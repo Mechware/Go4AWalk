@@ -5,11 +5,17 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Town/TownScreen.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Walking/WalkingScreen.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Fighting/FightingScene.unity
   - enabled: 0
     path: Assets/WalkingScreen.unity
+  - enabled: 1
+    path: Assets/Scenes/TownScreen.unity
+  - enabled: 1
+    path: Assets/Scenes/WalkingScreen.unity
+  - enabled: 1
+    path: Assets/Scenes/FightingScene.unity

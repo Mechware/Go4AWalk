@@ -22,7 +22,7 @@ public class DamageIndicator : MonoBehaviour {
     }
 
     public void setText(string text) {
-        GetComponent<Text>().text = text;
+        GetComponent<Text>().text = text;       
     }
    
     bool hasFaded = false;
