@@ -27,8 +27,7 @@ public class EnemyWatchdog : MonoBehaviour {
 
     void Awake() {
         if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("FightingScene")) {
-            // Spawn a random enemy from a list
-            int index = Mathf.RoundToInt(Random.Range(0, enemies.Length-1));
+            // Spawn enemy decided in the walking screen
             currentEnemy = Instantiate(currentEnemyPrefab);
         } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("WalkingScreen")) {
 

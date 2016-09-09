@@ -10,7 +10,6 @@ public class FightingWatchdog : MonoBehaviour {
     private LineRenderer lineRenderer;
     private int i;
     private bool swiping = false;
-    private Enemy currEnemy;
     
 
 
@@ -21,7 +20,6 @@ public class FightingWatchdog : MonoBehaviour {
     // Use this for initialization
     void Start () {
         lineRenderer = GetComponent<LineRenderer>();
-        currEnemy = EnemyWatchdog.currentEnemy.GetComponent<Enemy>();
     }
 	
 	// Update is called once per frame
