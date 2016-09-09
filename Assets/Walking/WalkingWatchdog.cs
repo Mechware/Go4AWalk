@@ -6,7 +6,11 @@ using UnityEngine.UI;
 public class WalkingWatchdog : MonoBehaviour {
 
 
-    // UI for walking 
+    // UI for walking
+    public Vector2 startPosition, endPosition;
+    public GameObject characterSprite;
+
+
     public GameObject goToTownPanel;
     public Button takeStepButton, randomEncounterButton;
     public Text walkingStats, questDistanceTravelled;
@@ -34,6 +38,17 @@ public class WalkingWatchdog : MonoBehaviour {
                 questDistanceToTravel.text = Questing.currentQuest.distance/100 + "";
             }
             questDistanceTravelled.text = Questing.currentQuest.distanceProgress/100 + "";
+
+            if(Questing.currentQuest.distance != -1 && Questing.currentQuest.distance != 0) {
+                float xDistanceDifference = endPosition.x - startPosition.x;
+                float yDistanceDifference = endPosition.y - startPosition.y;
+                float percentToEnd = Questing.currentQuest.distanceProgress/Questing.currentQuest.distance;
+                xDistanceDifference *= percentToEnd;
+                yDistanceDifference *= percentToEnd;
+                characterSprite.transform.position = new Vector2(startPosition.x + xDistanceDifference, startPosition.y + yDistanceDifference);
+            }
+
+            
         }
     }
 
