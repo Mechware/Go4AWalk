@@ -413,7 +413,7 @@ GameObject:
   - 4: {fileID: 490588423}
   - 212: {fileID: 490588422}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Character Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -458,13 +458,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 490588421}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.22, y: 2.35, z: 0}
-  m_LocalScale: {x: 0.4530065, y: 0.34679416, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.6, y: 4.36, z: -5}
+  m_LocalScale: {x: 0.17685446, y: 0.14499055, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 1011502123}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!1 &599729109
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,8 +842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d94dcb910fd7d428230e3c613ba4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {x: 0.6, y: -2.85}
-  endPosition: {x: 2.2, y: 2.35}
+  startPosition: {x: -0.3, y: -1}
+  endPosition: {x: 1.33, y: 4.13}
   characterSprite: {fileID: 490588421}
   goToTownPanel: {fileID: 599793355}
   takeStepButton: {fileID: 1465613199}
@@ -861,10 +861,9 @@ Transform:
   m_LocalPosition: {x: -0.9642037, y: 1.7279198, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 490588423}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &1079550211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,7 +1499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1684568167
 RectTransform:
   m_ObjectHideFlags: 0
