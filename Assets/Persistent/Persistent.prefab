@@ -283,6 +283,7 @@ GameObject:
   - 114: {fileID: 114000013480361372}
   - 114: {fileID: 114000013509966300}
   - 114: {fileID: 114000012313729876}
+  - 114: {fileID: 114000010641745992}
   m_Layer: 0
   m_Name: Watchdog
   m_TagString: Untagged
@@ -709,6 +710,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: New Text
+--- !u!114 &114000010641745992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011551358684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6858f67232e512449f7b2326258924e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000010761148960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1535,7 +1547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 1000012588398632, guid: e72c8e013af10864d908cbcd72a1ef17, type: 2}
+  - {fileID: 1000010328516586, guid: 118dcb26d73d8b0408e2f08bfbb8e932, type: 2}
   randomEncounterButton: {fileID: 0}
   walkingWatchdogUI: {fileID: 0}
 --- !u!114 &114000013525115666
@@ -2538,7 +2550,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -189, y: -248}
+  m_AnchoredPosition: {x: -900, y: -230}
   m_SizeDelta: {x: 211, y: 218}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000014057387976

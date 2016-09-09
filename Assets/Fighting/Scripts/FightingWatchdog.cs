@@ -67,12 +67,10 @@ public class FightingWatchdog : MonoBehaviour {
 
     void updateHealthBar() {
         healthBar.updateBar(Player.maxHealth, Player.health);
-        //healthBarText.text = "Health: " + Player.health;
     }
 
     void updateCritBar() {
         critBar.updateBar(100, Player.crit);
-        //critBarText.text = "Power: " + Player.getCrit();
     }
 
 

@@ -15,21 +15,22 @@ public class EnemyWatchdog : MonoBehaviour {
     public WalkingWatchdog walkingWatchdogUI;
     public static GameObject currentEnemy;
 
-    private static GameObject[] privEnemies;
+    // Distance will be anywhere from this distance to 10 times this distance
+    public static float randomEncounterDistance = 10f; 
+
     private static float lastEncounterTime;
     private static float lastEncounterDistance;
     private static float nextEncounterDistance;
     private static encounterState state;
-
+    private static GameObject currentEnemyPrefab;
+    
 
     void Awake() {
         if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("FightingScene")) {
             // Spawn a random enemy from a list
-            int index = Mathf.RoundToInt(Random.Range(0, privEnemies.Length-1));
-            currentEnemy = Instantiate(privEnemies[index]);
+            int index = Mathf.RoundToInt(Random.Range(0, enemies.Length-1));
+            currentEnemy = Instantiate(currentEnemyPrefab);
         } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("WalkingScreen")) {
-            // Load static variable of enemies
-            privEnemies = enemies;
 
             // Initialize encounter variables
             lastEncounterDistance = Player.totalDistance;
@@ -54,7 +55,7 @@ public class EnemyWatchdog : MonoBehaviour {
             if (state == encounterState.None) {
                 if (Player.totalDistance > nextEncounterDistance) {
                     walkingWatchdogUI.enableRandomEncounter(spawnEnemy);
-                    nextEncounterDistance = lastEncounterDistance + 10f*Random.Range(1f, 10f);
+                    nextEncounterDistance = lastEncounterDistance + randomEncounterDistance*Random.Range(1f, 10f);
                 }
             }
         } else if (Player.fighting) {
@@ -65,7 +66,7 @@ public class EnemyWatchdog : MonoBehaviour {
 	    
 	}
 
-    public static void encounterIsOver() {
+    public void encounterIsOver() {
         switch(state) {
             case encounterState.Fight:
                 endFight();
@@ -77,7 +78,7 @@ public class EnemyWatchdog : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene("WalkingScreen");
     }
 
-    private static void endFight() {
+    private void endFight() {
         currentEnemy = null;
         Player.resetCrit();
         lastEncounterDistance = Player.totalDistance;
@@ -85,12 +86,17 @@ public class EnemyWatchdog : MonoBehaviour {
     }
 
 
-    private static void spawnEnemy() {
+    private void spawnEnemy() {
         if(state != encounterState.None) {
             return;
         }
 
+        currentEnemyPrefab = pickEnemy();
         state = encounterState.Fight;
         UnityEngine.SceneManagement.SceneManager.LoadScene("FightingScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
+    }
+
+    private GameObject pickEnemy() {
+        return enemies[0];
     }
 }

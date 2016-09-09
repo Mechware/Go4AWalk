@@ -26,8 +26,14 @@ public class WalkingWatchdog : MonoBehaviour {
 	void Update () {
 
         if (Player.walking) {
-            questDistanceToTravel.text = Player.currentQuest.distance/100 + "";
-            questDistanceTravelled.text = Player.currentQuest.distanceProgress/100 + "";
+            
+            if (Questing.currentQuest.distance == -1) {
+                questDistanceToTravel.text = "∞";
+
+            } else {
+                questDistanceToTravel.text = Questing.currentQuest.distance/100 + "";
+            }
+            questDistanceTravelled.text = Questing.currentQuest.distanceProgress/100 + "";
         }
     }
 

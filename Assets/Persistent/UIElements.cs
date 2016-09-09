@@ -31,7 +31,7 @@ public class UIElements : MonoBehaviour {
         }
 
         if (questStats.IsActive()) {
-            questStats.text = Player.currentQuest.toString();
+            questStats.text = Questing.currentQuest.getStats();
         }
 
         // TODO: Optimize so only changes when needed

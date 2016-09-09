@@ -1,64 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-#region Queststruct
-public struct quest {
-    public string name;
-    public int goldReward;
-    public int xpReward;
-    public float timeToComplete;
-    public float distance;
-    public float difficulty;
-    public System.DateTime endTime;
-    public float distanceProgress;
-    public bool active;
-
-    public quest(string name, int goldReward, int xpReward, float timeToComplete, float distance, float difficulty) {
-        this.name = name;
-        this.goldReward = goldReward;
-        this.xpReward = xpReward;
-        this.timeToComplete = timeToComplete;
-        this.distance = distance;
-        this.difficulty = difficulty;
-        this.distanceProgress = 0;
-        active = true;
-        // If quest has no time limit, make time limit end of time
-        if(timeToComplete == -1) {
-            this.endTime = System.DateTime.MaxValue;
-        } else {
-            this.endTime = System.DateTime.UtcNow.AddSeconds(timeToComplete);
-        }
-    }
-
-    public string toString() {
-
-        if (!active)
-            return "No active quest";
-
-        string s = "";
-        s += "Name: " + name + "\n";
-        s += "Gold Reward: " + goldReward + "\n";
-        s += "Xp Reward: " + xpReward + "\n";
-        
-        if(timeToComplete != -1) {
-            s += "Quest time length: " + string.Format("{0:0.00}", timeToComplete/60f) + " minutes\n";
-        } else {
-            s += "Quest time length: Unlimited\n";
-        }
-
-        double timeLeft = (endTime - System.DateTime.UtcNow).TotalMinutes;
-        if(timeLeft < 5) {
-            s += "Time left: " + string.Format("{0:0.00}", timeLeft*60) + " seconds\n";
-        } else if (timeLeft > 1000000) {
-            s += "Time left: Unlimited\n";
-        }
-        
-        s += "Quest distance: " + distance + " meters\n";
-        s += "Distance Travelled: " + distanceProgress + " meters\n";
-        return s;
-    }
-}
-#endregion
 public class Player : MonoBehaviour {
 
     #region nonstatic
@@ -83,23 +25,10 @@ public class Player : MonoBehaviour {
         }
 
         thisGo = this;
-
-        if(currentQuest.active) {
-            StopCoroutine("checkQuestEnd");
-            StartCoroutine("checkQuestEnd");
-        }
     }
 
     void Update() {
         
-    }
-
-    public static int waitTime = 5;
-    IEnumerator checkQuestEnd() {
-        while (currentQuest.endTime > System.DateTime.UtcNow) {
-            yield return new WaitForSeconds(waitTime);
-        }
-        endQuest(false);
     }
 
     #endregion
@@ -200,43 +129,10 @@ public class Player : MonoBehaviour {
     public static void updateDistance(float deltaDistance) {
         giveExperience(Mathf.RoundToInt(deltaDistance));
         totalDistance += deltaDistance;
-        currentQuest.distanceProgress += deltaDistance;
-        if(currentQuest.distanceProgress >= currentQuest.distance) {
-            endQuest(true);
-        }
+        Questing.move(deltaDistance);
     }
 
-    // Questing
-    public static quest currentQuest;
 
-    /**
-    *   distance: Distance in meters until the end of the quest
-    *   time: Time to complete the quest in minutes
-    *   goldReward: Amount of gold rewarded for completion
-    */
-    public static void startQuest(quest q) {
-        currentQuest = q;
-        if(q.timeToComplete != -1) {
-            thisGo.StartCoroutine("checkQuestEnd");
-        }
-
-        UnityEngine.SceneManagement.SceneManager.LoadScene("WalkingScreen");
-    }
-
-    public static void endQuest(bool userFinished) {
-
-        if (userFinished) {
-            print("Quest passed!");
-            giveGold(currentQuest.goldReward);
-            giveExperience(currentQuest.xpReward);
-        } else {
-            print("Quest failed!");
-        }
-
-        currentQuest.active = false;
-
-        UnityEngine.SceneManagement.SceneManager.LoadScene("TownScreen");
-    }
 
     #endregion
     #region gettersAndSetters
