@@ -81,7 +81,11 @@ public class Player : MonoBehaviour {
     }
 
     private static void combatDie() {
-        
+        health = 0;
+    }
+
+    void dilensABitch() {
+        print("Dilen's is az bitch");
     }
 
     public static int getRegularAttack() {
