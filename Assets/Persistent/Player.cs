@@ -4,6 +4,7 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
     #region nonstatic
+
     void Awake() {
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("FightingScene")) {
             print("Fighting");
@@ -23,6 +24,10 @@ public class Player : MonoBehaviour {
         } else {
             print("Unexpected scene was loaded");
         }
+        if (died) {
+            health=50;
+            died = false;
+        }
 
         thisGo = this;
     }
@@ -36,7 +41,7 @@ public class Player : MonoBehaviour {
     #region static
 
     // General variables
-    public static bool fighting = false, walking = false, inTown = false;
+    public static bool fighting = false, walking = false, inTown = false, died = false;
     public static Player thisGo;
 
 
@@ -80,8 +85,9 @@ public class Player : MonoBehaviour {
         return crit;
     }
 
-    private static void combatDie() {
-        health = 0;
+    private static void combatDie() {      
+        UnityEngine.SceneManagement.SceneManager.LoadScene("TownScreen");
+        died = true;
     }
 
     void dilensABitch() {
