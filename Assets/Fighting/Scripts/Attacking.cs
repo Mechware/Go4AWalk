@@ -66,7 +66,8 @@ public class Attacking : MonoBehaviour {
                 // TODO: Check if over player
 
                 // Hit enemy with damage dictated by Player class
-                EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getSwipeAttack(swipe), true);
+                if(EnemyWatchdog.currentEnemy != null && EnemyWatchdog.currentEnemy.GetComponent<Collider2D>() != null)
+                    EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getSwipeAttack(swipe), true);
 
                 // TODO: Show animation
 

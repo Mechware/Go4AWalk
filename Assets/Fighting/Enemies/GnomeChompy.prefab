@@ -195,6 +195,7 @@ MonoBehaviour:
   damage: 4
   goldToGive: 0
   timeBetweenAttacks: 3
+  ew: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990, type: 2}
 --- !u!212 &212000011923461764
 SpriteRenderer:
   m_ObjectHideFlags: 1

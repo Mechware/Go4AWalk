@@ -106,6 +106,7 @@ public class Questing : MonoBehaviour {
         while (currentQuest.endTime > System.DateTime.UtcNow) {
             yield return new WaitForSeconds(waitTime);
         }
+        print("Didn't finish quest in time");
         endQuest(false);
     }
 
@@ -115,7 +116,7 @@ public class Questing : MonoBehaviour {
             thisGO.StartCoroutine("checkQuestEnd");
         }
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene("WalkingScreen");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(Player.WALKING_LEVEL);
     }
 
     public static void endQuest(bool userFinished) {
@@ -130,16 +131,18 @@ public class Questing : MonoBehaviour {
 
         currentQuest.active = false;
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene("TownScreen");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(Player.TOWN_LEVEL);
     }
 
     public static void move(float distance) {
 
         currentQuest.distanceProgress += distance;
-
+        
         if (currentQuest.distanceProgress >= currentQuest.distance) {
-            if (currentQuest.distance != -1)
-                endQuest(true);
+            if (currentQuest.distance != -1) {
+                currentQuest.distanceProgress = currentQuest.distance;
+                //endQuest(true);
+            }   
         }
     }
 

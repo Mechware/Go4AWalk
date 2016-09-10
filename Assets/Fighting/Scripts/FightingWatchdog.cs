@@ -10,26 +10,26 @@ public class FightingWatchdog : MonoBehaviour {
     private LineRenderer lineRenderer;
     private int i;
     private bool swiping = false;
-    
+
 
 
     void Awake() {
-        
+
     }
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         lineRenderer = GetComponent<LineRenderer>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-        
+
+    // Update is called once per frame
+    void Update() {
+
         updateHealthBar();
         updateCritBar();
 
-       #if UNITY_EDITOR
-
+#if UNITY_EDITOR
+        // If using editor, you want to use a mouse
         if (Input.GetMouseButtonUp(0)) {
             // Mouse button released
 
@@ -46,8 +46,8 @@ public class FightingWatchdog : MonoBehaviour {
             swiping = false;
         }
 
-       #else
-            
+#else
+        // If not using editor, find touches    
         if (Input.touchCount > 0) {
             if (Input.touches[0].phase == TouchPhase.Began) {
                 InvokeRepeating("AddPoint", lineUpdateSpeed, lineUpdateSpeed);
@@ -60,13 +60,15 @@ public class FightingWatchdog : MonoBehaviour {
             swiping = false;
         }
 
-       #endif
+#endif
     }
 
+    // Used for update the health bar
     void updateHealthBar() {
         healthBar.updateBar(Player.maxHealth, Player.health);
     }
 
+    // Used for updating the critical bar
     void updateCritBar() {
         critBar.updateBar(100, Player.crit);
     }
@@ -74,27 +76,27 @@ public class FightingWatchdog : MonoBehaviour {
 
     // Used for drawing attack lines while doing criticals
     public void AddPoint() {
-        Vector3 tempPos;
+        Vector3 inputPoint;
 
-        #if UNITY_EDITOR
+        // If using editor I want to be able to click
+#if UNITY_EDITOR
 
         if (!Input.GetMouseButton(0))
             return;
-        tempPos = Input.mousePosition;
+        inputPoint = Input.mousePosition;
 
-        #else
-
-        print("Unity editor");
+#else
+        // If using phone use touch
         if (Input.touchCount == 0)
             return;
-        tempPos = Input.touches[0].position;
+        inputPoint = Input.touches[0].position;
 
-        #endif
-
-        tempPos.z = 10;
-        tempPos = Camera.main.ScreenToWorldPoint(tempPos);
+#endif
+        // Change input point to 
+        inputPoint.z = 10;
+        inputPoint = Camera.main.ScreenToWorldPoint(inputPoint);
         lineRenderer.SetVertexCount(++i);
-        lineRenderer.SetPosition(i-1, tempPos);
+        lineRenderer.SetPosition(i-1, inputPoint);
 
         // Check if swipe has taken too long
         if (i*lineUpdateSpeed > 0.5) {
@@ -102,5 +104,43 @@ public class FightingWatchdog : MonoBehaviour {
             lineRenderer.SetVertexCount(0);
             CancelInvoke("AddPoint");
         }
+    }
+
+    public Graphic background, treasureBackground, enemyKilled;
+    public GameObject treasureChest, critBarObject, healthBarObject;
+
+    // Called when the enemy is killed
+    public void endRegularFight() {
+        foreach (Graphic g in critBarObject.GetComponentsInChildren<Graphic>()) {
+            g.CrossFadeAlpha(0, 1, false);
+        }
+        foreach (Graphic g in healthBarObject.GetComponentsInChildren<Graphic>()) {
+            g.CrossFadeAlpha(0, 1, false);
+        }
+        enemyKilled.gameObject.SetActive(true);
+        enemyKilled.CrossFadeAlpha(255, 1, false);
+    }
+
+    // Called when a boss is killed
+    public IEnumerator questFightEnd() {
+        foreach(Graphic g in critBarObject.GetComponentsInChildren<Graphic>()) {
+            g.CrossFadeAlpha(0, 1, false);
+        }
+        foreach (Graphic g in healthBarObject.GetComponentsInChildren<Graphic>()) {
+            g.CrossFadeAlpha(0, 1, false);
+        }
+
+        background.CrossFadeAlpha(0, 1, false);
+        treasureBackground.CrossFadeAlpha(255, 1, false);
+
+        yield return new WaitForSeconds(1.1f);
+
+        treasureChest.SetActive(true);
+        treasureChest.GetComponent<TreasureChest>().openChest();
+        Destroy(treasureChest, 5.1f);
+
+        yield return new WaitForSeconds(5);
+
+        Questing.endQuest(true);
     }
 }
