@@ -125,6 +125,8 @@ public class WalkingScript : MonoBehaviour
         return EARTH_RADIUS * c;
     }
 
+    private int timeOfLastDistanceUpdate;
+
     // Update is called once per frame
     void Update()
     {
@@ -148,7 +150,15 @@ public class WalkingScript : MonoBehaviour
                     prevLatitude = latitude;
 
                     if (deltaDistance > 0f) {
-                        Player.updateDistance(deltaDistance);
+                        DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0,
+                                                                System.DateTimeKind.Utc);
+
+                        double curTime = (DateTime.UtcNow - epochStart).TotalSeconds;
+                        float timeChanged = (float) (curTime - timeOfLastDistanceUpdate);
+                        int timeChange = Mathf.CeilToInt(timeChanged);
+
+                        Player.updateDistance(deltaDistance, timeChange);
+                        timeOfLastDistanceUpdate = (int) curTime;
                     }
                     
                     gpsUpdates = 1;
@@ -170,9 +180,9 @@ public class WalkingScript : MonoBehaviour
                 DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0,
                                                                 System.DateTimeKind.Utc);
 
-                double curTime = (int) (DateTime.UtcNow - epochStart).TotalSeconds;
-                double timeChanged = curTime - timestamp;
-                int timeChange = (int) timeChanged;
+                double curTime = (DateTime.UtcNow - epochStart).TotalSeconds;
+                float timeChanged = (float) (curTime - timestamp);
+                int timeChange = Mathf.CeilToInt(timeChanged);
 
 
                 text = "Time since last update: " + timeChange + "\n" +

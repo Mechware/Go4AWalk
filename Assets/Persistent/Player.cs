@@ -3,20 +3,24 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
+    public const string TOWN_LEVEL = "TownScreen";
+    public const string FIGHTING_LEVEL = "FightingScene";
+    public const string WALKING_LEVEL = "WalkingScreen";
+
     #region nonstatic
 
     void Awake() {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("FightingScene")) {
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(FIGHTING_LEVEL)) {
             print("Fighting");
             fighting = true;
             walking = false;
             inTown = false;
-        } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("TownScreen")) {
+        } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(TOWN_LEVEL)) {
             print("In town");
             fighting = false;
             walking = false;
             inTown = true;
-        } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("WalkingScreen")) {
+        } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(WALKING_LEVEL)) {
             print("Walking");
             fighting = false;
             walking = true;
@@ -86,7 +90,7 @@ public class Player : MonoBehaviour {
     }
 
     private static void combatDie() {      
-        UnityEngine.SceneManagement.SceneManager.LoadScene("TownScreen");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(TOWN_LEVEL);
         died = true;
     }
 
@@ -94,6 +98,7 @@ public class Player : MonoBehaviour {
         print("Dilen's is az bitch");
     }
 
+    // Returns a regular random attack
     public static int getRegularAttack() {
         float randFactor = Random.Range(-1.0f, 1.0f);
         float fAttackStrength = (float) attackStrength;
@@ -104,6 +109,7 @@ public class Player : MonoBehaviour {
         return attackStrength + Mathf.RoundToInt(randFactor * fAttackStrength); ;
     }
 
+    // Returns a crit attack based on swipe
     public static int getSwipeAttack(Vector2 swipe) {
 
         //Debug.Log("Swipe length: " + swipe.magnitude);
@@ -111,17 +117,12 @@ public class Player : MonoBehaviour {
 
         float fAttack;
         int attack;
-        int regAttack = getRegularAttack();
 
-        while(regAttack < attackStrength) {
-            regAttack = getRegularAttack();
-        }
-
-        if (crit != 100) {
-            fAttack = (((float) crit)/10f)*regAttack;
+        if (crit < 100) {
+            fAttack = (((float) crit)/5f)*attackStrength;
             attack = Mathf.RoundToInt(fAttack);
         } else {
-            attack = (int) (15f * regAttack);
+            attack = (int) (15f * attackStrength);
         }
 
         // Reset crit to 0
@@ -141,6 +142,20 @@ public class Player : MonoBehaviour {
         totalDistance += deltaDistance;
         Questing.move(deltaDistance);
     }
+
+    public static void updateDistance(float deltaDistance, int deltaSeconds) {
+        // Check if going too fast ( > 20 km/h)
+        if (deltaDistance/deltaSeconds > 5.56f) {
+            print("Whoa there speed racer, slow the fuck down!");
+            string s = "" + deltaDistance/deltaSeconds * (1000/3600);
+            WalkingWatchdog.slowTheFuckDownAlert(s);
+            return;
+        }
+        giveExperience(Mathf.RoundToInt(deltaDistance));
+        totalDistance += deltaDistance;
+        Questing.move(deltaDistance);
+    }
+
 
 
 

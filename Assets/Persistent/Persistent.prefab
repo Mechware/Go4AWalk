@@ -1550,6 +1550,7 @@ MonoBehaviour:
   - {fileID: 1000010328516586, guid: 118dcb26d73d8b0408e2f08bfbb8e932, type: 2}
   randomEncounterButton: {fileID: 0}
   walkingWatchdogUI: {fileID: 0}
+  fw: {fileID: 0}
 --- !u!114 &114000013525115666
 MonoBehaviour:
   m_ObjectHideFlags: 1

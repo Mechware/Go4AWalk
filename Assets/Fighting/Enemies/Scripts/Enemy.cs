@@ -6,21 +6,26 @@ public class Enemy : MonoBehaviour {
     public GameObject damageIndicator, critIndicator;
     public int health, damage, goldToGive;
     public float timeBetweenAttacks;
+    
 
     private StatusBar healthBar;
     private GameObject canvas;
     private int maxHealth;
+    private EnemyWatchdog ew;
+
     // Use this for initialization
-	void Start () {
+    void Start () {
         goldToGive = Mathf.RoundToInt(Random.Range(1f, 100f));
         canvas = GameObject.Find("MainCanvas");
         healthBar = GetComponentInChildren<StatusBar>();
         maxHealth = health;
+        ew = GameObject.Find("Watchdog").GetComponent<EnemyWatchdog>();
+        StartCoroutine("attack");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        attack();
+
 	}
 
     public void hit(int damage, bool isCrit) {
@@ -54,17 +59,22 @@ public class Enemy : MonoBehaviour {
     // For attacking player
     private float lastAttack;
 
-    void attack() {
-        if (Time.time - lastAttack > timeBetweenAttacks) {
+    IEnumerator attack() {
+        while(true) {
             GetComponent<Animator>().SetTrigger("attacking");
             lastAttack = Time.time;
             Player.damage(damage);
+            yield return new WaitForSeconds(timeBetweenAttacks);
         }
     }
 
     void die() {
         GetComponent<Animator>().SetBool("dying", true);
+        Destroy(healthBar.transform.parent.gameObject);
         Player.giveGold(goldToGive);
-        Destroy(this.gameObject, 2);
+        Destroy(GetComponent<Collider2D>());
+        Destroy(gameObject, 2);
+        ew.encounterIsOver();
+        StopCoroutine("attack");
     }
 }
