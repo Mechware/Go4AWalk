@@ -280,7 +280,6 @@ GameObject:
   - 4: {fileID: 4000011690282786}
   - 114: {fileID: 114000010368321498}
   - 114: {fileID: 114000013749702878}
-  - 114: {fileID: 114000013480361372}
   - 114: {fileID: 114000013509966300}
   - 114: {fileID: 114000012313729876}
   - 114: {fileID: 114000010641745992}
@@ -1513,28 +1512,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114000013480361372
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011551358684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1e13e270c3ca514cba2da66c3401833, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GPSUpdatesBeforeAverage: 5
-  desiredAccuracyInMeters: 1
-  updateDistanceInMeters: 0
-  state: 0
-  latitude: 0
-  longitude: 0
-  deltaDistance: 0
-  gpsUpdates: 1
-  timestamp: 0
-  prevLatitude: 0
-  prevLongitude: 0
 --- !u!114 &114000013509966300
 MonoBehaviour:
   m_ObjectHideFlags: 1

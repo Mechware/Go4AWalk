@@ -11,12 +11,11 @@ public class TreasureChest : MonoBehaviour {
 
 	}
 
-	public void openChest () {
+	public IEnumerator openChest () {
         GetComponent<Animator>().SetTrigger("Open");
-        Invoke("makeGoldFly", 1);
-	}
-
-    void makeGoldFly() {
+        yield return new WaitForSeconds(1);
         ps.gameObject.SetActive(true);
-    }
+        yield return new WaitForSeconds(3);
+        ps.Stop();
+	}
 }

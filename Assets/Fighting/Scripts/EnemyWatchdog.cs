@@ -14,13 +14,13 @@ public class EnemyWatchdog : MonoBehaviour {
     public GameObject[] enemies;
     public GameObject randomEncounterButton;
     public WalkingWatchdog walkingWatchdogUI;
-    public static GameObject currentEnemy;
     public FightingWatchdog fw;
+    public static GameObject currentEnemy;
+    
 
     // Distance will be anywhere from this distance to 10 times this distance
     public static float randomEncounterDistance = 10f; 
 
-    private static float lastEncounterTime;
     private static float lastEncounterDistance;
     private static float nextEncounterDistance;
     private static encounterState state;
@@ -42,7 +42,6 @@ public class EnemyWatchdog : MonoBehaviour {
             // Initialize encounter variables
             lastEncounterDistance = Player.totalDistance;
             nextEncounterDistance = lastEncounterDistance + Random.Range(1f, 10f);
-            lastEncounterTime = Time.time;
 
             state = encounterState.None;
         }
@@ -74,7 +73,7 @@ public class EnemyWatchdog : MonoBehaviour {
         }  
 	}
 
-    // Called as soon as an enemy dies.
+    // Called to end an encounter
     public void encounterIsOver() {
         switch(state) {
             case encounterState.Fight:
@@ -121,7 +120,7 @@ public class EnemyWatchdog : MonoBehaviour {
 
         currentEnemyPrefab = pickBoss();
         state = encounterState.Boss;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(Player.FIGHTING_LEVEL, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(Player.FIGHTING_LEVEL);
     }
 
     private GameObject pickEnemy() {

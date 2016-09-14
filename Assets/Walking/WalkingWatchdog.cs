@@ -10,64 +10,116 @@ public class WalkingWatchdog : MonoBehaviour {
     public Vector2 startPosition, endPosition;
     public GameObject characterSprite;
 
-
     public GameObject goToTownPanel, slowDownAlertObject;
-    private static WalkingWatchdog objectWatchdog;
     public Button takeStepButton, randomEncounterButton;
     public Text walkingStats, questDistanceTravelled;
     public Text questDistanceToTravel;
+    private GPS gps;
     
 
     // Use this for initialization
     void Start () {
-        if (Player.walking) {
-            takeStepButton.onClick.AddListener(() => {
-                Player.updateDistance(1f);
-            });
+
+        gps = GetComponent<GPS>();
+
+        // Make it so when the GPS changes, increase player distance is called
+        gps.deltaDistance.OnValueChange += increasePlayerDistance;
+
+        takeStepButton.onClick.AddListener(() => {
+            // Move 1 meter per step click
+            updateDistance(1, 1);
+        });
+
+        // Display the correct distance to travel
+        if (Questing.currentQuest.distance == -1) {
+            questDistanceToTravel.text = "∞";
+        } else {
+            questDistanceToTravel.text = Questing.currentQuest.distance/100 + "";
         }
-        objectWatchdog = this;
+
+        updateUserInterface();
     }
 	
 	// Update is called once per frame
 	void Update () {
+       
+    }
 
-        if (Player.walking) {
-            
-            if (Questing.currentQuest.distance == -1) {
-                questDistanceToTravel.text = "∞";
 
-            } else {
-                questDistanceToTravel.text = Questing.currentQuest.distance/100 + "";
-            }
-            questDistanceTravelled.text = Questing.currentQuest.distanceProgress/100 + "";
+    void increasePlayerDistance() {
+        updateDistance(gps.deltaDistance.Value, gps.deltaTime);
+    }
 
-            // Update player walking on screen (could probably do this in coroutine)
-            if(Questing.currentQuest.distance != -1 && Questing.currentQuest.distance != 0) {
-                float xDistanceDifference = endPosition.x - startPosition.x;
-                float yDistanceDifference = endPosition.y - startPosition.y;
-                float percentToEnd = Questing.currentQuest.distanceProgress/Questing.currentQuest.distance;
-                xDistanceDifference *= percentToEnd;
-                yDistanceDifference *= percentToEnd;
-                characterSprite.transform.position = new Vector2(startPosition.x + xDistanceDifference, startPosition.y + yDistanceDifference);
-            }
+    /// <summary>
+    /// This function is to be called whenever the distance the player has travelled is to be
+    /// increased
+    /// </summary>
+    /// <param name="changeInDistance"> Change in distance since last update in meters</param>
+    /// <param name="changeInTime"> Change of time since last update in seconds</param>
+    public void updateDistance(float changeInDistance, float changeInTime) {
+        
+        UnityEngine.Assertions.Assert.AreNotEqual(0, changeInTime, "Moved a distance in zero time.");
+        UnityEngine.Assertions.Assert.IsTrue(changeInDistance >= 0, "Distance moved is negative.");
+
+        float speed = changeInDistance / changeInTime; // in m/s
+
+        // Check if going too fast ( > 20 km/h || > 5.56 m/s)
+        if (speed > 5.56f) {
+            print("Whoa there speed racer, slow the fuck down!");
+            StartCoroutine(slowDownAlert(speed));
+            return;
+        }
+
+        // Update player values
+        Player.giveExperience(Mathf.RoundToInt(changeInDistance));
+        Player.totalDistance += changeInDistance;
+
+        // Update quest values
+        Questing.move(changeInDistance);
+
+        updateUserInterface();
+    }
+
+    /// <summary>
+    /// Updates the user interface to reflect the changes in distance travelled
+    /// </summary>
+    void updateUserInterface() {
+        // Update questing distance travelled text
+        questDistanceTravelled.text = string.Format("{0:0.00}", Questing.currentQuest.distanceProgress/100);
+
+        // Update position of character sprite on screen
+        if (Questing.currentQuest.distance == -1 || Questing.currentQuest.distance == 0) {
+            characterSprite.transform.position = startPosition;
+        } else {
+            float percentToEnd = Questing.currentQuest.distanceProgress/Questing.currentQuest.distance;
+            float xDistanceDifference = endPosition.x - startPosition.x;
+            float yDistanceDifference = endPosition.y - startPosition.y;
+            float xPos = xDistanceDifference * percentToEnd + startPosition.x;
+            float yPos = yDistanceDifference * percentToEnd + startPosition.y;
+            characterSprite.transform.position = new Vector2(xPos, yPos);
         }
     }
 
-    IEnumerator slowDownAlertFade(string speed) {
+    /// <summary>
+    /// Displays an alert telling the user to slow down
+    /// </summary>
+    /// <param name="speed">The speed the user was travelling</param>
+    /// <returns></returns>
+    IEnumerator slowDownAlert(float speed) {
         slowDownAlertObject.SetActive(true);
+        speed *= 1000 / 3600;
         slowDownAlertObject.GetComponentInChildren<Text>().text = "Slow the fuck down speed racer!\n" +
                                                               "You were going " + speed + " km/h";
+
         yield return new WaitForSeconds(5);
         slowDownAlertObject.SetActive(false);
     }
 
-    public static void slowTheFuckDownAlert(string speed) {
-        objectWatchdog.StartCoroutine("slowDownAlertFade", speed);
-    }
-
-    // ** For walking ** //
-    // This is called from EnemyWatchdog to enable random encounters and the "encounter" method
-    // is usually just the spawnEnemy() method in EnemyWatchdog
+    /// <summary>
+    /// This is called from EnemyWatchdog to enable random encounters and the "encounter" method
+    /// is usually just the spawnEnemy() method in EnemyWatchdog
+    /// </summary>
+    /// <param name="encounter">Function called once user clicks enemy</param>
     public void enableRandomEncounter(Action encounter) {
         randomEncounterButton.GetComponentInChildren<Text>().text = "Random Encounter";
         randomEncounterButton.gameObject.SetActive(true);
@@ -76,8 +128,11 @@ public class WalkingWatchdog : MonoBehaviour {
         });
     }
 
-    // This is called from EnemyWatchdog to enable boss encounters and the "encounter" method
-    // is usually just the spawnBoss() method in EnemyWatchdog
+    /// <summary>
+    /// This is called from EnemyWatchdog to enable boss encounters and the "encounter" method
+    /// is usually just the spawnBoss() method in EnemyWatchdog
+    /// </summary>
+    /// <param name="encounter">Function called once user clicks boss</param>
     public void enableBossEncounter(Action encounter) {
         randomEncounterButton.GetComponentInChildren<Text>().text = "BOSS FIGHT";
         randomEncounterButton.gameObject.SetActive(true);
@@ -86,25 +141,4 @@ public class WalkingWatchdog : MonoBehaviour {
             encounter();
         });
     }
-
-    // Used for confirming going to town
-    public void confirmGoToTown() {
-        goToTownPanel.SetActive(true);
-    }
-
-    // Used to close the "Go into town?" panel
-    public void closeGoToTown() {
-        goToTownPanel.SetActive(false);
-    }
-
-    // Method for going into town and ending the quest
-    public void goToTown() {
-        if(Questing.currentQuest.name.Equals("Forest")) {
-            Questing.endQuest(true);
-        } else {
-            print("Went to town via tavern and gave up on quest");
-            Questing.endQuest(false);
-        }
-    }
-    // ** End walking ** //
 }

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 
-public class UIElements : MonoBehaviour {
+public class PersistentUIElements : MonoBehaviour {
 
     // Persistent stats bar
     public Text totalExperience, totalGold, level;
@@ -15,11 +15,11 @@ public class UIElements : MonoBehaviour {
     public string currentPanel = "";
 
     // Script for walking data
-    public WalkingScript walkingScript;
+    public GPS walkingScript;
 
     // Use this for initialization
     void Start () {
-        walkingScript = GetComponent<WalkingScript>();
+        
     }
 	
 	// Update is called once per frame

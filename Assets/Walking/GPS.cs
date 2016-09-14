@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using Gamelogic.Extensions;
 
 public enum LocationState
 {
@@ -10,70 +11,69 @@ public enum LocationState
     Enabled
 }
 
-public class WalkingScript : MonoBehaviour
+public class GPS : MonoBehaviour
 {
 
-
+    
     public int GPSUpdatesBeforeAverage = 5;
     public float desiredAccuracyInMeters = 1f;
     public float updateDistanceInMeters = 0f;
 
     [HideInInspector]
     // Approximate radius of the earth (in kilometers)
-    const float EARTH_RADIUS = 6371;
     public LocationState state;
+
     // Position on earth (in degrees)
     public float latitude;
     public float longitude;
+
     // Distance walked (in meters) since last update 
-    public float deltaDistance;
+    public ObservedValue<float> deltaDistance;
+    public float deltaTime;
+
     // Amount of times GPS has updated
-    public int gpsUpdates = 1;
+    private int gpsUpdates = 1;
+
     // Timestamp of last data
-    public double timestamp;
+    private double timestamp;
+
     // Total lat and long for averaging
-    float totalLat = 0;
-    float totalLong = 0;
+    private float totalLat = 0;
+    private float totalLong = 0;
+
     // Previous average lat and long
-    public float prevLatitude, prevLongitude;
+    private float prevLatitude, prevLongitude;
+    public double timeOfLastDistanceUpdate;
+
+    private const float EARTH_RADIUS = 6371;
 
     // Use this for initialization
-    IEnumerator Start()
-    {
-        // Only load this script if walking screen
-        if(!Player.walking) {
-            state = LocationState.Disabled;
-            yield break;
-        }
-
+    void Awake() {
+        deltaDistance = new ObservedValue<float>(0);
+        timeOfLastDistanceUpdate = DateTime.UtcNow.Second;
         state = LocationState.Disabled;
         latitude = 0f;
         longitude = 0f;
-        
-        if (Input.location.isEnabledByUser)
-        {
-            Input.location.Start(desiredAccuracyInMeters, updateDistanceInMeters);
-            int waitTime = 15;
+    }
 
-            while (Input.location.status == LocationServiceStatus.Initializing && waitTime > 0) {
-                yield return new WaitForSeconds(1);
-                waitTime--;
-            }
+    IEnumerator Start()
+    {
 
-            if (waitTime == 0) {
-                state = LocationState.TimedOut;
-            }
-            else if (Input.location.status == LocationServiceStatus.Failed) {
-                state = LocationState.Failed;
-            }
-            else {
-                state = LocationState.Enabled;
-                timestamp = Input.location.lastData.timestamp;
-                prevLatitude = Input.location.lastData.latitude;
-                prevLongitude = Input.location.lastData.longitude;
-                totalLong = prevLongitude;
-                totalLat = prevLatitude;
-            }
+        yield return StartCoroutine(initializeGPS());
+
+        if(state == LocationState.Enabled) {
+            // Initialize all variables
+            gpsUpdates = 1;
+            timestamp = Input.location.lastData.timestamp;
+            latitude = Input.location.lastData.latitude;
+            longitude = Input.location.lastData.longitude;
+            prevLatitude = latitude;
+            prevLongitude = longitude;
+            totalLong = prevLongitude;
+            totalLat = prevLatitude;
+            DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0,
+                                                            System.DateTimeKind.Utc);
+            timeOfLastDistanceUpdate = (int) (DateTime.UtcNow - epochStart).TotalSeconds;
         }
     }
 
@@ -91,6 +91,11 @@ public class WalkingScript : MonoBehaviour
     }
 
     IEnumerator initializeGPS() {
+
+        if (!Input.location.isEnabledByUser) {
+            state = LocationState.Disabled;
+            yield break;
+        }
 
         Input.location.Start(desiredAccuracyInMeters, updateDistanceInMeters);
         
@@ -125,8 +130,6 @@ public class WalkingScript : MonoBehaviour
         return EARTH_RADIUS * c;
     }
 
-    private int timeOfLastDistanceUpdate;
-
     // Update is called once per frame
     void Update()
     {
@@ -134,7 +137,6 @@ public class WalkingScript : MonoBehaviour
         {
             
             if (timestamp != Input.location.lastData.timestamp) {
-                
 
                 totalLat += Input.location.lastData.latitude;
                 totalLong += Input.location.lastData.longitude;
@@ -144,21 +146,18 @@ public class WalkingScript : MonoBehaviour
                 if (gpsUpdates == GPSUpdatesBeforeAverage) {
                     longitude = totalLong / GPSUpdatesBeforeAverage;
                     latitude = totalLat / GPSUpdatesBeforeAverage;
-                    deltaDistance = Haversine(prevLongitude, prevLatitude, longitude, latitude) * 1000f;
+                    deltaDistance.Value = Haversine(prevLongitude, prevLatitude, longitude, latitude) * 1000f;
 
                     prevLongitude = longitude;
                     prevLatitude = latitude;
 
-                    if (deltaDistance > 0f) {
+                    if (deltaDistance.Value > 0f) {
                         DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0,
                                                                 System.DateTimeKind.Utc);
 
                         double curTime = (DateTime.UtcNow - epochStart).TotalSeconds;
-                        float timeChanged = (float) (curTime - timeOfLastDistanceUpdate);
-                        int timeChange = Mathf.CeilToInt(timeChanged);
-
-                        Player.updateDistance(deltaDistance, timeChange);
-                        timeOfLastDistanceUpdate = (int) curTime;
+                        deltaTime = (float) (curTime - timeOfLastDistanceUpdate);
+                        timeOfLastDistanceUpdate = curTime;
                     }
                     
                     gpsUpdates = 1;
@@ -185,12 +184,11 @@ public class WalkingScript : MonoBehaviour
                 int timeChange = Mathf.CeilToInt(timeChanged);
 
 
-                text = "Time since last update: " + timeChange + "\n" +
+                text =  "Time since last update: " + timeChange + "\n" +
                         "Previous Latitude: " + prevLatitude + "\n" +
                         "Previous Longitude: " + prevLongitude + "\n" +
                         "Current Longitude: " + longitude + "\n" +
                         "Current Latitude: " + latitude + "\n" +
-                        "Distance: " + Player.totalDistance + "\n" +
                         "Delta Distance: " + deltaDistance + "\n" +
                         "GPS updates: " + gpsUpdates;
 
