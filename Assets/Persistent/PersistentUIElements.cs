@@ -27,7 +27,11 @@ public class PersistentUIElements : MonoBehaviour {
 
 
         if (walkingStats.IsActive()) {
-            walkingStats.text = walkingScript.getGPSData();
+            if(walkingScript == null) {
+                walkingStats.text = "GPS disabled";
+            } else {
+                walkingStats.text = walkingScript.getGPSData();
+            }
         }
 
         if (questStats.IsActive()) {

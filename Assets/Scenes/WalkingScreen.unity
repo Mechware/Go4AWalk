@@ -785,49 +785,22 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013749702878, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: walkingScript
+      value: 
+      objectReference: {fileID: 1011502124}
     - target: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990,
         type: 2}
       propertyPath: randomEncounterButton
       value: 
       objectReference: {fileID: 1684568166}
-    - target: {fileID: 114000013749702878, guid: da687c2027639a24583cf909cdae1990,
-        type: 2}
-      propertyPath: questDistanceTravelled
-      value: 
-      objectReference: {fileID: 1742093807}
-    - target: {fileID: 114000013749702878, guid: da687c2027639a24583cf909cdae1990,
-        type: 2}
-      propertyPath: questDistanceToTravel
-      value: 
-      objectReference: {fileID: 1862308786}
-    - target: {fileID: 114000013749702878, guid: da687c2027639a24583cf909cdae1990,
-        type: 2}
-      propertyPath: takeStepButton
-      value: 
-      objectReference: {fileID: 1465613199}
-    - target: {fileID: 114000013749702878, guid: da687c2027639a24583cf909cdae1990,
-        type: 2}
-      propertyPath: randomEncounterButton
-      value: 
-      objectReference: {fileID: 1684568168}
-    - target: {fileID: 114000013749702878, guid: da687c2027639a24583cf909cdae1990,
-        type: 2}
-      propertyPath: goToTownPanel
-      value: 
-      objectReference: {fileID: 599793355}
     - target: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990,
         type: 2}
       propertyPath: walkingWatchdogUI
       value: 
       objectReference: {fileID: 1011502122}
-    - target: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990,
-        type: 2}
-      propertyPath: enemies.Array.data[0]
-      value: 
-      objectReference: {fileID: 1000010328516586, guid: 118dcb26d73d8b0408e2f08bfbb8e932,
-        type: 2}
-    m_RemovedComponents:
-    - {fileID: 114000013480361372, guid: da687c2027639a24583cf909cdae1990, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da687c2027639a24583cf909cdae1990, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &863017230

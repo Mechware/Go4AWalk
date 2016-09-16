@@ -48,7 +48,7 @@ public class Attacking : MonoBehaviour {
             // Hit enemy with damage dictated by Player class
             if (EnemyWatchdog.currentEnemy != null && EnemyWatchdog.currentEnemy.GetComponent<Collider2D>() != null) {
                 //EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getCriticalAttack(swipe), true);
-                EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(450, true);
+                EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getCriticalAttack(swipe), true);
                 Player.resetCrit();
             }
 

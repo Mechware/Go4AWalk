@@ -92,7 +92,7 @@ public class GPS : MonoBehaviour
 
     IEnumerator initializeGPS() {
 
-        if (!Input.location.isEnabledByUser) {
+        if (!Input.location.isEnabledByUser || Input.location.status == LocationServiceStatus.Failed || Input.location.status == LocationServiceStatus.Stopped) {
             state = LocationState.Disabled;
             yield break;
         }
@@ -189,7 +189,7 @@ public class GPS : MonoBehaviour
                         "Previous Longitude: " + prevLongitude + "\n" +
                         "Current Longitude: " + longitude + "\n" +
                         "Current Latitude: " + latitude + "\n" +
-                        "Delta Distance: " + deltaDistance + "\n" +
+                        "Delta Distance: " + deltaDistance.Value + "\n" +
                         "GPS updates: " + gpsUpdates;
 
                 break;
