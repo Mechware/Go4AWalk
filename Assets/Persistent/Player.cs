@@ -11,8 +11,8 @@ public class Player : MonoBehaviour {
     public static bool fighting = false, walking = false, inTown = false, died = false;
     public static Player instance;
 
-    public static float totalDistance;
-    public static int gold, experience, level;
+    public static float totalDistance = 0;
+    public static int gold=0, experience=0, level=0;
     public static int experienceOfLastLevel = 0;
 
     public static int maxHealth = 100;
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour {
         }
 
         if (died) {
-            health=50;
+            health = 50;
             died = false;
         }
 
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour {
     public static void damage(int amount) {
         health -= amount;
         if(health <= 0) {
-            combatDie();
+            die();
         }
     }
 
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour {
         return crit.Value;
     }
 
-    private static void combatDie() {      
+    private static void die() {      
         UnityEngine.SceneManagement.SceneManager.LoadScene(TOWN_LEVEL);
         died = true;
     }
@@ -137,6 +137,7 @@ public class Player : MonoBehaviour {
         return attack;
     }
     #endregion 
+
     #region gettersAndSetters
     /// <summary>
     /// Give a certain amount of gold to the player
@@ -156,6 +157,14 @@ public class Player : MonoBehaviour {
             level++;
             experienceOfLastLevel = experience;
         }
+    }
+
+    public static void giveHealth(int amount) {
+        health += amount;
+        if (health > maxHealth)
+            health = maxHealth;
+        else if (health <= 0)
+            die();
     }
     #endregion
     #endregion

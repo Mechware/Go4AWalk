@@ -14,21 +14,33 @@ public class PersistentUIElements : MonoBehaviour {
     public GameObject statsPanel, questPanel, optionsPanel, itemsPanel;
     public string currentPanel = "";
 
+
+    //Prefabs
+    public GameObject item;
+
     // Script for walking data
-    public GPS walkingScript;
+    private GPS walkingScript;
 
     // Use this for initialization
     void Start () {
-        
+        walkingScript = GPS.gpsObject;
+
+        Inventory.items.OnValueChange += () => {
+            updateItems();
+        };
+
+        Button[] buttons = itemsPanel.GetComponentsInChildren<Button>();
+
+        for(int i = 0 ; i < buttons.Length ; i++) {
+            
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
-
-
         if (walkingStats.IsActive()) {
             if(walkingScript == null) {
-                walkingStats.text = "GPS disabled";
+                walkingStats.text = "GPS Disabled";
             } else {
                 walkingStats.text = walkingScript.getGPSData();
             }
@@ -95,6 +107,7 @@ public class PersistentUIElements : MonoBehaviour {
                 optionsPanel.SetActive(false);
                 itemsPanel.SetActive(true);
                 currentPanel = panel;
+                updateItems();
                 break;
             default:
                 print("Didn't not open a valid panel");
@@ -102,6 +115,27 @@ public class PersistentUIElements : MonoBehaviour {
         }
     }
 
+    void updateItems() {
+
+        print("Updating items");
+
+        string s = "";
+        
+
+        Button[] buttons = itemsPanel.GetComponentsInChildren<Button>();
+
+        int length = Inventory.items.Value.Count > buttons.Length ? buttons.Length : Inventory.items.Value.Count;
+
+        for(int i = 0 ; i < length ; i++) { 
+            s = Inventory.items.Value[i].name + "\n" + Inventory.items.Value[i].description + "\n";
+            buttons[i].GetComponentInChildren<Text>().text = s;
+            buttons[i].onClick.RemoveAllListeners();
+            
+            buttons[i].onClick.AddListener(() => {
+                //TODO: Implement using items
+            });
+        }
+    }
     // ** End Journal Stuffs ** //
 
 }

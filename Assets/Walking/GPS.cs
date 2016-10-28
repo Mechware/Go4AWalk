@@ -13,7 +13,7 @@ public enum LocationState
 
 public class GPS : MonoBehaviour
 {
-
+    public static GPS gpsObject;
     
     public int GPSUpdatesBeforeAverage = 5;
     public float desiredAccuracyInMeters = 1f;
@@ -49,6 +49,7 @@ public class GPS : MonoBehaviour
 
     // Use this for initialization
     void Awake() {
+        gpsObject = this;
         deltaDistance = new ObservedValue<float>(0);
         timeOfLastDistanceUpdate = DateTime.UtcNow.Second;
         state = LocationState.Disabled;
@@ -58,7 +59,7 @@ public class GPS : MonoBehaviour
 
     IEnumerator Start()
     {
-
+        
         yield return StartCoroutine(initializeGPS());
 
         if(state == LocationState.Enabled) {

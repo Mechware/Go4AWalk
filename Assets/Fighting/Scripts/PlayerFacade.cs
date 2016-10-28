@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/*********************************************************************
+ * PlayerFacade.cs
+ * This is the class that the Enemy in "Fighting" scene interacts with
+ * 
+ *********************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 public class PlayerFacade : MonoBehaviour {
