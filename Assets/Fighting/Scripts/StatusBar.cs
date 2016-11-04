@@ -7,7 +7,7 @@ public class StatusBar : MonoBehaviour {
     private Vector3 originalScale;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         originalScale = transform.localScale;
 	}
 

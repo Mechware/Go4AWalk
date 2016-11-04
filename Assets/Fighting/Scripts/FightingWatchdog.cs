@@ -4,14 +4,10 @@ using UnityEngine.UI;
 
 public class FightingWatchdog : MonoBehaviour {
 
-    public Text critBarText, healthBarText, enemyHealthBar;
-    public StatusBar healthBar, critBar;
     public float lineUpdateSpeed = 0.005f;
     private LineRenderer lineRenderer;
     private int i;
     private bool swiping = false;
-
-
 
     void Awake() {
 
@@ -25,52 +21,37 @@ public class FightingWatchdog : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        updateHealthBar();
-        updateCritBar();
-
-#if UNITY_EDITOR
-        // If using editor, you want to use a mouse
-        if (Input.GetMouseButtonUp(0)) {
-            // Mouse button released
-
-        } else if (Input.GetMouseButtonDown(0)) {
-            // Mouse button released
-            InvokeRepeating("AddPoint", lineUpdateSpeed, lineUpdateSpeed);
-            swiping = true;
-        } else if (Input.GetMouseButton(0)) {
-            // Swiping
-        } else if (swiping) {
-            CancelInvoke("AddPoint");
-            lineRenderer.SetVertexCount(0);
-            i = 0;
-            swiping = false;
-        }
-
-#else
-        // If not using editor, find touches    
-        if (Input.touchCount > 0) {
-            if (Input.touches[0].phase == TouchPhase.Began) {
+        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WebGLPlayer) {
+            // If using editor, you want to use a mouse
+            if (Input.GetMouseButtonUp(0) && swiping) {
+                // Mouse button released
+                CancelInvoke("AddPoint");
+                lineRenderer.SetVertexCount(0);
+                i = 0;
+                swiping = false;
+            } else if (Input.GetMouseButtonDown(0)) {
+                // Mouse button released
                 InvokeRepeating("AddPoint", lineUpdateSpeed, lineUpdateSpeed);
                 swiping = true;
+            } else if (Input.GetMouseButton(0)) {
+                // Swiping
+            } else if (swiping) {
+                print("Still swiping but no released");
             }
-        } else if (swiping) {
-            CancelInvoke("AddPoint");
-            lineRenderer.SetVertexCount(0);
-            i = 0;
-            swiping = false;
+        } else {
+            // If not using editor, find touches    
+            if (Input.touchCount > 0) {
+                if (Input.touches[0].phase == TouchPhase.Began) {
+                    InvokeRepeating("AddPoint", lineUpdateSpeed, lineUpdateSpeed);
+                    swiping = true;
+                }
+            } else if (swiping) {
+                CancelInvoke("AddPoint");
+                lineRenderer.SetVertexCount(0);
+                i = 0;
+                swiping = false;
+            }
         }
-
-#endif
-    }
-
-    // Used for update the health bar
-    void updateHealthBar() {
-        healthBar.updateBar(Player.maxHealth, Player.health);
-    }
-
-    // Used for updating the critical bar
-    void updateCritBar() {
-        critBar.updateBar(100, Player.crit);
     }
 
 
@@ -78,20 +59,19 @@ public class FightingWatchdog : MonoBehaviour {
     public void AddPoint() {
         Vector3 inputPoint;
 
-        // If using editor I want to be able to click
-#if UNITY_EDITOR
+        
+        if(Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WebGLPlayer) {
+            // If using computer, make click attack
+            if (!Input.GetMouseButton(0))
+                return;
+            inputPoint = Input.mousePosition;
+        } else {
+            // If using phone use touch
+            if (Input.touchCount == 0)
+                return;
+            inputPoint = Input.touches[0].position;
+        }
 
-        if (!Input.GetMouseButton(0))
-            return;
-        inputPoint = Input.mousePosition;
-
-#else
-        // If using phone use touch
-        if (Input.touchCount == 0)
-            return;
-        inputPoint = Input.touches[0].position;
-
-#endif
         // Change input point to 
         inputPoint.z = 10;
         inputPoint = Camera.main.ScreenToWorldPoint(inputPoint);
@@ -136,7 +116,8 @@ public class FightingWatchdog : MonoBehaviour {
         yield return new WaitForSeconds(1.1f);
 
         treasureChest.SetActive(true);
-        treasureChest.GetComponent<TreasureChest>().openChest();
+        StartCoroutine(treasureChest.GetComponent<TreasureChest>().openChest());
+
         Destroy(treasureChest, 5.1f);
 
         yield return new WaitForSeconds(5);

@@ -17,6 +17,7 @@ public struct quest {
     public bool active;
 
     public quest(string name, string shortOverview, string description, int goldReward, int xpReward, GameObject[] rewards, float timeToComplete, float distance, float difficulty) {
+        UnityEngine.Assertions.Assert.AreNotEqual(0, distance, "Quest has a distance of 0.");
         this.name = name;
         this.shortOverview = shortOverview;
         this.description = description;
@@ -39,7 +40,7 @@ public struct quest {
     }
 
     public string getStats() {
-
+        
         if (!active)
             return "No active quest";
 
@@ -85,15 +86,16 @@ public class Questing : MonoBehaviour {
 
     // Questing
     public static quest currentQuest;
-    public static Questing thisGO;
+    public static Questing instance;
 
     // Use this for initialization
     void Awake () {
         if (currentQuest.active) {
+            // Stop it to make sure it's not running twice
             StopCoroutine("checkQuestEnd");
             StartCoroutine("checkQuestEnd");
         }
-        thisGO = this;
+        instance = this;
     }
 	
 	// Update is called once per frame
@@ -113,7 +115,7 @@ public class Questing : MonoBehaviour {
     public static void startQuest(quest q) {
         currentQuest = q;
         if (q.timeToComplete != -1) {
-            thisGO.StartCoroutine("checkQuestEnd");
+            instance.StartCoroutine("checkQuestEnd");
         }
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(Player.WALKING_LEVEL);

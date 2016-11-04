@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour {
     public GameObject damageIndicator, critIndicator;
     public int health, damage, goldToGive;
     public float timeBetweenAttacks;
-    
+    public PlayerFacade player;
 
     private StatusBar healthBar;
     private GameObject canvas;
@@ -20,7 +20,9 @@ public class Enemy : MonoBehaviour {
         healthBar = GetComponentInChildren<StatusBar>();
         maxHealth = health;
         ew = GameObject.Find("Watchdog").GetComponent<EnemyWatchdog>();
+        player = GameObject.Find("Manager").GetComponent<PlayerFacade>();
         StartCoroutine("attack");
+        
 	}
 	
 	// Update is called once per frame
@@ -56,15 +58,12 @@ public class Enemy : MonoBehaviour {
         healthBar.updateBar(maxHealth, health);
     }
 
-    // For attacking player
-    private float lastAttack;
-
+    // Attack player a set number of times
     IEnumerator attack() {
         while(true) {
-            GetComponent<Animator>().SetTrigger("attacking");
-            lastAttack = Time.time;
-            Player.damage(damage);
             yield return new WaitForSeconds(timeBetweenAttacks);
+            GetComponent<Animator>().SetTrigger("attacking");
+            player.hitPlayer(damage);
         }
     }
 
