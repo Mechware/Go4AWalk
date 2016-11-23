@@ -9,11 +9,7 @@
 
 
 using UnityEngine;
-using System.Collections;
 using System;
-using Gamelogic;
-using Gamelogic.Extensions;
-using System.Collections.Generic;
 
 /// <summary>
 /// A structure that is an item. I left the "otherInfo" object
@@ -60,36 +56,77 @@ public enum itemType {
 
 public class Inventory : MonoBehaviour {
 
-    public static ObservedValue<List<item>> items;
+    public static item noItem = new item("", "", 0, 0, null, itemType.Equipment, () => { });
+    public const int INVENTORY_SIZE = 6;
+    public static Action onValueChanged;
+    private static item[] items;
 
-	// Use this for initialization
+    // Use this for initialization
     void Awake() {
-        if (items == null)
-            items = new ObservedValue<List<item>>(new List<item>());
+        initalizeInventory();
+        onValueChanged += () => { print("Hello"); };
     }
 
-	void Start () {
-        
-	}
+    static void initalizeInventory() {
+        if (items != null)
+            return;
+        items = new item[INVENTORY_SIZE];
+        for(int i = 0 ; i < INVENTORY_SIZE ; i++) {
+            items[i] = noItem;
+        }
+    }
+
+    public static void addItem(item it, int pos) {
+        initalizeInventory();
+        items[pos] = it;
+        onValueChanged.Invoke();
+    }
 
     public static void addItem(item it) {
-        if(items == null) {
-            items = new ObservedValue<List<item>>(new List<item>());
+        initalizeInventory();
+
+        for(int i = 0 ; i < INVENTORY_SIZE ; i++) {
+            if (items[i].Equals(noItem)) {
+                addItem(it, i);
+                return;
+            }
         }
-        items.Value.Add(it);
     }
 
-    public static void removeItem(item it) {
-        if (items == null)
-            return;
-        else if (!items.Value.Contains(it)) {
-            print("Inventory does not contain " + it.name);
+    public static void removeItem(int pos) {
+
+        initalizeInventory();
+
+        if (items[pos].Equals(noItem)) {
+            print("Inventory does not contain an item at position: " + pos);
             return;
         }
-        items.Value.Remove(it);
+        
+        items[pos] = noItem;
+        onValueChanged.Invoke();
+    }
+
+    private static void Items_OnValueChange() {
+        print("Okay now it's being thronw?");
     }
 
     public static void use(item it) {
         it.useItem();
+    }
+
+    public static void use(int number) {
+        print("Using item: " + number);
+        items[number].useItem();
+        removeItem(number);
+    }
+
+    public void useItem(int number) {
+        print("Using item: " + number);
+        items[number].useItem();
+        removeItem(number);
+    }
+
+    public static item getItem(int pos) {
+        return items[pos];
     }
 }

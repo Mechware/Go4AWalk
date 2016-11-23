@@ -26,6 +26,7 @@ public class BountyBoard : MonoBehaviour {
         tw.menus.SetActive(true);
         tw.bountyBoard.SetActive(true);
         tw.exitButton.SetActive(true);
+        tw.shop.SetActive(false);
     }
 
     public void openQuestInBounties(quest q) {
