@@ -26,13 +26,8 @@ public class PersistentUIElements : MonoBehaviour {
         walkingScript = GPS.gpsObject;
 
         Inventory.onValueChanged += updateItems;
-        
-
         Button[] buttons = itemsPanel.GetComponentsInChildren<Button>();
 
-        for(int i = 0 ; i < buttons.Length ; i++) {
-            
-        }
     }
 	
 	// Update is called once per frame

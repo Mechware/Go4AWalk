@@ -64,7 +64,8 @@ public class Inventory : MonoBehaviour {
     // Use this for initialization
     void Awake() {
         initalizeInventory();
-        onValueChanged += () => { print("Hello"); };
+        onValueChanged = null;
+        onValueChanged += () => { };
     }
 
     static void initalizeInventory() {
