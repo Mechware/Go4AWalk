@@ -4125,6 +4125,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013749702878, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 1000010887623784, guid: c0acb44c55722444883233ac47cb1e25,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da687c2027639a24583cf909cdae1990, type: 2}
   m_IsPrefabParent: 0
@@ -5724,7 +5730,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 622159115}
+      - m_Target: {fileID: 622159118}
         m_MethodName: ignoreQuest
         m_Mode: 1
         m_Arguments:
@@ -6273,7 +6279,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 622159115}
+      - m_Target: {fileID: 622159118}
         m_MethodName: acceptQuest
         m_Mode: 1
         m_Arguments:

@@ -49,8 +49,6 @@ public class Shop : MonoBehaviour {
         itemInfoPanel.SetActive(false);
     }
 
-    
-
     public void selectItem(int buttonNum) {
         openItem(items[buttonNum]);
         currentItemNum = buttonNum;
@@ -63,7 +61,6 @@ public class Shop : MonoBehaviour {
 
         healthPotion.useItem += () => {
             Player.giveHealth(10);
-            Inventory.removeItem(healthPotion);
         };
 
         for(int i = 0 ; i<7 ; i++) {

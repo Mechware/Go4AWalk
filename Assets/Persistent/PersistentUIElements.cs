@@ -25,15 +25,9 @@ public class PersistentUIElements : MonoBehaviour {
     void Start () {
         walkingScript = GPS.gpsObject;
 
-        Inventory.items.OnValueChange += () => {
-            updateItems();
-        };
-
+        Inventory.onValueChanged += updateItems;
         Button[] buttons = itemsPanel.GetComponentsInChildren<Button>();
 
-        for(int i = 0 ; i < buttons.Length ; i++) {
-            
-        }
     }
 	
 	// Update is called once per frame
@@ -120,20 +114,12 @@ public class PersistentUIElements : MonoBehaviour {
         print("Updating items");
 
         string s = "";
-        
 
         Button[] buttons = itemsPanel.GetComponentsInChildren<Button>();
 
-        int length = Inventory.items.Value.Count > buttons.Length ? buttons.Length : Inventory.items.Value.Count;
-
-        for(int i = 0 ; i < length ; i++) { 
-            s = Inventory.items.Value[i].name + "\n" + Inventory.items.Value[i].description + "\n";
+        for(int i = 0 ; i < buttons.Length ; i++) { 
+            s = Inventory.getItem(i).name + "\n" + Inventory.getItem(i).description + "\n";
             buttons[i].GetComponentInChildren<Text>().text = s;
-            buttons[i].onClick.RemoveAllListeners();
-            
-            buttons[i].onClick.AddListener(() => {
-                //TODO: Implement using items
-            });
         }
     }
     // ** End Journal Stuffs ** //
