@@ -753,6 +753,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: enemies.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4000011089418154, guid: da687c2027639a24583cf909cdae1990, type: 2}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -800,6 +805,30 @@ Prefab:
       propertyPath: walkingWatchdogUI
       value: 
       objectReference: {fileID: 1011502122}
+    - target: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 1000012080610346, guid: daf550588788323458545c1e8db22410,
+        type: 2}
+    - target: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 1000011345134160, guid: c50f40abeb835134cbddb4498027e70a,
+        type: 2}
+    - target: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: enemies.Array.data[3]
+      value: 
+      objectReference: {fileID: 1000012277805392, guid: 6ebc2d9f83dd6544bb208a514bc5f5ab,
+        type: 2}
+    - target: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: enemies.Array.data[4]
+      value: 
+      objectReference: {fileID: 1000010820289118, guid: af5e05849eed50c4ba121c171759f9f8,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da687c2027639a24583cf909cdae1990, type: 2}
   m_IsPrefabParent: 0

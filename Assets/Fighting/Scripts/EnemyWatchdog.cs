@@ -26,6 +26,7 @@ public class EnemyWatchdog : MonoBehaviour {
     private static encounterState state;
     private static GameObject currentEnemyPrefab;
     private static bool bossEncounterAvailable = false;
+	private int randomEnemy;
 
     void Awake() {
         bossEncounterAvailable = false;
@@ -124,7 +125,8 @@ public class EnemyWatchdog : MonoBehaviour {
     }
 
     private GameObject pickEnemy() {
-        return enemies[0];
+		int randomEnemy = Mathf.RoundToInt(Random.value*4);
+		return enemies[randomEnemy];
     }
 
     private GameObject pickBoss() {
