@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
-    public GameObject damageIndicator, critIndicator;
+    public GameObject damageIndicator, critIndicator, item;
     public int health, damage, goldToGive;
     public float timeBetweenAttacks;
     public PlayerFacade player;
@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour {
     private GameObject canvas;
     private int maxHealth;
     private EnemyWatchdog ew;
+    
 
     // Use this for initialization
     void Start () {
@@ -68,12 +69,35 @@ public class Enemy : MonoBehaviour {
     }
 
     void die() {
+        StopCoroutine("attack");
         GetComponent<Animator>().SetBool("dying", true);
         Destroy(healthBar.transform.parent.gameObject);
+
         Player.giveGold(goldToGive);
         Destroy(GetComponent<Collider2D>());
-        Destroy(gameObject, 2);
+        Destroy(gameObject, 5);
+        spawnItems(2);
         ew.encounterIsOver();
-        StopCoroutine("attack");
+        
+    }
+
+    void spawnItems(int numberOfItems) {
+
+        GameObject[] items = new GameObject[numberOfItems];
+
+        item healthPotion = new item("Health Potion", "Used to regain health", 10, 10, null, itemType.Potion, null);
+
+        for (int i = 0 ; i < numberOfItems ; i++) { 
+            items[i] = (GameObject) Instantiate(item, new Vector2(1,1), Quaternion.identity);
+            items[i].GetComponent<ItemContainer>().setItem(healthPotion);
+            items[i].GetComponent<ItemContainer>().launchItem();
+            print("item spawned");
+
+        }
+
+        
+        
+
+
     }
 }
