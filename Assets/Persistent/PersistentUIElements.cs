@@ -28,6 +28,21 @@ public class PersistentUIElements : MonoBehaviour {
         Inventory.onValueChanged += updateItems;
         Button[] buttons = itemsPanel.GetComponentsInChildren<Button>();
 
+        // Set the stats
+        level.text = Player.level.Value.ToString();
+        totalGold.text = Player.gold.Value.ToString();
+        totalExperience.text = Player.experience.Value.ToString();
+
+        // Update each time the experience, gold, or level is updated
+        Player.experience.OnValueChange += () => {
+            totalExperience.text = Player.experience.Value.ToString();
+        };
+        Player.gold.OnValueChange += () => {
+            totalGold.text = Player.gold.Value.ToString();
+        };
+        Player.level.OnValueChange += () => {
+            level.text = Player.level.Value.ToString();
+        };
     }
 	
 	// Update is called once per frame
@@ -44,10 +59,7 @@ public class PersistentUIElements : MonoBehaviour {
             questStats.text = Questing.currentQuest.getStats();
         }
 
-        // TODO: Optimize so only changes when needed
-        totalExperience.text = Player.experience + "";
-        totalGold.text = Player.gold + "";
-        level.text = Player.level + "";
+        
     }
 
 // **** JOURNAL STUFF **** //

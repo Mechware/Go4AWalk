@@ -41,8 +41,15 @@ public class Shop : MonoBehaviour {
             print("No item selected");
             return;
         }
-        Inventory.addItem(items[currentItemNum]);
-        itemInfoPanel.SetActive(false);
+
+        if(items[currentItemNum].price > Player.gold.Value) {
+            StartCoroutine(showNotEnoughGold());
+        } else {
+            Player.takeGold(items[currentItemNum].price);
+            Inventory.addItem(items[currentItemNum]);
+            itemInfoPanel.SetActive(false);
+        }
+        
     }
 
     public void ignoreItem() {
@@ -55,16 +62,14 @@ public class Shop : MonoBehaviour {
     }
 
     void setItems() {
+        int sizeOfShop = 7;
+        items = new item[sizeOfShop];
+        
 
-        items = new item[7];
-        item healthPotion = new item("Health Potion", "Used to regain health", 10, 10, null, itemType.Potion, null);
+        items[0] = ItemList.itemMasterList["Health Potion"];
 
-        healthPotion.useItem += () => {
-            Player.giveHealth(10);
-        };
-
-        for(int i = 0 ; i<7 ; i++) {
-            items[i] = healthPotion;
+        for(int i = 1 ; i < sizeOfShop ; i++) {
+            items[i] = Inventory.noItem;
         }
 
         itemButton0.GetComponentInChildren<Text>().text = items[0].name + "\n" + items[0].description;
@@ -74,5 +79,16 @@ public class Shop : MonoBehaviour {
         itemButton4.GetComponentInChildren<Text>().text = items[4].name + "\n" + items[4].description;
         itemButton5.GetComponentInChildren<Text>().text = items[5].name + "\n" + items[5].description;
         itemButton6.GetComponentInChildren<Text>().text = items[6].name + "\n" + items[6].description;
+    }
+
+    IEnumerator showNotEnoughGold() {
+        string prev = itemPageOverview.GetComponent<Text>().text;
+        if (prev.Equals("Not enough gold...")) {
+            yield break;
+        }
+            
+        itemPageOverview.GetComponent<Text>().text = "Not enough gold...";
+        yield return new WaitForSeconds(2);
+        itemPageOverview.GetComponent<Text>().text = prev;
     }
 }

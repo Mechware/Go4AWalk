@@ -33,8 +33,10 @@ public struct item {
     public itemType type;
     // Method to call to use item
     public Action useItem;
+    // Item's icon
+    public Sprite icon;
 
-    public item(string name, string description, int price, int attributeValue, object otherInfo, itemType type, Action useItem) {
+    public item(string name, string description, int price, int attributeValue, object otherInfo, itemType type, Action useItem, Sprite icon) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -42,6 +44,7 @@ public struct item {
         this.otherInfo = otherInfo;
         this.type = type;
         this.useItem = useItem;
+        this.icon = icon;
     }
 }
 
@@ -56,7 +59,7 @@ public enum itemType {
 
 public class Inventory : MonoBehaviour {
 
-    public static item noItem = new item("", "", 0, 0, null, itemType.Equipment, () => { });
+    public static item noItem = new item("", "", 0, 0, null, itemType.Equipment, () => { }, null);
     public const int INVENTORY_SIZE = 6;
     public static Action onValueChanged;
     private static item[] items;
@@ -65,7 +68,6 @@ public class Inventory : MonoBehaviour {
     void Awake() {
         initalizeInventory();
         onValueChanged = null;
-        onValueChanged += () => { };
     }
 
     static void initalizeInventory() {

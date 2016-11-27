@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
     public static Player instance;
 
     public static float totalDistance = 0;
-    public static int gold=0, experience=0, level=0;
+    public static ObservedValue<int> gold, experience, level;
     public static int experienceOfLastLevel = 0;
 
     public static int maxHealth = 100;
@@ -26,8 +26,18 @@ public class Player : MonoBehaviour {
     #region nonstatic
 
     void Awake() {
+        if (gold == null) {
+            gold = new ObservedValue<int>(0);
+            experience = new ObservedValue<int>(0);
+            level = new ObservedValue<int>(1);
+        } else {
+            gold = new ObservedValue<int>(gold.Value);
+            experience = new ObservedValue<int>(experience.Value);
+            level = new ObservedValue<int>(level.Value);
+        }
         crit = new ObservedValue<int>(0);
-        
+
+        ItemList.initialize();
         
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(FIGHTING_LEVEL)) {
             print("Fighting");
@@ -144,7 +154,15 @@ public class Player : MonoBehaviour {
     /// </summary>
     /// <param name="amount">Amount of gold to give</param>
     public static void giveGold(int amount) {
-        gold += amount;
+        gold.Value += amount;
+    }
+
+    /// <summary>
+    /// Take gold from the player
+    /// </summary>
+    /// <param name="amount">Amount of gold to be taken</param>
+    public static void takeGold(int amount) {
+        gold.Value -= amount;
     }
 
     /// <summary>
@@ -152,10 +170,10 @@ public class Player : MonoBehaviour {
     /// </summary>
     /// <param name="amount">Amount of gold to give</param>
     public static void giveExperience(int amount) {
-        experience += amount;
-        if(experience > experienceOfLastLevel + 100) {
-            level++;
-            experienceOfLastLevel = experience;
+        experience.Value += amount;
+        if(experience.Value > experienceOfLastLevel + 100) {
+            level.Value++;
+            experienceOfLastLevel = experience.Value;
         }
     }
 
