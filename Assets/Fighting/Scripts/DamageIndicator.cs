@@ -17,7 +17,7 @@ public class DamageIndicator : MonoBehaviour {
         xforce = Random.Range(-400f, 400f);
         yforce = Random.Range(900f, 1100f);
         this.GetComponent<Rigidbody2D>().AddForce(new Vector2(xforce, yforce));
-
+        
         startTime = Time.time;
     }
 
