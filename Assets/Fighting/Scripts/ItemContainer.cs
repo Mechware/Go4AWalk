@@ -23,7 +23,7 @@ public class ItemContainer : MonoBehaviour {
           yforce = Random.Range(-40f, 40f);
         //gameObject.AddComponent<Rigidbody2D>().gravityScale = gravity;
           this.GetComponent<Rigidbody2D>().AddForce(new Vector2(xforce, yforce));
-        print(xforce + yforce);
+        //print(xforce + yforce);
     }
 
     // Update is called once per frame

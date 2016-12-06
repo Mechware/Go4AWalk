@@ -191,6 +191,7 @@ MonoBehaviour:
     type: 2}
   critIndicator: {fileID: 1000010078750342, guid: 9e299e57bbc025641988ac9b0c935eef,
     type: 2}
+  item: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae, type: 2}
   health: 200
   damage: 10
   goldToGive: 0

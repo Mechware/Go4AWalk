@@ -85,14 +85,12 @@ public class Enemy : MonoBehaviour {
 
         GameObject[] items = new GameObject[numberOfItems];
 
-        item healthPotion = new item("Health Potion", "Used to regain health", 10, 10, null, itemType.Potion, null);
+        item healthPotion = ItemList.itemMasterList["Health Potion"];
 
         for (int i = 0 ; i < numberOfItems ; i++) { 
             items[i] = (GameObject) Instantiate(item, new Vector2(1,1), Quaternion.identity);
             items[i].GetComponent<ItemContainer>().setItem(healthPotion);
             items[i].GetComponent<ItemContainer>().launchItem();
-            print("item spawned");
-
         }
 
         

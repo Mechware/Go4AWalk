@@ -174,11 +174,12 @@ public class GPS : MonoBehaviour
     } // update
 
     public string getGPSData() {
+
         string text;
         switch (state) {
             case LocationState.Enabled:
                 DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0,
-                                                                System.DateTimeKind.Utc);
+                                                                DateTimeKind.Utc);
 
                 double curTime = (DateTime.UtcNow - epochStart).TotalSeconds;
                 float timeChanged = (float) (curTime - timestamp);

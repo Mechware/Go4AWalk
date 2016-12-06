@@ -4,19 +4,36 @@ using System.Collections.Generic;
 
 public class ItemList {
 
-    public static IDictionary<string, item> itemMasterList;
+    private static IDictionary<string, item> _itemMasterList = null;
+    public static IDictionary<string, item> itemMasterList {
+        get {
+            if (_itemMasterList == null) {
+                initialize();
+            }
+            return _itemMasterList;
+        }
+    }
     public static bool initialized = false;
 
 
     public static void initialize() {
         if (initialized) return;
 
-        itemMasterList = new Dictionary<string, item>();
+        _itemMasterList = new Dictionary<string, item>();
 
         // Health Potion
-        item healthPotion = new item("Health Potion", "Used to regain health", 10, 10, null, itemType.Potion, null, null);
+        item healthPotion = new item(name: "Health Potion", 
+            description: "Used to regain health",
+            price: 10, 
+            attributeValue: 10, 
+            otherInfo: null, 
+            type: itemType.Potion, 
+            useItem: null, 
+            icon: null);
+
         healthPotion.useItem += () => {
             Player.giveHealth(10);
+            return true;
         };
         itemMasterList["Health Potion"] = healthPotion;
     }

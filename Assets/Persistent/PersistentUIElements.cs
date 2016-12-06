@@ -49,7 +49,8 @@ public class PersistentUIElements : MonoBehaviour {
 	void Update () {
         if (walkingStats.IsActive()) {
             if(walkingScript == null) {
-                walkingStats.text = "GPS Disabled";
+                if(!walkingStats.Equals("GPS Disabled"))
+                    walkingStats.text = "GPS Disabled";
             } else {
                 walkingStats.text = walkingScript.getGPSData();
             }
@@ -62,7 +63,7 @@ public class PersistentUIElements : MonoBehaviour {
         
     }
 
-// **** JOURNAL STUFF **** //
+    #region journal
 
     public void openJournal() {
         
@@ -123,8 +124,6 @@ public class PersistentUIElements : MonoBehaviour {
 
     void updateItems() {
 
-        print("Updating items");
-
         string s = "";
 
         Button[] buttons = itemsPanel.GetComponentsInChildren<Button>();
@@ -134,6 +133,6 @@ public class PersistentUIElements : MonoBehaviour {
             buttons[i].GetComponentInChildren<Text>().text = s;
         }
     }
-    // ** End Journal Stuffs ** //
+    #endregion
 
 }

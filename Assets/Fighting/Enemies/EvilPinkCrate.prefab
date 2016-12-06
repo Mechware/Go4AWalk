@@ -87,10 +87,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageIndicator: {fileID: 0}
   critIndicator: {fileID: 0}
+  item: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae, type: 2}
   health: 1000
   damage: 10
   goldToGive: 0
   timeBetweenAttacks: 2
+  player: {fileID: 0}
 --- !u!212 &212000013435426298
 SpriteRenderer:
   m_ObjectHideFlags: 1

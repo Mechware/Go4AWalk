@@ -36,8 +36,6 @@ public class Player : MonoBehaviour {
             level = new ObservedValue<int>(level.Value);
         }
         crit = new ObservedValue<int>(0);
-
-        ItemList.initialize();
         
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(FIGHTING_LEVEL)) {
             print("Fighting");

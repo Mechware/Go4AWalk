@@ -31,12 +31,13 @@ public struct item {
     public object otherInfo;
     // The item type
     public itemType type;
-    // Method to call to use item
-    public Action useItem;
+    // Method to call to use item. 
+    // Returns whether or not the item should be removed
+    public Func<bool> useItem;
     // Item's icon
     public Sprite icon;
 
-    public item(string name, string description, int price, int attributeValue, object otherInfo, itemType type, Action useItem, Sprite icon) {
+    public item(string name, string description, int price, int attributeValue, object otherInfo, itemType type, Func<bool> useItem, Sprite icon) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -59,7 +60,7 @@ public enum itemType {
 
 public class Inventory : MonoBehaviour {
 
-    public static item noItem = new item("", "", 0, 0, null, itemType.Equipment, () => { }, null);
+    public static item noItem = new item("", "", 0, 0, null, itemType.Equipment, () => { return false; }, null);
     public const int INVENTORY_SIZE = 6;
     public static Action onValueChanged;
     private static item[] items;
@@ -118,15 +119,14 @@ public class Inventory : MonoBehaviour {
     }
 
     public static void use(int number) {
-        print("Using item: " + number);
-        items[number].useItem();
-        removeItem(number);
+        bool shouldRemoveItem = items[number].useItem();
+        if(shouldRemoveItem)
+            removeItem(number);
     }
 
+    // Non-static method for inventory buttons to use
     public void useItem(int number) {
-        print("Using item: " + number);
-        items[number].useItem();
-        removeItem(number);
+        use(number);
     }
 
     public static item getItem(int pos) {
