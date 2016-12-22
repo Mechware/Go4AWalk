@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: GnomeController
+  m_Name: GoblinController
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: dying
@@ -243,7 +243,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 307c9054b55aa1b42ab04b4df2fb82c3, type: 2}
+  m_Motion: {fileID: 7400000, guid: 309b4baf2988a2547a62ff2abf2725bd, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -255,7 +255,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Death
-  m_Speed: 1
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101000011746576734}
@@ -267,7 +267,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d87fb821a0674b54c89c57309ce6b1d4, type: 2}
+  m_Motion: {fileID: 7400000, guid: 199f3bc3bf14fc146a0e7cd19d25da27, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -290,7 +290,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c4e4edf128efd9d4a8609334fdbd3cbc, type: 2}
+  m_Motion: {fileID: 7400000, guid: 10161129da3d36740993b5d221797463, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -316,7 +316,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bef373441e047a4449c8c5a7792eaaec, type: 2}
+  m_Motion: {fileID: 7400000, guid: 5d2af750e70348d4b90e0214deb97d27, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: dying
@@ -340,7 +340,53 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1838a862f3f7dc34abfe326a4ae70335, type: 2}
+  m_Motion: {fileID: 7400000, guid: 3c82726113f03074fb298b0043be1ace, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+--- !u!1102 &1102000013225497426
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Flinch 0
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 307c9054b55aa1b42ab04b4df2fb82c3, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+--- !u!1102 &1102000013984735910
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: currrrve
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: fea240781e1f4454d8b7d1b832ebca66, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -368,6 +414,12 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 1102000010602058528}
     m_Position: {x: 576, y: 120, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102000013984735910}
+    m_Position: {x: 611, y: 185, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102000013225497426}
+    m_Position: {x: 646, y: 250, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

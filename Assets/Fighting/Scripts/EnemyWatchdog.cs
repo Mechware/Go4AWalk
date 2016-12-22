@@ -125,7 +125,8 @@ public class EnemyWatchdog : MonoBehaviour {
     }
 
     private GameObject pickEnemy() {
-		int randomEnemy = Mathf.RoundToInt(Random.value*4);
+        int randomEnemy = Mathf.FloorToInt(Random.value*(enemies.Length));
+        print("Randon enemy: " + randomEnemy);
 		return enemies[randomEnemy];
     }
 

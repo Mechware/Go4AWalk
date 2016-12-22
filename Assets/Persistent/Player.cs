@@ -38,17 +38,17 @@ public class Player : MonoBehaviour {
         crit = new ObservedValue<int>(0);
         
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(FIGHTING_LEVEL)) {
-            print("Fighting");
+            //print("Fighting");
             fighting = true;
             walking = false;
             inTown = false;
         } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(TOWN_LEVEL)) {
-            print("In town");
+            //print("In town");
             fighting = false;
             walking = false;
             inTown = true;
         } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(WALKING_LEVEL)) {
-            print("Walking");
+            //print("Walking");
             fighting = false;
             walking = true;
             inTown = false;

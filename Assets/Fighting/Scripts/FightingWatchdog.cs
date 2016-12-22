@@ -75,6 +75,7 @@ public class FightingWatchdog : MonoBehaviour {
         // Change input point to 
         inputPoint.z = 10;
         inputPoint = Camera.main.ScreenToWorldPoint(inputPoint);
+        inputPoint.z = 25;
         lineRenderer.SetVertexCount(++i);
         lineRenderer.SetPosition(i-1, inputPoint);
 

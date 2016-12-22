@@ -14,8 +14,9 @@ public class DamageIndicator : MonoBehaviour {
     //damage = damagefromotherplace
 	// Use this for initialization
 	void Start () {
-        xforce = Random.Range(-400f, 400f);
-        yforce = Random.Range(900f, 1100f);
+        xforce = Random.Range(-20000f, 20000f);
+        yforce = Random.Range(0, 10000f);
+        transform.Translate(new Vector3(25, -125, 0));
         this.GetComponent<Rigidbody2D>().AddForce(new Vector2(xforce, yforce));
         
         startTime = Time.time;

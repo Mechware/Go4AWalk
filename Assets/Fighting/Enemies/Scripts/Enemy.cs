@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour {
             go.GetComponent<DamageIndicator>().setText(""+damage);
         }
 
-        GetComponent<Animator>().SetTrigger("flinch");
+        GetComponentInChildren<Animator>().SetTrigger("flinch");
         health -= damage;
 
         if (health <= 0) {
@@ -63,14 +63,14 @@ public class Enemy : MonoBehaviour {
     IEnumerator attack() {
         while(true) {
             yield return new WaitForSeconds(timeBetweenAttacks);
-            GetComponent<Animator>().SetTrigger("attacking");
+            GetComponentInChildren<Animator>().SetTrigger("attacking");
             player.hitPlayer(damage);
         }
     }
 
     void die() {
         StopCoroutine("attack");
-        GetComponent<Animator>().SetBool("dying", true);
+        GetComponentInChildren<Animator>().SetBool("dying", true);
         Destroy(healthBar.transform.parent.gameObject);
 
         Player.giveGold(goldToGive);
@@ -92,10 +92,5 @@ public class Enemy : MonoBehaviour {
             items[i].GetComponent<ItemContainer>().setItem(healthPotion);
             items[i].GetComponent<ItemContainer>().launchItem();
         }
-
-        
-        
-
-
     }
 }
