@@ -12,7 +12,7 @@ public class Shop : MonoBehaviour {
     item[] items;
     int currentItemNum = -1;
 
-    private TownWatchdog tw;
+    public TownWatchdog tw;
     // Use this for initialization
     void Start() {
         tw = GetComponent<TownWatchdog>();
@@ -67,8 +67,9 @@ public class Shop : MonoBehaviour {
         
 
         items[0] = ItemList.itemMasterList["Health Potion"];
+        items[1] = ItemList.itemMasterList["Crit Potion"];
 
-        for(int i = 1 ; i < sizeOfShop ; i++) {
+        for(int i = 2 ; i < sizeOfShop ; i++) {
             items[i] = Inventory.noItem;
         }
 

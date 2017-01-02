@@ -16,7 +16,19 @@ public class TownWatchdog : MonoBehaviour {
     // Shop
     public GameObject shop;
 
+    // 
+    public GameObject forestPopUp;
+
+    public void showForestPopUp() {
+        forestPopUp.SetActive(true);
+    }
+
+    public void closeForestPopUp() {
+        forestPopUp.SetActive(false);
+    }
+
     public void toForest() {
+        
         int goldReward = 0;
         int xpReward = 0;
         float timeToComplete = -1;

@@ -23,7 +23,6 @@ public class TownButtonController : MonoBehaviour {
             RaycastHit2D hitInfo = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             // RaycastHit2D can be either true or null, but has an implicit conversion to bool, so we can use it like this
             if (hitInfo) {
-                Debug.Log(hitInfo.transform.gameObject.name);
                 buttonHit(hitInfo.collider);
             }
         }
@@ -33,7 +32,6 @@ public class TownButtonController : MonoBehaviour {
                 RaycastHit2D hitInfo = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position), Vector2.zero);
                 // RaycastHit2D can be either true or null, but has an implicit conversion to bool, so we can use it like this
                 if (hitInfo) {
-                    Debug.Log(hitInfo.transform.gameObject.name);
                     buttonHit(hitInfo.collider);
                 }
             }
@@ -42,17 +40,18 @@ public class TownButtonController : MonoBehaviour {
     }
 
     void buttonHit(Collider2D collider) {
-        if(collider == shopCollider) {
+
+        if (shop.tw.menus.activeSelf == true)
+            return;
+
+        if (collider == shopCollider) {
             shop.openShop();
-            print("Open shop");
         } else if (collider == bountyBoardCollider) {
             bountyBoard.openBounties();
-            print("Open bounties");
         } else if (collider == tavernCollider) {
             
         } else if (collider == forestCollider) {
-            town.toForest();
-            print("To forest");
+            town.showForestPopUp();
         } else {
 
         }

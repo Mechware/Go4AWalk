@@ -101,9 +101,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 1.4690936, y: 0.000023841858}
+  m_Offset: {x: 17.393875, y: -3.9810896}
   serializedVersion: 2
-  m_Size: {x: 146.37209, y: 40.93476}
+  m_Size: {x: 178.22144, y: 48.89698}
 --- !u!102 &102000010966329150
 TextMesh:
   serializedVersion: 3

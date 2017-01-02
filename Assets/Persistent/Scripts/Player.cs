@@ -139,7 +139,7 @@ public class Player : MonoBehaviour {
             fAttack = (((float) crit.Value)/5f)*attackStrength;
             attack = Mathf.RoundToInt(fAttack);
         } else {
-            attack = (int) (15f * attackStrength);
+            attack = (int) (150f/5f * attackStrength);
         }
 
         return attack;
