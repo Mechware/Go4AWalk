@@ -17,14 +17,8 @@ public class PlayerFacade : MonoBehaviour {
         updateCritBar();
         updateHealthBar();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-    public void hitPlayer(int amount) {
-        
+    public void hitPlayer(int amount) {   
 
         Player.health -= amount;
         if (Player.health <= 0) {

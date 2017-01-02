@@ -9,18 +9,18 @@ public class Enemy : MonoBehaviour {
     public PlayerFacade player;
 
     private StatusBar healthBar;
-    private GameObject canvas;
+    private GameObject damageIndicatorParent;
     private int maxHealth;
-    private EnemyWatchdog ew;
+    private EnemyWatchdog enemyWatchdog;
     
 
     // Use this for initialization
     void Start () {
         goldToGive = Mathf.RoundToInt(Random.Range(1f, 100f));
-        canvas = GameObject.Find("MainCanvas");
+        damageIndicatorParent = GameObject.Find("DamageIndicators");
         healthBar = GetComponentInChildren<StatusBar>();
         maxHealth = health;
-        ew = GameObject.Find("Watchdog").GetComponent<EnemyWatchdog>();
+        enemyWatchdog = GameObject.Find("Watchdog").GetComponent<EnemyWatchdog>();
         player = GameObject.Find("Manager").GetComponent<PlayerFacade>();
         StartCoroutine("attack");
         
@@ -38,14 +38,14 @@ public class Enemy : MonoBehaviour {
 
         GameObject go;
         if (isCrit) {
-            go = (GameObject) Instantiate(critIndicator, canvas.transform, false);
+            go = (GameObject) Instantiate(critIndicator, damageIndicatorParent.transform, false);
         } else {
-            go = (GameObject) Instantiate(damageIndicator, canvas.transform, false);
+            go = (GameObject) Instantiate(damageIndicator, damageIndicatorParent.transform, false);
         }
         if(damage == 0) {
             go.GetComponent<DamageIndicator>().setText("MISS");
         } else {
-            go.GetComponent<DamageIndicator>().setText(""+damage);
+            go.GetComponent<DamageIndicator>().setText(damage.ToString());
         }
 
         GetComponentInChildren<Animator>().SetTrigger("flinch");
@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour {
         Destroy(GetComponent<Collider2D>());
         Destroy(gameObject, 5);
         spawnItems(2);
-        ew.encounterIsOver();
+        enemyWatchdog.encounterIsOver();
         
     }
 
