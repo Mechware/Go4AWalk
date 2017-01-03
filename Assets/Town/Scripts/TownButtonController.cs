@@ -6,6 +6,7 @@ public class TownButtonController : MonoBehaviour {
     TownWatchdog town;
     BountyBoard bountyBoard;
     Shop shop;
+    Tavern tavern;
     public Collider2D bountyBoardCollider, tavernCollider, shopCollider, forestCollider;
 
 	// Use this for initialization
@@ -13,6 +14,7 @@ public class TownButtonController : MonoBehaviour {
         town = GetComponent<TownWatchdog>();
         bountyBoard = GetComponent<BountyBoard>();
         shop = GetComponent<Shop>();
+        tavern = GetComponent<Tavern>();
 	}
 	
 	// Update is called once per frame
@@ -49,6 +51,7 @@ public class TownButtonController : MonoBehaviour {
         } else if (collider == bountyBoardCollider) {
             bountyBoard.openBounties();
         } else if (collider == tavernCollider) {
+            tavern.openTavernPopUp();
             
         } else if (collider == forestCollider) {
             town.showForestPopUp();
