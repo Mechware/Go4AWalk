@@ -6,6 +6,7 @@ public class ItemList {
 
     public const string HEALTH_POTION = "Health Potion";
     public const string CRIT_POTION = "Crit Potion";
+    public const string MUNNY_POUCH = "Munny Pouch";
 
     private static IDictionary<string, item> _itemMasterList = null;
     public static IDictionary<string, item> itemMasterList {
@@ -34,6 +35,9 @@ public class ItemList {
             useItem: null, 
             icon: null);
 
+        Texture2D texture = Resources.Load("Item Sprites/Health Potion") as Texture2D;
+        healthPotion.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
         healthPotion.useItem += () => {
             Player.giveHealth(10);
             return true;
@@ -49,6 +53,9 @@ public class ItemList {
             useItem: null,
             icon: null);
 
+        texture = Resources.Load("Item Sprites/Crit Potion") as Texture2D;
+        critPotion.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
         critPotion.useItem += () => {
             if (Player.crit.Value + 10 >= 100)
                 Player.crit.Value = 100;
@@ -59,5 +66,23 @@ public class ItemList {
         };
 
         itemMasterList[CRIT_POTION] = critPotion;
+
+        item munnyPouch = new item(name: "Munny Pouch",
+            description: "$",
+            price: 50,
+            attributeValue: 50,
+            otherInfo: null,
+            type: itemType.Potion,
+            useItem: null,
+            icon: null);
+
+        munnyPouch.useItem();
+
+        munnyPouch.useItem += () => {
+            Player.giveGold(50);
+            return true;
+        };
+
+        itemMasterList[MUNNY_POUCH] = munnyPouch;
     }
 }

@@ -14,7 +14,7 @@ public class ItemContainer : MonoBehaviour {
 
     public void setItem(item it) {
         containingItem = it;
-        GetComponent<TextMesh>().text = it.name;
+        this.GetComponentInChildren<SpriteRenderer>().sprite = it.icon;
     }
 
     public void launchItem() {

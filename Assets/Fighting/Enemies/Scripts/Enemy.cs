@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour {
         Player.giveGold(goldToGive);
         Destroy(GetComponent<Collider2D>());
         Destroy(gameObject, 5);
-        spawnItems(2);
+        spawnItems(Mathf.FloorToInt(Random.Range(0, 4)));
         enemyWatchdog.encounterIsOver();
         
     }
@@ -85,9 +85,16 @@ public class Enemy : MonoBehaviour {
 
         GameObject[] items = new GameObject[numberOfItems];
 
-        item healthPotion = ItemList.itemMasterList["Health Potion"];
+        item healthPotion = ItemList.itemMasterList[ItemList.HEALTH_POTION];
+        item critPotion = ItemList.itemMasterList[ItemList.CRIT_POTION];
 
         for (int i = 0 ; i < numberOfItems ; i++) { 
+            if(i % 2 == 0) {
+                items[i] = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
+                items[i].GetComponent<ItemContainer>().setItem(critPotion);
+                items[i].GetComponent<ItemContainer>().launchItem();
+                continue;
+            }
             items[i] = (GameObject) Instantiate(item, new Vector2(1,1), Quaternion.identity);
             items[i].GetComponent<ItemContainer>().setItem(healthPotion);
             items[i].GetComponent<ItemContainer>().launchItem();
