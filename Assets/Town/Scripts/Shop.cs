@@ -6,8 +6,9 @@ public class Shop : MonoBehaviour {
 
     public GameObject itemButton0, itemButton1, itemButton2, itemButton3, itemButton4, itemButton5, itemButton6;
     public GameObject itemBackPanel, itemQuests;
-    public GameObject itemInfoPanel;
+    public GameObject itemInfoPanel, itemContentPanel, itemAddedPrefab;
     public Text itemPageTitle, itemPageOverview;
+    public Image itemImage;
 
     item[] items;
     int currentItemNum = -1;
@@ -33,6 +34,7 @@ public class Shop : MonoBehaviour {
     public void openItem(item it) {
         itemPageTitle.text = it.name;
         itemPageOverview.text = it.description;
+        itemImage.sprite = it.icon;
         itemInfoPanel.SetActive(true);
     }
 
@@ -47,9 +49,23 @@ public class Shop : MonoBehaviour {
         } else {
             Player.takeGold(items[currentItemNum].price);
             Inventory.addItem(items[currentItemNum]);
-            itemInfoPanel.SetActive(false);
+            StartCoroutine(buyItemFeedback());
         }
-        
+    }
+
+    IEnumerator buyItemFeedback() {
+        GameObject addedPrefab = Instantiate(itemAddedPrefab, itemContentPanel.transform, false)
+            as GameObject;
+        Vector2 startPosition = addedPrefab.transform.localPosition;
+        float startTime = Time.time;
+        while (startTime + 1 > Time.time) {
+            startPosition.x += 20 * Time.deltaTime;
+            startPosition.y += 20 * Time.deltaTime;
+            addedPrefab.transform.localPosition = startPosition;
+            yield return null;
+        }
+
+        Destroy(addedPrefab);
     }
 
     public void ignoreItem() {
@@ -80,6 +96,13 @@ public class Shop : MonoBehaviour {
         itemButton4.GetComponentInChildren<Text>().text = items[4].name + "\n" + items[4].description;
         itemButton5.GetComponentInChildren<Text>().text = items[5].name + "\n" + items[5].description;
         itemButton6.GetComponentInChildren<Text>().text = items[6].name + "\n" + items[6].description;
+        itemButton0.GetComponentsInChildren<Image>()[1].sprite = items[0].icon;
+        itemButton1.GetComponentsInChildren<Image>()[1].sprite = items[1].icon;
+        itemButton2.GetComponentsInChildren<Image>()[1].sprite = items[2].icon;
+        itemButton3.GetComponentsInChildren<Image>()[1].sprite = items[3].icon;
+        itemButton4.GetComponentsInChildren<Image>()[1].sprite = items[4].icon;
+        itemButton5.GetComponentsInChildren<Image>()[1].sprite = items[5].icon;
+        itemButton6.GetComponentsInChildren<Image>()[1].sprite = items[6].icon;
     }
 
     IEnumerator showNotEnoughGold() {
