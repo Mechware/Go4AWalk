@@ -43,7 +43,7 @@ public class TownButtonController : MonoBehaviour {
 
     void buttonHit(Collider2D collider) {
 
-        if (shop.tw.menus.activeSelf == true)
+        if (town.menus.activeSelf == true)
             return;
 
         if (collider == shopCollider) {
@@ -52,7 +52,6 @@ public class TownButtonController : MonoBehaviour {
             bountyBoard.openBounties();
         } else if (collider == tavernCollider) {
             tavern.openTavernPopUp();
-            
         } else if (collider == forestCollider) {
             town.showForestPopUp();
         } else {

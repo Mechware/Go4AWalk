@@ -13,10 +13,10 @@ public class Shop : MonoBehaviour {
     item[] items;
     int currentItemNum = -1;
 
-    public TownWatchdog tw;
+    public TownWatchdog townWatchdog;
     // Use this for initialization
     void Start() {
-        tw = GetComponent<TownWatchdog>();
+        townWatchdog = GetComponent<TownWatchdog>();
     }
 
     // Update is called once per frame
@@ -26,9 +26,7 @@ public class Shop : MonoBehaviour {
 
     public void openShop() {
         setItems();
-        tw.menus.SetActive(true);
-        tw.shop.SetActive(true);
-        tw.exitButton.SetActive(true);
+        townWatchdog.open(townWatchdog.shop);
     }
 
     public void openItem(item it) {
@@ -82,8 +80,8 @@ public class Shop : MonoBehaviour {
         items = new item[sizeOfShop];
         
 
-        items[0] = ItemList.itemMasterList["Health Potion"];
-        items[1] = ItemList.itemMasterList["Crit Potion"];
+        items[0] = ItemList.itemMasterList[ItemList.HEALTH_POTION];
+        items[1] = ItemList.itemMasterList[ItemList.CRIT_POTION];
 
         for(int i = 2 ; i < sizeOfShop ; i++) {
             items[i] = Inventory.noItem;

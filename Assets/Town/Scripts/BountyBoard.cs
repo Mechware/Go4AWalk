@@ -23,10 +23,7 @@ public class BountyBoard : MonoBehaviour {
 
     public void openBounties() {
         setQuests();
-        town.menus.SetActive(true);
-        town.bountyBoard.SetActive(true);
-        town.exitButton.SetActive(true);
-        town.shop.SetActive(false);
+        town.open(town.bountyBoard);
     }
 
     public void openQuestInBounties(quest q) {

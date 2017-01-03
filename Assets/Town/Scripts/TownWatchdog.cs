@@ -39,10 +39,17 @@ public class TownWatchdog : MonoBehaviour {
         Questing.startQuest(thisQuest);
     }
 
-   
+   public void open(GameObject menu) {
+        menu.SetActive(true);
+        menus.SetActive(true);
+        exitButton.SetActive(true);
+    }
 
     public void closeButton() {
         menus.SetActive(false);
+        bountyBoard.SetActive(false);
+        tavern.SetActive(false);
+        shop.SetActive(false);
     }
 
 

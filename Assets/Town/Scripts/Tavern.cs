@@ -34,17 +34,14 @@ public class Tavern : MonoBehaviour {
         fadePopUp.SetActive(true);
         yield return FadingUtils.fadeImage(fadePopUp.GetComponent<Image>(), 0.5f, 0, 1);
         yield return new WaitForSeconds(1);
+        restPopUp.SetActive(false);
         yield return FadingUtils.fadeImage(fadePopUp.GetComponent<Image>(), 0.5f, 1, 0);
         fadePopUp.SetActive(false);
     }
 
     public void openTavernPopUp()
     {
-        if (townWatchdog.menus.activeSelf == true)
-            return;
-        townWatchdog.menus.SetActive(true);
-        townWatchdog.tavern.SetActive(true);
-        townWatchdog.exitButton.SetActive(true);
+        townWatchdog.open(townWatchdog.tavern);
     }
 	
     public void closeRestPopUp()
