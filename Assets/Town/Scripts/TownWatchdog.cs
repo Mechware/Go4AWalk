@@ -39,15 +39,7 @@ public class TownWatchdog : MonoBehaviour {
         Questing.startQuest(thisQuest);
     }
 
-    public void openTavern() {
-        int goldReward = 100;
-        int xpReward = 15;
-        float timeToComplete = 10;
-        float distance = 10;
-        float difficulty = 1;
-        quest thisQuest = new quest("Test Quest", "Overview goes here!", "This is a description! lalalalala", goldReward, xpReward, null, timeToComplete, distance, difficulty);
-        Questing.startQuest(thisQuest);
-    }
+   
 
     public void closeButton() {
         menus.SetActive(false);
