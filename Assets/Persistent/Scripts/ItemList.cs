@@ -76,8 +76,6 @@ public class ItemList {
             useItem: null,
             icon: null);
 
-        munnyPouch.useItem();
-
         munnyPouch.useItem += () => {
             Player.giveGold(50);
             return true;
