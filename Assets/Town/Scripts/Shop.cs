@@ -54,6 +54,13 @@ public class Shop : MonoBehaviour {
     IEnumerator buyItemFeedback() {
         GameObject addedPrefab = Instantiate(itemAddedPrefab, itemContentPanel.transform, false)
             as GameObject;
+
+        // Fade color
+        Color startColor = addedPrefab.GetComponent<Text>().color;
+        startColor.a = 0;
+        addedPrefab.GetComponent<Text>().CrossFadeColor(startColor, 1, false, true);
+
+        // drift up and right
         Vector2 startPosition = addedPrefab.transform.localPosition;
         float startTime = Time.time;
         while (startTime + 1 > Time.time) {

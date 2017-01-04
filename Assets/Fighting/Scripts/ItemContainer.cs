@@ -25,15 +25,16 @@ public class ItemContainer : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-       
+        CheckInput.checkTapOrMouseDown(itemSelected);
     }
 
-    void OnMouseDown() {
+    void itemSelected(Collider2D hitCollider) {
+
+        if (hitCollider != this.GetComponentInChildren<Collider2D>())
+            return;
+
         Inventory.addItem(containingItem);
         Destroy(gameObject);
-    }
-
-    public void onClick() {
-        
+        return;
     }
 }

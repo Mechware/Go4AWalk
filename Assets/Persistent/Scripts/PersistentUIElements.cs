@@ -26,7 +26,6 @@ public class PersistentUIElements : MonoBehaviour {
         walkingScript = GPS.gpsObject;
 
         Inventory.onValueChanged += updateItems;
-        Button[] buttons = itemsPanel.GetComponentsInChildren<Button>();
 
         // Set the stats
         level.text = Player.level.Value.ToString();
@@ -62,6 +61,7 @@ public class PersistentUIElements : MonoBehaviour {
 
         
     }
+
 
     #region journal
 

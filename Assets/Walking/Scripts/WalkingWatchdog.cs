@@ -37,7 +37,7 @@ public class WalkingWatchdog : MonoBehaviour {
             questDistanceToTravel.text = Questing.currentQuest.distance/100 + "";
         }
 
-        updateUserInterface();
+        updateDistanceTravelledUI();
     }
 	
 	// Update is called once per frame
@@ -76,13 +76,13 @@ public class WalkingWatchdog : MonoBehaviour {
         // Update quest values
         Questing.move(changeInDistance);
 
-        updateUserInterface();
+        updateDistanceTravelledUI();
     }
 
     /// <summary>
     /// Updates the user interface to reflect the changes in distance travelled
     /// </summary>
-    void updateUserInterface() {
+    void updateDistanceTravelledUI() {
 
         // Update questing distance travelled text
         questDistanceTravelled.text = string.Format("{0:0.00}", Questing.currentQuest.distanceProgress/100);

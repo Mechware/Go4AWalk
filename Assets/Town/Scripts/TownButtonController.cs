@@ -20,6 +20,9 @@ public class TownButtonController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        CheckInput.checkTapOrMouseDown(buttonHit);
+
+        /*
 #if DEBUG || UNITY_WEBGL
         if(Input.GetMouseButtonDown(0)) {
             RaycastHit2D hitInfo = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -39,6 +42,7 @@ public class TownButtonController : MonoBehaviour {
             }
         }
 #endif
+*/
     }
 
     void buttonHit(Collider2D collider) {
@@ -51,11 +55,13 @@ public class TownButtonController : MonoBehaviour {
         } else if (collider == bountyBoardCollider) {
             bountyBoard.openBounties();
         } else if (collider == tavernCollider) {
-            tavern.openTavernPopUp();
+            tavern.openTavern();
         } else if (collider == forestCollider) {
             town.showForestPopUp();
         } else {
 
         }
+
+        return;
     }
 }

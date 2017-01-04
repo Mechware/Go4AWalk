@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class TownWatchdog : MonoBehaviour {
 
@@ -20,11 +21,15 @@ public class TownWatchdog : MonoBehaviour {
     public GameObject forestPopUp;
 
     public void showForestPopUp() {
-        forestPopUp.SetActive(true);
+        //forestPopUp.SetActive(true);
+        PopUp.instance.showPopUp("Are you sure you would like to go to the forest?", 
+            new string[] { "Yes", "No" }, 
+            new Action[] { toForest, () => { } }
+            );
     }
 
     public void closeForestPopUp() {
-        forestPopUp.SetActive(false);
+        //forestPopUp.SetActive(false);
     }
 
     public void toForest() {
