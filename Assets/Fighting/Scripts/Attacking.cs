@@ -15,7 +15,6 @@ public class Attacking : MonoBehaviour {
 
         if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WebGLPlayer) {
             if (Input.GetMouseButtonUp(0)) {
-
                 checkAttack(startPosition, Input.mousePosition);
 
             } else if (Input.GetMouseButtonDown(0)) {
@@ -23,7 +22,6 @@ public class Attacking : MonoBehaviour {
                 startPosition = mousePos;
             }
         } else {
-
             if (Input.touchCount > 0) {
                 Touch t = Input.GetTouch(0);
 
@@ -46,8 +44,7 @@ public class Attacking : MonoBehaviour {
         if (swipe.magnitude > Screen.width/4) {
 
             // Hit enemy with damage dictated by Player class
-            if (EnemyWatchdog.currentEnemy != null && EnemyWatchdog.currentEnemy.GetComponent<Collider2D>() != null) {
-                //EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getCriticalAttack(swipe), true);
+            if (EnemyWatchdog.currentEnemy != null && EnemyWatchdog.currentEnemy.GetComponentInChildren<Collider2D>() != null) {
                 EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getCriticalAttack(swipe), true);
                 Player.resetCrit();
             }

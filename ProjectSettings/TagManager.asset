@@ -47,3 +47,9 @@ TagManager:
   - name: Popup
     uniqueID: 2847369991
     locked: 0
+  - name: UI
+    uniqueID: 3548223183
+    locked: 0
+  - name: JournalAndStats
+    uniqueID: 4152541885
+    locked: 0

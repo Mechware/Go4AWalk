@@ -1,14 +1,16 @@
 fileFormatVersion: 2
 guid: c5bf827af8492694482f5caaa1fcf98e
-timeCreated: 1472082087
+timeCreated: 1482480695
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - damageIndicator: {fileID: 1000010852130034, guid: fd0fcb131dfb10a40978296f003aedaa,
+  - damageIndicator: {fileID: 1000012382817292, guid: fd0fcb131dfb10a40978296f003aedaa,
       type: 2}
-  - critIndicator: {fileID: 1000010078750342, guid: 9e299e57bbc025641988ac9b0c935eef,
+  - critIndicator: {fileID: 1000010949253424, guid: 365566c3e79628247a4615d81809be4f,
       type: 2}
+  - item: {instanceID: 0}
+  - player: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

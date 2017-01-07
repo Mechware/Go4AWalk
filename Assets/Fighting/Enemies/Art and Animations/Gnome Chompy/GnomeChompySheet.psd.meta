@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: dc65c6d14ab3218478044adec3f5550d
-timeCreated: 1471565696
+timeCreated: 1483339341
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -69,9 +69,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 180
-        width: 60
-        height: 60
+        y: 1800
+        width: 600
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -81,10 +81,10 @@ TextureImporter:
       name: GnomeChompySheet_1
       rect:
         serializedVersion: 2
-        x: 60
-        y: 180
-        width: 60
-        height: 60
+        x: 600
+        y: 1800
+        width: 600
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -94,10 +94,10 @@ TextureImporter:
       name: GnomeChompySheet_2
       rect:
         serializedVersion: 2
-        x: 120
-        y: 180
-        width: 60
-        height: 60
+        x: 1200
+        y: 1800
+        width: 600
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -108,9 +108,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 120
-        width: 60
-        height: 60
+        y: 1200
+        width: 600
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,10 +120,10 @@ TextureImporter:
       name: GnomeChompySheet_4
       rect:
         serializedVersion: 2
-        x: 60
-        y: 120
-        width: 60
-        height: 60
+        x: 600
+        y: 1200
+        width: 600
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,10 +133,10 @@ TextureImporter:
       name: GnomeChompySheet_5
       rect:
         serializedVersion: 2
-        x: 120
-        y: 120
-        width: 60
-        height: 60
+        x: 1200
+        y: 1200
+        width: 600
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,9 +147,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 60
-        width: 60
-        height: 60
+        y: 600
+        width: 600
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,10 +159,10 @@ TextureImporter:
       name: GnomeChompySheet_7
       rect:
         serializedVersion: 2
-        x: 60
-        y: 60
-        width: 60
-        height: 60
+        x: 600
+        y: 600
+        width: 600
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,10 +172,10 @@ TextureImporter:
       name: GnomeChompySheet_8
       rect:
         serializedVersion: 2
-        x: 120
-        y: 60
-        width: 60
-        height: 60
+        x: 1200
+        y: 600
+        width: 600
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +187,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 60
-        height: 60
+        width: 600
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -198,10 +198,10 @@ TextureImporter:
       name: GnomeChompySheet_10
       rect:
         serializedVersion: 2
-        x: 60
+        x: 600
         y: 0
-        width: 60
-        height: 60
+        width: 600
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -211,10 +211,10 @@ TextureImporter:
       name: GnomeChompySheet_11
       rect:
         serializedVersion: 2
-        x: 120
+        x: 1200
         y: 0
-        width: 60
-        height: 60
+        width: 600
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

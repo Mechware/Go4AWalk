@@ -9,18 +9,18 @@ public class Enemy : MonoBehaviour {
     public PlayerFacade player;
 
     private StatusBar healthBar;
-    private GameObject canvas;
+    private GameObject damageIndicatorParent;
     private int maxHealth;
-    private EnemyWatchdog ew;
+    private EnemyWatchdog enemyWatchdog;
     
 
     // Use this for initialization
     void Start () {
         goldToGive = Mathf.RoundToInt(Random.Range(1f, 100f));
-        canvas = GameObject.Find("MainCanvas");
+        damageIndicatorParent = GameObject.Find("DamageIndicators");
         healthBar = GetComponentInChildren<StatusBar>();
         maxHealth = health;
-        ew = GameObject.Find("Watchdog").GetComponent<EnemyWatchdog>();
+        enemyWatchdog = GameObject.Find("Watchdog").GetComponent<EnemyWatchdog>();
         player = GameObject.Find("Manager").GetComponent<PlayerFacade>();
         StartCoroutine("attack");
         
@@ -38,17 +38,17 @@ public class Enemy : MonoBehaviour {
 
         GameObject go;
         if (isCrit) {
-            go = (GameObject) Instantiate(critIndicator, canvas.transform, false);
+            go = (GameObject) Instantiate(critIndicator, damageIndicatorParent.transform, false);
         } else {
-            go = (GameObject) Instantiate(damageIndicator, canvas.transform, false);
+            go = (GameObject) Instantiate(damageIndicator, damageIndicatorParent.transform, false);
         }
         if(damage == 0) {
             go.GetComponent<DamageIndicator>().setText("MISS");
         } else {
-            go.GetComponent<DamageIndicator>().setText(""+damage);
+            go.GetComponent<DamageIndicator>().setText(damage.ToString());
         }
 
-        GetComponent<Animator>().SetTrigger("flinch");
+        GetComponentInChildren<Animator>().SetTrigger("flinch");
         health -= damage;
 
         if (health <= 0) {
@@ -63,21 +63,21 @@ public class Enemy : MonoBehaviour {
     IEnumerator attack() {
         while(true) {
             yield return new WaitForSeconds(timeBetweenAttacks);
-            GetComponent<Animator>().SetTrigger("attacking");
+            GetComponentInChildren<Animator>().SetTrigger("attacking");
             player.hitPlayer(damage);
         }
     }
 
     void die() {
         StopCoroutine("attack");
-        GetComponent<Animator>().SetBool("dying", true);
+        GetComponentInChildren<Animator>().SetBool("dying", true);
         Destroy(healthBar.transform.parent.gameObject);
 
         Player.giveGold(goldToGive);
         Destroy(GetComponent<Collider2D>());
         Destroy(gameObject, 5);
-        spawnItems(2);
-        ew.encounterIsOver();
+        spawnItems(Mathf.FloorToInt(Random.Range(0, 4)));
+        enemyWatchdog.encounterIsOver();
         
     }
 
@@ -85,19 +85,19 @@ public class Enemy : MonoBehaviour {
 
         GameObject[] items = new GameObject[numberOfItems];
 
-        item healthPotion = new item("Health Potion", "Used to regain health", 10, 10, null, itemType.Potion, null);
+        item healthPotion = ItemList.itemMasterList[ItemList.HEALTH_POTION];
+        item critPotion = ItemList.itemMasterList[ItemList.CRIT_POTION];
 
         for (int i = 0 ; i < numberOfItems ; i++) { 
+            if(i % 2 == 0) {
+                items[i] = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
+                items[i].GetComponent<ItemContainer>().setItem(critPotion);
+                items[i].GetComponent<ItemContainer>().launchItem();
+                continue;
+            }
             items[i] = (GameObject) Instantiate(item, new Vector2(1,1), Quaternion.identity);
             items[i].GetComponent<ItemContainer>().setItem(healthPotion);
             items[i].GetComponent<ItemContainer>().launchItem();
-            print("item spawned");
-
         }
-
-        
-        
-
-
     }
 }
