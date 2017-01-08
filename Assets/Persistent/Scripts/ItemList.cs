@@ -93,7 +93,7 @@ public class ItemList {
 			useItem: null,
 			icon: null);
 
-		texture = Resources.Load("Item Sprites/Crit Potion") as Texture2D;
+		texture = Resources.Load("Item Sprites/Attack Potion") as Texture2D;
 		attackPotion.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
 		attackPotion.useItem += () => {

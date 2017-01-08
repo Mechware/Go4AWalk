@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour {
 
         Player.giveGold(goldToGive);
         Destroy(GetComponent<Collider2D>());
-        Destroy(gameObject, 5);
+        Destroy(gameObject, 15);
         spawnItems(Mathf.FloorToInt(Random.Range(0, 4)));
         enemyWatchdog.encounterIsOver();
         
