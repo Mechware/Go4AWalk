@@ -259,6 +259,7 @@ MonoBehaviour:
   goldToGive: 0
   timeBetweenAttacks: 3
   player: {fileID: 0}
+  spawnRate: 60
 --- !u!114 &114000012615831684
 MonoBehaviour:
   m_ObjectHideFlags: 1

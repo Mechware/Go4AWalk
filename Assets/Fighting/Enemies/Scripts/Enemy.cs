@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour {
     public int health, damage, goldToGive;
     public float timeBetweenAttacks;
     public PlayerFacade player;
+    public int spawnRate;
 
     private StatusBar healthBar;
     private GameObject damageIndicatorParent;
@@ -81,6 +82,7 @@ public class Enemy : MonoBehaviour {
         
     }
 
+ 
     void spawnItems(int numberOfItems) {
 
         GameObject[] items = new GameObject[numberOfItems];
