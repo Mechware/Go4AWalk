@@ -87,9 +87,26 @@ public class Enemy : MonoBehaviour {
 
         item healthPotion = ItemList.itemMasterList[ItemList.HEALTH_POTION];
         item critPotion = ItemList.itemMasterList[ItemList.CRIT_POTION];
+		item attackPotion = ItemList.itemMasterList [ItemList.ATTACK_POTION];
 
-        for (int i = 0 ; i < numberOfItems ; i++) { 
-            if(i % 2 == 0) {
+		for (int i = 0; i < numberOfItems; i++) { 
+			int randItem = Mathf.FloorToInt (Random.Range (0, 3));
+			if (randItem == 0) {
+				items [i] = (GameObject)Instantiate (item, new Vector2 (1, 1), Quaternion.identity);
+				items [i].GetComponent<ItemContainer> ().setItem (critPotion);
+				items [i].GetComponent<ItemContainer> ().launchItem ();
+			} else if (randItem == 1) {
+
+				items [i] = (GameObject)Instantiate (item, new Vector2 (1, 1), Quaternion.identity);
+				items [i].GetComponent<ItemContainer> ().setItem (healthPotion);
+				items [i].GetComponent<ItemContainer> ().launchItem ();
+			} else {
+			}
+			items [i] = (GameObject)Instantiate (item, new Vector2 (1, 1), Quaternion.identity);
+			items [i].GetComponent<ItemContainer> ().setItem (attackPotion);
+			items [i].GetComponent<ItemContainer> ().launchItem ();
+		}
+          /*  if(i % 2 == 0) {
                 items[i] = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
                 items[i].GetComponent<ItemContainer>().setItem(critPotion);
                 items[i].GetComponent<ItemContainer>().launchItem();
@@ -98,6 +115,8 @@ public class Enemy : MonoBehaviour {
             items[i] = (GameObject) Instantiate(item, new Vector2(1,1), Quaternion.identity);
             items[i].GetComponent<ItemContainer>().setItem(healthPotion);
             items[i].GetComponent<ItemContainer>().launchItem();
-        }
+        }*/
+
+
     }
 }

@@ -182,6 +182,13 @@ public class Player : MonoBehaviour {
         else if (health <= 0)
             die();
     }
+
+	public static void giveAttack(int amount, int duration) {
+		attackStrength = attackStrength + amount;
+		//yield return new WaitForSeconds (duration);
+		//attackStrength = attackStrength - amount;
+	}
+
     #endregion
     #endregion
 
