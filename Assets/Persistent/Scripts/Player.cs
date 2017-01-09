@@ -21,6 +21,8 @@ public class Player : MonoBehaviour {
     public static ObservedValue<int> crit;
     private static int attackStrength = 5;
     private static int critFactor = 4;
+    public static double attackModifier = 1;
+    public static double critModifier = 1;
     
 
     #region nonstatic
@@ -88,7 +90,7 @@ public class Player : MonoBehaviour {
         // Updates crit and returns updated value
         float rand = Random.Range(0.0f, 1.0f);
 
-        if (rand+0.30f > 1f/16000f * (float)(crit.Value*crit.Value)) {
+        if ((rand+0.30f) > 1f/16000f * (float)(crit.Value*crit.Value)) {
             crit.Value += critFactor + randFactor;
             if (crit.Value > 100) crit.Value = 100;
         } else {

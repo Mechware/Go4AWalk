@@ -26,7 +26,6 @@ public class EnemyWatchdog : MonoBehaviour {
     private static encounterState state;
     private static GameObject currentEnemyPrefab;
     private static bool bossEncounterAvailable = false;
-	private int randomEnemy;
 
     void Awake() {
         bossEncounterAvailable = false;
@@ -124,9 +123,18 @@ public class EnemyWatchdog : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene(Player.FIGHTING_LEVEL);
     }
 
-    private GameObject pickEnemy() {
-        int randomEnemy = Mathf.FloorToInt(Random.value*(enemies.Length));
-		return enemies[randomEnemy];
+    private GameObject pickEnemy() {        
+        int randomEnemyNum = Mathf.FloorToInt(Random.value*(enemies.Length));
+        Enemy possibleEnemy = enemies[randomEnemyNum].GetComponent<Enemy>();
+        int spawnRateComparer = Random.Range(0, 100);
+        if (spawnRateComparer < possibleEnemy.spawnRate)
+        {
+            return enemies[randomEnemyNum];
+        }
+        else
+        {
+            return pickEnemy();
+        }
     }
 
     private GameObject pickBoss() {
