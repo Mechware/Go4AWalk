@@ -24,7 +24,6 @@ public class Player : MonoBehaviour {
     public static double attackModifier = 1;
     public static double critModifier = 1; 
 
-	private IEnumerator coroutine;
 
     #region nonstatic
 
@@ -191,10 +190,7 @@ public class Player : MonoBehaviour {
 		int regularAttack = attackStrength; 
 		attackStrength = attackStrength + amount;
 		//start buff countdown timer 
-		//instance.StartCoroutine ("buffTimer");
-		//attackStrength = attackStrength - amount;
-		//print ("Potion Over");
-		instance.attackBuff(duration, regularAttack);
+		instance.StartCoroutine(instance.buffTimer(duration,regularAttack));
 
 	}
 
@@ -204,19 +200,12 @@ public class Player : MonoBehaviour {
 
 	IEnumerator buffTimer(int duration,int attack) { 
 		//buff countdown timer. 
-		//for(int i = 0; i < duration; i++) {
-			//print (i); //prints current seconds
 		yield return new WaitForSeconds (duration);
 		resetAttack (attack);
 		print ("Buff ended");
-		//}
-	}
-
-	public void attackBuff(int attack, int duration){
-		coroutine = buffTimer (duration, attack);
-		StartCoroutine (coroutine);
 
 	}
+
 
     #endregion
     #endregion
