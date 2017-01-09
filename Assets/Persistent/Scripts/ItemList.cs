@@ -7,6 +7,7 @@ public class ItemList {
     public const string HEALTH_POTION = "Health Potion";
     public const string CRIT_POTION = "Crit Potion";
     public const string MUNNY_POUCH = "Munny Pouch";
+	public const string ATTACK_POTION = "Attack Potion";
 
     private static IDictionary<string, item> _itemMasterList = null;
     public static IDictionary<string, item> itemMasterList {
@@ -82,5 +83,24 @@ public class ItemList {
         };
 
         itemMasterList[MUNNY_POUCH] = munnyPouch;
+
+		item attackPotion = new item (name: "Attack Potion", 
+			description: "raises attack for a short amount of time",
+			price: 100,
+			attributeValue: 50,
+			otherInfo: null,
+			type: itemType.Potion,
+			useItem: null,
+			icon: null);
+
+		texture = Resources.Load("Item Sprites/Attack Potion") as Texture2D;
+		attackPotion.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+		attackPotion.useItem += () => {
+			Player.giveAttack (50, 10);
+			return true;
+		};
+
+		itemMasterList [ATTACK_POTION] = attackPotion;
     }
 }

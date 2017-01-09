@@ -89,6 +89,7 @@ public class Shop : MonoBehaviour {
 
         items[0] = ItemList.itemMasterList[ItemList.HEALTH_POTION];
         items[1] = ItemList.itemMasterList[ItemList.CRIT_POTION];
+		items [2] = ItemList.itemMasterList [ItemList.ATTACK_POTION];
 
         for(int i = 2 ; i < sizeOfShop ; i++) {
             items[i] = Inventory.noItem;
