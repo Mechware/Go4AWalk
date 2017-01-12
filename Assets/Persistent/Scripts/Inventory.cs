@@ -36,8 +36,12 @@ public struct item {
     public Func<bool> useItem;
     // Item's icon
     public Sprite icon;
+    // Stats of weapons
+    public int baseAttack;
+    public float attackModifier;
+    public float critModifier;
 
-    public item(string name, string description, int price, int attributeValue, object otherInfo, itemType type, Func<bool> useItem, Sprite icon) {
+    public item(string name, string description, int price, int attributeValue, object otherInfo, itemType type, Func<bool> useItem, Sprite icon, int baseAttack, float attackModifier, float critModifier) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -46,21 +50,16 @@ public struct item {
         this.type = type;
         this.useItem = useItem;
         this.icon = icon;
+        this.baseAttack = baseAttack; ;
+        this.attackModifier = attackModifier;
+        this.critModifier = critModifier;
     }
 }
 
-/// <summary>
-/// All the different item types that exist in our game.
-/// </summary>
-public enum itemType {
-    Potion,
-    Poison,
-    Equipment,
-}
 
 public class Inventory : MonoBehaviour {
 
-    public static item noItem = new item("", "", 0, 0, null, itemType.Equipment, () => { return false; }, null);
+    
     public const int INVENTORY_SIZE = 6;
     public static Action onValueChanged;
     private static item[] items;
@@ -76,7 +75,7 @@ public class Inventory : MonoBehaviour {
             return;
         items = new item[INVENTORY_SIZE];
         for(int i = 0 ; i < INVENTORY_SIZE ; i++) {
-            items[i] = noItem;
+            items[i] = ItemList.noItem;
         }
     }
 
@@ -90,7 +89,7 @@ public class Inventory : MonoBehaviour {
         initalizeInventory();
 
         for(int i = 0 ; i < INVENTORY_SIZE ; i++) {
-            if (items[i].Equals(noItem)) {
+            if (items[i].Equals(ItemList.noItem)) {
                 addItem(it, i);
                 return;
             }
@@ -101,12 +100,12 @@ public class Inventory : MonoBehaviour {
 
         initalizeInventory();
 
-        if (items[pos].Equals(noItem)) {
+        if (items[pos].Equals(ItemList.noItem)) {
             print("Inventory does not contain an item at position: " + pos);
             return;
         }
         
-        items[pos] = noItem;
+        items[pos] = ItemList.noItem;
         onValueChanged.Invoke();
     }
 

@@ -14,16 +14,16 @@ public class Player : MonoBehaviour {
     public static float totalDistance = 0;
     public static ObservedValue<int> gold, experience, level;
     public static int experienceOfLastLevel = 0;
-
+    
     public static int maxHealth = 100;
     public static int health = 100;
 
     public static ObservedValue<int> crit;
     private static int attackStrength = 5;
     private static int critFactor = 4;
-    public static double attackModifier = 1;
-    public static double critModifier = 1; 
-
+    public static float attackModifier = 1;
+    public static float critModifier = 1; 
+    public static item equippedWeapon;
 
     #region nonstatic
 
@@ -38,7 +38,10 @@ public class Player : MonoBehaviour {
             level = new ObservedValue<int>(level.Value);
         }
         crit = new ObservedValue<int>(0);
-        
+        attackStrength = 5 + level.Value;
+        maxHealth = 100 + 10 * level.Value;
+
+        equippedWeapon = ItemList.noItem;
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(FIGHTING_LEVEL)) {
             //print("Fighting");
             fighting = true;
@@ -83,6 +86,16 @@ public class Player : MonoBehaviour {
         }
     }
 
+    public static void equipWeapon(item newItem)
+    {
+        UnityEngine.Assertions.Assert.AreEqual(newItem.type, itemType.Weapon, "Trying to equip something that is not a weapon.");
+
+        attackStrength -= equippedWeapon.baseAttack;                  
+        equippedWeapon = newItem;
+        attackStrength += equippedWeapon.baseAttack;           
+        
+    }
+
     public static int updateCrit(int randFactor) {
 
         if (crit.Value == 100) return 100;
@@ -90,7 +103,7 @@ public class Player : MonoBehaviour {
         // Updates crit and returns updated value
         float rand = Random.Range(0.0f, 1.0f);
 
-        if ((rand+0.30f) > 1f/16000f * (float)(crit.Value*crit.Value)) {
+        if ((rand+0.30f)*critModifier > 1f/16000f * (float)(crit.Value*crit.Value)) {
             crit.Value += critFactor + randFactor;
             if (crit.Value > 100) crit.Value = 100;
         } else {
@@ -121,7 +134,7 @@ public class Player : MonoBehaviour {
         // Update crit to some value
         updateCrit(Mathf.RoundToInt(randFactor));
 
-        return attackStrength + Mathf.RoundToInt(randFactor * fAttackStrength); ;
+        return Mathf.RoundToInt(fAttackStrength*attackModifier) + Mathf.RoundToInt(randFactor * fAttackStrength); ;
     }
 
     /// <summary>
@@ -138,10 +151,10 @@ public class Player : MonoBehaviour {
         int attack;
 
         if (crit.Value < 100) {
-            fAttack = (((float) crit.Value)/5f)*attackStrength;
+            fAttack = (((float) crit.Value)/5f)*attackStrength*attackModifier;
             attack = Mathf.RoundToInt(fAttack);
         } else {
-            attack = (int) (150f/5f * attackStrength);
+            attack = (int) (150f/5f * attackStrength*attackModifier);
         }
 
         return attack;

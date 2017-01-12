@@ -85,15 +85,17 @@ public class Shop : MonoBehaviour {
     void setItems() {
         int sizeOfShop = 7;
         items = new item[sizeOfShop];
-        
+
+        for (int i = 0; i < sizeOfShop; i++)
+        {
+            items[i] = ItemList.noItem;
+        }
 
         items[0] = ItemList.itemMasterList[ItemList.HEALTH_POTION];
         items[1] = ItemList.itemMasterList[ItemList.CRIT_POTION];
 		items [2] = ItemList.itemMasterList [ItemList.ATTACK_POTION];
-
-        for(int i = 2 ; i < sizeOfShop ; i++) {
-            items[i] = Inventory.noItem;
-        }
+        items[3] = ItemList.itemMasterList[ItemList.BRONZE_SWORD];
+              
 
         itemButton0.GetComponentInChildren<Text>().text = items[0].name + "\n" + items[0].description;
         itemButton1.GetComponentInChildren<Text>().text = items[1].name + "\n" + items[1].description;
