@@ -11,15 +11,16 @@ public class WalkingWatchdog : MonoBehaviour {
     public GameObject characterSprite;
 
     public GameObject goToTownPanel, slowDownAlertObject;
-    public Button takeStepButton, randomEncounterButton;
+    public Button takeStepButton, randomEncounterButton, fightEnemiesButton;
     public Text walkingStats, questDistanceTravelled;
     public Text questDistanceToTravel;
+    public Text enemyQueueCount;
     private GPS gps;
     
 
     // Use this for initialization
     void Start () {
-
+       
         gps = GetComponent<GPS>();
 
         // Make it so when the GPS changes, increase player distance is called
@@ -46,6 +47,11 @@ public class WalkingWatchdog : MonoBehaviour {
     }
 
 
+    public void setQueueSize(int queueSize)
+    {
+        enemyQueueCount.text = "" + queueSize;
+    }
+
     void increasePlayerDistance() {
         updateDistance(gps.deltaDistance.Value, gps.deltaTime);
     }
@@ -70,7 +76,7 @@ public class WalkingWatchdog : MonoBehaviour {
         }
 
         // Update player values
-        Player.giveExperience(Mathf.RoundToInt(changeInDistance));
+        //Player.giveExperience(Mathf.RoundToInt(changeInDistance));
         Player.totalDistance += changeInDistance;
 
         // Update quest values
@@ -126,6 +132,16 @@ public class WalkingWatchdog : MonoBehaviour {
         randomEncounterButton.GetComponent<Button>().onClick.AddListener(() => {
             encounter();
         });
+    }
+
+    public void fightEnemiesFromQueue(Action encounter)
+    {
+        fightEnemiesButton.gameObject.SetActive(true);
+        fightEnemiesButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            encounter();
+        });
+
     }
 
     /// <summary>

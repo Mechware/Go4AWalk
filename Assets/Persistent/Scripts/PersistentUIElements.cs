@@ -6,7 +6,7 @@ using System;
 public class PersistentUIElements : MonoBehaviour {
 
     // Persistent stats bar
-    public Text totalExperience, totalGold, level;
+    public Text totalExperience, totalGold, lootGold, level, distance;
 
     // Journal
     public Text walkingStats, questStats;
@@ -30,7 +30,9 @@ public class PersistentUIElements : MonoBehaviour {
         // Set the stats
         level.text = Player.level.Value.ToString();
         totalGold.text = Player.gold.Value.ToString();
+        lootGold.text = "+" + Player.lootGold.Value.ToString();
         totalExperience.text = Player.experience.Value.ToString();
+        distance.text = Player.totalDistance.ToString();
 
         // Update each time the experience, gold, or level is updated
         Player.experience.OnValueChange += () => {
@@ -39,8 +41,14 @@ public class PersistentUIElements : MonoBehaviour {
         Player.gold.OnValueChange += () => {
             totalGold.text = Player.gold.Value.ToString();
         };
+        Player.lootGold.OnValueChange += () => {
+            lootGold.text = "+" + Player.lootGold.Value.ToString();
+        };
         Player.level.OnValueChange += () => {
             level.text = Player.level.Value.ToString();
+        };
+        Player.distance.OnValueChange += () => {
+            distance.text = Player.totalDistance.ToString();
         };
     }
 	

@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
     public static Player instance;
 
     public static float totalDistance = 0;
-    public static ObservedValue<int> gold, experience, level;
+    public static ObservedValue<int> gold, experience, level, lootGold, distance;
     public static int experienceOfLastLevel = 0;
     
     public static int maxHealth = 100;
@@ -30,12 +30,16 @@ public class Player : MonoBehaviour {
     void Awake() {
         if (gold == null) {
             gold = new ObservedValue<int>(0);
+            lootGold = new ObservedValue<int>(0);
             experience = new ObservedValue<int>(0);
             level = new ObservedValue<int>(1);
+            distance = new ObservedValue<int>(0);
         } else {
             gold = new ObservedValue<int>(gold.Value);
+            lootGold = new ObservedValue<int>(lootGold.Value);
             experience = new ObservedValue<int>(experience.Value);
             level = new ObservedValue<int>(level.Value);
+            distance = new ObservedValue<int>(Mathf.RoundToInt(totalDistance));
         }
         crit = new ObservedValue<int>(0);
         attackStrength = 5 + level.Value;
@@ -52,6 +56,8 @@ public class Player : MonoBehaviour {
             fighting = false;
             walking = false;
             inTown = true;
+            gold = new ObservedValue<int>(lootGold.Value + gold.Value);
+            lootGold = new ObservedValue<int>(0);
         } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(WALKING_LEVEL)) {
             //print("Walking");
             fighting = false;
@@ -63,6 +69,7 @@ public class Player : MonoBehaviour {
 
         if (died) {
             health = 50;
+            lootGold = new ObservedValue<int>(0);
             died = false;
         }
 
@@ -170,12 +177,22 @@ public class Player : MonoBehaviour {
         gold.Value += amount;
     }
 
+    public static void giveLootGold(int amount)
+    {
+        lootGold.Value += amount;
+    }
+
     /// <summary>
     /// Take gold from the player
     /// </summary>
     /// <param name="amount">Amount of gold to be taken</param>
     public static void takeGold(int amount) {
         gold.Value -= amount;
+    }
+
+    public static void takeLootGold(int amount)
+    {
+        lootGold.Value -= amount;
     }
 
     /// <summary>

@@ -4,7 +4,7 @@ using System.Collections;
 public class Enemy : MonoBehaviour {
 
     public GameObject damageIndicator, critIndicator, item;
-    public int health, damage, goldToGive;
+    public int health, damage, goldToGive, expToGive;
     public float timeBetweenAttacks;
     public PlayerFacade player;
     public int spawnRate;
@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour {
     // Use this for initialization
     void Start () {
         goldToGive = Mathf.RoundToInt(Random.Range(1f, 100f));
+        expToGive = Mathf.RoundToInt(Random.Range(1f, 100f));
         damageIndicatorParent = GameObject.Find("DamageIndicators");
         healthBar = GetComponentInChildren<StatusBar>();
         maxHealth = health;
@@ -74,11 +75,12 @@ public class Enemy : MonoBehaviour {
         GetComponentInChildren<Animator>().SetBool("dying", true);
         Destroy(healthBar.transform.parent.gameObject);
 
-        Player.giveGold(goldToGive);
+        Player.giveLootGold(goldToGive);
+        Player.giveExperience(expToGive);
         Destroy(GetComponent<Collider2D>());
         Destroy(gameObject, 15);
         spawnItems(Mathf.FloorToInt(Random.Range(0, 4)));
-        enemyWatchdog.encounterIsOver();
+        StartCoroutine(enemyWatchdog.enemyHasDied());
         
     }
 
