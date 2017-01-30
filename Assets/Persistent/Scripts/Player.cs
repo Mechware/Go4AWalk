@@ -75,11 +75,18 @@ public class Player : MonoBehaviour {
 
         instance = this;
     }
-
+    
+    void Start() {
+        if(experience.Value == 0)
+            load();
+        else {
+            save();
+        }
+        
+    }
     void Update() {
         
     }
-
 
     #endregion
 
@@ -166,7 +173,41 @@ public class Player : MonoBehaviour {
 
         return attack;
     }
-    #endregion 
+    #endregion
+
+    #region savingAndLoading
+    public void save() {
+        PlayerPrefs.SetInt("Health", health);
+        PlayerPrefs.SetInt("Gold", gold.Value);
+        PlayerPrefs.SetInt("XP", experience.Value);
+        PlayerPrefs.SetFloat("Distance", totalDistance);
+        PlayerPrefs.SetInt("Level", level.Value);
+        //foreach(item it in Inventory.)
+        PlayerPrefs.Save();
+    }
+
+    public void load() {
+        health = PlayerPrefs.GetInt("Health", health);
+        gold.Value = PlayerPrefs.GetInt("Gold", gold.Value);
+        experience.Value = PlayerPrefs.GetInt("XP", experience.Value);
+        totalDistance = PlayerPrefs.GetFloat("Distance", totalDistance);
+        level.Value = PlayerPrefs.GetInt("Level", level.Value);
+    }
+
+    public void clearStats() {
+        PlayerPrefs.DeleteKey("Health");
+        PlayerPrefs.DeleteKey("Gold");
+        PlayerPrefs.DeleteKey("XP");
+        PlayerPrefs.DeleteKey("Distance");
+        PlayerPrefs.DeleteKey("Level");
+        health = 100;
+        gold.Value = 0;
+        experience.Value = 0;
+        totalDistance = 0;
+        level.Value = 0;
+    }
+
+    #endregion
 
     #region gettersAndSetters
     /// <summary>
