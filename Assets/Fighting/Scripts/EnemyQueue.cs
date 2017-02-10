@@ -80,4 +80,8 @@ public class EnemyQueue {
     {
         return enemiesQueue.Count;
     }
+
+    public void emptyQueue() {
+        enemiesQueue.Clear();
+    }
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-
+[RequireComponent(typeof(AudioSource))]
 public class DamageIndicator : MonoBehaviour {
     public int damage;
     
@@ -18,6 +18,9 @@ public class DamageIndicator : MonoBehaviour {
     private float xforce;
     private float yforce;
 
+    private AudioSource sliceSound;
+
+
     // Get damage from damage class
     //damage = damagefromotherplace
     // Use this for initialization
@@ -29,6 +32,11 @@ public class DamageIndicator : MonoBehaviour {
         
         rigid = GetComponent<Rigidbody2D>();
         rigid.AddForce(new Vector2(xforce, yforce));
+
+        sliceSound = GetComponent<AudioSource>();
+        print(sliceSound);
+        sliceSound.pitch = 1f + (((float)Player.getCrit())/200f);
+        sliceSound.Play();
 
         StartCoroutine(fade());
     }

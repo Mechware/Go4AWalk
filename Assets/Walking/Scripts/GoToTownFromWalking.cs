@@ -3,7 +3,6 @@ using System.Collections;
 using System;
 
 public class GoToTownFromWalking : MonoBehaviour {
-
     void Update() {
         CheckInput.checkTapOrMouseDown(goToTown);
     }
@@ -14,10 +13,8 @@ public class GoToTownFromWalking : MonoBehaviour {
             return;
 
         PopUp.instance.showPopUp("Would you like to return to town?",
-            new string[] { "Yes", "No" },
+            new string[] { "Yes", "No" },            
             new Action[] { endQuest, () => { } });
-
-        
     }
 
     private void endQuest() {
