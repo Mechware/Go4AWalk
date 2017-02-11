@@ -59,8 +59,10 @@ public class Attacking : MonoBehaviour {
         // IF statement assumes enemy is only collider on screen
         if (hit.collider != null) {
             // Hit enemy with power dictated by Player class
-            if(EnemyWatchdog.currentEnemy != null)
+            if(EnemyWatchdog.currentEnemy != null) {
                 EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getRegularAttack(), false);
+            }
+                
         }
     }
 }

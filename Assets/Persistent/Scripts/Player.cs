@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
 
     public static bool fighting = false, walking = false, inTown = false, died = false;
     public static Player instance;
+    private static EnemyWatchdog watchdog;
 
     public static float totalDistance = 0;
     public static ObservedValue<int> gold, experience, level, lootGold, distance;
@@ -135,7 +136,9 @@ public class Player : MonoBehaviour {
         return crit.Value;
     }
 
-    private static void die() {      
+    private static void die() {
+        lootGold = new ObservedValue<int>(0);
+        watchdog.clearEnemies();
         UnityEngine.SceneManagement.SceneManager.LoadScene(TOWN_LEVEL);
         died = true;
     }

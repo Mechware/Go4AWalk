@@ -1,0 +1,576 @@
+fileFormatVersion: 2
+guid: 7e7e13d05ecb764448f1382a7173e89e
+timeCreated: 1486765823
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: GnomeChompyOrange_0
+    21300002: GnomeChompyOrange_1
+    21300004: GnomeChompyOrange_2
+    21300006: GnomeChompyOrange_3
+    21300008: GnomeChompyOrange_4
+    21300010: GnomeChompyOrange_5
+    21300012: GnomeChompyOrange_6
+    21300014: GnomeChompyOrange_7
+    21300016: GnomeChompyOrange_8
+    21300018: GnomeChompyOrange_9
+    21300020: GnomeChompyOrange_10
+    21300022: GnomeChompyOrange_11
+    21300024: GnomeChompyOrange_12
+    21300026: GnomeChompyOrange_13
+    21300028: GnomeChompyOrange_14
+    21300030: GnomeChompyOrange_15
+    21300032: GnomeChompyOrange_16
+    21300034: GnomeChompyOrange_17
+    21300036: GnomeChompyOrange_18
+    21300038: GnomeChompyOrange_19
+    21300040: GnomeChompyOrange_20
+    21300042: GnomeChompyOrange_21
+    21300044: GnomeChompyOrange_22
+    21300046: GnomeChompyOrange_23
+    21300048: GnomeChompyOrange_24
+    21300050: GnomeChompyOrange_25
+    21300052: GnomeChompyOrange_26
+    21300054: GnomeChompyOrange_27
+    21300056: GnomeChompyOrange_28
+    21300058: GnomeChompyOrange_29
+    21300060: GnomeChompyOrange_30
+    21300062: GnomeChompyOrange_31
+    21300064: GnomeChompyOrange_32
+    21300066: GnomeChompyOrange_33
+    21300068: GnomeChompyOrange_34
+    21300070: GnomeChompyOrange_35
+    21300072: GnomeChompyOrange_36
+    21300074: GnomeChompyOrange_37
+    21300076: GnomeChompyOrange_38
+    21300078: GnomeChompyOrange_39
+    21300080: GnomeChompyOrange_40
+    21300082: GnomeChompyOrange_41
+    21300084: GnomeChompyOrange_42
+    21300086: GnomeChompyOrange_43
+    21300088: GnomeChompyOrange_44
+    21300090: GnomeChompyOrange_45
+    21300092: GnomeChompyOrange_46
+    21300094: GnomeChompyOrange_47
+    21300096: GnomeChompyOrange_48
+    21300098: GnomeChompyOrange_49
+    21300100: GnomeChompyOrange_50
+    21300102: GnomeChompyOrange_51
+    21300104: GnomeChompyOrange_52
+    21300106: GnomeChompyOrange_53
+    21300108: GnomeChompyOrange_54
+    21300110: GnomeChompyOrange_55
+    21300112: GnomeChompyOrange_56
+    21300114: GnomeChompyOrange_57
+    21300116: GnomeChompyOrange_58
+    21300118: GnomeChompyOrange_59
+    21300120: GnomeChompyOrange_60
+    21300122: GnomeChompyOrange_61
+    21300124: GnomeChompyOrange_62
+    21300126: GnomeChompyOrange_63
+    21300128: GnomeChompyOrange_64
+    21300130: GnomeChompyOrange_65
+    21300132: GnomeChompyOrange_66
+    21300134: GnomeChompyOrange_67
+    21300136: GnomeChompyOrange_68
+    21300138: GnomeChompyOrange_69
+    21300140: GnomeChompyOrange_70
+    21300142: GnomeChompyOrange_71
+    21300144: GnomeChompyOrange_72
+    21300146: GnomeChompyOrange_73
+    21300148: GnomeChompyOrange_74
+    21300150: GnomeChompyOrange_75
+    21300152: GnomeChompyOrange_76
+    21300154: GnomeChompyOrange_77
+    21300156: GnomeChompyOrange_78
+    21300158: GnomeChompyOrange_79
+    21300160: GnomeChompyOrange_80
+    21300162: GnomeChompyOrange_81
+    21300164: GnomeChompyOrange_82
+    21300166: GnomeChompyOrange_83
+    21300168: GnomeChompyOrange_84
+    21300170: GnomeChompyOrange_85
+    21300172: GnomeChompyOrange_86
+    21300174: GnomeChompyOrange_87
+    21300176: GnomeChompyOrange_88
+    21300178: GnomeChompyOrange_89
+    21300180: GnomeChompyOrange_90
+    21300182: GnomeChompyOrange_91
+    21300184: GnomeChompyOrange_92
+    21300186: GnomeChompyOrange_93
+    21300188: GnomeChompyOrange_94
+    21300190: GnomeChompyOrange_95
+    21300192: GnomeChompyOrange_96
+    21300194: GnomeChompyOrange_97
+    21300196: GnomeChompyOrange_98
+    21300198: GnomeChompyOrange_99
+    21300200: GnomeChompyOrange_100
+    21300202: GnomeChompyOrange_101
+    21300204: GnomeChompyOrange_102
+    21300206: GnomeChompyOrange_103
+    21300208: GnomeChompyOrange_104
+    21300210: GnomeChompyOrange_105
+    21300212: GnomeChompyOrange_106
+    21300214: GnomeChompyOrange_107
+    21300216: GnomeChompyOrange_108
+    21300218: GnomeChompyOrange_109
+    21300220: GnomeChompyOrange_110
+    21300222: GnomeChompyOrange_111
+    21300224: GnomeChompyOrange_112
+    21300226: GnomeChompyOrange_113
+    21300228: GnomeChompyOrange_114
+    21300230: GnomeChompyOrange_115
+    21300232: GnomeChompyOrange_116
+    21300234: GnomeChompyOrange_117
+    21300236: GnomeChompyOrange_118
+    21300238: GnomeChompyOrange_119
+    21300240: GnomeChompyOrange_120
+    21300242: GnomeChompyOrange_121
+    21300244: GnomeChompyOrange_122
+    21300246: GnomeChompyOrange_123
+    21300248: GnomeChompyOrange_124
+    21300250: GnomeChompyOrange_125
+    21300252: GnomeChompyOrange_126
+    21300254: GnomeChompyOrange_127
+    21300256: GnomeChompyOrange_128
+    21300258: GnomeChompyOrange_129
+    21300260: GnomeChompyOrange_130
+    21300262: GnomeChompyOrange_131
+    21300264: GnomeChompyOrange_132
+    21300266: GnomeChompyOrange_133
+    21300268: GnomeChompyOrange_134
+    21300270: GnomeChompyOrange_135
+    21300272: GnomeChompyOrange_136
+    21300274: GnomeChompyOrange_137
+    21300276: GnomeChompyOrange_138
+    21300278: GnomeChompyOrange_139
+    21300280: GnomeChompyOrange_140
+    21300282: GnomeChompyOrange_141
+    21300284: GnomeChompyOrange_142
+    21300286: GnomeChompyOrange_143
+    21300288: GnomeChompyOrange_144
+    21300290: GnomeChompyOrange_145
+    21300292: GnomeChompyOrange_146
+    21300294: GnomeChompyOrange_147
+    21300296: GnomeChompyOrange_148
+    21300298: GnomeChompyOrange_149
+    21300300: GnomeChompyOrange_150
+    21300302: GnomeChompyOrange_151
+    21300304: GnomeChompyOrange_152
+    21300306: GnomeChompyOrange_153
+    21300308: GnomeChompyOrange_154
+    21300310: GnomeChompyOrange_155
+    21300312: GnomeChompyOrange_156
+    21300314: GnomeChompyOrange_157
+    21300316: GnomeChompyOrange_158
+    21300318: GnomeChompyOrange_159
+    21300320: GnomeChompyOrange_160
+    21300322: GnomeChompyOrange_161
+    21300324: GnomeChompyOrange_162
+    21300326: GnomeChompyOrange_163
+    21300328: GnomeChompyOrange_164
+    21300330: GnomeChompyOrange_165
+    21300332: GnomeChompyOrange_166
+    21300334: GnomeChompyOrange_167
+    21300336: GnomeChompyOrange_168
+    21300338: GnomeChompyOrange_169
+    21300340: GnomeChompyOrange_170
+    21300342: GnomeChompyOrange_171
+    21300344: GnomeChompyOrange_172
+    21300346: GnomeChompyOrange_173
+    21300348: GnomeChompyOrange_174
+    21300350: GnomeChompyOrange_175
+    21300352: GnomeChompyOrange_176
+    21300354: GnomeChompyOrange_177
+    21300356: GnomeChompyOrange_178
+    21300358: GnomeChompyOrange_179
+    21300360: GnomeChompyOrange_180
+    21300362: GnomeChompyOrange_181
+    21300364: GnomeChompyOrange_182
+    21300366: GnomeChompyOrange_183
+    21300368: GnomeChompyOrange_184
+    21300370: GnomeChompyOrange_185
+    21300372: GnomeChompyOrange_186
+    21300374: GnomeChompyOrange_187
+    21300376: GnomeChompyOrange_188
+    21300378: GnomeChompyOrange_189
+    21300380: GnomeChompyOrange_190
+    21300382: GnomeChompyOrange_191
+    21300384: GnomeChompyOrange_192
+    21300386: GnomeChompyOrange_193
+    21300388: GnomeChompyOrange_194
+    21300390: GnomeChompyOrange_195
+    21300392: GnomeChompyOrange_196
+    21300394: GnomeChompyOrange_197
+    21300396: GnomeChompyOrange_198
+    21300398: GnomeChompyOrange_199
+    21300400: GnomeChompyOrange_200
+    21300402: GnomeChompyOrange_201
+    21300404: GnomeChompyOrange_202
+    21300406: GnomeChompyOrange_203
+    21300408: GnomeChompyOrange_204
+    21300410: GnomeChompyOrange_205
+    21300412: GnomeChompyOrange_206
+    21300414: GnomeChompyOrange_207
+    21300416: GnomeChompyOrange_208
+    21300418: GnomeChompyOrange_209
+    21300420: GnomeChompyOrange_210
+    21300422: GnomeChompyOrange_211
+    21300424: GnomeChompyOrange_212
+    21300426: GnomeChompyOrange_213
+    21300428: GnomeChompyOrange_214
+    21300430: GnomeChompyOrange_215
+    21300432: GnomeChompyOrange_216
+    21300434: GnomeChompyOrange_217
+    21300436: GnomeChompyOrange_218
+    21300438: GnomeChompyOrange_219
+    21300440: GnomeChompyOrange_220
+    21300442: GnomeChompyOrange_221
+    21300444: GnomeChompyOrange_222
+    21300446: GnomeChompyOrange_223
+    21300448: GnomeChompyOrange_224
+    21300450: GnomeChompyOrange_225
+    21300452: GnomeChompyOrange_226
+    21300454: GnomeChompyOrange_227
+    21300456: GnomeChompyOrange_228
+    21300458: GnomeChompyOrange_229
+    21300460: GnomeChompyOrange_230
+    21300462: GnomeChompyOrange_231
+    21300464: GnomeChompyOrange_232
+    21300466: GnomeChompyOrange_233
+    21300468: GnomeChompyOrange_234
+    21300470: GnomeChompyOrange_235
+    21300472: GnomeChompyOrange_236
+    21300474: GnomeChompyOrange_237
+    21300476: GnomeChompyOrange_238
+    21300478: GnomeChompyOrange_239
+    21300480: GnomeChompyOrange_240
+    21300482: GnomeChompyOrange_241
+    21300484: GnomeChompyOrange_242
+    21300486: GnomeChompyOrange_243
+    21300488: GnomeChompyOrange_244
+    21300490: GnomeChompyOrange_245
+    21300492: GnomeChompyOrange_246
+    21300494: GnomeChompyOrange_247
+    21300496: GnomeChompyOrange_248
+    21300498: GnomeChompyOrange_249
+    21300500: GnomeChompyOrange_250
+    21300502: GnomeChompyOrange_251
+    21300504: GnomeChompyOrange_252
+    21300506: GnomeChompyOrange_253
+    21300508: GnomeChompyOrange_254
+    21300510: GnomeChompyOrange_255
+    21300512: GnomeChompyOrange_256
+    21300514: GnomeChompyOrange_257
+    21300516: GnomeChompyOrange_258
+    21300518: GnomeChompyOrange_259
+    21300520: GnomeChompyOrange_260
+    21300522: GnomeChompyOrange_261
+    21300524: GnomeChompyOrange_262
+    21300526: GnomeChompyOrange_263
+    21300528: GnomeChompyOrange_264
+    21300530: GnomeChompyOrange_265
+    21300532: GnomeChompyOrange_266
+    21300534: GnomeChompyOrange_267
+    21300536: GnomeChompyOrange_268
+    21300538: GnomeChompyOrange_269
+    21300540: GnomeChompyOrange_270
+    21300542: GnomeChompyOrange_271
+    21300544: GnomeChompyOrange_272
+    21300546: GnomeChompyOrange_273
+    21300548: GnomeChompyOrange_274
+    21300550: GnomeChompyOrange_275
+    21300552: GnomeChompyOrange_276
+    21300554: GnomeChompyOrange_277
+    21300556: GnomeChompyOrange_278
+    21300558: GnomeChompyOrange_279
+    21300560: GnomeChompyOrange_280
+    21300562: GnomeChompyOrange_281
+    21300564: GnomeChompyOrange_282
+    21300566: GnomeChompyOrange_283
+    21300568: GnomeChompyOrange_284
+    21300570: GnomeChompyOrange_285
+    21300572: GnomeChompyOrange_286
+    21300574: GnomeChompyOrange_287
+    21300576: GnomeChompyOrange_288
+    21300578: GnomeChompyOrange_289
+    21300580: GnomeChompyOrange_290
+    21300582: GnomeChompyOrange_291
+    21300584: GnomeChompyOrange_292
+    21300586: GnomeChompyOrange_293
+    21300588: GnomeChompyOrange_294
+    21300590: GnomeChompyOrange_295
+    21300592: GnomeChompyOrange_296
+    21300594: GnomeChompyOrange_297
+    21300596: GnomeChompyOrange_298
+    21300598: GnomeChompyOrange_299
+    21300600: GnomeChompyOrange_300
+    21300602: GnomeChompyOrange_301
+    21300604: GnomeChompyOrange_302
+    21300606: GnomeChompyOrange_303
+    21300608: GnomeChompyOrange_304
+    21300610: GnomeChompyOrange_305
+    21300612: GnomeChompyOrange_306
+    21300614: GnomeChompyOrange_307
+    21300616: GnomeChompyOrange_308
+    21300618: GnomeChompyOrange_309
+    21300620: GnomeChompyOrange_310
+    21300622: GnomeChompyOrange_311
+    21300624: GnomeChompyOrange_312
+    21300626: GnomeChompyOrange_313
+    21300628: GnomeChompyOrange_314
+    21300630: GnomeChompyOrange_315
+    21300632: GnomeChompyOrange_316
+    21300634: GnomeChompyOrange_317
+    21300636: GnomeChompyOrange_318
+    21300638: GnomeChompyOrange_319
+    21300640: GnomeChompyOrange_320
+    21300642: GnomeChompyOrange_321
+    21300644: GnomeChompyOrange_322
+    21300646: GnomeChompyOrange_323
+    21300648: GnomeChompyOrange_324
+    21300650: GnomeChompyOrange_325
+    21300652: GnomeChompyOrange_326
+    21300654: GnomeChompyOrange_327
+    21300656: GnomeChompyOrange_328
+    21300658: GnomeChompyOrange_329
+    21300660: GnomeChompyOrange_330
+    21300662: GnomeChompyOrange_331
+    21300664: GnomeChompyOrange_332
+    21300666: GnomeChompyOrange_333
+    21300668: GnomeChompyOrange_334
+    21300670: GnomeChompyOrange_335
+    21300672: GnomeChompyOrange_336
+    21300674: GnomeChompyOrange_337
+    21300676: GnomeChompyOrange_338
+    21300678: GnomeChompyOrange_339
+    21300680: GnomeChompyOrange_340
+    21300682: GnomeChompyOrange_341
+    21300684: GnomeChompyOrange_342
+    21300686: GnomeChompyOrange_343
+    21300688: GnomeChompyOrange_344
+    21300690: GnomeChompyOrange_345
+    21300692: GnomeChompyOrange_346
+    21300694: GnomeChompyOrange_347
+    21300696: GnomeChompyOrange_348
+    21300698: GnomeChompyOrange_349
+    21300700: GnomeChompyOrange_350
+    21300702: GnomeChompyOrange_351
+    21300704: GnomeChompyOrange_352
+    21300706: GnomeChompyOrange_353
+    21300708: GnomeChompyOrange_354
+    21300710: GnomeChompyOrange_355
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -3
+    compressionQuality: 50
+    allowsAlphaSplitting: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GnomeChompyOrange_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GnomeChompyOrange_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GnomeChompyOrange_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GnomeChompyOrange_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GnomeChompyOrange_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GnomeChompyOrange_5
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GnomeChompyOrange_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GnomeChompyOrange_7
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GnomeChompyOrange_8
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GnomeChompyOrange_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GnomeChompyOrange_10
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GnomeChompyOrange_11
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

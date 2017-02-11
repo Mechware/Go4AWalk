@@ -102,6 +102,14 @@ public class EnemyWatchdog : MonoBehaviour {
         }
     }
 
+    public void clearEnemies() {
+        enemiesQueue.emptyQueue();
+    }
+
+    public bool isEmpty() {
+        return enemiesQueue.IsEmpty();
+    }
+
     private void goToWalkingScreen() {
         UnityEngine.SceneManagement.SceneManager.LoadScene(Player.WALKING_LEVEL);
     }
