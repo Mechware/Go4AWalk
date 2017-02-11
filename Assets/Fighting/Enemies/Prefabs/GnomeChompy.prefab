@@ -268,6 +268,7 @@ MonoBehaviour:
   health: 100
   damage: 4
   goldToGive: 0
+  expToGive: 0
   timeBetweenAttacks: 1
   player: {fileID: 0}
   spawnRate: 100

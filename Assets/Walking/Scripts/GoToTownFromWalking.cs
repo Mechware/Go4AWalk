@@ -18,7 +18,7 @@ public class GoToTownFromWalking : MonoBehaviour {
     }
 
     private void endQuest() {
-        if (Questing.currentQuest.name.Equals("Forest")) {
+        if (Questing.currentQuest.name.Equals("Forest") || Questing.currentQuest.name.Equals("TestQuest")) {
             Questing.endQuest(true);
         } else {
             print("Went to town via tavern and gave up on quest");

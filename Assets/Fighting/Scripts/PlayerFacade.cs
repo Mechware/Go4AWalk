@@ -20,18 +20,13 @@ public class PlayerFacade : MonoBehaviour {
 
     public void hitPlayer(int amount) {   
 
-        Player.health -= amount;
-        if (Player.health <= 0) {
-            Player.health = 0;
-            Player.died = true;
-            Questing.endQuest(false);
-        }
+        Player.damage(amount);
         updateHealthBar();
     }
 
     // Used for update the health bar
     void updateHealthBar() {
-        healthBar.updateBar(Player.maxHealth, Player.health);
+        healthBar.updateBar(Player.getMaxHealth(), Player.getCurrentHealth());
     }
 
     // Used for updating the critical bar

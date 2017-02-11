@@ -12,7 +12,6 @@ public class Enemy : MonoBehaviour {
     private StatusBar healthBar;
     private GameObject damageIndicatorParent;
     private int maxHealth;
-    private EnemyWatchdog enemyWatchdog;
     
 
     // Use this for initialization
@@ -22,7 +21,6 @@ public class Enemy : MonoBehaviour {
         damageIndicatorParent = GameObject.Find("DamageIndicators");
         healthBar = GetComponentInChildren<StatusBar>();
         maxHealth = health;
-        enemyWatchdog = GameObject.Find("Watchdog").GetComponent<EnemyWatchdog>();
         player = GameObject.Find("Manager").GetComponent<PlayerFacade>();
         StartCoroutine("attack");
         
@@ -80,7 +78,7 @@ public class Enemy : MonoBehaviour {
         Destroy(GetComponent<Collider2D>());
         Destroy(gameObject, 15);
         spawnItems(Mathf.FloorToInt(Random.Range(0, 4)));
-        StartCoroutine(enemyWatchdog.enemyHasDied());
+        StartCoroutine(EnemyWatchdog.instance.enemyHasDied());
         
     }
 

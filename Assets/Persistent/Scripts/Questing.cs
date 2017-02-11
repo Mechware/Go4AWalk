@@ -97,7 +97,7 @@ public class Questing : MonoBehaviour {
         }
         instance = this;
     }
-	
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -108,6 +108,7 @@ public class Questing : MonoBehaviour {
         while (currentQuest.endTime > System.DateTime.UtcNow) {
             yield return new WaitForSeconds(waitTime);
         }
+
         print("Didn't finish quest in time");
         endQuest(false);
     }

@@ -13,7 +13,7 @@ public class Tavern : MonoBehaviour {
 
     public void rest() {
         if (Player.gold.Value >= 50) {
-            Player.giveHealth(Player.maxHealth);
+            Player.giveHealth(Player.getMaxHealth());
             Player.takeGold(50);
             StartCoroutine(fadeRestScreen());
         } else {

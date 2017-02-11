@@ -266,10 +266,10 @@ MonoBehaviour:
     type: 2}
   item: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae, type: 2}
   health: 400
-  damage: 50
+  damage: 10
   goldToGive: 0
   expToGive: 0
-  timeBetweenAttacks: 20
+  timeBetweenAttacks: 3
   player: {fileID: 0}
   spawnRate: 100
 --- !u!212 &212000010792392336

@@ -34,7 +34,6 @@ public class DamageIndicator : MonoBehaviour {
         rigid.AddForce(new Vector2(xforce, yforce));
 
         sliceSound = GetComponent<AudioSource>();
-        print(sliceSound);
         sliceSound.pitch = 1f + (((float)Player.getCrit())/200f);
         sliceSound.Play();
 

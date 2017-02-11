@@ -7,17 +7,15 @@ public class EnemyQueue {
     public int maxQueueLength = 9;
     private static Queue<GameObject> enemiesQueue;
     public static GameObject currentEnemy;
-    private static EnemyWatchdog watchdog;
 
     public EnemyQueue(EnemyWatchdog enemyWatchdog)
     {
         enemiesQueue = new Queue<GameObject>();
-        watchdog = enemyWatchdog;
     }
 
     public void putEnemy()
     {
-        currentEnemy = watchdog.pickEnemy();
+        currentEnemy = EnemyWatchdog.instance.pickEnemy();
         if (enemiesQueue.Count <= maxQueueLength)
         {
             enemiesQueue.Enqueue(currentEnemy);
@@ -50,16 +48,11 @@ public class EnemyQueue {
     }
     */
 
-    private void goToWalkingScreen()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(Player.WALKING_LEVEL);
-    }
-
     public GameObject removeEnemy()
     {      
         if(IsEmpty())
         {
-            return watchdog.pickEnemy();
+            return EnemyWatchdog.instance.pickEnemy();
         }
         else return enemiesQueue.Dequeue();
     }

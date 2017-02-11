@@ -10,14 +10,13 @@ public class Player : MonoBehaviour {
 
     public static bool fighting = false, walking = false, inTown = false, died = false;
     public static Player instance;
-    private static EnemyWatchdog watchdog;
 
-    public static float totalDistance = 0;
+    public static ObservedValue<float> totalDistance;
     public static ObservedValue<int> gold, experience, level, lootGold, distance;
     public static int experienceOfLastLevel = 0;
     
-    public static int maxHealth = 100;
-    public static int health = 100;
+    private static int maxHealth = 100;
+    private static int health = 100;
 
     public static ObservedValue<int> crit;
     private static int attackStrength = 5;
@@ -34,13 +33,13 @@ public class Player : MonoBehaviour {
             lootGold = new ObservedValue<int>(0);
             experience = new ObservedValue<int>(0);
             level = new ObservedValue<int>(1);
-            distance = new ObservedValue<int>(0);
+            totalDistance = new ObservedValue<float>(0);
         } else {
             gold = new ObservedValue<int>(gold.Value);
             lootGold = new ObservedValue<int>(lootGold.Value);
             experience = new ObservedValue<int>(experience.Value);
             level = new ObservedValue<int>(level.Value);
-            distance = new ObservedValue<int>(Mathf.RoundToInt(totalDistance));
+            totalDistance = new ObservedValue<float>(totalDistance.Value);
         }
         crit = new ObservedValue<int>(0);
         attackStrength = 5 + level.Value;
@@ -48,46 +47,71 @@ public class Player : MonoBehaviour {
 
         equippedWeapon = ItemList.noItem;
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(FIGHTING_LEVEL)) {
-            //print("Fighting");
             fighting = true;
             walking = false;
             inTown = false;
         } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(TOWN_LEVEL)) {
-            //print("In town");
             fighting = false;
             walking = false;
             inTown = true;
             gold = new ObservedValue<int>(lootGold.Value + gold.Value);
             lootGold = new ObservedValue<int>(0);
         } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(WALKING_LEVEL)) {
-            //print("Walking");
             fighting = false;
             walking = true;
             inTown = false;
         } else {
             print("Unexpected scene was loaded");
+            
         }
 
-        if (died) {
+        if(died) {
             health = 50;
             lootGold = new ObservedValue<int>(0);
-            died = false;
         }
+        
 
         instance = this;
     }
     
     void Start() {
-        if(experience.Value == 0)
+
+        // Let user know they died
+        if (died) {
+            PopUp.instance.showPopUp("Oh no! You died!", new string[] { "Okay", "No." },
+                new System.Action[] {
+                    new System.Action(() => {}),
+                    new System.Action(() => {
+                        PopUp.instance.showPopUp("Too bad.", new string[] {"Fine."}, new System.Action[] {
+                            new System.Action(()=> { })
+                        });
+                    })
+                }, new bool[] { true, false });
+            died = false;
+        } else if(walking) {
+            if(Questing.currentQuest.name == null) {
+                quest testQuest = new quest(
+                    name: "Test Quest", 
+                    shortOverview: "You're exploring in the forest", 
+                    description: "Find new enemies and get experience and gold!", 
+                    goldReward: 0, 
+                    xpReward: 0, 
+                    rewards: null, 
+                    timeToComplete: -1, 
+                    distance: -1, 
+                    difficulty: 1);
+                Questing.startQuest(testQuest);
+            }
+        }
+
+        if (experience.Value == 0)
             load();
         else {
             save();
         }
         
     }
-    void Update() {
-        
-    }
+
 
     #endregion
 
@@ -138,9 +162,9 @@ public class Player : MonoBehaviour {
 
     private static void die() {
         lootGold = new ObservedValue<int>(0);
-        watchdog.clearEnemies();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(TOWN_LEVEL);
+        EnemyWatchdog.instance.clearEnemies();
         died = true;
+        Questing.endQuest(false);
     }
 
     // Returns a regular random attack
@@ -183,9 +207,8 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetInt("Health", health);
         PlayerPrefs.SetInt("Gold", gold.Value);
         PlayerPrefs.SetInt("XP", experience.Value);
-        PlayerPrefs.SetFloat("Distance", totalDistance);
+        PlayerPrefs.SetFloat("Distance", totalDistance.Value);
         PlayerPrefs.SetInt("Level", level.Value);
-        //foreach(item it in Inventory.)
         PlayerPrefs.Save();
     }
 
@@ -193,21 +216,29 @@ public class Player : MonoBehaviour {
         health = PlayerPrefs.GetInt("Health", health);
         gold.Value = PlayerPrefs.GetInt("Gold", gold.Value);
         experience.Value = PlayerPrefs.GetInt("XP", experience.Value);
-        totalDistance = PlayerPrefs.GetFloat("Distance", totalDistance);
+        totalDistance.Value = PlayerPrefs.GetFloat("Distance", totalDistance.Value);
         level.Value = PlayerPrefs.GetInt("Level", level.Value);
     }
 
     public void clearStats() {
-        PlayerPrefs.DeleteKey("Health");
-        PlayerPrefs.DeleteKey("Gold");
-        PlayerPrefs.DeleteKey("XP");
-        PlayerPrefs.DeleteKey("Distance");
-        PlayerPrefs.DeleteKey("Level");
-        health = 100;
-        gold.Value = 0;
-        experience.Value = 0;
-        totalDistance = 0;
-        level.Value = 0;
+        PopUp.instance.showPopUp("Are you sure you want to reset your players stats permanently?",
+            new string[] { "Yes", "No" },
+            new System.Action[] {
+                new System.Action(()=> {
+                    PlayerPrefs.DeleteKey("Health");
+                    PlayerPrefs.DeleteKey("Gold");
+                    PlayerPrefs.DeleteKey("XP");
+                    PlayerPrefs.DeleteKey("Distance");
+                    PlayerPrefs.DeleteKey("Level");
+                    health = 100;
+                    gold.Value = 0;
+                    experience.Value = 0;
+                    totalDistance.Value = 0;
+                    level.Value = 0;
+                    save(); }),
+                new System.Action(()=> { })
+            });
+        
     }
 
     #endregion
@@ -226,6 +257,13 @@ public class Player : MonoBehaviour {
         lootGold.Value += amount;
     }
 
+    public static int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public static int getCurrentHealth() {
+        return health;
+    }
     /// <summary>
     /// Take gold from the player
     /// </summary>

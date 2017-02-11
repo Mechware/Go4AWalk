@@ -15,8 +15,8 @@ public class EnemyWatchdog : MonoBehaviour {
 
     public GameObject[] enemies;
     public GameObject randomEncounterButton;
-    public WalkingWatchdog walkingWatchdogUI;
     public FightingWatchdog fw;
+    public static EnemyWatchdog instance;
     public static GameObject currentEnemy;
     private static EnemyQueue enemiesQueue;
     public Text enemiesLeft;
@@ -33,8 +33,8 @@ public class EnemyWatchdog : MonoBehaviour {
         if (enemiesQueue == null) {
             enemiesQueue = new EnemyQueue(this);
         }
-   
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(Player.FIGHTING_LEVEL)) {
+        instance = this;
+        if (Player.fighting) {
             if (currentEnemyPrefab != null) {
                 // Spawn enemy decided in the walking screen
                 currentEnemy = Instantiate(currentEnemyPrefab);
@@ -42,20 +42,19 @@ public class EnemyWatchdog : MonoBehaviour {
                 currentEnemy = Instantiate(enemies[0]);
             }
 
-        } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(Player.WALKING_LEVEL)) {
+        } else if (Player.walking) {
 
             // Initialize encounter variables
-            lastEncounterDistance = Player.totalDistance;
+            lastEncounterDistance = Player.totalDistance.Value;
             nextEncounterDistance = lastEncounterDistance + Random.Range(1f, 10f);
         }
     }
 
     // Use this for initialization
     void Start() {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(Player.WALKING_LEVEL)) {
-            walkingWatchdogUI.setQueueSize(enemiesQueue.getSize());
-        }
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(Player.FIGHTING_LEVEL)) {
+        if (Player.walking) {
+            WalkingWatchdog.instance.setQueueSize(enemiesQueue.getSize());
+        } else if (Player.fighting) {
             enemiesLeft.text = "" + (enemiesQueue.getSize() + 1);
         }
     }
@@ -68,9 +67,9 @@ public class EnemyWatchdog : MonoBehaviour {
 
             if (Questing.currentQuest.distance != -1 && Questing.currentQuest.distance <= Questing.currentQuest.distanceProgress) {
                 nextEncounterDistance = float.MaxValue;
-            } else if (Player.totalDistance > nextEncounterDistance) {
+            } else if (Player.totalDistance.Value > nextEncounterDistance) {
                 enemiesQueue.putEnemy();
-                walkingWatchdogUI.setQueueSize(enemiesQueue.getSize());
+                WalkingWatchdog.instance.setQueueSize(enemiesQueue.getSize());
                 nextEncounterDistance += maxRandomEncounterDistance * Random.Range(0f, 1f);
             }
         }
@@ -117,7 +116,7 @@ public class EnemyWatchdog : MonoBehaviour {
 
     private void endFight() {
         currentEnemy = null;
-        lastEncounterDistance = Player.totalDistance;
+        lastEncounterDistance = Player.totalDistance.Value;
     }
 
     // this class takes enemies from EnemyQueue to fight

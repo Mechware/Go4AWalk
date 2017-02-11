@@ -7,6 +7,7 @@ public class WalkingWatchdog : MonoBehaviour {
 
 
     // UI for walking
+    public static WalkingWatchdog instance;
     public Vector2 startPosition, endPosition;
     public GameObject characterSprite;
 
@@ -20,7 +21,7 @@ public class WalkingWatchdog : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-       
+        instance = this;
         gps = GetComponent<GPS>();
 
         // Make it so when the GPS changes, increase player distance is called
@@ -76,8 +77,7 @@ public class WalkingWatchdog : MonoBehaviour {
         }
 
         // Update player values
-        //Player.giveExperience(Mathf.RoundToInt(changeInDistance));
-        Player.totalDistance += changeInDistance;
+        Player.totalDistance.Value += changeInDistance;
 
         // Update quest values
         Questing.move(changeInDistance);

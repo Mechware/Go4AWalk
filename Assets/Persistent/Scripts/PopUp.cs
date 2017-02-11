@@ -9,8 +9,13 @@ public class PopUp : MonoBehaviour {
     public GameObject[] popUpButtons;
     public GameObject popUpPanel, popUpTitle;
 
+    private UnityEngine.Events.UnityAction closePopUp;
+
     void Awake() {
         instance = this;
+        closePopUp = new UnityEngine.Events.UnityAction(() => {
+            popUpPanel.SetActive(false);
+        });
     }
 
 	// Use this for initialization
@@ -23,7 +28,16 @@ public class PopUp : MonoBehaviour {
         
     }
 
-    public void showPopUp(string title, string[] buttonTitles, Action[] actionWhenButtonHit) {
+    public void showPopUp(string title, string[] buttonTitles, Action[] actionWhenButtonHit, 
+        bool[] closePopUpWhenHit = null) {
+
+        int i;
+        if (closePopUpWhenHit == null) {
+            closePopUpWhenHit = new bool[buttonTitles.Length];
+            for (i = 0 ; i < closePopUpWhenHit.Length ; i++) {
+                closePopUpWhenHit[i] = true;
+            }
+        }
 
         UnityEngine.Assertions.Assert.IsFalse(
             buttonTitles.Length == 0,
@@ -35,14 +49,16 @@ public class PopUp : MonoBehaviour {
         resetButtons();
 
         popUpTitle.GetComponent<Text>().text = title;
-        int i;
+        
         for (i = 0 ; i < buttonTitles.Length ; i++) {
             popUpButtons[i].SetActive(true);
             popUpButtons[i].GetComponentInChildren<Text>().text = buttonTitles[i];
             UnityEngine.Events.UnityAction action = new UnityEngine.Events.UnityAction(actionWhenButtonHit[i]);
+            if(closePopUpWhenHit[i])
+                popUpButtons[i].GetComponent<Button>().onClick.AddListener(closePopUp);
             popUpButtons[i].GetComponent<Button>().onClick.AddListener(action);
         }
-        while(i < popUpButtons.Length) {
+        while (i < popUpButtons.Length) {
             popUpButtons[i].SetActive(false);
             i++;
         }
@@ -50,12 +66,8 @@ public class PopUp : MonoBehaviour {
     }
 
     void resetButtons() {
-        UnityEngine.Events.UnityAction action = new UnityEngine.Events.UnityAction(() => {
-            popUpPanel.SetActive(false);
-        });
         for (int i = 0 ; i < popUpButtons.Length ; i++) {
             popUpButtons[i].GetComponent<Button>().onClick.RemoveAllListeners();
-            popUpButtons[i].GetComponent<Button>().onClick.AddListener(action);
         }
     }
 }
