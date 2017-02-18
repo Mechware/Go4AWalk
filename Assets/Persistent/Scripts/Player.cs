@@ -212,6 +212,9 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetInt("XP", experience.Value);
         PlayerPrefs.SetFloat("Distance", totalDistance.Value);
         PlayerPrefs.SetInt("Level", level.Value);
+        PlayerPrefs.SetInt("HealthPotions", PotionInventory.numHealthPots);
+        PlayerPrefs.SetInt("CritPotions", PotionInventory.numCritPots);
+        PlayerPrefs.SetInt("AttackPotions", PotionInventory.numAttackPots);
         PlayerPrefs.Save();
     }
 
@@ -221,6 +224,9 @@ public class Player : MonoBehaviour {
         experience.Value = PlayerPrefs.GetInt("XP", experience.Value);
         totalDistance.Value = PlayerPrefs.GetFloat("Distance", totalDistance.Value);
         level.Value = PlayerPrefs.GetInt("Level", level.Value);
+        PotionInventory.numHealthPots = PlayerPrefs.GetInt("HealthPotions", PotionInventory.numHealthPots);
+        PotionInventory.numCritPots = PlayerPrefs.GetInt("CritPotions", PotionInventory.numCritPots);
+        PotionInventory.numAttackPots = PlayerPrefs.GetInt("AttackPotions", PotionInventory.numAttackPots);
     }
 
     public void clearStats() {
@@ -233,6 +239,9 @@ public class Player : MonoBehaviour {
                     PlayerPrefs.DeleteKey("XP");
                     PlayerPrefs.DeleteKey("Distance");
                     PlayerPrefs.DeleteKey("Level");
+                    PlayerPrefs.DeleteKey("HealthPotions");
+                    PlayerPrefs.DeleteKey("CritPotions");
+                    PlayerPrefs.DeleteKey("AttackPotions");
                     health = 100;
                     gold.Value = 0;
                     experience.Value = 0;
