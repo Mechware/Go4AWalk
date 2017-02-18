@@ -110,7 +110,7 @@ public class Inventory : MonoBehaviour {
     }
 
     private static void Items_OnValueChange() {
-        print("Okay now it's being thronw?");
+        print("Okay now it's being thrown?");
     }
 
     public static void use(item it) {

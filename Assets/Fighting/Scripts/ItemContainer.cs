@@ -18,9 +18,9 @@ public class ItemContainer : MonoBehaviour {
     }
 
     public void launchItem() {
-          xforce = Random.Range(-200f, 200f);
-          yforce = Random.Range(-400f, 400f);
-          this.GetComponent<Rigidbody2D>().AddForce(new Vector2(xforce, yforce));
+        xforce = Random.Range(-200f, 200f);
+        yforce = Random.Range(-400f, 400f);
+        this.GetComponent<Rigidbody2D>().AddForce(new Vector2(xforce, yforce));
     }
 
     // Update is called once per frame
@@ -33,8 +33,16 @@ public class ItemContainer : MonoBehaviour {
         if (hitCollider != this.GetComponentInChildren<Collider2D>())
             return;
 
-        Inventory.addItem(containingItem);
-        Destroy(gameObject);
+        if (containingItem.type == itemType.Potion) {
+            PotionInventory.addPotion(containingItem);
+            Destroy(gameObject);
+        } else {
+            Inventory.addItem(containingItem);
+            Destroy(gameObject);
+        }
+
+
+
         return;
     }
 }

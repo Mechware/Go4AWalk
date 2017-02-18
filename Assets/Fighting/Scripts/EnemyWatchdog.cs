@@ -34,27 +34,23 @@ public class EnemyWatchdog : MonoBehaviour {
             enemiesQueue = new EnemyQueue(this);
         }
         instance = this;
-        if (Player.fighting) {
+        
+    }
+
+    // Use this for initialization
+    void Start() {
+        if (Player.walking) {
+            // Initialize encounter variables
+            lastEncounterDistance = Player.totalDistance.Value;
+            nextEncounterDistance = lastEncounterDistance + Random.Range(1f, 10f);
+            WalkingWatchdog.instance.setQueueSize(enemiesQueue.getSize());
+        } else if (Player.fighting) {
             if (currentEnemyPrefab != null) {
                 // Spawn enemy decided in the walking screen
                 currentEnemy = Instantiate(currentEnemyPrefab);
             } else {
                 currentEnemy = Instantiate(enemies[0]);
             }
-
-        } else if (Player.walking) {
-
-            // Initialize encounter variables
-            lastEncounterDistance = Player.totalDistance.Value;
-            nextEncounterDistance = lastEncounterDistance + Random.Range(1f, 10f);
-        }
-    }
-
-    // Use this for initialization
-    void Start() {
-        if (Player.walking) {
-            WalkingWatchdog.instance.setQueueSize(enemiesQueue.getSize());
-        } else if (Player.fighting) {
             enemiesLeft.text = "" + (enemiesQueue.getSize() + 1);
         }
     }

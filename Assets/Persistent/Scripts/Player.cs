@@ -47,16 +47,19 @@ public class Player : MonoBehaviour {
 
         equippedWeapon = ItemList.noItem;
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(FIGHTING_LEVEL)) {
+            print("Fighting");
             fighting = true;
             walking = false;
             inTown = false;
         } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(TOWN_LEVEL)) {
+            print("In town");
             fighting = false;
             walking = false;
             inTown = true;
             gold = new ObservedValue<int>(lootGold.Value + gold.Value);
             lootGold = new ObservedValue<int>(0);
         } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(WALKING_LEVEL)) {
+            print("Walking");
             fighting = false;
             walking = true;
             inTown = false;

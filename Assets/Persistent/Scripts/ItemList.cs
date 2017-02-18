@@ -44,7 +44,7 @@ public class ItemList {
         item healthPotion = new item(name: "Health Potion", 
             description: "Used to regain health",
             price: 10, 
-            attributeValue: 10, 
+            attributeValue: 35, 
             otherInfo: null, 
             type: itemType.Potion, 
             useItem: null, 
