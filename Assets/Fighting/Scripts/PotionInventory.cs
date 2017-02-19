@@ -1,54 +1,81 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Gamelogic.Extensions;
 
 public class PotionInventory : MonoBehaviour {
-    public static int numHealthPots;
-    public static int numCritPots;
-    public static int numAttackPots;
+    public static ObservedValue<int> numHealthPots;
+    public static ObservedValue<int> numCritPots;
+    public static ObservedValue<int> numAttackPots;
  
-    public Text healthPots, critPots, attackPots;
+    public Text healthPotsText, critPotsText, attackPotsText;
 
     public static item healthPot;
     public static item critPot;
     public static item attackPot;
 
     // Use this for initialization
-    void Start() {
+    void Awake() {
+        if (numHealthPots == null)
+            numHealthPots = new ObservedValue<int>(0);
+        else
+            numHealthPots = new ObservedValue<int>(numHealthPots.Value);
+
+        if (numCritPots == null)
+            numCritPots = new ObservedValue<int>(0);
+        else
+            numCritPots = new ObservedValue<int>(numCritPots.Value);
+
+        if (numAttackPots == null)
+            numAttackPots = new ObservedValue<int>(0);
+        else
+            numAttackPots = new ObservedValue<int>(numAttackPots.Value);
+
         healthPot = ItemList.itemMasterList[ItemList.HEALTH_POTION];
         critPot = ItemList.itemMasterList[ItemList.CRIT_POTION];
         attackPot = ItemList.itemMasterList[ItemList.ATTACK_POTION];
-        healthPots.text = "x" + numHealthPots;
-        critPots.text = "x" + numCritPots;
-        attackPots.text = "x" + numAttackPots;
-        
-    }
+            
+        if (healthPotsText != null) {
+            healthPotsText.text = "x" + numHealthPots.Value;
+            numHealthPots.OnValueChange += () => {
+                healthPotsText.text = "x" + numHealthPots.Value;
+            };
+        }
 
-    // Update is called once per frame
-    void Update() {
-        healthPots.text = "x" + numHealthPots;
-        critPots.text = "x" + numCritPots;
-        attackPots.text = "x" + numAttackPots;
+        if (critPotsText != null) {
+            critPotsText.text = "x" + numCritPots.Value;
+            numCritPots.OnValueChange += () => {
+                critPotsText.text = "x" + numCritPots.Value;
+            };
+        }
+            
+        if (attackPotsText != null) {
+            attackPotsText.text = "x" + numAttackPots.Value;
+            numAttackPots.OnValueChange += () => {
+                attackPotsText.text = "x" + numAttackPots.Value;
+            };
+        }
+            
     }
 
     public static void addPotion(item item) {
         if (item.name == "Health Potion") {
-            if (numHealthPots >= 99) {
-                numHealthPots = 99;
+            if (numHealthPots.Value >= 99) {
+                numHealthPots.Value = 99;
             } else {
-                numHealthPots++;
+                numHealthPots.Value++;
             }
         } else if (item.name == "Crit Potion") {
-            if (numCritPots >= 99) {
-                numCritPots = 99;
+            if (numCritPots.Value >= 99) {
+                numCritPots.Value = 99;
             } else {
-                numCritPots++;
+                numCritPots.Value++;
             }
         } else if (item.name == "Attack Potion") {
-            if (numAttackPots >= 99) {
-                numAttackPots = 99;
+            if (numAttackPots.Value >= 99) {
+                numAttackPots.Value = 99;
             } else {
-                numAttackPots++;
+                numAttackPots.Value++;
             }
         } else {
             return;
@@ -58,20 +85,20 @@ public class PotionInventory : MonoBehaviour {
 
     public static void removePotion(item item) {
         if (item.name == "Health Potion") {
-            if (numHealthPots <= 0)
-                numHealthPots = 0;
+            if (numHealthPots.Value <= 0)
+                numHealthPots.Value = 0;
             else
-                numHealthPots--;
+                numHealthPots.Value--;
         } else if (item.name == "Crit Potion") {
-            if (numCritPots <= 0)
-                numCritPots = 0;
+            if (numCritPots.Value <= 0)
+                numCritPots.Value = 0;
             else
-                numCritPots--;
+                numCritPots.Value--;
         } else if (item.name == "Attack Potion") {
-            if (numAttackPots <= 0)
-                numAttackPots = 0;
+            if (numAttackPots.Value <= 0)
+                numAttackPots.Value = 0;
             else
-                numAttackPots--;
+                numAttackPots.Value--;
         } else {
             return;
         }
@@ -80,11 +107,11 @@ public class PotionInventory : MonoBehaviour {
 
     public static int getNumPotions(item item) {
         if (item.name == "Health Potion") {
-            return numHealthPots;
+            return numHealthPots.Value;
         } else if (item.name == "Crit Potion") {
-            return numCritPots;
+            return numCritPots.Value;
         } else if (item.name == "Attack Potion") {
-            return numAttackPots;
+            return numAttackPots.Value;
         } else {
             return 0;
         }
@@ -102,5 +129,4 @@ public class PotionInventory : MonoBehaviour {
         attackPot.useItem();
         removePotion(attackPot);
     }
-
 }

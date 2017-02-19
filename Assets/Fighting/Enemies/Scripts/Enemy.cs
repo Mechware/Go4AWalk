@@ -6,7 +6,6 @@ public class Enemy : MonoBehaviour {
     public GameObject damageIndicator, critIndicator, item;
     public int health, damage, goldToGive, expToGive;
     public float timeBetweenAttacks;
-    public PlayerFacade player;
     public int spawnRate;
 
     private StatusBar healthBar;
@@ -23,8 +22,7 @@ public class Enemy : MonoBehaviour {
         damageIndicatorParent = GameObject.Find("DamageIndicators");
         healthBar = GetComponentInChildren<StatusBar>();
         maxHealth = health;
-        player = GameObject.Find("Manager").GetComponent<PlayerFacade>();
-        StartCoroutine("attack");
+        StartCoroutine(attack());
         
 	}
 	
@@ -66,7 +64,7 @@ public class Enemy : MonoBehaviour {
         while(true) {
             yield return new WaitForSeconds(timeBetweenAttacks);
             GetComponentInChildren<Animator>().SetTrigger("attacking");
-            player.hitPlayer(damage);
+            Player.damage(damage);
         }
     }
 

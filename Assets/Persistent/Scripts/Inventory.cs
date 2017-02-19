@@ -63,7 +63,6 @@ public class Inventory : MonoBehaviour {
     
     public const int INVENTORY_SIZE = 10;
     public static Action onValueChanged;
-    private static bool listInitalized = false;
     private static List<item> _items;
     public static List<item> items {
         get {

@@ -9,7 +9,23 @@ public class Player : MonoBehaviour {
     public const string FIGHTING_LEVEL = "FightingScene";
     public const string WALKING_LEVEL = "WalkingScreen";
 
-    public static bool fighting = false, walking = false, inTown = false, died = false;
+    public static bool died = false;
+    public static bool fighting {
+        get {
+            return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(FIGHTING_LEVEL);
+        }
+    }
+    public static bool walking {
+        get {
+            return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(WALKING_LEVEL);
+        }
+    }
+    public static bool inTown {
+        get {
+            return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(TOWN_LEVEL);
+        }
+    }
+    
     public static Player instance;
 
     public static ObservedValue<float> totalDistance;
@@ -17,7 +33,7 @@ public class Player : MonoBehaviour {
     public static int experienceOfLastLevel = 0;
     
     private static int maxHealth = 100;
-    private static int health = 100;
+    public static ObservedValue<int> health;
 
     public static ObservedValue<int> crit;
     private static int attackStrength = 5;
@@ -38,45 +54,30 @@ public class Player : MonoBehaviour {
             experience = new ObservedValue<int>(0);
             level = new ObservedValue<int>(1);
             totalDistance = new ObservedValue<float>(0);
+            health = new ObservedValue<int>(100);
         } else {
             gold = new ObservedValue<int>(gold.Value);
             lootGold = new ObservedValue<int>(lootGold.Value);
             experience = new ObservedValue<int>(experience.Value);
             level = new ObservedValue<int>(level.Value);
             totalDistance = new ObservedValue<float>(totalDistance.Value);
+            health = new ObservedValue<int>(health.Value);
         }
         crit = new ObservedValue<int>(0);
         attackStrength = 5 + level.Value;
         maxHealth = 100 + 10 * level.Value;
 
         equippedWeapon = ItemList.noItem;
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(FIGHTING_LEVEL)) {
-            print("Fighting");
-            fighting = true;
-            walking = false;
-            inTown = false;
-        } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(TOWN_LEVEL)) {
-            print("In town");
-            fighting = false;
-            walking = false;
-            inTown = true;
-            gold = new ObservedValue<int>(lootGold.Value + gold.Value);
-            lootGold = new ObservedValue<int>(0);
-        } else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(WALKING_LEVEL)) {
-            print("Walking");
-            fighting = false;
-            walking = true;
-            inTown = false;
-        } else {
-            print("Unexpected scene was loaded");
-            
-        }
 
         if(died) {
-            health = 50;
+            health.Value = maxHealth/2;
             lootGold = new ObservedValue<int>(0);
         }
         
+        if(inTown) {
+            gold.Value += lootGold.Value;
+            lootGold.Value = 0;
+        }
 
         instance = this;
     }
@@ -126,8 +127,8 @@ public class Player : MonoBehaviour {
 
     #region combat
     public static void damage(int amount) {
-        health -= amount;
-        if(health <= 0) {
+        health.Value -= amount;
+        if(health.Value <= 0) {
             die();
         }
     }
@@ -169,7 +170,6 @@ public class Player : MonoBehaviour {
     }
 
     private static void die() {
-        lootGold = new ObservedValue<int>(0);
         EnemyWatchdog.instance.clearEnemies();
         died = true;
         Questing.endQuest(false);
@@ -212,26 +212,26 @@ public class Player : MonoBehaviour {
 
     #region savingAndLoading
     public void save() {
-        PlayerPrefs.SetInt("Health", health);
+        PlayerPrefs.SetInt("Health", health.Value);
         PlayerPrefs.SetInt("Gold", gold.Value);
         PlayerPrefs.SetInt("XP", experience.Value);
         PlayerPrefs.SetFloat("Distance", totalDistance.Value);
         PlayerPrefs.SetInt("Level", level.Value);
-        PlayerPrefs.SetInt("HealthPotions", PotionInventory.numHealthPots);
-        PlayerPrefs.SetInt("CritPotions", PotionInventory.numCritPots);
-        PlayerPrefs.SetInt("AttackPotions", PotionInventory.numAttackPots);
+        PlayerPrefs.SetInt("HealthPotions", PotionInventory.numHealthPots.Value);
+        PlayerPrefs.SetInt("CritPotions", PotionInventory.numCritPots.Value);
+        PlayerPrefs.SetInt("AttackPotions", PotionInventory.numAttackPots.Value);
         PlayerPrefs.Save();
     }
 
     public void load() {
-        health = PlayerPrefs.GetInt("Health", health);
+        health.Value = PlayerPrefs.GetInt("Health", health.Value);
         gold.Value = PlayerPrefs.GetInt("Gold", gold.Value);
         experience.Value = PlayerPrefs.GetInt("XP", experience.Value);
         totalDistance.Value = PlayerPrefs.GetFloat("Distance", totalDistance.Value);
         level.Value = PlayerPrefs.GetInt("Level", level.Value);
-        PotionInventory.numHealthPots = PlayerPrefs.GetInt("HealthPotions", PotionInventory.numHealthPots);
-        PotionInventory.numCritPots = PlayerPrefs.GetInt("CritPotions", PotionInventory.numCritPots);
-        PotionInventory.numAttackPots = PlayerPrefs.GetInt("AttackPotions", PotionInventory.numAttackPots);
+        PotionInventory.numHealthPots.Value = PlayerPrefs.GetInt("HealthPotions", PotionInventory.numHealthPots.Value);
+        PotionInventory.numCritPots.Value = PlayerPrefs.GetInt("CritPotions", PotionInventory.numCritPots.Value);
+        PotionInventory.numAttackPots.Value = PlayerPrefs.GetInt("AttackPotions", PotionInventory.numAttackPots.Value);
     }
 
     public void clearStats() {
@@ -247,7 +247,8 @@ public class Player : MonoBehaviour {
                     PlayerPrefs.DeleteKey("HealthPotions");
                     PlayerPrefs.DeleteKey("CritPotions");
                     PlayerPrefs.DeleteKey("AttackPotions");
-                    health = 100;
+                    health.Value = 100;
+                    maxHealth = 100;
                     gold.Value = 0;
                     experience.Value = 0;
                     totalDistance.Value = 0;
@@ -279,7 +280,7 @@ public class Player : MonoBehaviour {
     }
 
     public static int getCurrentHealth() {
-        return health;
+        return health.Value;
     }
     /// <summary>
     /// Take gold from the player
@@ -307,10 +308,10 @@ public class Player : MonoBehaviour {
     }
 
     public static void giveHealth(int amount) {
-        health += amount;
-        if (health > maxHealth)
-            health = maxHealth;
-        else if (health <= 0)
+        health.Value += amount;
+        if (health.Value > maxHealth)
+            health.Value = maxHealth;
+        else if (health.Value <= 0)
             die();
     }
 

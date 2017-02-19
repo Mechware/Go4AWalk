@@ -139,7 +139,6 @@ public class PersistentUIElements : MonoBehaviour {
         if (inventoryButtons == null) {
             inventoryButtons = new List<GameObject>();
         } else {
-            Inventory.items.Add(ItemList.noItem);
             while (inventoryButtons.Count > 1) {
                 currentButton = inventoryButtons[1];
                 inventoryButtons.RemoveAt(1);

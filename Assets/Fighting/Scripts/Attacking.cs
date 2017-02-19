@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Attacking : MonoBehaviour {
 
     private Vector2 startPosition, swipe;
     public GameObject buff;
+    public int swipingID;
+    public IDictionary<int, Vector2> touchesToSwipes = new Dictionary<int,Vector2>();
 
     // Use this for initialization
     void Start () {
@@ -14,27 +17,28 @@ public class Attacking : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WebGLPlayer) {
-            if (Input.GetMouseButtonUp(0)) {
-                checkAttack(startPosition, Input.mousePosition);
+#if UNITY_EDITOR || UNITY_WEBGL
 
-            } else if (Input.GetMouseButtonDown(0)) {
-                Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                startPosition = mousePos;
-            }
-        } else {
-            if (Input.touchCount > 0) {
-                Touch t = Input.GetTouch(0);
 
+        if (Input.GetMouseButtonUp(0)) {
+            checkAttack(startPosition, Input.mousePosition);
+
+        } else if (Input.GetMouseButtonDown(0)) {
+            Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            startPosition = mousePos;
+        }
+#else
+        if (Input.touchCount > 0) {
+            foreach(Touch t in Input.touches) {
                 if (t.phase == TouchPhase.Ended) {
-
-                    checkAttack(startPosition, t.position);
-
+                    checkAttack(touchesToSwipes[t.fingerId], t.position);
+                    touchesToSwipes.Remove(t.fingerId);
                 } else if (t.phase == TouchPhase.Began) {
-                    startPosition = t.position;
+                    touchesToSwipes.Add(t.fingerId, t.position);
                 }
             }
         }
+#endif
     }
 
     void checkAttack(Vector2 startPos, Vector2 endPos) {

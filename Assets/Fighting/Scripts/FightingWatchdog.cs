@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class FightingWatchdog : MonoBehaviour {
 
+    #region endingFights
+
     public SpriteRenderer background, treasureBackground;
     public TextMesh enemyKilledText;
     public GameObject treasureChest, critBarObject, healthBarObject;
@@ -57,5 +59,27 @@ public class FightingWatchdog : MonoBehaviour {
         Questing.endQuest(true);
     }
 
-    
+    #endregion
+
+    #region updatePlayerStats
+    public StatusBar healthBar, critBar;
+
+    // Use this for initialization
+    void Start() {
+        Player.crit.OnValueChange += updateCritBar;
+        Player.health.OnValueChange += updateHealthBar;
+        updateCritBar();
+        updateHealthBar();
+    }
+
+    // Used for update the health bar
+    void updateHealthBar() {
+        healthBar.updateBar(Player.getMaxHealth(), Player.getCurrentHealth());
+    }
+
+    // Used for updating the critical bar
+    void updateCritBar() {
+        critBar.updateBar(100, Player.getCrit());
+    }
+    #endregion
 }
