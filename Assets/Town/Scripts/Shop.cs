@@ -46,7 +46,7 @@ public class Shop : MonoBehaviour {
             StartCoroutine(showNotEnoughGold());
         } else {
             Player.takeGold(items[currentItemNum].price);
-            Inventory.addItem(items[currentItemNum]);
+            Inventory.items.Add(items[currentItemNum]);
             StartCoroutine(buyItemFeedback());
         }
     }

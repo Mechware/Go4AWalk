@@ -10,6 +10,7 @@
 
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// A structure that is an item. I left the "otherInfo" object
@@ -60,75 +61,18 @@ public struct item {
 public class Inventory : MonoBehaviour {
 
     
-    public const int INVENTORY_SIZE = 6;
+    public const int INVENTORY_SIZE = 10;
     public static Action onValueChanged;
-    private static item[] items;
-
-    // Use this for initialization
-    void Awake() {
-        initalizeInventory();
-        onValueChanged = null;
-    }
-
-    static void initalizeInventory() {
-        if (items != null)
-            return;
-        items = new item[INVENTORY_SIZE];
-        for(int i = 0 ; i < INVENTORY_SIZE ; i++) {
-            items[i] = ItemList.noItem;
+    private static bool listInitalized = false;
+    private static List<item> _items;
+    public static List<item> items {
+        get {
+            if (_items == null)
+                _items = new List<item>();
+            return _items;
         }
-    }
-
-    public static void addItem(item it, int pos) {
-        initalizeInventory();
-        items[pos] = it;
-        onValueChanged.Invoke();
-    }
-
-    public static void addItem(item it) {
-        initalizeInventory();
-
-        for(int i = 0 ; i < INVENTORY_SIZE ; i++) {
-            if (items[i].Equals(ItemList.noItem)) {
-                addItem(it, i);
-                return;
-            }
+        set {
+            _items = value;
         }
-    }
-
-    public static void removeItem(int pos) {
-
-        initalizeInventory();
-
-        if (items[pos].Equals(ItemList.noItem)) {
-            print("Inventory does not contain an item at position: " + pos);
-            return;
-        }
-        
-        items[pos] = ItemList.noItem;
-        onValueChanged.Invoke();
-    }
-
-    private static void Items_OnValueChange() {
-        print("Okay now it's being thrown?");
-    }
-
-    public static void use(item it) {
-        it.useItem();
-    }
-
-    public static void use(int number) {
-        bool shouldRemoveItem = items[number].useItem();
-        if(shouldRemoveItem)
-            removeItem(number);
-    }
-
-    // Non-static method for inventory buttons to use
-    public void useItem(int number) {
-        use(number);
-    }
-
-    public static item getItem(int pos) {
-        return items[pos];
     }
 }

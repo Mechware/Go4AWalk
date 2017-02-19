@@ -37,7 +37,7 @@ public class ItemContainer : MonoBehaviour {
             PotionInventory.addPotion(containingItem);
             Destroy(gameObject);
         } else {
-            Inventory.addItem(containingItem);
+            Inventory.items.Add(containingItem);
             Destroy(gameObject);
         }
 
