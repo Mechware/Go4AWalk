@@ -22,7 +22,7 @@ GameObject:
   - 114: {fileID: 114595981671398200}
   m_Layer: 0
   m_Name: Buff
-  m_TagString: Untagged
+  m_TagString: isBuff
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eaa71c66ec3849449a3db38c48c4322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tag: 
   statType: 
   modifier: 0
   frequency: 0

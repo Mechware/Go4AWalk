@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class Buff : MonoBehaviour {
 
+    public string tag;
     public string statType;
     public float modifier;
     public int frequency;
     public int duration;
     public GameObject target;
 
-    public void setBuff(string statType, float modifier, int duration, GameObject target) {
+    public void setBuff(string tag, string statType, float modifier, int duration, GameObject target) {
+        this.tag = tag;
+        gameObject.tag = tag;
         this.statType = statType;
         this.modifier = modifier;
         this.duration = duration;
@@ -73,7 +76,9 @@ public class Buff : MonoBehaviour {
         }
     }
 
-    public void setBuff(string statType, float modifier, int frequency, int duration, GameObject target) {
+    public void setBuff(string tag, string statType, float modifier, int frequency, int duration, GameObject target) {
+        this.tag = tag;
+        gameObject.tag = tag;
         this.statType = statType;
         this.modifier = modifier;
         this.frequency = frequency;
