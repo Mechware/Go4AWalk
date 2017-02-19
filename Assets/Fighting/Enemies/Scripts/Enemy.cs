@@ -12,7 +12,9 @@ public class Enemy : MonoBehaviour {
     private StatusBar healthBar;
     private GameObject damageIndicatorParent;
     private int maxHealth;
-    
+    public static float attackModifierEnemy = 1;
+    public static float defenseModifierEnemy = 1;
+
 
     // Use this for initialization
     void Start () {

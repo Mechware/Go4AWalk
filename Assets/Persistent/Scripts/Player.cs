@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Gamelogic.Extensions;
+using System;
 
 public class Player : MonoBehaviour {
 
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour {
     private static int attackStrength = 5;
     private static int critFactor = 4;
     public static float attackModifier = 1;
+    public static float defenseModifier = 1;
     public static float critModifier = 1; 
     public static item equippedWeapon;
 
@@ -154,6 +156,7 @@ public class Player : MonoBehaviour {
 
         return crit.Value;
     }
+
 
     public static void resetCrit() {
         crit.Value = 0;
