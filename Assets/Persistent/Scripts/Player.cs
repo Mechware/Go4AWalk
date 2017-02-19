@@ -27,6 +27,8 @@ public class Player : MonoBehaviour {
     public static float critModifier = 1; 
     public static item equippedWeapon;
 
+    public GameObject buff;
+
     #region nonstatic
 
     void Awake() {
@@ -145,7 +147,7 @@ public class Player : MonoBehaviour {
         if (crit.Value == 100) return 100;
         
         // Updates crit and returns updated value
-        float rand = Random.Range(0.0f, 1.0f);
+        float rand = UnityEngine.Random.Range(0.0f, 1.0f);
 
         if ((rand+0.30f)*critModifier > 1f/16000f * (float)(crit.Value*crit.Value)) {
             crit.Value += critFactor + randFactor;
@@ -175,7 +177,7 @@ public class Player : MonoBehaviour {
 
     // Returns a regular random attack
     public static int getRegularAttack() {
-        float randFactor = Random.Range(-1.0f, 1.0f);
+        float randFactor = UnityEngine.Random.Range(-1.0f, 1.0f);
         float fAttackStrength = (float) attackStrength;
 
         // Update crit to some value
@@ -337,4 +339,13 @@ public class Player : MonoBehaviour {
     #endregion
     #endregion
 
+    public void CreateBuff(string type, float modifier, int duration, GameObject target) {
+        GameObject thisIsABuff = Instantiate(buff) as GameObject;
+        thisIsABuff.GetComponent<Buff>().setBuff(type, modifier, duration, target);
+    }
+
+    public void CreateDOT(string type, float modifier, int duration, int frequency, GameObject target) {
+        GameObject thisIsABuff = Instantiate(buff) as GameObject;
+        thisIsABuff.GetComponent<Buff>().setBuff(type, modifier, frequency, duration, target);
+    }
 }

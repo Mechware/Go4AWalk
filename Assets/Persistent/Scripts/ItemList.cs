@@ -123,7 +123,7 @@ public class ItemList {
 		attackPotion.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
 		attackPotion.useItem += () => {
-			Player.giveAttack (50, 10);
+            Player.instance.CreateBuff("attack", 0.25f, 10, Player.instance.gameObject);
 			return true;
 		};
 

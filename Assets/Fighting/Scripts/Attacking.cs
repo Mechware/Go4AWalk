@@ -4,6 +4,7 @@ using System.Collections;
 public class Attacking : MonoBehaviour {
 
     private Vector2 startPosition, swipe;
+    public GameObject buff;
 
     // Use this for initialization
     void Start () {
@@ -64,5 +65,15 @@ public class Attacking : MonoBehaviour {
             }
                 
         }
+    }
+
+    void CreateBuff(string type, float modifier, int duration, GameObject target) {
+        GameObject thisIsABuff = Instantiate(buff) as GameObject;
+        thisIsABuff.GetComponent<Buff>().setBuff(type, modifier, duration, target);        
+    }
+
+    void CreateDOT(string type, float modifier, int duration, int frequency, GameObject target) {
+        GameObject thisIsABuff = Instantiate(buff) as GameObject;
+        thisIsABuff.GetComponent<Buff>().setBuff(type, modifier, frequency, duration, target);
     }
 }

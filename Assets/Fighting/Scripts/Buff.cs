@@ -5,15 +5,13 @@ using UnityEngine;
 
 public class Buff : MonoBehaviour {
 
-    public string name;
     public string statType;
     public float modifier;
     public int frequency;
     public int duration;
     public GameObject target;
 
-    public void setBuff(string name, string statType, float modifier, int duration, GameObject target) {
-        this.name = name;
+    public void setBuff(string statType, float modifier, int duration, GameObject target) {
         this.statType = statType;
         this.modifier = modifier;
         this.duration = duration;
@@ -22,22 +20,31 @@ public class Buff : MonoBehaviour {
         if (target.GetComponent<Player>() != null) {
             if (statType == "attack") {
                 Player.attackModifier += modifier;
+                print("attack");
                 StartCoroutine(timer(() => {
+                    print("buff done");
                     Player.attackModifier -= modifier;
+                    Destroy(this);
                     return true;
                 }));
 
             } else if (statType == "defense") {
                 Player.defenseModifier += modifier;
+                print("defense");
                 StartCoroutine(timer(() => {
+                    print("buff done");
                     Player.defenseModifier -= modifier;
+                    Destroy(this);
                     return true;
                 }));
 
             } else if (statType == "crit") {
                 Player.critModifier += modifier;
+                print("crit");
                 StartCoroutine(timer(() => {
+                    print("buff done");
                     Player.critModifier -= modifier;
+                    Destroy(this);
                     return true;
                 }));
 
@@ -45,23 +52,28 @@ public class Buff : MonoBehaviour {
         } else {
             if (statType == "attack") {
 
-                Enemy.attackModifierEnemy += modifier;                
+                Enemy.attackModifierEnemy += modifier;
+                print("enemy attack");
                 StartCoroutine(timer(() => {
+                    print("enemy buff done");
                     Enemy.attackModifierEnemy -= modifier;
+                    Destroy(this);
                     return true;
                 }));
             } else if (statType == "defense") {
                 Enemy.defenseModifierEnemy += modifier;
+                print("enemy defense");
                 StartCoroutine(timer(() => {
+                    print("enemy buff done");
                     Enemy.defenseModifierEnemy -= modifier;
+                    Destroy(this);
                     return true;
                 }));
             }
         }
     }
 
-    public void setBuff(string name, string statType, float modifier, int frequency, int duration, GameObject target) {
-        this.name = name;
+    public void setBuff(string statType, float modifier, int frequency, int duration, GameObject target) {
         this.statType = statType;
         this.modifier = modifier;
         this.frequency = frequency;
@@ -80,6 +92,7 @@ public class Buff : MonoBehaviour {
             Player.damage(Mathf.RoundToInt(modifier));
             yield return new WaitForSeconds(frequency);
         }
+        Destroy(this);
     }
 
     IEnumerator hurtEnemy(Enemy enemy) {
@@ -87,6 +100,7 @@ public class Buff : MonoBehaviour {
             enemy.hit(Mathf.RoundToInt(modifier), false);
             yield return new WaitForSeconds(frequency);
         }
+        Destroy(this);
     }
 
     IEnumerator timer(Func<bool> whenDone) {
