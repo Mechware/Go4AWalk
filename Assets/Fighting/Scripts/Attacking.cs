@@ -48,6 +48,7 @@ public class Attacking : MonoBehaviour {
             if (EnemyWatchdog.currentEnemy != null && EnemyWatchdog.currentEnemy.GetComponentInChildren<Collider2D>() != null) {
                 EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getCriticalAttack(swipe), true);
                 Player.resetCrit();
+                CreateDOT("EnemyDOTFire", "fire", 5, 5, 1, EnemyWatchdog.currentEnemy.gameObject);
             }
 
             return;
@@ -62,18 +63,23 @@ public class Attacking : MonoBehaviour {
             // Hit enemy with power dictated by Player class
             if(EnemyWatchdog.currentEnemy != null) {
                 EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getRegularAttack(), false);
+                CreateDOT("EnemyDOTFire","fire", 10, 5, 1, EnemyWatchdog.currentEnemy.gameObject);
             }
                 
         }
     }
 
-    void CreateBuff(string type, float modifier, int duration, GameObject target) {
+    void CreateBuff(string tag, string type, float modifier, int duration, GameObject target) {
+        Destroy(GameObject.FindGameObjectWithTag(tag));
+        print(tag + " buff Destroyed");
         GameObject thisIsABuff = Instantiate(buff) as GameObject;
-        thisIsABuff.GetComponent<Buff>().setBuff(type, modifier, duration, target);        
+        thisIsABuff.GetComponent<Buff>().setBuff(name, type, modifier, duration, target);        
     }
 
-    void CreateDOT(string type, float modifier, int duration, int frequency, GameObject target) {
+    void CreateDOT(string tag, string type, float modifier, int duration, int frequency, GameObject target) {
+        Destroy(GameObject.FindGameObjectWithTag(tag));
+        print(tag + " buff Destroyed");
         GameObject thisIsABuff = Instantiate(buff) as GameObject;
-        thisIsABuff.GetComponent<Buff>().setBuff(type, modifier, frequency, duration, target);
+        thisIsABuff.GetComponent<Buff>().setBuff(name, type, modifier, frequency, duration, target);
     }
 }

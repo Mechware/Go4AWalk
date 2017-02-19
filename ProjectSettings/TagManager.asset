@@ -3,7 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerAttackBoost
+  - PlayerAttackLower
+  - PlayerDefenseBoost
+  - PlayerDefenseLower
+  - PlayerCritBoost
+  - PlayerCritLower
+  - PlayerDOTFire
+  - PlayerDOTPoison
+  - EnemyAttackBoost
+  - EnemyAttackLower
+  - EnemyDefenseBoost
+  - EnemyDefenseLower
+  - EnemyDOTFire
+  - EnemyDOTPoison
   layers:
   - Default
   - TransparentFX
