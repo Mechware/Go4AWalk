@@ -340,18 +340,23 @@ public class Player : MonoBehaviour {
     #endregion
     #endregion
 
-    public void CreateBuff(string tag, string type, float modifier, int duration, GameObject target) {
+    public void CreateBuff(string statName, string statType, float modifier, int duration, GameObject target) {
         //Make sure "tag" exists as a tag. Tag is so that buffs dont stack (ie cant use 10 attack pots or stack DOT effects)
-        Destroy(GameObject.FindGameObjectWithTag(tag));
-        print(tag + " buff Destroyed"); 
+        if (GameObject.FindGameObjectWithTag(statName) != null) {
+            GameObject.FindGameObjectWithTag(statName).GetComponent<Buff>().endBuff(statType);
+            Destroy(GameObject.FindGameObjectWithTag(statName));
+            print(statName + " buff Destroyed");
+        }
         GameObject thisIsABuff = Instantiate(buff) as GameObject;
-        thisIsABuff.GetComponent<Buff>().setBuff(tag, type, modifier, duration, target);
+        thisIsABuff.GetComponent<Buff>().setBuff(statName, statType, modifier, duration, target);
     }
 
-    public void CreateDOT(string tag, string type, float modifier, int duration, int frequency, GameObject target) {
-        Destroy(GameObject.FindGameObjectWithTag(tag));
-        print(tag + " buff Destroyed");
+    public void CreateDOT(string statName, string statType, float modifier, int duration, int frequency, GameObject target) {
+        if (GameObject.FindGameObjectWithTag(statName) != null) {
+            Destroy(GameObject.FindGameObjectWithTag(statName));
+            print(statName + " buff Destroyed");
+        }
         GameObject thisIsABuff = Instantiate(buff) as GameObject;
-        thisIsABuff.GetComponent<Buff>().setBuff(tag, type, modifier, frequency, duration, target);
+        thisIsABuff.GetComponent<Buff>().setBuff(statName, statType, modifier, frequency, duration, target);
     }
 }

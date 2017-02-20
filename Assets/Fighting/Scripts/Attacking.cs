@@ -73,17 +73,22 @@ public class Attacking : MonoBehaviour {
         }
     }
 
-    void CreateBuff(string tag, string type, float modifier, int duration, GameObject target) {
-        Destroy(GameObject.FindGameObjectWithTag(tag));
-        print(tag + " buff Destroyed");
+    void CreateBuff(string statName, string statType, float modifier, int duration, GameObject target) {
+        if(GameObject.FindGameObjectWithTag(statName) != null) {
+            GameObject.FindGameObjectWithTag(statName).GetComponent<Buff>().endBuff(statType);
+            Destroy(GameObject.FindGameObjectWithTag(statName));
+            print(statName + " buff Destroyed");
+        }       
         GameObject thisIsABuff = Instantiate(buff) as GameObject;
-        thisIsABuff.GetComponent<Buff>().setBuff(name, type, modifier, duration, target);        
+        thisIsABuff.GetComponent<Buff>().setBuff(statName, statType, modifier, duration, target);        
     }
 
-    void CreateDOT(string tag, string type, float modifier, int duration, int frequency, GameObject target) {
-        Destroy(GameObject.FindGameObjectWithTag(tag));
-        print(tag + " buff Destroyed");
+    void CreateDOT(string statName, string statType, float modifier, int duration, int frequency, GameObject target) {
+        if (GameObject.FindGameObjectWithTag(statName) != null) {
+            Destroy(GameObject.FindGameObjectWithTag(statName));
+            print(statName + " buff Destroyed");
+        }
         GameObject thisIsABuff = Instantiate(buff) as GameObject;
-        thisIsABuff.GetComponent<Buff>().setBuff(name, type, modifier, frequency, duration, target);
+        thisIsABuff.GetComponent<Buff>().setBuff(statName, statType, modifier, frequency, duration, target);
     }
 }
