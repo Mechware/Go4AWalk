@@ -116,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010675719640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12, y: -3.17, z: 0}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 3}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -186,8 +186,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013258511684}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 20, y: 20, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000010277532024}
@@ -265,13 +265,12 @@ MonoBehaviour:
   critIndicator: {fileID: 1000010949253424, guid: 365566c3e79628247a4615d81809be4f,
     type: 2}
   item: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae, type: 2}
-  health: 400
-  damage: 10
-  goldToGive: 0
-  expToGive: 0
-  timeBetweenAttacks: 3
-  player: {fileID: 0}
-  spawnRate: 100
+  health: 4000
+  damage: 50
+  goldToGive: 250
+  expToGive: 80
+  timeBetweenAttacks: 9
+  spawnRate: 60
 --- !u!212 &212000010792392336
 SpriteRenderer:
   m_ObjectHideFlags: 1

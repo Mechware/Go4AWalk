@@ -7,7 +7,7 @@ public class PotionInventory : MonoBehaviour {
     public static ObservedValue<int> numHealthPots;
     public static ObservedValue<int> numCritPots;
     public static ObservedValue<int> numAttackPots;
- 
+
     public Text healthPotsText, critPotsText, attackPotsText;
 
     public static item healthPot;
@@ -34,7 +34,7 @@ public class PotionInventory : MonoBehaviour {
         healthPot = ItemList.itemMasterList[ItemList.HEALTH_POTION];
         critPot = ItemList.itemMasterList[ItemList.CRIT_POTION];
         attackPot = ItemList.itemMasterList[ItemList.ATTACK_POTION];
-            
+
         if (healthPotsText != null) {
             healthPotsText.text = "x" + numHealthPots.Value;
             numHealthPots.OnValueChange += () => {
@@ -48,14 +48,14 @@ public class PotionInventory : MonoBehaviour {
                 critPotsText.text = "x" + numCritPots.Value;
             };
         }
-            
+
         if (attackPotsText != null) {
             attackPotsText.text = "x" + numAttackPots.Value;
             numAttackPots.OnValueChange += () => {
                 attackPotsText.text = "x" + numAttackPots.Value;
             };
         }
-            
+
     }
 
     public static void addPotion(item item) {
@@ -118,15 +118,24 @@ public class PotionInventory : MonoBehaviour {
     }
 
     public void useHealthPot() {
-        healthPot.useItem();
-        removePotion(healthPot);
+        if (numHealthPots.Value != 0) {
+            healthPot.useItem();
+            removePotion(healthPot);
+        }
+
     }
     public void useCritPot() {
-        critPot.useItem();
-        removePotion(critPot);
+        if (numCritPots.Value != 0) {
+            critPot.useItem();
+            removePotion(critPot);
+        }
+
     }
     public void useAttackPot() {
-        attackPot.useItem();
-        removePotion(attackPot);
+        if (numAttackPots.Value != 0) {
+            attackPot.useItem();
+            removePotion(attackPot);
+        }
+
     }
 }

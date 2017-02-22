@@ -37,12 +37,14 @@ public struct item {
     public Func<bool> useItem;
     // Item's icon
     public Sprite icon;
+    // Item's spawnrate (based on the item not on the enemy, which might be a different thing to add later)
+    public int spawnRate;
     // Stats of weapons
     public int baseAttack;
     public float attackModifier;
     public float critModifier;
 
-    public item(string name, string description, int price, int attributeValue, object otherInfo, itemType type, Func<bool> useItem, Sprite icon, int baseAttack, float attackModifier, float critModifier) {
+    public item(string name, string description, int price, int attributeValue, object otherInfo, itemType type, Func<bool> useItem, Sprite icon, int spawnRate, int baseAttack, float attackModifier, float critModifier) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -51,6 +53,7 @@ public struct item {
         this.type = type;
         this.useItem = useItem;
         this.icon = icon;
+        this.spawnRate = spawnRate;
         this.baseAttack = baseAttack; ;
         this.attackModifier = attackModifier;
         this.critModifier = critModifier;

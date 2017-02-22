@@ -33,6 +33,7 @@ public class DamageIndicator : MonoBehaviour {
         rigid = GetComponent<Rigidbody2D>();
         rigid.AddForce(new Vector2(xforce, yforce));
 
+        // plays sound effect that gets higher pitch as the players crit increases
         sliceSound = GetComponent<AudioSource>();
         sliceSound.pitch = 1f + (((float)Player.getCrit())/200f);
         sliceSound.Play();

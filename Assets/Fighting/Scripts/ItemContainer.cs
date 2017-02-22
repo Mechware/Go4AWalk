@@ -23,6 +23,12 @@ public class ItemContainer : MonoBehaviour {
         this.GetComponent<Rigidbody2D>().AddForce(new Vector2(xforce, yforce));
     }
 
+    public void launchItemSlow() {
+        xforce = Random.Range(-100f, 100f);
+        yforce = Random.Range(-100f, 100f);
+        this.GetComponent<Rigidbody2D>().AddForce(new Vector2(xforce, yforce));
+    }
+
     // Update is called once per frame
     void Update() {
         CheckInput.checkTapOrMouseDown(itemSelected);

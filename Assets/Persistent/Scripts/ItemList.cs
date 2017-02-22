@@ -32,7 +32,7 @@ public class ItemList {
         }
     }
     public static bool initialized = false;
-    public static item noItem = new item("", "", 0, 0, null, itemType.Equipment, () => { return false; }, null, 0, 1, 1);
+    public static item noItem = new item("", "", 0, 0, null, itemType.Equipment, () => { return false; }, null, 0, 0, 1, 1);
 
     public static void initialize() {
 
@@ -41,14 +41,15 @@ public class ItemList {
         _itemMasterList = new Dictionary<string, item>();
 
         // Health Potion
-        item healthPotion = new item(name: "Health Potion", 
+        item healthPotion = new item(name: "Health Potion",
             description: "Used to regain health",
-            price: 10, 
-            attributeValue: 35, 
-            otherInfo: null, 
-            type: itemType.Potion, 
-            useItem: null, 
+            price: 10,
+            attributeValue: 35,
+            otherInfo: null,
+            type: itemType.Potion,
+            useItem: null,
             icon: null,
+            spawnRate: 60,
             baseAttack: 0,
             attackModifier: 1,
             critModifier: 1);
@@ -57,7 +58,7 @@ public class ItemList {
         healthPotion.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         healthPotion.useItem += () => {
-            Player.giveHealth(35);
+            Player.giveHealth(Mathf.RoundToInt((float)Player.getMaxHealth()*0.35f));
             return true;
         };
         itemMasterList[HEALTH_POTION] = healthPotion;
@@ -70,6 +71,7 @@ public class ItemList {
             type: itemType.Potion,
             useItem: null,
             icon: null,
+            spawnRate: 40,
             baseAttack: 0,
             attackModifier: 1,
             critModifier: 1);
@@ -78,16 +80,12 @@ public class ItemList {
         critPotion.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         critPotion.useItem += () => {
-            if (Player.crit.Value + 10 >= 100)
-                Player.crit.Value = 100;
-            else {
-                Player.crit.Value += 10;
-            }
+            Player.instance.CreateBuff("PlayerCritBoost", "crit", 1f, 5, Player.instance.gameObject);
             return true;
         };
 
         itemMasterList[CRIT_POTION] = critPotion;
-// ***
+        // ***
         item munnyPouch = new item(name: "Munny Pouch",
             description: "$",
             price: 50,
@@ -96,6 +94,7 @@ public class ItemList {
             type: itemType.Potion,
             useItem: null,
             icon: null,
+            spawnRate: 30,
             baseAttack: 0,
             attackModifier: 1,
             critModifier: 1);
@@ -115,6 +114,7 @@ public class ItemList {
 			type: itemType.Potion,
 			useItem: null,
 			icon: null,
+            spawnRate: 0,
             baseAttack: 0,
             attackModifier: 1,
             critModifier: 1);
@@ -128,7 +128,7 @@ public class ItemList {
 		};
 
 		itemMasterList [ATTACK_POTION] = attackPotion;
-// ***
+        // ***
         item bronzeSword = new item(name: "Bronze Sword",
             description: "A trusty sword made of bronze",
             price: 100,
@@ -137,6 +137,7 @@ public class ItemList {
             type: itemType.Weapon,
             useItem: null,
             icon: null,
+            spawnRate: 0,
             baseAttack: 10,
             attackModifier: 1,
             critModifier: 1);
@@ -159,6 +160,7 @@ public class ItemList {
                     type: itemType.Weapon,
                     useItem: null,
                     icon: null,
+                    spawnRate: 0,
                     baseAttack: 10,
                     attackModifier: 0.9f,
                     critModifier: 1.05f);
