@@ -119,7 +119,7 @@ public class Questing : MonoBehaviour {
             instance.StartCoroutine("checkQuestEnd");
         }
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(Player.WALKING_LEVEL);
+        GameState.loadScene(GameState.scene.WALKING_LEVEL);
     }
 
     public static void endQuest(bool userFinished) {
@@ -134,7 +134,7 @@ public class Questing : MonoBehaviour {
 
         currentQuest.active = false;
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(Player.TOWN_LEVEL);
+        GameState.loadScene(GameState.scene.TOWN_LEVEL);
     }
 
     public static void move(float distance) {

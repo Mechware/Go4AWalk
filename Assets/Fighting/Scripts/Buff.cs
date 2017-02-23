@@ -6,13 +6,13 @@ using UnityEngine;
 public class Buff : MonoBehaviour {
 
     public string statName;
-    public string statType;
+    public BuffManager.BuffType statType;
     public float modifier;
     public int frequency;
     public int duration;
     public GameObject target;
 
-    public void setBuff(string statName, string statType, float modifier, int duration, GameObject target) {
+    public void setBuff(string statName, BuffManager.BuffType statType, float modifier, int duration, GameObject target) {
         this.statName = statName;
         gameObject.tag = statName;
         this.statType = statType;
@@ -21,7 +21,7 @@ public class Buff : MonoBehaviour {
         this.target = target;
 
         if (target.GetComponent<Player>() != null) {
-            if (statType == "attack") {
+            if (statType == BuffManager.BuffType.attack) {
                 Player.attackModifier += modifier;
                 print("attack " + Player.attackModifier);
                 StartCoroutine(timer(() => {
@@ -31,7 +31,7 @@ public class Buff : MonoBehaviour {
                     return true;
                 }));
 
-            } else if (statType == "defense") {
+            } else if (statType == BuffManager.BuffType.defense) {
                 Player.defenseModifier += modifier;
                 print("defense");
                 StartCoroutine(timer(() => {
@@ -41,7 +41,7 @@ public class Buff : MonoBehaviour {
                     return true;
                 }));
 
-            } else if (statType == "crit") {
+            } else if (statType == BuffManager.BuffType.crit) {
                 Player.critModifier += modifier;
                 print("crit");
                 StartCoroutine(timer(() => {
@@ -53,7 +53,7 @@ public class Buff : MonoBehaviour {
 
             }
         } else {
-            if (statType == "attack") {
+            if (statType == BuffManager.BuffType.attack) {
 
                 Enemy.attackModifierEnemy += modifier;
                 print("enemy attack");
@@ -63,7 +63,7 @@ public class Buff : MonoBehaviour {
                     Destroy(this.gameObject);
                     return true;
                 }));
-            } else if (statType == "defense") {
+            } else if (statType == BuffManager.BuffType.defense) {
                 Enemy.defenseModifierEnemy += modifier;
                 print("enemy defense");
                 StartCoroutine(timer(() => {
@@ -76,7 +76,7 @@ public class Buff : MonoBehaviour {
         }
     }
 
-    public void setBuff(string statName, string statType, float modifier, int frequency, int duration, GameObject target) {
+    public void setBuff(string statName, BuffManager.BuffType statType, float modifier, int frequency, int duration, GameObject target) {
         this.statName = statName;
         gameObject.tag = statName;
         this.statType = statType;
@@ -114,27 +114,27 @@ public class Buff : MonoBehaviour {
         whenDone();
     }
 
-    public void endBuff(string type) {
-
+    public void endBuff() {
+        
         StopCoroutine("timer");
 
-        if (target.GetComponent<Player>() != null) {
-            if (type == "attack") {
+        if (target == null || target.GetComponent<Player>() != null) {
+            if (statType == BuffManager.BuffType.attack) {
                 print("buff cancel");
                 Player.attackModifier -= modifier;
-            } else if (type == "defense") {
+            } else if (statType == BuffManager.BuffType.defense) {
 
                 print("buff cancel");
                 Player.defenseModifier -= modifier;
-            } else if (type == "crit") {
+            } else if (statType == BuffManager.BuffType.crit) {
                 print("buff cancel");
                 Player.critModifier -= modifier;
             }
         } else {
-            if (type == "attack") {
+            if (statType == BuffManager.BuffType.attack) {
                 print("enemy buff cancel");
                 Enemy.attackModifierEnemy -= modifier;
-            } else if (type == "defense") {
+            } else if (statType == BuffManager.BuffType.defense) {
                 print("enemy buff cancel");
                 Enemy.defenseModifierEnemy -= modifier;
             }
@@ -145,7 +145,6 @@ public class Buff : MonoBehaviour {
     // Use this for initialization
     void Start () {
         DontDestroyOnLoad(this.gameObject);
-      
 	}
 	
 	// Update is called once per frame

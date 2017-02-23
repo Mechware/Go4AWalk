@@ -80,7 +80,7 @@ public class ItemList {
         critPotion.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         critPotion.useItem += () => {
-            Player.instance.CreateBuff("PlayerCritBoost", "crit", 1f, 5, Player.instance.gameObject);
+            BuffManager.instance.CreateBuff("PlayerCritBoost", BuffManager.BuffType.crit, 1f, 5, Player.instance.gameObject);
             return true;
         };
 
@@ -123,7 +123,7 @@ public class ItemList {
 		attackPotion.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
 		attackPotion.useItem += () => {
-            Player.instance.CreateBuff("PlayerAttackBoost","attack", 0.25f, 10, Player.instance.gameObject);
+            BuffManager.instance.CreateBuff("PlayerAttackBoost",BuffManager.BuffType.attack, 0.25f, 10, Player.instance.gameObject);
 			return true;
 		};
 

@@ -39,12 +39,12 @@ public class EnemyWatchdog : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        if (Player.walking) {
+        if (GameState.walking) {
             // Initialize encounter variables
             lastEncounterDistance = Player.totalDistance.Value;
             nextEncounterDistance = lastEncounterDistance + Random.Range(1f, 100f);
             WalkingWatchdog.instance.setQueueSize(enemiesQueue.getSize());
-        } else if (Player.fighting) {
+        } else if (GameState.fighting) {
             if (currentEnemyPrefab != null) {
                 // Spawn enemy decided in the walking screen
                 currentEnemy = Instantiate(currentEnemyPrefab);
@@ -59,7 +59,7 @@ public class EnemyWatchdog : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (Player.walking) {
+        if (GameState.walking) {
 
             if (Questing.currentQuest.distance != -1 && Questing.currentQuest.distance <= Questing.currentQuest.distanceProgress) {
                 nextEncounterDistance = float.MaxValue;
@@ -77,12 +77,13 @@ public class EnemyWatchdog : MonoBehaviour {
             endFight();
             fw.endRegularFight();
             yield return new WaitForSeconds(2);
-            goToWalkingScreen();
+            GameState.loadScene(GameState.scene.WALKING_LEVEL);
         } else {
             enemiesLeft.text = "" + enemiesQueue.getSize();
             yield return new WaitForSeconds(2);
 
-            spawnEnemy();
+            currentEnemyPrefab = enemiesQueue.removeEnemy();
+            GameState.loadScene(GameState.scene.FIGHTING_LEVEL);
         }
         
     }
@@ -93,7 +94,7 @@ public class EnemyWatchdog : MonoBehaviour {
             return;
         } else {
             enemiesQueue.removeEnemy();
-            UnityEngine.SceneManagement.SceneManager.LoadScene(Player.FIGHTING_LEVEL);
+            GameState.loadScene(GameState.scene.FIGHTING_LEVEL);
         }
     }
 
@@ -105,21 +106,10 @@ public class EnemyWatchdog : MonoBehaviour {
         return enemiesQueue.IsEmpty();
     }
 
-    private void goToWalkingScreen() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(Player.WALKING_LEVEL);
-    }
-
 
     private void endFight() {
         currentEnemy = null;
         lastEncounterDistance = Player.totalDistance.Value;
-    }
-
-    // this class takes enemies from EnemyQueue to fight
-
-    public void spawnEnemy() {
-        currentEnemyPrefab = enemiesQueue.removeEnemy();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(Player.FIGHTING_LEVEL);
     }
 
     public GameObject pickEnemy() {
