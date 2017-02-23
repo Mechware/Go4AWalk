@@ -42,7 +42,7 @@ public class EnemyWatchdog : MonoBehaviour {
         if (GameState.walking) {
             // Initialize encounter variables
             lastEncounterDistance = Player.totalDistance.Value;
-            nextEncounterDistance = lastEncounterDistance + Random.Range(1f, 100f);
+            nextEncounterDistance = lastEncounterDistance + Random.Range(1f, 10f);
             WalkingWatchdog.instance.setQueueSize(enemiesQueue.getSize());
         } else if (GameState.fighting) {
             if (currentEnemyPrefab != null) {

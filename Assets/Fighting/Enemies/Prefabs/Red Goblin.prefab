@@ -254,7 +254,7 @@ MonoBehaviour:
   critIndicator: {fileID: 1000010949253424, guid: 365566c3e79628247a4615d81809be4f,
     type: 2}
   item: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae, type: 2}
-  health: 2500
+  health: 750
   damage: 10
   goldToGive: 60
   expToGive: 50
