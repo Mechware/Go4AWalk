@@ -5,33 +5,15 @@ using System;
 
 public class Player : MonoBehaviour {
 
-    public const string TOWN_LEVEL = "TownScreen";
-    public const string FIGHTING_LEVEL = "FightingScene";
-    public const string WALKING_LEVEL = "WalkingScreen";
 
     public static bool died = false;
-    public static bool fighting {
-        get {
-            return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(FIGHTING_LEVEL);
-        }
-    }
-    public static bool walking {
-        get {
-            return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(WALKING_LEVEL);
-        }
-    }
-    public static bool inTown {
-        get {
-            return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(TOWN_LEVEL);
-        }
-    }
-    
+
     public static Player instance;
 
     public static ObservedValue<float> totalDistance;
     public static ObservedValue<int> gold, experience, level, lootGold, distance;
     public static int experienceOfLastLevel = 0;
-    
+
     private static int maxHealth = 100;
     public static ObservedValue<int> health;
 
@@ -40,10 +22,8 @@ public class Player : MonoBehaviour {
     private static int critFactor = 4;
     public static float attackModifier = 1;
     public static float defenseModifier = 1;
-    public static float critModifier = 1; 
+    public static float critModifier = 1;
     public static item equippedWeapon;
-
-    public GameObject buff;
 
     #region nonstatic
 
@@ -69,19 +49,19 @@ public class Player : MonoBehaviour {
 
         equippedWeapon = ItemList.noItem;
 
-        if(died) {
-            health.Value = maxHealth/2;
+        if (died) {
+            health.Value = maxHealth / 2;
             lootGold = new ObservedValue<int>(0);
         }
-        
-        if(inTown) {
+
+        if (GameState.inTown) {
             gold.Value += lootGold.Value;
             lootGold.Value = 0;
         }
 
         instance = this;
     }
-    
+
     void Start() {
 
         // Let user know they died
@@ -96,17 +76,17 @@ public class Player : MonoBehaviour {
                     })
                 }, new bool[] { true, false });
             died = false;
-        } else if(walking) {
-            if(Questing.currentQuest.name == null) {
+        } else if (GameState.walking) {
+            if (Questing.currentQuest.name == null) {
                 quest testQuest = new quest(
-                    name: "Test Quest", 
-                    shortOverview: "You're exploring in the forest", 
-                    description: "Find new enemies and get experience and gold!", 
-                    goldReward: 0, 
-                    xpReward: 0, 
-                    rewards: null, 
-                    timeToComplete: -1, 
-                    distance: -1, 
+                    name: "Test Quest",
+                    shortOverview: "You're exploring in the forest",
+                    description: "Find new enemies and get experience and gold!",
+                    goldReward: 0,
+                    xpReward: 0,
+                    rewards: null,
+                    timeToComplete: -1,
+                    distance: -1,
                     difficulty: 1);
                 Questing.startQuest(testQuest);
             }
@@ -117,7 +97,7 @@ public class Player : MonoBehaviour {
         else {
             save();
         }
-        
+
     }
 
 
@@ -128,29 +108,28 @@ public class Player : MonoBehaviour {
     #region combat
     public static void damage(int amount) {
         health.Value -= amount;
-        if(health.Value <= 0) {
+        if (health.Value <= 0) {
             die();
         }
     }
 
-    public static void equipWeapon(item newItem)
-    {
+    public static void equipWeapon(item newItem) {
         UnityEngine.Assertions.Assert.AreEqual(newItem.type, itemType.Weapon, "Trying to equip something that is not a weapon.");
 
-        attackStrength -= equippedWeapon.baseAttack;                  
+        attackStrength -= equippedWeapon.baseAttack;
         equippedWeapon = newItem;
-        attackStrength += equippedWeapon.baseAttack;           
-        
+        attackStrength += equippedWeapon.baseAttack;
+
     }
 
     public static int updateCrit(int randFactor) {
 
         if (crit.Value == 100) return 100;
-        
+
         // Updates crit and returns updated value
         float rand = UnityEngine.Random.Range(0.0f, 1.0f);
 
-        if ((rand+0.30f)*critModifier > 1f/16000f * (float)(crit.Value*crit.Value)) {
+        if ((rand + 0.30f) * critModifier > 1f / 16000f * (float) (crit.Value * crit.Value)) {
             crit.Value += critFactor + randFactor;
             if (crit.Value > 100) crit.Value = 100;
         } else {
@@ -183,7 +162,7 @@ public class Player : MonoBehaviour {
         // Update crit to some value
         updateCrit(Mathf.RoundToInt(randFactor));
 
-        return Mathf.RoundToInt(fAttackStrength*attackModifier) + Mathf.RoundToInt(randFactor * fAttackStrength); ;
+        return Mathf.RoundToInt(fAttackStrength * attackModifier) + Mathf.RoundToInt(randFactor * fAttackStrength); ;
     }
 
     /// <summary>
@@ -200,10 +179,10 @@ public class Player : MonoBehaviour {
         int attack;
 
         if (crit.Value < 100) {
-            fAttack = (((float) crit.Value)/5f)*attackStrength*attackModifier;
+            fAttack = (((float) crit.Value) / 5f) * attackStrength * attackModifier;
             attack = Mathf.RoundToInt(fAttack);
         } else {
-            attack = (int) (150f/5f * attackStrength*attackModifier);
+            attack = (int) (150f / 5f * attackStrength * attackModifier);
         }
 
         return attack;
@@ -256,52 +235,16 @@ public class Player : MonoBehaviour {
                     save(); }),
                 new System.Action(()=> { })
             });
-        
+
     }
 
     #endregion
 
     #region gettersAndSetters
-    /// <summary>
-    /// Give a certain amount of gold to the player
-    /// </summary>
-    /// <param name="amount">Amount of gold to give</param>
-    public static void giveGold(int amount) {
-        gold.Value += amount;
-    }
 
-    public static void giveLootGold(int amount)
-    {
-        lootGold.Value += amount;
-    }
-
-    public static int getMaxHealth() {
-        return maxHealth;
-    }
-
-    public static int getCurrentHealth() {
-        return health.Value;
-    }
-    /// <summary>
-    /// Take gold from the player
-    /// </summary>
-    /// <param name="amount">Amount of gold to be taken</param>
-    public static void takeGold(int amount) {
-        gold.Value -= amount;
-    }
-
-    public static void takeLootGold(int amount)
-    {
-        lootGold.Value -= amount;
-    }
-
-    /// <summary>
-    /// Give a certain amount of experience to the player
-    /// </summary>
-    /// <param name="amount">Amount of gold to give</param>
     public static void giveExperience(int amount) {
         experience.Value += amount;
-        if(experience.Value > experienceOfLastLevel + 100) {
+        if (experience.Value > experienceOfLastLevel + 100) {
             level.Value++;
             experienceOfLastLevel = experience.Value;
         }
@@ -315,48 +258,41 @@ public class Player : MonoBehaviour {
             die();
     }
 
-	public static void giveAttack(int amount, int duration) {
-		//gives player amount of bonus attack for duration (s) 
-		int regularAttack = attackStrength; 
-		attackStrength = attackStrength + amount;
-		//start buff countdown timer 
-		instance.StartCoroutine(instance.buffTimer(duration,regularAttack));
-
-	}
-
-	public static void resetAttack(int attack) { 
-		attackStrength = attack;
-	}
-
-	IEnumerator buffTimer(int duration,int attack) { 
-		//buff countdown timer. 
-		yield return new WaitForSeconds (duration);
-		resetAttack (attack);
-		print ("Buff ended");
-
-	}
-
-
-    #endregion
-    #endregion
-
-    public void CreateBuff(string statName, string statType, float modifier, int duration, GameObject target) {
-        //Make sure "tag" exists as a tag. Tag is so that buffs dont stack (ie cant use 10 attack pots or stack DOT effects)
-        if (GameObject.FindGameObjectWithTag(statName) != null) {
-            GameObject.FindGameObjectWithTag(statName).GetComponent<Buff>().endBuff(statType);
-            Destroy(GameObject.FindGameObjectWithTag(statName));
-            print(statName + " buff Destroyed");
-        }
-        GameObject thisIsABuff = Instantiate(buff) as GameObject;
-        thisIsABuff.GetComponent<Buff>().setBuff(statName, statType, modifier, duration, target);
+    public static void giveGold(int amount) {
+        gold.Value += amount;
     }
 
-    public void CreateDOT(string statName, string statType, float modifier, int duration, int frequency, GameObject target) {
-        if (GameObject.FindGameObjectWithTag(statName) != null) {
-            Destroy(GameObject.FindGameObjectWithTag(statName));
-            print(statName + " buff Destroyed");
-        }
-        GameObject thisIsABuff = Instantiate(buff) as GameObject;
-        thisIsABuff.GetComponent<Buff>().setBuff(statName, statType, modifier, frequency, duration, target);
+    public static void giveLootGold(int amount) {
+        lootGold.Value += amount;
     }
+
+    public static void takeGold(int amount) {
+        gold.Value -= amount;
+    }
+
+    public static void takeLootGold(int amount) {
+        lootGold.Value -= amount;
+    }
+
+    public static int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public static int getCurrentHealth() {
+        return health.Value;
+    }
+
+    public static int getAttack() {
+        return attackStrength;
+    }
+
+    public static void setAttack(int attack) {
+        attackStrength = attack;
+    }
+
+    #endregion
+
+    #endregion
+
+
 }
