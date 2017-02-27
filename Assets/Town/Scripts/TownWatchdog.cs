@@ -22,8 +22,8 @@ public class TownWatchdog : MonoBehaviour {
 
     public void showForestPopUp() {
         //forestPopUp.SetActive(true);
-        PopUp.instance.showPopUp("Are you sure you would like to go to the forest?", 
-            new string[] { "Yes", "No" }, 
+        PopUp.instance.showPopUp("ARE YOU SURE YOU WOULD LIKE TO GO TO THE FOREST?", 
+            new string[] { "YES", "NO" }, 
             new Action[] { toForest, () => { } }
             );
     }
