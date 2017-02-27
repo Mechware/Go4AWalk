@@ -14,7 +14,6 @@ public class Buff : MonoBehaviour {
 
     public void setBuff(string statName, BuffManager.BuffType statType, float modifier, int duration, GameObject target) {
         this.statName = statName;
-        gameObject.tag = statName;
         this.statType = statType;
         this.modifier = modifier;
         this.duration = duration;
@@ -78,7 +77,7 @@ public class Buff : MonoBehaviour {
 
     public void setBuff(string statName, BuffManager.BuffType statType, float modifier, int frequency, int duration, GameObject target) {
         this.statName = statName;
-        gameObject.tag = statName;
+       // gameObject.tag = statName;
         this.statType = statType;
         this.modifier = modifier;
         this.frequency = frequency;
