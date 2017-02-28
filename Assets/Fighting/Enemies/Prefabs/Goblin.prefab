@@ -253,6 +253,12 @@ MonoBehaviour:
     type: 2}
   critIndicator: {fileID: 1000010949253424, guid: 365566c3e79628247a4615d81809be4f,
     type: 2}
+  poisonIndicator: {fileID: 1000011986161452, guid: 42ef97fa8db5b18409a8ffd369378d39,
+    type: 2}
+  expIndicator: {fileID: 1000013045327486, guid: 9f623a4b0ae5c6546a659b5d6ba6c31d,
+    type: 2}
+  goldIndicator: {fileID: 1000010227259316, guid: 296d33ae00cdda04b8c818eb6dc9f709,
+    type: 2}
   item: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae, type: 2}
   health: 600
   damage: 6

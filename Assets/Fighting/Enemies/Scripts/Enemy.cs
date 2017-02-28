@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
-    public GameObject damageIndicator, critIndicator, item;
+    public GameObject damageIndicator, critIndicator, poisonIndicator, expIndicator, goldIndicator, item;
     public int health, damage, goldToGive, expToGive;
     public float timeBetweenAttacks;
     public int spawnRate;
@@ -32,13 +32,18 @@ public class Enemy : MonoBehaviour {
     void Update() {
 
     }
+    
+    public void poison(int damage) { 
+            GameObject poison;
+            poison = (GameObject)Instantiate(poisonIndicator, damageIndicatorParent.transform, false);
+            poison.GetComponent<DamageIndicator>().setText(damage.ToString());       
+    }
 
     public void hit(int damage, bool isCrit) {
         if (health == 0) {
             return;
         }
-
-        GameObject go;
+        GameObject go;        
         if (isCrit) {
             go = (GameObject)Instantiate(critIndicator, damageIndicatorParent.transform, false);
         } else {
@@ -65,21 +70,26 @@ public class Enemy : MonoBehaviour {
     IEnumerator attack() {
         while (true) {
             yield return new WaitForSeconds(timeBetweenAttacks);
+            if (GetComponentInChildren<Animator>().GetBool("dying"))
+                break;
             GetComponentInChildren<Animator>().SetTrigger("attacking");
             Player.damage(damage);
         }
     }
 
     void die() {
-        StopCoroutine("attack");
         GetComponentInChildren<Animator>().SetBool("dying", true);
         Destroy(healthBar.transform.parent.gameObject);
-
+   
         Player.giveLootGold(goldToGive);
         Player.giveExperience(expToGive);
         Destroy(GetComponent<Collider2D>());
         Destroy(gameObject, 15);
         spawnItems();
+        GameObject exp = (GameObject)Instantiate(expIndicator, damageIndicatorParent.transform, false);
+        exp.GetComponent<DamageIndicator>().setText(expToGive.ToString());
+        GameObject gold = (GameObject)Instantiate(goldIndicator, damageIndicatorParent.transform, false);
+        gold.GetComponent<DamageIndicator>().setText(goldToGive.ToString());
         StartCoroutine(EnemyWatchdog.instance.enemyHasDied());
 
     }

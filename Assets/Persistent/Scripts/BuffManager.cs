@@ -46,7 +46,7 @@ public class BuffManager : MonoBehaviour {
         buffs.Add(statName, buff);
     }
 
-    private void removeCurrentBuff(string statName) {
+    public static void removeCurrentBuff(string statName) {
         if (buffs.ContainsKey(statName) && buffs[statName] != null) {
             buffs[statName].endBuff();
             Destroy(buffs[statName].gameObject);

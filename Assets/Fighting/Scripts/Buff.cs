@@ -101,8 +101,12 @@ public class Buff : MonoBehaviour {
 
     IEnumerator hurtEnemy(Enemy enemy) {
         for (int i = 0 ; i < duration ; i += frequency) {
-            enemy.hit(Mathf.RoundToInt(modifier), false);
-            yield return new WaitForSeconds(frequency);
+            if (target != null) {
+                enemy.poison(Mathf.RoundToInt(modifier));
+                yield return new WaitForSeconds(frequency);
+            } else
+                break;
+           
         }
         Destroy(this.gameObject);
     }

@@ -52,8 +52,6 @@ public class Attacking : MonoBehaviour {
             if (EnemyWatchdog.currentEnemy != null && EnemyWatchdog.currentEnemy.GetComponentInChildren<Collider2D>() != null) {
                 EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getCriticalAttack(swipe), true);
                 Player.resetCrit();
-                BuffManager.instance.CreateDOT("EnemyDOTFire", 
-                    BuffManager.BuffType.fire, 5, 5, 1, EnemyWatchdog.currentEnemy.gameObject);
             }
 
             return;

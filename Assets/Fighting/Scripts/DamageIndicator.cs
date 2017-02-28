@@ -3,8 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
-public class DamageIndicator : MonoBehaviour {
-    public int damage;
+public class DamageIndicator :MonoBehaviour {
+    public int value;
     
     public float xForcePeakMagnitude = 200;
     public float yForcePeakMagnitude = 200;
@@ -25,24 +25,28 @@ public class DamageIndicator : MonoBehaviour {
     //damage = damagefromotherplace
     // Use this for initialization
     void Start () {
+        damageIdicator();
+    }
+
+    public void setText(string text) {
+        GetComponent<TextMesh>().text = text;       
+    }
+
+    public void damageIdicator() {
         transform.position = new Vector3(xStartPosition, yStartPosition, 0);
 
-        xforce = Random.Range(-1*xForcePeakMagnitude, xForcePeakMagnitude);
-        yforce = Random.Range(yForcePeakMagnitude/4, yForcePeakMagnitude);
-        
+        xforce = Random.Range(-1 * xForcePeakMagnitude, xForcePeakMagnitude);
+        yforce = Random.Range(yForcePeakMagnitude / 4, yForcePeakMagnitude);
+
         rigid = GetComponent<Rigidbody2D>();
         rigid.AddForce(new Vector2(xforce, yforce));
 
         // plays sound effect that gets higher pitch as the players crit increases
         sliceSound = GetComponent<AudioSource>();
-        sliceSound.pitch = 1f + (((float)Player.getCrit())/200f);
+        sliceSound.pitch = 1f + (((float)Player.getCrit()) / 200f);
         sliceSound.Play();
 
         StartCoroutine(fade());
-    }
-
-    public void setText(string text) {
-        GetComponent<TextMesh>().text = text;       
     }
    
     IEnumerator fade() {
