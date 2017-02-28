@@ -87,9 +87,9 @@ public class Enemy : MonoBehaviour {
         Destroy(gameObject, 15);
         spawnItems();
         GameObject exp = (GameObject)Instantiate(expIndicator, damageIndicatorParent.transform, false);
-        exp.GetComponent<DamageIndicator>().setText(expToGive.ToString());
+        exp.GetComponent<DamageIndicator>().setText("+" + expToGive.ToString() + " XP");
         GameObject gold = (GameObject)Instantiate(goldIndicator, damageIndicatorParent.transform, false);
-        gold.GetComponent<DamageIndicator>().setText(goldToGive.ToString());
+        gold.GetComponent<DamageIndicator>().setText("+" + goldToGive.ToString() + " GOLD");
         StartCoroutine(EnemyWatchdog.instance.enemyHasDied());
 
     }
