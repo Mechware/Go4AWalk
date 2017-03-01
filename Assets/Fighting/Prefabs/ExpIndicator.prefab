@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
-  xForcePeakMagnitude: 200
+  xForcePeakMagnitude: 50
   yForcePeakMagnitude: 100
   xStartPosition: 0
   yStartPosition: -0.5

@@ -52,8 +52,8 @@ public class TownWatchdog : MonoBehaviour {
 
     public void closeButton() {
         menus.SetActive(false);
-        bountyBoard.SetActive(false);
-        tavern.SetActive(false);
+        //bountyBoard.SetActive(false);
+        //tavern.SetActive(false);
         shop.SetActive(false);
     }
 

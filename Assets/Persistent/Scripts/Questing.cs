@@ -40,7 +40,7 @@ public struct quest {
     }
 
     public string getStats() {
-        
+
         if (!active)
             return "No active quest";
 
@@ -50,14 +50,14 @@ public struct quest {
         s += "Xp Reward: " + xpReward + "\n";
 
         if (timeToComplete != -1) {
-            s += "Quest time length: " + string.Format("{0:0.00}", timeToComplete/60f) + " minutes\n";
+            s += "Quest time length: " + string.Format("{0:0.00}", timeToComplete / 60f) + " minutes\n";
         } else {
             s += "Quest time length: Unlimited\n";
         }
 
         double timeLeft = (endTime - System.DateTime.UtcNow).TotalMinutes;
         if (timeLeft < 5) {
-            s += "Time left: " + string.Format("{0:0.00}", timeLeft*60) + " seconds\n";
+            s += "Time left: " + string.Format("{0:0.00}", timeLeft * 60) + " seconds\n";
         } else if (timeLeft > 1000000) {
             s += "Time left: Unlimited\n";
         }
@@ -89,7 +89,7 @@ public class Questing : MonoBehaviour {
     public static Questing instance;
 
     // Use this for initialization
-    void Awake () {
+    void Awake() {
         if (currentQuest.active) {
             // Stop it to make sure it's not running twice
             StopCoroutine("checkQuestEnd");
@@ -98,10 +98,10 @@ public class Questing : MonoBehaviour {
         instance = this;
     }
 
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Update is called once per frame
+    void Update() {
+
+    }
 
     public static int waitTime = 5;
     IEnumerator checkQuestEnd() {
@@ -137,15 +137,19 @@ public class Questing : MonoBehaviour {
         GameState.loadScene(GameState.scene.TOWN_LEVEL);
     }
 
+    public static void makeCamp() {
+        GameState.loadScene(GameState.scene.CAMPSITE);
+    }
+
     public static void move(float distance) {
 
         currentQuest.distanceProgress += distance;
-        
+
         if (currentQuest.distanceProgress >= currentQuest.distance) {
             if (currentQuest.distance != -1) {
                 currentQuest.distanceProgress = currentQuest.distance;
                 //endQuest(true);
-            }   
+            }
         }
     }
 
@@ -156,10 +160,10 @@ public class Questing : MonoBehaviour {
         string name = "bounty " + randomVal;
         string shortOverview = "This is the first bounty";
         string description = "This is the description of the first bounty where you will go for walks and do amazing things";
-        int goldReward = 50 + Mathf.RoundToInt(500f*randomVal);
-        int xpReward = 10 + Mathf.RoundToInt(100f*randomVal);
-        int timeToComplete = 1000 + Mathf.RoundToInt(randomVal*1500f);
-        int distance = Mathf.RoundToInt(1000f*randomVal);
+        int goldReward = 50 + Mathf.RoundToInt(500f * randomVal);
+        int xpReward = 10 + Mathf.RoundToInt(100f * randomVal);
+        int timeToComplete = 1000 + Mathf.RoundToInt(randomVal * 1500f);
+        int distance = Mathf.RoundToInt(1000f * randomVal);
         int difficulty = 1;
         quest q = new quest(name, shortOverview, description, goldReward, xpReward, null, timeToComplete, distance, difficulty);
         return q;
