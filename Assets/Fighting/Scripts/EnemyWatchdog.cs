@@ -14,6 +14,7 @@ public class EnemyWatchdog : MonoBehaviour {
 
 
     public GameObject[] enemies;
+    public GameObject[] bosses;
     public GameObject randomEncounterButton;
     public FightingWatchdog fw;
     public static EnemyWatchdog instance;
@@ -24,6 +25,7 @@ public class EnemyWatchdog : MonoBehaviour {
 
     // Distance will be anywhere from this distance to 10 times this distance
     public static float maxRandomEncounterDistance = 10f;
+    public static bool isBoss;
 
     private static float lastEncounterDistance;
     private static float nextEncounterDistance;
@@ -72,8 +74,18 @@ public class EnemyWatchdog : MonoBehaviour {
     }
 
     // Called to end an encounter
-    public IEnumerator enemyHasDied() {
-        if (enemiesQueue.IsEmpty()) {
+    public IEnumerator enemyHasDied(bool isBoss) {
+        if (isBoss == true) {
+            endFight();
+            print("" + isBoss + " " + EnemyWatchdog.isBoss);
+            fw.questFightEnd();
+
+            yield return new WaitForSeconds(2);
+            GameState.loadScene(GameState.scene.CAMPSITE);
+            EnemyWatchdog.isBoss = false;
+            Questing.endQuest(true);
+        }
+        else if (enemiesQueue.IsEmpty()) {
             endFight();
             fw.endRegularFight();
             yield return new WaitForSeconds(2);
@@ -93,9 +105,18 @@ public class EnemyWatchdog : MonoBehaviour {
             print("There are no enemies to fight ya dummy!");
             return;
         } else {
+            isBoss = false;
             enemiesQueue.removeEnemy();
             GameState.loadScene(GameState.scene.FIGHTING_LEVEL);
         }
+    }
+
+    public void startBossFight() {
+        isBoss = true;        
+        clearEnemies();
+        print("" + StoryOverlord.currentLevel);
+        currentEnemyPrefab = bosses[StoryOverlord.currentLevel];
+        GameState.loadScene(GameState.scene.FIGHTING_LEVEL);
     }
 
     public void clearEnemies() {
@@ -124,6 +145,6 @@ public class EnemyWatchdog : MonoBehaviour {
     }
 
     private GameObject pickBoss() {
-        return enemies[0];
+        return bosses[StoryOverlord.currentLevel];
     }
 }

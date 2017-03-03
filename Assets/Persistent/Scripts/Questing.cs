@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 #region Queststruct
 public struct quest {
     public string name;
@@ -87,6 +88,7 @@ public class Questing : MonoBehaviour {
     // Questing
     public static quest currentQuest;
     public static Questing instance;
+    public EnemyWatchdog ew;
 
     // Use this for initialization
     void Awake() {
@@ -128,31 +130,38 @@ public class Questing : MonoBehaviour {
             print("Quest passed!");
             Player.giveGold(currentQuest.goldReward);
             Player.giveExperience(currentQuest.xpReward);
+            StoryOverlord.currentLevel++;
         } else {
             print("Quest failed!");
         }
 
         currentQuest.active = false;
-
-        GameState.loadScene(GameState.scene.TOWN_LEVEL);
+        StoryOverlord.startQuest(StoryOverlord.currentLevel);
+        GameState.loadScene(GameState.scene.CAMPSITE);
     }
+
 
     public static void makeCamp() {
         GameState.loadScene(GameState.scene.CAMPSITE);
     }
 
     public static void move(float distance) {
-
         currentQuest.distanceProgress += distance;
 
         if (currentQuest.distanceProgress >= currentQuest.distance) {
             if (currentQuest.distance != -1) {
                 currentQuest.distanceProgress = currentQuest.distance;
+                // PopUp.instance.showPopUp("A BOSS HAS APPEARED!",
+                //     new string[] { "FIGHT" },
+                //    new System.Action[] { EnemyWatchdog.instance.startBossFight() }
+                //);
+                EnemyWatchdog.instance.startBossFight();
+
                 //endQuest(true);
             }
         }
     }
-
+   
     public static quest createRandomQuest() {
 
         float randomVal = Random.Range(0f, 1f);

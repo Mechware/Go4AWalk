@@ -97,6 +97,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: bosses.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: enemies.Array.size
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4000011089418154, guid: da687c2027639a24583cf909cdae1990, type: 2}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -154,6 +164,24 @@ Prefab:
       propertyPath: attackPotsText
       value: 
       objectReference: {fileID: 76974837}
+    - target: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: bosses.Array.data[0]
+      value: 
+      objectReference: {fileID: 1000013902114332, guid: 310bfd0a0b714df469b1d32a44e2cb3f,
+        type: 2}
+    - target: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: enemies.Array.data[6]
+      value: 
+      objectReference: {fileID: 1000010147549132, guid: 31a4441a8fa5c61408f2f77f2b3fd3e0,
+        type: 2}
+    - target: {fileID: 114000013509966300, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: enemies.Array.data[8]
+      value: 
+      objectReference: {fileID: 1000010147549132, guid: 31a4441a8fa5c61408f2f77f2b3fd3e0,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da687c2027639a24583cf909cdae1990, type: 2}
   m_IsPrefabParent: 0

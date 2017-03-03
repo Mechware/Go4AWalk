@@ -44,7 +44,7 @@ public class Player : MonoBehaviour {
             health = new ObservedValue<int>(health.Value);
         }
         crit = new ObservedValue<int>(0);
-        attackStrength = 5 + level.Value;
+        attackStrength = 50 + level.Value;
         maxHealth = 100 + 10 * level.Value;
 
         equippedWeapon = ItemList.noItem;
@@ -58,6 +58,10 @@ public class Player : MonoBehaviour {
             gold.Value += lootGold.Value;
             lootGold.Value = 0;
         }
+        if (GameState.atCamp) {
+            gold.Value += lootGold.Value;
+            lootGold.Value = 0;
+        }
 
         instance = this;
     }
@@ -66,7 +70,7 @@ public class Player : MonoBehaviour {
 
         // Let user know they died
         if (died) {
-            PopUp.instance.showPopUp("Oh no! You died!", new string[] { "Okay", "No." },
+            PopUp.instance.showPopUp("Oh no! You were defeated! \n You conveniently find yourself back at camp, \n but the gold you have accumulated has been stolen.", new string[] { "Okay", "No." },
                 new System.Action[] {
                     new System.Action(() => {}),
                     new System.Action(() => {
@@ -151,7 +155,7 @@ public class Player : MonoBehaviour {
     private static void die() {
         EnemyWatchdog.instance.clearEnemies();
         died = true;
-        Questing.endQuest(false);
+        Questing.makeCamp();
     }
 
     // Returns a regular random attack
@@ -199,6 +203,7 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetInt("HealthPotions", PotionInventory.numHealthPots.Value);
         PlayerPrefs.SetInt("CritPotions", PotionInventory.numCritPots.Value);
         PlayerPrefs.SetInt("AttackPotions", PotionInventory.numAttackPots.Value);
+        PlayerPrefs.SetInt("StoryLevel", StoryOverlord.currentLevel);
         PlayerPrefs.Save();
     }
 
@@ -208,6 +213,8 @@ public class Player : MonoBehaviour {
         experience.Value = PlayerPrefs.GetInt("XP", experience.Value);
         totalDistance.Value = PlayerPrefs.GetFloat("Distance", totalDistance.Value);
         level.Value = PlayerPrefs.GetInt("Level", level.Value);
+        StoryOverlord.currentLevel = PlayerPrefs.GetInt("StoryLevel", StoryOverlord.currentLevel);
+        
         PotionInventory.numHealthPots.Value = PlayerPrefs.GetInt("HealthPotions", PotionInventory.numHealthPots.Value);
         PotionInventory.numCritPots.Value = PlayerPrefs.GetInt("CritPotions", PotionInventory.numCritPots.Value);
         PotionInventory.numAttackPots.Value = PlayerPrefs.GetInt("AttackPotions", PotionInventory.numAttackPots.Value);
@@ -218,6 +225,8 @@ public class Player : MonoBehaviour {
             new string[] { "Yes", "No" },
             new System.Action[] {
                 new System.Action(()=> {
+                    PlayerPrefs.DeleteAll();
+                    /*
                     PlayerPrefs.DeleteKey("Health");
                     PlayerPrefs.DeleteKey("Gold");
                     PlayerPrefs.DeleteKey("XP");
@@ -232,7 +241,8 @@ public class Player : MonoBehaviour {
                     experience.Value = 0;
                     totalDistance.Value = 0;
                     level.Value = 0;
-                    save(); }),
+                    save(); 
+                    */ }),
                 new System.Action(()=> { })
             });
 

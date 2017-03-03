@@ -33,8 +33,8 @@ public class PersistentUIElements : MonoBehaviour {
         totalGold.text = Player.gold.Value.ToString();
         lootGold.text = "+" + Player.lootGold.Value.ToString();
         totalExperience.text = Player.experience.Value.ToString();
-        distance.text = Player.totalDistance.Value.ToString();
-
+        distance.text = Math.Round(Player.totalDistance.Value/1000,1).ToString();
+     
         // Update each time the experience, gold, or level is updated
         Player.experience.OnValueChange += () => {
             totalExperience.text = Player.experience.Value.ToString();

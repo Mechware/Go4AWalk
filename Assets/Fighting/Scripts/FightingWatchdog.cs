@@ -12,6 +12,7 @@ public class FightingWatchdog : MonoBehaviour {
 
     // Called when the enemy is killed
     public void endRegularFight() {
+        print("reg fight over");
         foreach (SpriteRenderer sp in critBarObject.GetComponentsInChildren<SpriteRenderer>()) {
             StartCoroutine(FadingUtils.fadeSpriteRenderer(sp, 1, 1, 0));
         }
@@ -31,6 +32,7 @@ public class FightingWatchdog : MonoBehaviour {
 
     // Called when a boss is killed
     public IEnumerator questFightEnd() {
+        print("boss fight over");
         foreach (SpriteRenderer sp in critBarObject.GetComponentsInChildren<SpriteRenderer>()) {
             StartCoroutine(FadingUtils.fadeSpriteRenderer(sp, 1, 1, 0));
         }

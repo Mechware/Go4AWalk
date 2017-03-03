@@ -90,7 +90,7 @@ public class Enemy : MonoBehaviour {
         exp.GetComponent<DamageIndicator>().setText("+" + expToGive.ToString() + " XP");
         GameObject gold = (GameObject)Instantiate(goldIndicator, damageIndicatorParent.transform, false);
         gold.GetComponent<DamageIndicator>().setText("+" + goldToGive.ToString() + " GOLD");
-        StartCoroutine(EnemyWatchdog.instance.enemyHasDied());
+        StartCoroutine(EnemyWatchdog.instance.enemyHasDied(EnemyWatchdog.isBoss));
 
     }
 

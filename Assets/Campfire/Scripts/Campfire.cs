@@ -23,7 +23,14 @@ public class Campfire : MonoBehaviour {
     }
 
     public void toForest() {
+        if(Questing.currentQuest.active == true) {
+            GameState.loadScene(GameState.scene.WALKING_LEVEL);
+        } else {
+            StoryOverlord.startQuest(StoryOverlord.currentLevel);
+        }
 
+        
+        /*
         int goldReward = 0;
         int xpReward = 0;
         float timeToComplete = -1;
@@ -32,6 +39,7 @@ public class Campfire : MonoBehaviour {
         quest thisQuest = new quest("Test Quest", "You're exploring in the forest", "Find new enemies and get experience and gold!", goldReward, xpReward, null, timeToComplete, distance, difficulty);
         thisQuest.active = true;
         Questing.startQuest(thisQuest);
+        */
     }
 
     public void openSleepPopUp() {
