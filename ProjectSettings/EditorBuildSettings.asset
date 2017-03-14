@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/WalkingScreen.unity
   - enabled: 1
+    path: Assets/Scenes/Campsite.unity
+  - enabled: 1
     path: Assets/Scenes/TownScreen.unity
   - enabled: 1
     path: Assets/Scenes/WalkingScreen.unity
   - enabled: 1
     path: Assets/Scenes/FightingScene.unity
-  - enabled: 1
-    path: Assets/Scenes/Campsite.unity

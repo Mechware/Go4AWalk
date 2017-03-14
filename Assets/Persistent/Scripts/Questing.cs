@@ -130,6 +130,7 @@ public class Questing : MonoBehaviour {
             print("Quest passed!");
             Player.giveGold(currentQuest.goldReward);
             Player.giveExperience(currentQuest.xpReward);
+            Inventory.items.Add(StoryOverlord.reward);
             StoryOverlord.currentLevel++;
         } else {
             print("Quest failed!");
@@ -138,6 +139,9 @@ public class Questing : MonoBehaviour {
         currentQuest.active = false;
         StoryOverlord.startQuest(StoryOverlord.currentLevel);
         GameState.loadScene(GameState.scene.CAMPSITE);
+        PopUp.instance.showPopUp("QUEST COMPLETE! \n You defeated the boss and make camp for some much needed rest. \n \n Reward:" + StoryOverlord.reward.name, new string[] { "Okay" },
+                new System.Action[] {
+                    new System.Action(() => {}) });
     }
 
 

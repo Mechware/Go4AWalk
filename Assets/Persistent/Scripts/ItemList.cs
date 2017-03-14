@@ -21,6 +21,8 @@ public class ItemList {
     public const string MUNNY_POUCH = "Munny Pouch";
 	public const string ATTACK_POTION = "Attack Potion";
     public const string BRONZE_SWORD = "Bronze Sword";
+    public const string BRONZE_SABER = "Bronze Saber";
+    public const string WOOD_SWORD = "Wood Sword";
 
     private static IDictionary<string, item> _itemMasterList = null;
     public static IDictionary<string, item> itemMasterList {
@@ -146,7 +148,7 @@ public class ItemList {
         bronzeSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         bronzeSword.useItem += () => {
-            Player.equipWeapon(bronzeSword);
+            Player.instance.equipWeapon(bronzeSword);
             return true;
         };
 
@@ -169,10 +171,34 @@ public class ItemList {
         bronzeSaber.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         bronzeSaber.useItem += () => {
-            Player.equipWeapon(bronzeSaber);
+            Player.instance.equipWeapon(bronzeSaber);
             return true;
         };
 
-        itemMasterList[BRONZE_SWORD] = bronzeSaber;
+        itemMasterList[BRONZE_SABER] = bronzeSaber;
+        // ***
+        item woodSword = new item(name: "Wooden Sword",
+                    description: "A sword made of wood. Okay, its just a stick shaped like a sword. Okay, its just a stick.",
+                    price: 100,
+                    attributeValue: 0,
+                    otherInfo: null,
+                    type: itemType.Weapon,
+                    useItem: null,
+                    icon: null,
+                    spawnRate: 0,
+                    baseAttack: 1,
+                    attackModifier: 1f,
+                    critModifier: 1f);
+
+        texture = Resources.Load("Item Sprites/Wooden Sword") as Texture2D;
+        woodSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        woodSword.useItem += () => {
+            Player.instance.equipWeapon(woodSword);
+            return true;
+        };
+
+        itemMasterList[WOOD_SWORD] = woodSword;
     }
+   
 }

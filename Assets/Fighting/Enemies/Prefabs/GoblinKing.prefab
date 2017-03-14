@@ -265,7 +265,7 @@ MonoBehaviour:
   goldToGive: 1000
   expToGive: 100
   timeBetweenAttacks: 3
-  spawnRate: 100
+  spawnRate: 5
 --- !u!114 &114000012268232346
 MonoBehaviour:
   m_ObjectHideFlags: 1

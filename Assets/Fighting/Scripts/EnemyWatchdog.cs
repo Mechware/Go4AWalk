@@ -24,7 +24,7 @@ public class EnemyWatchdog : MonoBehaviour {
  
 
     // Distance will be anywhere from this distance to 10 times this distance
-    public static float maxRandomEncounterDistance = 10f;
+    public static float maxRandomEncounterDistance = 100f;
     public static bool isBoss;
 
     private static float lastEncounterDistance;
@@ -44,7 +44,7 @@ public class EnemyWatchdog : MonoBehaviour {
         if (GameState.walking) {
             // Initialize encounter variables
             lastEncounterDistance = Player.totalDistance.Value;
-            nextEncounterDistance = lastEncounterDistance + Random.Range(1f, 10f);
+            nextEncounterDistance = lastEncounterDistance + Random.Range(10f, 100f);
             WalkingWatchdog.instance.setQueueSize(enemiesQueue.getSize());
         } else if (GameState.fighting) {
             if (currentEnemyPrefab != null) {
@@ -68,7 +68,7 @@ public class EnemyWatchdog : MonoBehaviour {
             } else if (Player.totalDistance.Value > nextEncounterDistance) {
                 enemiesQueue.putEnemy();
                 WalkingWatchdog.instance.setQueueSize(enemiesQueue.getSize());
-                nextEncounterDistance += maxRandomEncounterDistance * Random.Range(0f, 1f);
+                nextEncounterDistance += maxRandomEncounterDistance * Random.Range(0.1f, 1f);
             }
         }
     }
@@ -134,7 +134,8 @@ public class EnemyWatchdog : MonoBehaviour {
     }
 
     public GameObject pickEnemy() {
-        int randomEnemyNum = Mathf.FloorToInt(Random.value * (enemies.Length));
+        int randomEnemyNum = Random.Range(StoryOverlord.firstEnemy, StoryOverlord.lastEnemy+1);
+        //int randomEnemyNum = Mathf.FloorToInt(Random.value * (enemies.Length));
         Enemy possibleEnemy = enemies[randomEnemyNum].GetComponent<Enemy>();
         int spawnRateComparer = Random.Range(0, 100);
         if (spawnRateComparer < possibleEnemy.spawnRate) {

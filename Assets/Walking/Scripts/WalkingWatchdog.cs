@@ -29,14 +29,20 @@ public class WalkingWatchdog : MonoBehaviour {
 
         takeStepButton.onClick.AddListener(() => {
             // Move 1 meter per step click
-            updateDistance(1, 1);
+            updateDistance(10, 10);
         });
 
         // Display the correct distance to travel
         if (Questing.currentQuest.distance == -1) {
             questDistanceToTravel.text = "∞";
         } else {
-            questDistanceToTravel.text = Questing.currentQuest.distance/100 + "";
+            if (Questing.currentQuest.distance > 1001f) {
+                questDistanceToTravel.text = Questing.currentQuest.distance/1000 + "km";
+            }
+            else {
+                questDistanceToTravel.text = Questing.currentQuest.distance + "m";
+            }
+            
         }
 
         updateDistanceTravelledUI();
@@ -91,7 +97,7 @@ public class WalkingWatchdog : MonoBehaviour {
     void updateDistanceTravelledUI() {
 
         // Update questing distance travelled text
-        questDistanceTravelled.text = string.Format("{0:0.00}", Questing.currentQuest.distanceProgress/100);
+        questDistanceTravelled.text = "" + Questing.currentQuest.distanceProgress;
 
         // Update position of character sprite on screen
         if (Questing.currentQuest.distance == -1 || Questing.currentQuest.distance == 0) {

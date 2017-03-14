@@ -18,15 +18,16 @@ public class Player : MonoBehaviour {
     public static ObservedValue<int> health;
 
     public static ObservedValue<int> crit;
-    private static int attackStrength = 5;
+    public static int attackStrength = 5;
     private static int critFactor = 4;
     public static float attackModifier = 1;
     public static float defenseModifier = 1;
     public static float critModifier = 1;
     public static item equippedWeapon;
 
-    #region nonstatic
 
+    #region nonstatic
+ 
     void Awake() {
         if (gold == null) {
             gold = new ObservedValue<int>(0);
@@ -44,10 +45,11 @@ public class Player : MonoBehaviour {
             health = new ObservedValue<int>(health.Value);
         }
         crit = new ObservedValue<int>(0);
-        attackStrength = 50 + level.Value;
+        attackStrength = 5 + level.Value;
         maxHealth = 100 + 10 * level.Value;
 
-        equippedWeapon = ItemList.noItem;
+        Inventory.items.Add(ItemList.itemMasterList[ItemList.WOOD_SWORD]);
+        equippedWeapon = ItemList.itemMasterList[ItemList.WOOD_SWORD];
 
         if (died) {
             health.Value = maxHealth / 2;
@@ -104,6 +106,15 @@ public class Player : MonoBehaviour {
 
     }
 
+    public void equipWeapon(item newItem) {
+        UnityEngine.Assertions.Assert.AreEqual(newItem.type, itemType.Weapon, "Trying to equip something that is not a weapon.");
+
+        attackStrength -= equippedWeapon.baseAttack;
+        equippedWeapon = newItem;
+        attackStrength += equippedWeapon.baseAttack;
+        GetComponent<PersistentUIElements>().updateItems();
+    }
+
 
     #endregion
 
@@ -117,14 +128,7 @@ public class Player : MonoBehaviour {
         }
     }
 
-    public static void equipWeapon(item newItem) {
-        UnityEngine.Assertions.Assert.AreEqual(newItem.type, itemType.Weapon, "Trying to equip something that is not a weapon.");
-
-        attackStrength -= equippedWeapon.baseAttack;
-        equippedWeapon = newItem;
-        attackStrength += equippedWeapon.baseAttack;
-
-    }
+  
 
     public static int updateCrit(int randFactor) {
 
