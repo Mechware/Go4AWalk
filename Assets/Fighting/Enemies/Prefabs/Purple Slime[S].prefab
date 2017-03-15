@@ -37,7 +37,7 @@ GameObject:
   - 4: {fileID: 4000010277532024}
   - 114: {fileID: 114000012976545522}
   m_Layer: 0
-  m_Name: Purple Slime
+  m_Name: Purple Slime[S]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010675719640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalPosition: {x: 0.016054213, y: -3.0845208, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 3}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageIndicator: {fileID: 1000012382817292, guid: fd0fcb131dfb10a40978296f003aedaa,
     type: 2}
-  critIndicator: {fileID: 1000010949253424, guid: 365566c3e79628247a4615d81809be4f,
+  critIndicator: {fileID: 1000014082458882, guid: f1042b13077ce0a469d540ae889905c0,
     type: 2}
   poisonIndicator: {fileID: 1000011986161452, guid: 42ef97fa8db5b18409a8ffd369378d39,
     type: 2}
@@ -275,6 +275,8 @@ MonoBehaviour:
   damage: 50
   goldToGive: 250
   expToGive: 80
+  armor: 1
+  sturdy: 0.3
   timeBetweenAttacks: 9
   spawnRate: 60
 --- !u!212 &212000010792392336
@@ -340,7 +342,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: d90a8faf6fb9540b084ef2825cc3a5dc, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.427451, g: 0.03137255, b: 0.03137255, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!212 &212000013225277750

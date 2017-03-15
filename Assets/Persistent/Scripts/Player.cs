@@ -48,9 +48,10 @@ public class Player : MonoBehaviour {
         attackStrength = 5 + level.Value;
         maxHealth = 100 + 10 * level.Value;
 
-        Inventory.items.Add(ItemList.itemMasterList[ItemList.WOOD_SWORD]);
-        equippedWeapon = ItemList.itemMasterList[ItemList.WOOD_SWORD];
-
+        if (Player.equippedWeapon.Equals(ItemList.noItem) || Player.equippedWeapon.Equals(default(item))) {
+            Inventory.items.Add(ItemList.itemMasterList[ItemList.WOOD_SWORD]);
+            equippedWeapon = ItemList.itemMasterList[ItemList.WOOD_SWORD];
+        }
         if (died) {
             health.Value = maxHealth / 2;
             lootGold = new ObservedValue<int>(0);
@@ -239,6 +240,7 @@ public class Player : MonoBehaviour {
                     PlayerPrefs.DeleteKey("HealthPotions");
                     PlayerPrefs.DeleteKey("CritPotions");
                     PlayerPrefs.DeleteKey("AttackPotions");
+                    */
                     health.Value = 100;
                     maxHealth = 100;
                     gold.Value = 0;
@@ -246,7 +248,7 @@ public class Player : MonoBehaviour {
                     totalDistance.Value = 0;
                     level.Value = 0;
                     save(); 
-                    */ }),
+                     }),
                 new System.Action(()=> { })
             });
 

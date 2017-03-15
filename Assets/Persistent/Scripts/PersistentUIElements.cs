@@ -14,6 +14,7 @@ public class PersistentUIElements : MonoBehaviour {
     public GameObject JournalMenu, JournalButton;
     public GameObject statsPanel, questPanel, optionsPanel, itemsPanel;
     public string currentPanel = "";
+    public Sprite panelBackground1, panelBackground2, panelBackground3, panelBackground4;
     // Inventory Stuff
     public Text equippedWeapon, equippedArmor, equippedAccessory, playerStats;
     public Image equippedItem1, equippedWeapon2, equippedWeapon3;
@@ -87,6 +88,7 @@ public class PersistentUIElements : MonoBehaviour {
             questPanel.SetActive(true);
             optionsPanel.SetActive(false);
             itemsPanel.SetActive(false);
+            JournalMenu.GetComponent<Image>().sprite = panelBackground1;
         }
     }
 
@@ -105,6 +107,8 @@ public class PersistentUIElements : MonoBehaviour {
                 optionsPanel.SetActive(false);
                 itemsPanel.SetActive(false);
                 currentPanel = panel;
+                JournalMenu.GetComponent<Image>().sprite = panelBackground3;
+
                 break;
             case "Options":
                 statsPanel.SetActive(false);
@@ -112,6 +116,7 @@ public class PersistentUIElements : MonoBehaviour {
                 optionsPanel.SetActive(true);
                 itemsPanel.SetActive(false);
                 currentPanel = panel;
+                JournalMenu.GetComponent<Image>().sprite = panelBackground4;
                 break;
             case "Quests":
                 statsPanel.SetActive(false);
@@ -119,6 +124,7 @@ public class PersistentUIElements : MonoBehaviour {
                 optionsPanel.SetActive(false);
                 itemsPanel.SetActive(false);
                 currentPanel = panel;
+                JournalMenu.GetComponent<Image>().sprite = panelBackground1;
                 break;
             case "Items":
                 statsPanel.SetActive(false);
@@ -127,6 +133,7 @@ public class PersistentUIElements : MonoBehaviour {
                 itemsPanel.SetActive(true);
                 currentPanel = panel;
                 updateItems();
+                JournalMenu.GetComponent<Image>().sprite = panelBackground2;
                 break;
             default:
                 print("Didn't not open a valid panel");
@@ -153,16 +160,16 @@ public class PersistentUIElements : MonoBehaviour {
         }
 
         if (Player.equippedWeapon.Equals(ItemList.noItem) || Player.equippedWeapon.Equals(default(item))) {
-            equippedWeapon.text = "None";
+            equippedWeapon.text = "Weapon:" + "\n" + "None";
         } else {
-            equippedWeapon.text = "" + Player.equippedWeapon.name.ToString();
+            equippedWeapon.text = "Weapon:" + "\n" + Player.equippedWeapon.name.ToString();
             equippedItem1.sprite = Player.equippedWeapon.icon;
         }
            
 
 
-        equippedArmor.text = "None";        
-        equippedAccessory.text = "None";
+        equippedArmor.text = "Armor: " + "\n" + "None";        
+        equippedAccessory.text = "Accessory:" + "\n" + "None";
         playerStats.text =
             "ATK:  " + Player.attackStrength + "\n" +
             "DEF:  " + Player.defenseModifier + "\n" +
@@ -211,7 +218,7 @@ public class PersistentUIElements : MonoBehaviour {
                 "CRIT: " + Inventory.items[i].critModifier + "\n" +
                 "PWR:  " + Inventory.items[i].attackModifier;
             icon = Inventory.items[i].icon;
-            currentButton.GetComponentInChildren<Image>().sprite = icon;
+            currentButton.GetComponentsInChildren<Image>()[1].sprite = icon;
             currentButton.GetComponentsInChildren<Text>()[1].text = itemStats;
             currentButton.GetComponentInChildren<Text>().text = itemDescription;
             setButtonClick(currentButton.GetComponent<Button>(), Inventory.items[i]);

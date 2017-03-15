@@ -29,7 +29,7 @@ public class WalkingWatchdog : MonoBehaviour {
 
         takeStepButton.onClick.AddListener(() => {
             // Move 1 meter per step click
-            updateDistance(10, 10);
+            updateDistance(25, 25);
         });
 
         // Display the correct distance to travel

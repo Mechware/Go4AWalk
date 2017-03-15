@@ -70,7 +70,7 @@ GameObject:
   - 4: {fileID: 4000011592050994}
   - 114: {fileID: 114000012095665224}
   m_Layer: 0
-  m_Name: Red Goblin
+  m_Name: Red Goblin[A]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5bf827af8492694482f5caaa1fcf98e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageIndicator: {fileID: 1000012382817292, guid: fd0fcb131dfb10a40978296f003aedaa,
+  damageIndicator: {fileID: 1000010834631054, guid: f868133c252415742a99f6bcf6dfc868,
     type: 2}
   critIndicator: {fileID: 1000010949253424, guid: 365566c3e79628247a4615d81809be4f,
     type: 2}
@@ -264,8 +264,10 @@ MonoBehaviour:
   damage: 10
   goldToGive: 60
   expToGive: 50
+  armor: 0.5
+  sturdy: 1.25
   timeBetweenAttacks: 3
-  spawnRate: 80
+  spawnRate: 50
 --- !u!114 &114000014211924666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -373,6 +375,6 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: d90a8faf6fb9540b084ef2825cc3a5dc, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.6745098, g: 0.6745098, b: 0.6745098, a: 1}
   m_FlipX: 0
   m_FlipY: 0
