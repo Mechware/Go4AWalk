@@ -45,7 +45,7 @@ public class Player : MonoBehaviour {
             health = new ObservedValue<int>(health.Value);
         }
         crit = new ObservedValue<int>(0);
-        attackStrength = 5 + level.Value;
+        attackStrength = 50 + level.Value;
         maxHealth = 100 + 10 * level.Value;
 
         if (Player.equippedWeapon.Equals(ItemList.noItem) || Player.equippedWeapon.Equals(default(item))) {

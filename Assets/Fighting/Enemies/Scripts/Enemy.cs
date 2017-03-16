@@ -95,6 +95,7 @@ public class Enemy : MonoBehaviour {
     }
 
     void die() {
+        print("Oh no I'm dead!");
         GetComponentInChildren<Animator>().SetBool("dying", true);
         Destroy(healthBar.transform.parent.gameObject);
 

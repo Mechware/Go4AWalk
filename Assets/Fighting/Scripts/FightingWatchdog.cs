@@ -28,6 +28,8 @@ public class FightingWatchdog : MonoBehaviour {
 
         enemyKilledText.gameObject.SetActive(true);
         StartCoroutine(FadingUtils.fadeTextMesh(enemyKilledText, 1, 0, 1));
+        
+        GameState.loadScene(GameState.scene.WALKING_LEVEL);
     }
 
     // Called when a boss is killed
@@ -55,8 +57,8 @@ public class FightingWatchdog : MonoBehaviour {
         StartCoroutine(treasureChest.GetComponent<TreasureChest>().openChest());
 
         Destroy(treasureChest, 5.1f);
-        yield return new WaitForSeconds(2);
-        GameState.loadScene(GameState.scene.CAMPSITE);
+        yield return new WaitForSeconds(5.1f);
+        
         EnemyWatchdog.isBoss = false;
         Questing.endQuest(true);
 

@@ -13,7 +13,7 @@ public class TreasureChest : MonoBehaviour {
 
 	public IEnumerator openChest () {
         GetComponentInChildren<Animator>().SetTrigger("Open");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         ps.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         ps.Stop();

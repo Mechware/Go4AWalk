@@ -272,9 +272,11 @@ MonoBehaviour:
     type: 2}
   item: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae, type: 2}
   health: 450
-  damage: 6
+  damage: 4
   goldToGive: 25
   expToGive: 20
+  armor: 1
+  sturdy: 1
   timeBetweenAttacks: 1
   spawnRate: 60
 --- !u!212 &212000013493875122

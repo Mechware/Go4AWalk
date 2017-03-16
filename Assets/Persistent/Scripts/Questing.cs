@@ -120,8 +120,6 @@ public class Questing : MonoBehaviour {
         if (q.timeToComplete != -1) {
             instance.StartCoroutine("checkQuestEnd");
         }
-
-        GameState.loadScene(GameState.scene.WALKING_LEVEL);
     }
 
     public static void endQuest(bool userFinished) {
@@ -138,10 +136,11 @@ public class Questing : MonoBehaviour {
 
         currentQuest.active = false;
         StoryOverlord.startQuest(StoryOverlord.currentLevel);
-        GameState.loadScene(GameState.scene.CAMPSITE);
-        PopUp.instance.showPopUp("QUEST COMPLETE! \n You defeated the boss and make camp for some much needed rest. \n \n Reward:" + StoryOverlord.reward.name, new string[] { "Okay" },
+        
+        PopUp.instance.showPopUp("QUEST COMPLETE! \nYou defeated the boss! \n"+"Continue on your journey or make camp for some much needed rest?" + "\n\n" + "Reward: " + StoryOverlord.reward.name, 
+                new string[] { "Continue", "Camp" },
                 new System.Action[] {
-                    new System.Action(() => {}) });
+                    new System.Action(() => {GameState.loadScene(GameState.scene.WALKING_LEVEL); }), () => {GameState.loadScene(GameState.scene.CAMPSITE); } }) ;
     }
 
 

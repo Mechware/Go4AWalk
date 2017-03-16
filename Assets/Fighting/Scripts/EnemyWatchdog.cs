@@ -82,10 +82,9 @@ public class EnemyWatchdog : MonoBehaviour {
         }
         else if (enemiesQueue.IsEmpty()) {
             endFight();
+            yield return new WaitForSeconds(2);
             fw.endRegularFight();
            
-            yield return new WaitForSeconds(2);
-            GameState.loadScene(GameState.scene.WALKING_LEVEL);
         } else {
             enemiesLeft.text = "" + enemiesQueue.getSize();
             yield return new WaitForSeconds(2);
