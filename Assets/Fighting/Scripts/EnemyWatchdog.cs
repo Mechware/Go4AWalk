@@ -78,16 +78,12 @@ public class EnemyWatchdog : MonoBehaviour {
         if (isBoss == true) {
             endFight();
             print("" + isBoss + " " + EnemyWatchdog.isBoss);
-            fw.questFightEnd();
-
-            yield return new WaitForSeconds(2);
-            GameState.loadScene(GameState.scene.CAMPSITE);
-            EnemyWatchdog.isBoss = false;
-            Questing.endQuest(true);
+            StartCoroutine(fw.questFightEnd());
         }
         else if (enemiesQueue.IsEmpty()) {
             endFight();
             fw.endRegularFight();
+           
             yield return new WaitForSeconds(2);
             GameState.loadScene(GameState.scene.WALKING_LEVEL);
         } else {

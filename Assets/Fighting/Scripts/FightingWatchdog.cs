@@ -55,10 +55,11 @@ public class FightingWatchdog : MonoBehaviour {
         StartCoroutine(treasureChest.GetComponent<TreasureChest>().openChest());
 
         Destroy(treasureChest, 5.1f);
-
-        yield return new WaitForSeconds(5);
-
+        yield return new WaitForSeconds(2);
+        GameState.loadScene(GameState.scene.CAMPSITE);
+        EnemyWatchdog.isBoss = false;
         Questing.endQuest(true);
+
     }
 
     #endregion

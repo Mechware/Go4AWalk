@@ -247,6 +247,7 @@ public class Player : MonoBehaviour {
                     experience.Value = 0;
                     totalDistance.Value = 0;
                     level.Value = 0;
+                    StoryOverlord.currentLevel = 0;
                     save(); 
                      }),
                 new System.Action(()=> { })

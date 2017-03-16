@@ -3029,7 +3029,7 @@ MonoBehaviour:
   - {fileID: 1000010147549132, guid: 31a4441a8fa5c61408f2f77f2b3fd3e0, type: 2}
   - {fileID: 1000010107298772, guid: db29f3f361a333a4aacde25def09a751, type: 2}
   bosses:
-  - {fileID: 1000013902114332, guid: 310bfd0a0b714df469b1d32a44e2cb3f, type: 2}
+  - {fileID: 1000012475826692, guid: 246168b928e0b2a4caffdfb013d8cea6, type: 2}
   - {fileID: 1000013902114332, guid: 310bfd0a0b714df469b1d32a44e2cb3f, type: 2}
   randomEncounterButton: {fileID: 0}
   fw: {fileID: 0}
