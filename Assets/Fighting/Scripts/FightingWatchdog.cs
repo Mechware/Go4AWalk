@@ -10,9 +10,8 @@ public class FightingWatchdog : MonoBehaviour {
     public TextMesh enemyKilledText;
     public GameObject treasureChest, critBarObject, healthBarObject;
 
-    // Called when the enemy is killed
-    public void endRegularFight() {
-        print("reg fight over");
+
+    public void fadeOutStats() {
         foreach (SpriteRenderer sp in critBarObject.GetComponentsInChildren<SpriteRenderer>()) {
             StartCoroutine(FadingUtils.fadeSpriteRenderer(sp, 1, 1, 0));
         }
@@ -25,28 +24,23 @@ public class FightingWatchdog : MonoBehaviour {
         foreach (TextMesh tm in healthBarObject.GetComponentsInChildren<TextMesh>()) {
             StartCoroutine(FadingUtils.fadeTextMesh(tm, 1, 1, 0));
         }
+    }
+
+    // Called when the enemy is killed
+    public IEnumerator endRegularFight() {
+        print("reg fight over");
+        fadeOutStats();
 
         enemyKilledText.gameObject.SetActive(true);
         StartCoroutine(FadingUtils.fadeTextMesh(enemyKilledText, 1, 0, 1));
-        
+        yield return new WaitForSeconds(2);
         GameState.loadScene(GameState.scene.WALKING_LEVEL);
     }
 
     // Called when a boss is killed
     public IEnumerator questFightEnd() {
         print("boss fight over");
-        foreach (SpriteRenderer sp in critBarObject.GetComponentsInChildren<SpriteRenderer>()) {
-            StartCoroutine(FadingUtils.fadeSpriteRenderer(sp, 1, 1, 0));
-        }
-        foreach (TextMesh tm in critBarObject.GetComponentsInChildren<TextMesh>()) {
-            StartCoroutine(FadingUtils.fadeTextMesh(tm, 1, 1, 0));
-        }
-        foreach (SpriteRenderer sp in healthBarObject.GetComponentsInChildren<SpriteRenderer>()) {
-            StartCoroutine(FadingUtils.fadeSpriteRenderer(sp, 1, 1, 0));
-        }
-        foreach (TextMesh tm in healthBarObject.GetComponentsInChildren<TextMesh>()) {
-            StartCoroutine(FadingUtils.fadeTextMesh(tm, 1, 1, 0));
-        }
+        fadeOutStats();
 
         StartCoroutine(FadingUtils.fadeSpriteRenderer(background, 1, 1, 0));
         StartCoroutine(FadingUtils.fadeSpriteRenderer(treasureBackground, 1, 0, 1));

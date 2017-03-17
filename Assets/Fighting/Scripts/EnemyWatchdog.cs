@@ -78,14 +78,12 @@ public class EnemyWatchdog : MonoBehaviour {
         if (isBoss == true) {
             endFight();
             print("" + isBoss + " " + EnemyWatchdog.isBoss);
-            StartCoroutine(fw.questFightEnd());
-        }
-        else if (enemiesQueue.IsEmpty()) {
+            yield return fw.questFightEnd();
+        } else if (enemiesQueue.IsEmpty()) {
             endFight();
-            yield return new WaitForSeconds(2);
-            fw.endRegularFight();
-           
+            StartCoroutine(fw.endRegularFight());
         } else {
+            fw.fadeOutStats();
             enemiesLeft.text = "" + enemiesQueue.getSize();
             yield return new WaitForSeconds(2);
 

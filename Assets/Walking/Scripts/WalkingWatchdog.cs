@@ -101,7 +101,7 @@ public class WalkingWatchdog : MonoBehaviour {
 
         // Update position of character sprite on screen
         if (Questing.currentQuest.distance == -1 || Questing.currentQuest.distance == 0) {
-            characterSprite.transform.position = startPosition;
+            //characterSprite.transform.position = startPosition;
         } else {
             float percentToEnd = Questing.currentQuest.distanceProgress/Questing.currentQuest.distance;
             float xDistanceDifference = endPosition.x - startPosition.x;
