@@ -129,8 +129,8 @@ public class EnemyWatchdog : MonoBehaviour {
     }
 
     public GameObject pickEnemy() {
-        int randomEnemyNum = Random.Range(StoryOverlord.firstEnemy, StoryOverlord.lastEnemy+1);
-        //int randomEnemyNum = Mathf.FloorToInt(Random.value * (enemies.Length));
+        int randomEnemyNum = Random.Range(StoryOverlord.firstEnemy, StoryOverlord.lastEnemy-1);
+
         Enemy possibleEnemy = enemies[randomEnemyNum].GetComponent<Enemy>();
         int spawnRateComparer = Random.Range(0, 100);
         if (spawnRateComparer < possibleEnemy.spawnRate) {

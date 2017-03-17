@@ -97,7 +97,7 @@ public class WalkingWatchdog : MonoBehaviour {
     void updateDistanceTravelledUI() {
 
         // Update questing distance travelled text
-        questDistanceTravelled.text = "" + Questing.currentQuest.distanceProgress;
+        questDistanceTravelled.text = string.Format("{0:0.##}", Questing.currentQuest.distanceProgress);
 
         // Update position of character sprite on screen
         if (Questing.currentQuest.distance == -1 || Questing.currentQuest.distance == 0) {
