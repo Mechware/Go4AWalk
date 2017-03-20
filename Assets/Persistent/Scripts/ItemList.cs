@@ -23,6 +23,13 @@ public class ItemList {
     public const string BRONZE_SWORD = "Bronze Sword";
     public const string BRONZE_SABER = "Bronze Saber";
     public const string WOOD_SWORD = "Wood Sword";
+    public const string IRON_SWORD = "Iron Sword";
+    public const string STEEL_SWORD = "Steel Sword";
+    public const string ORICH_SWORD = "Oricalcum Sword";
+    public const string SAND_SWORD = "Sand Steel Sword";
+    public const string JADE_SWORD = "Jade Sword";
+    public const string OBSIDIAN_SWORD = "Obsidian Sword";
+    public const string STEEL_RAPIER = "Steel Rapier";
 
     private static IDictionary<string, item> _itemMasterList = null;
     public static IDictionary<string, item> itemMasterList {
@@ -44,7 +51,7 @@ public class ItemList {
 
         // Health Potion
         item healthPotion = new item(name: "Health Potion",
-            description: "Used to regain health",
+            description: "Used to regain health.",
             price: 10,
             attributeValue: 35,
             otherInfo: null,
@@ -66,7 +73,7 @@ public class ItemList {
         itemMasterList[HEALTH_POTION] = healthPotion;
 // ***
         item critPotion = new item(name: "Crit Potion",
-            description: "Used to gain crit points",
+            description: "When used the critical bar will not reset for a short amount of time.",
             price: 10,
             attributeValue: 10,
             otherInfo: null,
@@ -109,14 +116,14 @@ public class ItemList {
         itemMasterList[MUNNY_POUCH] = munnyPouch;
 // ***
         item attackPotion = new item (name: "Attack Potion", 
-			description: "raises attack for a short amount of time",
+			description: "Raises attack for a short amount of time.",
 			price: 100,
 			attributeValue: 50,
 			otherInfo: null,
 			type: itemType.Potion,
 			useItem: null,
 			icon: null,
-            spawnRate: 0,
+            spawnRate: 15,
             baseAttack: 0,
             attackModifier: 1,
             critModifier: 1);
@@ -144,7 +151,7 @@ public class ItemList {
             attackModifier: 1,
             critModifier: 1);
 
-        texture = Resources.Load("Item Sprites/Bronze Sword") as Texture2D;
+        texture = Resources.Load("Item Sprites/Sword-Bronze") as Texture2D;
         bronzeSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         bronzeSword.useItem += () => {
@@ -167,7 +174,7 @@ public class ItemList {
                     attackModifier: 0.9f,
                     critModifier: 1.05f);
 
-        texture = Resources.Load("Item Sprites/Bronze Saber") as Texture2D;
+        texture = Resources.Load("Item Sprites/Saber-Bronze") as Texture2D;
         bronzeSaber.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         bronzeSaber.useItem += () => {
@@ -190,7 +197,7 @@ public class ItemList {
                     attackModifier: 1f,
                     critModifier: 1f);
 
-        texture = Resources.Load("Item Sprites/Wooden Sword") as Texture2D;
+        texture = Resources.Load("Item Sprites/Sword-Wood") as Texture2D;
         woodSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         woodSword.useItem += () => {
@@ -199,6 +206,174 @@ public class ItemList {
         };
 
         itemMasterList[WOOD_SWORD] = woodSword;
+
+        // ***
+        item ironSword = new item(name: "Iron Sword",
+                    description: "A sturdy sword forged from iron.",
+                    price: 100,
+                    attributeValue: 0,
+                    otherInfo: null,
+                    type: itemType.Weapon,
+                    useItem: null,
+                    icon: null,
+                    spawnRate: 0,
+                    baseAttack: 20,
+                    attackModifier: 1f,
+                    critModifier: 1f);
+
+        texture = Resources.Load("Item Sprites/Sword-Iron") as Texture2D;
+        ironSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        ironSword.useItem += () => {
+            Player.instance.equipWeapon(ironSword);
+            return true;
+        };
+
+        itemMasterList[IRON_SWORD] = ironSword;
+
+        // ***
+        item steelSword = new item(name: "Steel Sword",
+                    description: "A quality blade made out of steel. #Carbon",
+                    price: 100,
+                    attributeValue: 0,
+                    otherInfo: null,
+                    type: itemType.Weapon,
+                    useItem: null,
+                    icon: null,
+                    spawnRate: 0,
+                    baseAttack: 30,
+                    attackModifier: 1f,
+                    critModifier: 1f);
+
+        texture = Resources.Load("Item Sprites/Sword-Steel") as Texture2D;
+        steelSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        steelSword.useItem += () => {
+            Player.instance.equipWeapon(steelSword);
+            return true;
+        };
+
+        itemMasterList[STEEL_SWORD] = steelSword;
+
+        // ***
+        item orichalcumSword = new item(name: "Orichalcum Sword",
+                    description: "A sword made from a mysterious ancient alloy, and apparently modern metallurgy can't compete. Huh.",
+                    price: 100,
+                    attributeValue: 0,
+                    otherInfo: null,
+                    type: itemType.Weapon,
+                    useItem: null,
+                    icon: null,
+                    spawnRate: 0,
+                    baseAttack: 50,
+                    attackModifier: 1f,
+                    critModifier: 1f);
+
+        texture = Resources.Load("Item Sprites/Sword-Orichalcum") as Texture2D;
+        orichalcumSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        orichalcumSword.useItem += () => {
+            Player.instance.equipWeapon(orichalcumSword);
+            return true;
+        };
+
+        itemMasterList[ORICH_SWORD] = orichalcumSword;
+
+        // ***
+        item sandSteelSword = new item(name: "Sand Steel Sword",
+                    description: "A sword forged from legendary sand steel. The secret to its strength is heavily guarded. Its probably love.",
+                    price: 100,
+                    attributeValue: 0,
+                    otherInfo: null,
+                    type: itemType.Weapon,
+                    useItem: null,
+                    icon: null,
+                    spawnRate: 0,
+                    baseAttack: 70,
+                    attackModifier: 1f,
+                    critModifier: 1f);
+
+        texture = Resources.Load("Item Sprites/Sword-SandSteel") as Texture2D;
+        sandSteelSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        sandSteelSword.useItem += () => {
+            Player.instance.equipWeapon(sandSteelSword);
+            return true;
+        };
+
+        itemMasterList[SAND_SWORD] = sandSteelSword;
+
+        // ***
+        item jadeSword = new item(name: "Jade Sword",
+                    description: "A beautiful ornamental sword made out of the jade. Wait why are you fighting with this?",
+                    price: 100,
+                    attributeValue: 0,
+                    otherInfo: null,
+                    type: itemType.Weapon,
+                    useItem: null,
+                    icon: null,
+                    spawnRate: 0,
+                    baseAttack: 85,
+                    attackModifier: 1f,
+                    critModifier: 1f);
+
+        texture = Resources.Load("Item Sprites/Sword-Jade") as Texture2D;
+        jadeSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        jadeSword.useItem += () => {
+            Player.instance.equipWeapon(jadeSword);
+            return true;
+        };
+
+        itemMasterList[JADE_SWORD] = jadeSword;
+
+        // ***
+        item obsidianSword = new item(name: "Macuahuitl",
+                    description: "A wooden club with obsidian blades. Did you know obsidian blades can be as sharp as 3 nanometer? Well now you do.",
+                    price: 100,
+                    attributeValue: 0,
+                    otherInfo: null,
+                    type: itemType.Weapon,
+                    useItem: null,
+                    icon: null,
+                    spawnRate: 0,
+                    baseAttack: 100,
+                    attackModifier: 1f,
+                    critModifier: 1f);
+
+        texture = Resources.Load("Item Sprites/Sword-Obsidian") as Texture2D;
+        obsidianSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        obsidianSword.useItem += () => {
+            Player.instance.equipWeapon(obsidianSword);
+            return true;
+        };
+
+        itemMasterList[OBSIDIAN_SWORD] = obsidianSword;
+
+        // ***
+        item steelRapier = new item(name: "Rapier",
+                    description: "A delicate blade that sacrifices damage for being able to find the enemies' weak spots with more criticals.",
+                    price: 100,
+                    attributeValue: 0,
+                    otherInfo: null,
+                    type: itemType.Weapon,
+                    useItem: null,
+                    icon: null,
+                    spawnRate: 0,
+                    baseAttack: 30,
+                    attackModifier: 0.6f,
+                    critModifier: 1.1f);
+
+        texture = Resources.Load("Item Sprites/Rapier") as Texture2D;
+        steelRapier.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        steelRapier.useItem += () => {
+            Player.instance.equipWeapon(steelRapier);
+            return true;
+        };
+
+        itemMasterList[STEEL_RAPIER] = steelRapier;
     }
    
 }

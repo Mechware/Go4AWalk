@@ -45,8 +45,9 @@ public class Player : MonoBehaviour {
             health = new ObservedValue<int>(health.Value);
         }
         crit = new ObservedValue<int>(0);
-        attackStrength = 5 + level.Value;
+        attackStrength = 50 + level.Value + equippedWeapon.baseAttack;
         maxHealth = 100 + 10 * level.Value;
+        critFactor = 4 + Mathf.RoundToInt((equippedWeapon.critModifier - 1f) * 40);
 
         if (Player.equippedWeapon.Equals(ItemList.noItem) || Player.equippedWeapon.Equals(default(item))) {
             Inventory.items.Add(ItemList.itemMasterList[ItemList.WOOD_SWORD]);
@@ -209,6 +210,7 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetInt("CritPotions", PotionInventory.numCritPots.Value);
         PlayerPrefs.SetInt("AttackPotions", PotionInventory.numAttackPots.Value);
         PlayerPrefs.SetInt("StoryLevel", StoryOverlord.currentLevel);
+        PlayerPrefs.SetString("Inventory", Inventory.getInventory());
         PlayerPrefs.Save();
     }
 
@@ -241,6 +243,10 @@ public class Player : MonoBehaviour {
                     PlayerPrefs.DeleteKey("CritPotions");
                     PlayerPrefs.DeleteKey("AttackPotions");
                     */
+                    
+                    PotionInventory.numHealthPots.Value = 0;
+                    PotionInventory.numCritPots.Value = 0;
+                    PotionInventory.numAttackPots.Value = 0;
                     health.Value = 100;
                     maxHealth = 100;
                     gold.Value = 0;
@@ -248,7 +254,8 @@ public class Player : MonoBehaviour {
                     totalDistance.Value = 0;
                     level.Value = 0;
                     StoryOverlord.currentLevel = 0;
-                    save(); 
+                    save();
+                    GameState.loadScene(GameState.scene.CAMPSITE);
                      }),
                 new System.Action(()=> { })
             });

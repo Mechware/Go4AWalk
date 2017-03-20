@@ -77,4 +77,7 @@ public class Inventory : MonoBehaviour {
             _items = value;
         }
     }
+     public static string getInventory() {
+        return _items.ToString();
+    }
 }

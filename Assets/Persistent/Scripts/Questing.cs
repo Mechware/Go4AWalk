@@ -129,6 +129,14 @@ public class Questing : MonoBehaviour {
             Player.giveGold(currentQuest.goldReward);
             Player.giveExperience(currentQuest.xpReward);
             Inventory.items.Add(StoryOverlord.reward);
+
+            Inventory.items.Add(ItemList.itemMasterList[ItemList.IRON_SWORD]);
+            Inventory.items.Add(ItemList.itemMasterList[ItemList.STEEL_SWORD]);
+            Inventory.items.Add(ItemList.itemMasterList[ItemList.ORICH_SWORD]);
+            Inventory.items.Add(ItemList.itemMasterList[ItemList.SAND_SWORD]);
+            Inventory.items.Add(ItemList.itemMasterList[ItemList.JADE_SWORD]);
+            Inventory.items.Add(ItemList.itemMasterList[ItemList.OBSIDIAN_SWORD]);
+            print(Inventory.getInventory());
             StoryOverlord.currentLevel++;
         } else {
             print("Quest failed!");
