@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour {
     public float sturdy = 1;
     public float timeBetweenAttacks;
     public int spawnRate;
+    public string itemName;
+    public int lootSpawnRate;
 
     private StatusBar healthBar;
     private GameObject damageIndicatorParent;
@@ -127,11 +129,18 @@ public class Enemy : MonoBehaviour {
         item healthPotion = ItemList.itemMasterList[ItemList.HEALTH_POTION];
         item critPotion = ItemList.itemMasterList[ItemList.CRIT_POTION];
         item attackPotion = ItemList.itemMasterList[ItemList.ATTACK_POTION];
+        item lootDrop = ItemList.itemMasterList[itemName];
 
         int luckyNumberH = Random.Range(1, 100);
         int luckyNumberC = Random.Range(1, 100);
         int luckyNumberA = Random.Range(1, 100);
+        int luckyNumberLoot = Random.Range(1, 100);
 
+        if (lootSpawnRate >= luckyNumberLoot) {
+            items = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
+            items.GetComponent<ItemContainer>().setItem(lootDrop);
+            items.GetComponent<ItemContainer>().launchItem();
+        }
         if (healthPotion.spawnRate >= luckyNumberH) {
             items = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
             items.GetComponent<ItemContainer>().setItem(healthPotion);
@@ -164,35 +173,7 @@ public class Enemy : MonoBehaviour {
                 items.GetComponent<ItemContainer>().launchItem();
             }
         }
-        /*
-        for (int i = 0; i < numberOfItems; i++) { 
-            int randItem = Mathf.FloorToInt (Random.Range (0, 3));
-            if (randItem == 0) {
-                items [i] = (GameObject)Instantiate (item, new Vector2 (1, 1), Quaternion.identity);
-                items [i].GetComponent<ItemContainer> ().setItem (critPotion);
-                items [i].GetComponent<ItemContainer> ().launchItem ();
-            } else if (randItem == 1) {
-
-                items [i] = (GameObject)Instantiate (item, new Vector2 (1, 1), Quaternion.identity);
-                items [i].GetComponent<ItemContainer> ().setItem (healthPotion);
-                items [i].GetComponent<ItemContainer> ().launchItem ();
-            } else {
-            }
-            items [i] = (GameObject)Instantiate (item, new Vector2 (1, 1), Quaternion.identity);
-            items [i].GetComponent<ItemContainer> ().setItem (attackPotion);
-            items [i].GetComponent<ItemContainer> ().launchItem ();
-        }
-          /*  if(i % 2 == 0) {
-                items[i] = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
-                items[i].GetComponent<ItemContainer>().setItem(critPotion);
-                items[i].GetComponent<ItemContainer>().launchItem();
-                continue;
-            }
-            items[i] = (GameObject) Instantiate(item, new Vector2(1,1), Quaternion.identity);
-            items[i].GetComponent<ItemContainer>().setItem(healthPotion);
-            items[i].GetComponent<ItemContainer>().launchItem();
-        }*/
-
-
     }
+
+
 }

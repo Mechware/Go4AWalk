@@ -264,8 +264,12 @@ MonoBehaviour:
   damage: 10
   goldToGive: 1000
   expToGive: 100
+  armor: 1
+  sturdy: 1
   timeBetweenAttacks: 3
   spawnRate: 5
+  itemName: 
+  lootSpawnRate: -1
 --- !u!114 &114000012268232346
 MonoBehaviour:
   m_ObjectHideFlags: 1

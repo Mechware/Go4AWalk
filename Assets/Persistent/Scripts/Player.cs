@@ -24,10 +24,11 @@ public class Player : MonoBehaviour {
     public static float defenseModifier = 1;
     public static float critModifier = 1;
     public static item equippedWeapon;
+    public static item equippedArmor;
 
 
     #region nonstatic
- 
+
     void Awake() {
         if (gold == null) {
             gold = new ObservedValue<int>(0);
@@ -45,14 +46,27 @@ public class Player : MonoBehaviour {
             health = new ObservedValue<int>(health.Value);
         }
         crit = new ObservedValue<int>(0);
-        attackStrength = 50 + level.Value + equippedWeapon.baseAttack;
+        attackStrength = 5 + level.Value + equippedWeapon.baseAttack;
+
+        if (defenseModifier == 0) {
+            defenseModifier = 1;
+        } else { defenseModifier = equippedArmor.attributeValue; }
+
         maxHealth = 100 + 10 * level.Value;
         critFactor = 4 + Mathf.RoundToInt((equippedWeapon.critModifier - 1f) * 40);
 
         if (Player.equippedWeapon.Equals(ItemList.noItem) || Player.equippedWeapon.Equals(default(item))) {
-            Inventory.items.Add(ItemList.itemMasterList[ItemList.WOOD_SWORD]);
-            equippedWeapon = ItemList.itemMasterList[ItemList.WOOD_SWORD];
+            Inventory.items.Add(ItemList.itemMasterList[ItemList.STEEL_RAPIER]);
+            equipWeapon(ItemList.itemMasterList[ItemList.STEEL_RAPIER]);
+
         }
+        if (Player.equippedArmor.Equals(ItemList.noItem) || Player.equippedArmor.Equals(default(item))) {
+            Inventory.items.Add(ItemList.itemMasterList[ItemList.BRONZE_ARMOR]);
+            equipArmor(ItemList.itemMasterList[ItemList.BRONZE_ARMOR]);
+
+        }
+
+
         if (died) {
             health.Value = maxHealth / 2;
             lootGold = new ObservedValue<int>(0);
@@ -117,6 +131,15 @@ public class Player : MonoBehaviour {
         GetComponent<PersistentUIElements>().updateItems();
     }
 
+    public void equipArmor(item newItem) {
+        UnityEngine.Assertions.Assert.AreEqual(newItem.type, itemType.Armor, "Trying to equip something that is not Armor.");
+
+        defenseModifier -= equippedArmor.attributeValue;
+        equippedArmor = newItem;
+        defenseModifier += equippedArmor.attributeValue;
+        GetComponent<PersistentUIElements>().updateItems();
+    }
+
 
     #endregion
 
@@ -124,13 +147,13 @@ public class Player : MonoBehaviour {
 
     #region combat
     public static void damage(int amount) {
-        health.Value -= amount;
+        health.Value -= Mathf.RoundToInt((float)amount*defenseModifier);
         if (health.Value <= 0) {
             die();
         }
     }
 
-  
+
 
     public static int updateCrit(int randFactor) {
 
@@ -139,7 +162,7 @@ public class Player : MonoBehaviour {
         // Updates crit and returns updated value
         float rand = UnityEngine.Random.Range(0.0f, 1.0f);
 
-        if ((rand + 0.30f) * critModifier > 1f / 16000f * (float) (crit.Value * crit.Value)) {
+        if ((rand + 0.30f) * critModifier > 1f / 16000f * (float)(crit.Value * crit.Value)) {
             crit.Value += critFactor + randFactor;
             if (crit.Value > 100) crit.Value = 100;
         } else {
@@ -167,7 +190,7 @@ public class Player : MonoBehaviour {
     // Returns a regular random attack
     public static int getRegularAttack() {
         float randFactor = UnityEngine.Random.Range(-1.0f, 1.0f);
-        float fAttackStrength = (float) attackStrength;
+        float fAttackStrength = (float)attackStrength;
 
         // Update crit to some value
         updateCrit(Mathf.RoundToInt(randFactor));
@@ -189,10 +212,10 @@ public class Player : MonoBehaviour {
         int attack;
 
         if (crit.Value < 100) {
-            fAttack = (((float) crit.Value) / 5f) * attackStrength * attackModifier;
+            fAttack = (((float)crit.Value) / 5f) * attackStrength * attackModifier;
             attack = Mathf.RoundToInt(fAttack);
         } else {
-            attack = (int) (150f / 5f * attackStrength * attackModifier);
+            attack = (int)(150f / 5f * attackStrength * attackModifier);
         }
 
         return attack;
@@ -221,7 +244,7 @@ public class Player : MonoBehaviour {
         totalDistance.Value = PlayerPrefs.GetFloat("Distance", totalDistance.Value);
         level.Value = PlayerPrefs.GetInt("Level", level.Value);
         StoryOverlord.currentLevel = PlayerPrefs.GetInt("StoryLevel", StoryOverlord.currentLevel);
-        
+
         PotionInventory.numHealthPots.Value = PlayerPrefs.GetInt("HealthPotions", PotionInventory.numHealthPots.Value);
         PotionInventory.numCritPots.Value = PlayerPrefs.GetInt("CritPotions", PotionInventory.numCritPots.Value);
         PotionInventory.numAttackPots.Value = PlayerPrefs.GetInt("AttackPotions", PotionInventory.numAttackPots.Value);

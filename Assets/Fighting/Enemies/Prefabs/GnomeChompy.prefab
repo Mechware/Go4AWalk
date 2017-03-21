@@ -275,8 +275,12 @@ MonoBehaviour:
   damage: 4
   goldToGive: 15
   expToGive: 10
+  armor: 1
+  sturdy: 1
   timeBetweenAttacks: 1.5
   spawnRate: 100
+  itemName: Bronze Armor
+  lootSpawnRate: 100
 --- !u!212 &212000012901826658
 SpriteRenderer:
   m_ObjectHideFlags: 1

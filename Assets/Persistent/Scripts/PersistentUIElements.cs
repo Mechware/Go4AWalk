@@ -17,7 +17,7 @@ public class PersistentUIElements : MonoBehaviour {
     public Sprite panelBackground1, panelBackground2, panelBackground3, panelBackground4;
     // Inventory Stuff
     public Text equippedWeapon, equippedArmor, equippedAccessory, playerStats;
-    public Image equippedItem1, equippedWeapon2, equippedWeapon3;
+    public Image equippedItem1, equippedItem2, equippedItem3;
 
 
     //Prefabs
@@ -81,6 +81,7 @@ public class PersistentUIElements : MonoBehaviour {
     public void openJournal() {
 
         JournalMenu.SetActive(true);
+        Time.timeScale = 0;
         JournalButton.SetActive(false);
         if (currentPanel.Equals("")) {
             currentPanel = "Quests";
@@ -95,6 +96,7 @@ public class PersistentUIElements : MonoBehaviour {
     public void closeJournal() {
         JournalButton.SetActive(true);
         JournalMenu.SetActive(false);
+        Time.timeScale = 1;
     }
 
     // Used for opening panels via buttons
@@ -165,30 +167,36 @@ public class PersistentUIElements : MonoBehaviour {
             equippedWeapon.text = "Weapon:" + "\n" + Player.equippedWeapon.name.ToString();
             equippedItem1.sprite = Player.equippedWeapon.icon;
         }
-           
+
+        if (Player.equippedArmor.Equals(ItemList.noItem) || Player.equippedArmor.Equals(default(item))) {
+            equippedArmor.text = "Armor:" + "\n" + "None";
+        } else {
+            equippedArmor.text = "Armor:" + "\n" + Player.equippedArmor.name.ToString();
+            equippedItem2.sprite = Player.equippedArmor.icon;
+        }
 
 
-        equippedArmor.text = "Armor: " + "\n" + "None";        
         equippedAccessory.text = "Accessory:" + "\n" + "None";
+
         playerStats.text =
             "ATK:  " + Player.attackStrength + "\n" +
-            "DEF:  " + Player.defenseModifier + "\n" +
+            "DEF:  " + Mathf.Round((1 - Player.defenseModifier) * 100) + "\n" + //Defence now shows how much damage the player avoids with a max of 99;
             "HP:   " + Player.getMaxHealth() + "\n" +
             "CRIT: " + Player.critModifier + "\n" +
             "PWR:  " + Player.attackModifier;
 
-        // Uncomment this out when armor and accessories are actually in place
-/**
-        if (Player.equippedArmor.Equals(ItemList.noItem) || Player.equippedArmor.Equals(default(item))) {
-            equippedArmor.text = "" + Player.equippedArmor.name.ToString();
-        } else
-            equippedArmor.text = "None";
-        if (Player.equippedAccessory.Equals(ItemList.noItem) || Player.equippedAccessory.Equals(default(item))) {
-            equippedAccessory.text = "" + Player.equippedAccessory.name.ToString();
-        } else
-            equippedAccessory.text = "None";
+        // Uncomment this out when accessories are actually in place
 
-    **/
+        
+         
+
+        /**
+             if (Player.equippedAccessory.Equals(ItemList.noItem) || Player.equippedAccessory.Equals(default(item))) {
+                 equippedAccessory.text = "" + Player.equippedAccessory.name.ToString();
+             } else
+                 equippedAccessory.text = "None";
+
+         **/
 
         string itemDescription = "";
         string itemStats = "";
@@ -213,10 +221,18 @@ public class PersistentUIElements : MonoBehaviour {
         for (int i = 0 ; i < Inventory.items.Count ; i++) {
             inventoryButtons.Add(currentButton);
             itemDescription = Inventory.items[i].name + "\n" + Inventory.items[i].description + "\n";
-            itemStats =
+            if(Inventory.items[i].type == itemType.Weapon) {
+                itemStats =
                 "ATK:  " + Inventory.items[i].baseAttack + "\n" +
                 "CRIT: " + Inventory.items[i].critModifier + "\n" +
                 "PWR:  " + Inventory.items[i].attackModifier;
+            } 
+            else if(Inventory.items[i].type == itemType.Armor) {
+                itemStats = 
+                    "DEF:  " + Mathf.Round((1-Inventory.items[i].attributeValue)*100);
+                    
+            }
+            
             icon = Inventory.items[i].icon;
             currentButton.GetComponentsInChildren<Image>()[1].sprite = icon;
             currentButton.GetComponentsInChildren<Text>()[1].text = itemStats;

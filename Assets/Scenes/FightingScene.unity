@@ -154,6 +154,20 @@ Prefab:
       propertyPath: attackPotsText
       value: 
       objectReference: {fileID: 76974837}
+    - target: {fileID: 114000012256654234, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c7754d085ff0c9f43af3a23e56f2f5dc,
+        type: 3}
+    - target: {fileID: 1000012729461972, guid: da687c2027639a24583cf909cdae1990, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013767885410, guid: da687c2027639a24583cf909cdae1990, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da687c2027639a24583cf909cdae1990, type: 2}
   m_IsPrefabParent: 0

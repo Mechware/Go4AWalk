@@ -279,6 +279,8 @@ MonoBehaviour:
   sturdy: 1
   timeBetweenAttacks: 1
   spawnRate: 60
+  itemName: Bronze Armor
+  lootSpawnRate: 100
 --- !u!212 &212000013493875122
 SpriteRenderer:
   m_ObjectHideFlags: 1

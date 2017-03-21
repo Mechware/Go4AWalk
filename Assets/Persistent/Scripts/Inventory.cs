@@ -27,7 +27,7 @@ public struct item {
     // The amount of stuff it gives you, ex:
     // Amount of health given make, duration of
     // lure/repel, amount of attack boost, etc.
-    public int attributeValue;
+    public float attributeValue;
     // Just other info that was may need 
     public object otherInfo;
     // The item type
@@ -44,7 +44,7 @@ public struct item {
     public float attackModifier;
     public float critModifier;
 
-    public item(string name, string description, int price, int attributeValue, object otherInfo, itemType type, Func<bool> useItem, Sprite icon, int spawnRate, int baseAttack, float attackModifier, float critModifier) {
+    public item(string name, string description, int price, float attributeValue, object otherInfo, itemType type, Func<bool> useItem, Sprite icon, int spawnRate, int baseAttack, float attackModifier, float critModifier) {
         this.name = name;
         this.description = description;
         this.price = price;

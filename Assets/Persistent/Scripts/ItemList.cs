@@ -11,6 +11,7 @@ public enum itemType
     Poison,
     Equipment,
     Weapon,
+    Armor
 }
 public class ItemList {
 
@@ -20,6 +21,7 @@ public class ItemList {
     public const string CRIT_POTION = "Crit Potion";
     public const string MUNNY_POUCH = "Munny Pouch";
 	public const string ATTACK_POTION = "Attack Potion";
+
     public const string BRONZE_SWORD = "Bronze Sword";
     public const string BRONZE_SABER = "Bronze Saber";
     public const string WOOD_SWORD = "Wood Sword";
@@ -30,6 +32,16 @@ public class ItemList {
     public const string JADE_SWORD = "Jade Sword";
     public const string OBSIDIAN_SWORD = "Obsidian Sword";
     public const string STEEL_RAPIER = "Steel Rapier";
+    public const string MYTHRIL_SWORD = "Mythril Sword";
+
+    public const string BRONZE_ARMOR = "Bronze Armor";
+    public const string IRON_ARMOR = "Iron Armor";
+    public const string STEEL_ARMOR = "Steel Armor";
+    public const string ORICH_ARMOR = "Orichalcum Armor";
+    public const string SAND_ARMOR = "Sand Steel Armor";
+    public const string MYTHRIL_ARMOR = "Mythril Armor";
+    public const string JADE_ARMOR = "Jade Armor";
+    public const string OBSIDIAN_ARMOR = "Obsidian Armor";
 
     private static IDictionary<string, item> _itemMasterList = null;
     public static IDictionary<string, item> itemMasterList {
@@ -49,6 +61,7 @@ public class ItemList {
 
         _itemMasterList = new Dictionary<string, item>();
 
+        #region Consumables
         // Health Potion
         item healthPotion = new item(name: "Health Potion",
             description: "Used to regain health.",
@@ -133,10 +146,15 @@ public class ItemList {
 
 		attackPotion.useItem += () => {
             BuffManager.instance.CreateBuff("PlayerAttackBoost",BuffManager.BuffType.attack, 0.25f, 10, Player.instance.gameObject);
-			return true;
-		};
+			return true;        
+        };
+        itemMasterList[ATTACK_POTION] = attackPotion;
 
-		itemMasterList [ATTACK_POTION] = attackPotion;
+        #endregion
+
+        #region Weapons
+
+
         // ***
         item bronzeSword = new item(name: "Bronze Sword",
             description: "A trusty sword made of bronze",
@@ -329,7 +347,7 @@ public class ItemList {
 
         // ***
         item obsidianSword = new item(name: "Macuahuitl",
-                    description: "A wooden club with obsidian blades. Did you know obsidian blades can be as sharp as 3 nanometer? Well now you do.",
+                    description: "A wooden club with obsidian blades. Did you know obsidian blades can be as sharp as 3 nanometers? Well now you do.",
                     price: 100,
                     attributeValue: 0,
                     otherInfo: null,
@@ -337,7 +355,7 @@ public class ItemList {
                     useItem: null,
                     icon: null,
                     spawnRate: 0,
-                    baseAttack: 100,
+                    baseAttack: 125,
                     attackModifier: 1f,
                     critModifier: 1f);
 
@@ -353,7 +371,7 @@ public class ItemList {
 
         // ***
         item steelRapier = new item(name: "Rapier",
-                    description: "A delicate blade that sacrifices damage for being able to find the enemies' weak spots with more criticals.",
+                    description: "A delicate blade that sacrifices damage for being able to find the enemies' weak spots.",
                     price: 100,
                     attributeValue: 0,
                     otherInfo: null,
@@ -374,6 +392,58 @@ public class ItemList {
         };
 
         itemMasterList[STEEL_RAPIER] = steelRapier;
+
+        // ***
+        item mythrilSword = new item(name: "Mythril Sword",
+                    description: "A magnificent sword made from the mythical metal mythril. Many muse the metal is magical, maybe.",
+                    price: 100,
+                    attributeValue: 0,
+                    otherInfo: null,
+                    type: itemType.Weapon,
+                    useItem: null,
+                    icon: null,
+                    spawnRate: 0,
+                    baseAttack: 100,
+                    attackModifier: 1f,
+                    critModifier: 1f);
+
+        texture = Resources.Load("Item Sprites/Sword-Mythril") as Texture2D;
+        mythrilSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        mythrilSword.useItem += () => {
+            Player.instance.equipWeapon(mythrilSword);
+            return true;
+        };
+
+        itemMasterList[MYTHRIL_SWORD] = mythrilSword;
+
+        #endregion
+
+        #region Armor
+        // ***
+        item bronzeArmor = new item(name: "Bronze Armor",
+            description: "Armor made from bronze.",
+            price: 100,
+            attributeValue: 0.95f,
+            otherInfo: null,
+            type: itemType.Armor,
+            useItem: null,
+            icon: null,
+            spawnRate: 0,
+            baseAttack: 0,
+            attackModifier: 1,
+            critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/Armor-Bronze") as Texture2D;
+        bronzeArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        bronzeArmor.useItem += () => {
+            Player.instance.equipArmor(bronzeArmor);
+            return true;
+        };
+
+        itemMasterList[BRONZE_ARMOR] = bronzeArmor;
+        #endregion
     }
-   
+
 }

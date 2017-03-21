@@ -279,6 +279,8 @@ MonoBehaviour:
   sturdy: 0.1
   timeBetweenAttacks: 4
   spawnRate: 10
+  itemName: 
+  lootSpawnRate: -1
 --- !u!212 &212000010982815360
 SpriteRenderer:
   m_ObjectHideFlags: 1
