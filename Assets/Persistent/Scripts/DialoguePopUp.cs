@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DialoguePopUp : MonoBehaviour {
 
     public static DialoguePopUp instance;
-    public Image[] characterSprite;
+    public Image characterSprite;
     public GameObject[] popUpButtons;
     public GameObject popUpPanel, popUpTitle, popUpImage;
 
@@ -30,7 +30,7 @@ public class DialoguePopUp : MonoBehaviour {
 
     }
 
-    public void showPopUp(string title, string[] buttonTitles, Action[] actionWhenButtonHit,
+    public void showPopUp(string title, Image character, string[] buttonTitles, Action[] actionWhenButtonHit,
         bool[] closePopUpWhenHit = null) {
 
         int i;

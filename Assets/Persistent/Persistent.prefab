@@ -3247,7 +3247,7 @@ MonoBehaviour:
   equippedAccessory: {fileID: 114000012067208072}
   playerStats: {fileID: 114000012995520734}
   equippedItem1: {fileID: 114000012971496490}
-  equippedItem2: {fileID: 0}
+  equippedItem2: {fileID: 114000012256654234}
   equippedItem3: {fileID: 0}
   item: {fileID: 0}
 --- !u!114 &114000013815195750

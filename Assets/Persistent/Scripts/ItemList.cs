@@ -443,6 +443,174 @@ public class ItemList {
         };
 
         itemMasterList[BRONZE_ARMOR] = bronzeArmor;
+
+        // ***
+        item ironArmor = new item(name: "Iron Armor",
+            description: "Armor made from iron.",
+            price: 100,
+            attributeValue: 0.9f,
+            otherInfo: null,
+            type: itemType.Armor,
+            useItem: null,
+            icon: null,
+            spawnRate: 0,
+            baseAttack: 0,
+            attackModifier: 1,
+            critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/Armor-Iron") as Texture2D;
+        ironArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        ironArmor.useItem += () => {
+            Player.instance.equipArmor(ironArmor);
+            return true;
+        };
+
+        itemMasterList[IRON_ARMOR] = ironArmor;
+
+        // ***
+        item steelArmor = new item(name: "Steel Armor",
+            description: "Armor made from steel.",
+            price: 100,
+            attributeValue: 0.85f,
+            otherInfo: null,
+            type: itemType.Armor,
+            useItem: null,
+            icon: null,
+            spawnRate: 0,
+            baseAttack: 0,
+            attackModifier: 1,
+            critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/Armor-Steel") as Texture2D;
+        steelArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        steelArmor.useItem += () => {
+            Player.instance.equipArmor(steelArmor);
+            return true;
+        };
+
+        itemMasterList[STEEL_ARMOR] = steelArmor;
+
+        // ***
+        item sandSteelArmor = new item(name: "Sand Steel Armor",
+            description: "Armor made from sand steel.",
+            price: 100,
+            attributeValue: 0.75f,
+            otherInfo: null,
+            type: itemType.Armor,
+            useItem: null,
+            icon: null,
+            spawnRate: 0,
+            baseAttack: 0,
+            attackModifier: 1,
+            critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/Armor-SandSteel") as Texture2D;
+        sandSteelArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        sandSteelArmor.useItem += () => {
+            Player.instance.equipArmor(sandSteelArmor);
+            return true;
+        };
+
+        itemMasterList[SAND_ARMOR] = sandSteelArmor;
+
+        // ***
+        item orchalcumArmor = new item(name: "Orichalcum Armor",
+            description: "Armor made from orichalcum.",
+            price: 100,
+            attributeValue: 0.80f,
+            otherInfo: null,
+            type: itemType.Armor,
+            useItem: null,
+            icon: null,
+            spawnRate: 0,
+            baseAttack: 0,
+            attackModifier: 1,
+            critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/Armor-Orichalcum") as Texture2D;
+        orchalcumArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        orchalcumArmor.useItem += () => {
+            Player.instance.equipArmor(orchalcumArmor);
+            return true;
+        };
+
+        itemMasterList[ORICH_ARMOR] = orchalcumArmor;
+
+        // ***
+        item mythrilArmor = new item(name: "Mythril Armor",
+            description: "Armor made from mythril.",
+            price: 100,
+            attributeValue: 0.70f,
+            otherInfo: null,
+            type: itemType.Armor,
+            useItem: null,
+            icon: null,
+            spawnRate: 0,
+            baseAttack: 0,
+            attackModifier: 1,
+            critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/Armor-Mythril") as Texture2D;
+        mythrilArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        mythrilArmor.useItem += () => {
+            Player.instance.equipArmor(mythrilArmor);
+            return true;
+        };
+
+        itemMasterList[MYTHRIL_ARMOR] = mythrilArmor;
+
+        // ***
+        item jadeArmor = new item(name: "Jade Armor",
+            description: "Armor made from jade.",
+            price: 100,
+            attributeValue: 0.65f,
+            otherInfo: null,
+            type: itemType.Armor,
+            useItem: null,
+            icon: null,
+            spawnRate: 0,
+            baseAttack: 0,
+            attackModifier: 1,
+            critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/Armor-Jade") as Texture2D;
+        jadeArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        jadeArmor.useItem += () => {
+            Player.instance.equipArmor(jadeArmor);
+            return true;
+        };
+
+        itemMasterList[JADE_ARMOR] = jadeArmor;
+
+        // ***
+        item obsidianArmor = new item(name: "Obsidian Armor",
+            description: "Armor made from obsidian.",
+            price: 100,
+            attributeValue: 0.60f,
+            otherInfo: null,
+            type: itemType.Armor,
+            useItem: null,
+            icon: null,
+            spawnRate: 0,
+            baseAttack: 0,
+            attackModifier: 1,
+            critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/Armor-Obsidian") as Texture2D;
+        obsidianArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        obsidianArmor.useItem += () => {
+            Player.instance.equipArmor(obsidianArmor);
+            return true;
+        };
+
+        itemMasterList[OBSIDIAN_ARMOR] = obsidianArmor;
         #endregion
     }
 

@@ -15,11 +15,12 @@ public class ItemContainer : MonoBehaviour {
     public void setItem(item it) {
         containingItem = it;
         this.GetComponentInChildren<SpriteRenderer>().sprite = it.icon;
+
     }
 
     public void launchItem() {
-        xforce = Random.Range(-200f, 200f);
-        yforce = Random.Range(-400f, 400f);
+        xforce = Random.Range(-200f, 200);
+        yforce = Random.Range(-400f, 400);
         this.GetComponent<Rigidbody2D>().AddForce(new Vector2(xforce, yforce));
     }
 
