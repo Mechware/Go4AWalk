@@ -3,19 +3,44 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 
+
+/***** EXAMPLE USAGE:
+ * 
+ * 
+    DialoguePopUp.instance.showDialog(
+        dialog: "Hello! This is a h*ckin test", 
+        buttonsText: new string[] { "Really??", "Cool!", "Ugh, lame" },
+        buttonsAction: new Action[] {
+            () => {
+                DialoguePopUp.instance.showDialog(
+                    dialog: "Test :D", 
+                    buttonsText: new string[] {"WOO!" }, 
+                    buttonsAction: new Action[] { ()=> { } }, 
+                    characterName: "Moik", 
+                    characterSprite: characterSprite);
+            },
+            () => { },
+            () => { } }, 
+        characterName: "Moik", 
+        characterSprite: characterSprite, 
+        closePopUpWhenHit: new bool[] { false, true, true });
+ * 
+ */
+
 public class DialoguePopUp : MonoBehaviour {
 
     public static DialoguePopUp instance;
-    public Image characterSprite;
-    public GameObject[] popUpButtons;
-    public GameObject popUpPanel, popUpTitle, popUpImage;
+    public Image characterSpriteHolder;
+    public GameObject[] dialogOptions;
+    public GameObject dialogPanel;
+    public Text dialogText, characterNameText;
 
     private UnityEngine.Events.UnityAction closePopUp;
 
     void Awake() {
         instance = this;
         closePopUp = new UnityEngine.Events.UnityAction(() => {
-            popUpPanel.SetActive(false);
+            dialogPanel.SetActive(false);
         });
         
     }
@@ -30,46 +55,60 @@ public class DialoguePopUp : MonoBehaviour {
 
     }
 
-    public void showPopUp(string title, Image character, string[] buttonTitles, Action[] actionWhenButtonHit,
-        bool[] closePopUpWhenHit = null) {
-
+    public void showDialog(string dialog, string[] buttonsText, Action[] buttonsAction, 
+        string characterName, Sprite characterSprite, bool[] closePopUpWhenHit = null) {
+        
         int i;
+
+        // Make sure input is valid
+        UnityEngine.Assertions.Assert.IsFalse(
+            buttonsText.Length == 0,
+            "No button titles provided");
+        UnityEngine.Assertions.Assert.IsFalse(
+            buttonsText.Length != buttonsAction.Length,
+            "Button and action array length must be the same");
+
         if (closePopUpWhenHit == null) {
-            closePopUpWhenHit = new bool[buttonTitles.Length];
+            closePopUpWhenHit = new bool[buttonsText.Length];
             for (i = 0 ; i < closePopUpWhenHit.Length ; i++) {
                 closePopUpWhenHit[i] = true;
             }
         }
 
-        UnityEngine.Assertions.Assert.IsFalse(
-            buttonTitles.Length == 0,
-            "No button titles provided");
-        UnityEngine.Assertions.Assert.IsFalse(
-            buttonTitles.Length != actionWhenButtonHit.Length,
-            "Button and action array length must be the same");
-
+        // Reset the buttons of the pop up
         resetButtons();
 
-        popUpTitle.GetComponent<Text>().text = title;
+        // Set the dialog text
+        dialogText.text = dialog;
 
-        for (i = 0 ; i < buttonTitles.Length ; i++) {
-            popUpButtons[i].SetActive(true);
-            popUpButtons[i].GetComponentInChildren<Text>().text = buttonTitles[i];
-            UnityEngine.Events.UnityAction action = new UnityEngine.Events.UnityAction(actionWhenButtonHit[i]);
+        // Set character name
+        characterNameText.text = characterName;
+
+        // Set buttons
+        for (i = 0 ; i < buttonsText.Length ; i++) {
+            dialogOptions[i].SetActive(true);
+            dialogOptions[i].GetComponentInChildren<Text>().text = buttonsText[i];
+            UnityEngine.Events.UnityAction action = new UnityEngine.Events.UnityAction(buttonsAction[i]);
             if (closePopUpWhenHit[i])
-                popUpButtons[i].GetComponent<Button>().onClick.AddListener(closePopUp);
-            popUpButtons[i].GetComponent<Button>().onClick.AddListener(action);
+                dialogOptions[i].GetComponent<Button>().onClick.AddListener(closePopUp);
+            dialogOptions[i].GetComponent<Button>().onClick.AddListener(action);
         }
-        while (i < popUpButtons.Length) {
-            popUpButtons[i].SetActive(false);
+
+        // Set unused buttons invisible
+        while (i < dialogOptions.Length) {
+            dialogOptions[i].SetActive(false);
             i++;
         }
-        popUpPanel.SetActive(true);
+
+        // Set sprite
+        characterSpriteHolder.sprite = characterSprite;
+
+        dialogPanel.SetActive(true);
     }
 
     void resetButtons() {
-        for (int i = 0 ; i < popUpButtons.Length ; i++) {
-            popUpButtons[i].GetComponent<Button>().onClick.RemoveAllListeners();
+        for (int i = 0 ; i < dialogOptions.Length ; i++) {
+            dialogOptions[i].GetComponent<Button>().onClick.RemoveAllListeners();
         }
     }
 }
