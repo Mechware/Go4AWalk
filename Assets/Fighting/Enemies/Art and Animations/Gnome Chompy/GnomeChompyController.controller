@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: GreenChompy
+  m_Name: GnomeChompyController
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: dying
@@ -243,7 +243,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6f2619d653dfabc4184275413a7ec9bf, type: 2}
+  m_Motion: {fileID: 7400000, guid: 307c9054b55aa1b42ab04b4df2fb82c3, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -267,7 +267,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2b7f65574f2ec454bb41ce43aa256f20, type: 2}
+  m_Motion: {fileID: 7400000, guid: 43570f206193fea4c9ae1b83f4bebc05, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -290,7 +290,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: be9a4c4bd8227c34a84fd65c2db1655d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 8cb0e9fc7f320eb4c96244309acb2ae5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -302,7 +302,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Idle
-  m_Speed: 1
+  m_Speed: 0.1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101000013474671564}
@@ -316,7 +316,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8a12f52ee8ec6764582934221c8a77e6, type: 2}
+  m_Motion: {fileID: 7400000, guid: bef373441e047a4449c8c5a7792eaaec, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: dying
@@ -340,7 +340,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a5b23f6fa6d2bf04ea54e98f034d769f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 1838a862f3f7dc34abfe326a4ae70335, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
