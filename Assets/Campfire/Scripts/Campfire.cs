@@ -27,6 +27,7 @@ public class Campfire : MonoBehaviour {
             GameState.loadScene(GameState.scene.WALKING_LEVEL);
         } else {
             StoryOverlord.startQuest(StoryOverlord.currentLevel);
+            GameState.loadScene(GameState.scene.WALKING_LEVEL);
         }
 
         
