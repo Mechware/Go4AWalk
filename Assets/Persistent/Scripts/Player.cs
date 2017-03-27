@@ -257,8 +257,11 @@ public class Player : MonoBehaviour {
             itemNames.Add(PlayerPrefs.GetString("Inventory_" + i));
             i++;
         }
-        Inventory.items = new List<item>();
-        Inventory.setInventory(itemNames.ToArray());
+        if(itemNames.Count > 0) {
+            Inventory.items = new List<item>();
+            Inventory.setInventory(itemNames.ToArray());
+        }
+        
 
         PotionInventory.numHealthPots.Value = PlayerPrefs.GetInt("HealthPotions", PotionInventory.numHealthPots.Value);
         PotionInventory.numCritPots.Value = PlayerPrefs.GetInt("CritPotions", PotionInventory.numCritPots.Value);
