@@ -2,6 +2,7 @@
 using System.Collections;
 using Gamelogic.Extensions;
 using System;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
@@ -233,7 +234,10 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetInt("CritPotions", PotionInventory.numCritPots.Value);
         PlayerPrefs.SetInt("AttackPotions", PotionInventory.numAttackPots.Value);
         PlayerPrefs.SetInt("StoryLevel", StoryOverlord.currentLevel);
-        PlayerPrefs.SetString("Inventory", Inventory.getInventory());
+        string[] itemNames = Inventory.getInventory();
+        for(int i =0 ; i < itemNames.Length ; i++) {
+            PlayerPrefs.SetString("Inventory_" + i, itemNames[i]);
+        }
         PlayerPrefs.Save();
     }
 
@@ -244,6 +248,17 @@ public class Player : MonoBehaviour {
         totalDistance.Value = PlayerPrefs.GetFloat("Distance", totalDistance.Value);
         level.Value = PlayerPrefs.GetInt("Level", level.Value);
         StoryOverlord.currentLevel = PlayerPrefs.GetInt("StoryLevel", StoryOverlord.currentLevel);
+        List<string> itemNames = new List<string>();
+        int i=0;
+        while(true) {
+            if(!PlayerPrefs.HasKey("Inventory_"+i)) {
+                break;
+            }
+            itemNames.Add(PlayerPrefs.GetString("Inventory_" + i));
+            i++;
+        }
+        Inventory.items = new List<item>();
+        Inventory.setInventory(itemNames.ToArray());
 
         PotionInventory.numHealthPots.Value = PlayerPrefs.GetInt("HealthPotions", PotionInventory.numHealthPots.Value);
         PotionInventory.numCritPots.Value = PlayerPrefs.GetInt("CritPotions", PotionInventory.numCritPots.Value);
@@ -270,6 +285,7 @@ public class Player : MonoBehaviour {
                     PotionInventory.numHealthPots.Value = 0;
                     PotionInventory.numCritPots.Value = 0;
                     PotionInventory.numAttackPots.Value = 0;
+                    Inventory.items = new List<item>();
                     health.Value = 100;
                     maxHealth = 100;
                     gold.Value = 0;

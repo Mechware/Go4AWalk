@@ -30,7 +30,7 @@ public class ItemList {
     public const string ORICH_SWORD = "Oricalcum Sword";
     public const string SAND_SWORD = "Sand Steel Sword";
     public const string JADE_SWORD = "Jade Sword";
-    public const string OBSIDIAN_SWORD = "Obsidian Sword";
+    public const string OBSIDIAN_SWORD = "Macuahuitl";
     public const string STEEL_RAPIER = "Steel Rapier";
     public const string MYTHRIL_SWORD = "Mythril Sword";
 
@@ -63,7 +63,7 @@ public class ItemList {
 
         #region Consumables
         // Health Potion
-        item healthPotion = new item(name: "Health Potion",
+        item healthPotion = new item(name: HEALTH_POTION,
             description: "Used to regain health.",
             price: 10,
             attributeValue: 35,
@@ -85,7 +85,7 @@ public class ItemList {
         };
         itemMasterList[HEALTH_POTION] = healthPotion;
 // ***
-        item critPotion = new item(name: "Crit Potion",
+        item critPotion = new item(name: CRIT_POTION,
             description: "When used the critical bar will not reset for a short amount of time.",
             price: 10,
             attributeValue: 10,
@@ -108,7 +108,7 @@ public class ItemList {
 
         itemMasterList[CRIT_POTION] = critPotion;
         // ***
-        item munnyPouch = new item(name: "Munny Pouch",
+        item munnyPouch = new item(name: MUNNY_POUCH,
             description: "$",
             price: 50,
             attributeValue: 50,
@@ -128,7 +128,7 @@ public class ItemList {
 
         itemMasterList[MUNNY_POUCH] = munnyPouch;
 // ***
-        item attackPotion = new item (name: "Attack Potion", 
+        item attackPotion = new item (name: ATTACK_POTION, 
 			description: "Raises attack for a short amount of time.",
 			price: 100,
 			attributeValue: 50,
@@ -156,7 +156,7 @@ public class ItemList {
 
 
         // ***
-        item bronzeSword = new item(name: "Bronze Sword",
+        item bronzeSword = new item(name: BRONZE_SWORD,
             description: "A trusty sword made of bronze",
             price: 100,
             attributeValue: 0,
@@ -179,7 +179,7 @@ public class ItemList {
 
         itemMasterList[BRONZE_SWORD] = bronzeSword;
 // ***
-        item bronzeSaber = new item(name: "Bronze Saber",
+        item bronzeSaber = new item(name: BRONZE_SABER,
                     description: "A duelists' saber made of bronze, deals less damage per strike but allows for more critical hits.",
                     price: 100,
                     attributeValue: 0,
@@ -202,7 +202,7 @@ public class ItemList {
 
         itemMasterList[BRONZE_SABER] = bronzeSaber;
         // ***
-        item woodSword = new item(name: "Wooden Sword",
+        item woodSword = new item(name: WOOD_SWORD,
                     description: "A sword made of wood. Okay, its just a stick shaped like a sword. Okay, its just a stick.",
                     price: 100,
                     attributeValue: 0,
@@ -226,7 +226,7 @@ public class ItemList {
         itemMasterList[WOOD_SWORD] = woodSword;
 
         // ***
-        item ironSword = new item(name: "Iron Sword",
+        item ironSword = new item(name: IRON_SWORD,
                     description: "A sturdy sword forged from iron.",
                     price: 100,
                     attributeValue: 0,
@@ -250,7 +250,7 @@ public class ItemList {
         itemMasterList[IRON_SWORD] = ironSword;
 
         // ***
-        item steelSword = new item(name: "Steel Sword",
+        item steelSword = new item(name: STEEL_SWORD,
                     description: "A quality blade made out of steel. #Carbon",
                     price: 100,
                     attributeValue: 0,
@@ -274,7 +274,7 @@ public class ItemList {
         itemMasterList[STEEL_SWORD] = steelSword;
 
         // ***
-        item orichalcumSword = new item(name: "Orichalcum Sword",
+        item orichalcumSword = new item(name: ORICH_SWORD,
                     description: "A sword made from a mysterious ancient alloy, and apparently modern metallurgy can't compete. Huh.",
                     price: 100,
                     attributeValue: 0,
@@ -298,7 +298,7 @@ public class ItemList {
         itemMasterList[ORICH_SWORD] = orichalcumSword;
 
         // ***
-        item sandSteelSword = new item(name: "Sand Steel Sword",
+        item sandSteelSword = new item(name: SAND_SWORD,
                     description: "A sword forged from legendary sand steel. The secret to its strength is heavily guarded. Its probably love.",
                     price: 100,
                     attributeValue: 0,
@@ -322,7 +322,7 @@ public class ItemList {
         itemMasterList[SAND_SWORD] = sandSteelSword;
 
         // ***
-        item jadeSword = new item(name: "Jade Sword",
+        item jadeSword = new item(name: JADE_SWORD,
                     description: "A beautiful ornamental sword made out of the jade. Wait why are you fighting with this?",
                     price: 100,
                     attributeValue: 0,
@@ -346,7 +346,7 @@ public class ItemList {
         itemMasterList[JADE_SWORD] = jadeSword;
 
         // ***
-        item obsidianSword = new item(name: "Macuahuitl",
+        item obsidianSword = new item(name: OBSIDIAN_SWORD,
                     description: "A wooden club with obsidian blades. Did you know obsidian blades can be as sharp as 3 nanometers? Well now you do.",
                     price: 100,
                     attributeValue: 0,
@@ -370,7 +370,7 @@ public class ItemList {
         itemMasterList[OBSIDIAN_SWORD] = obsidianSword;
 
         // ***
-        item steelRapier = new item(name: "Rapier",
+        item steelRapier = new item(name: STEEL_RAPIER,
                     description: "A delicate blade that sacrifices damage for being able to find the enemies' weak spots.",
                     price: 100,
                     attributeValue: 0,
@@ -394,7 +394,7 @@ public class ItemList {
         itemMasterList[STEEL_RAPIER] = steelRapier;
 
         // ***
-        item mythrilSword = new item(name: "Mythril Sword",
+        item mythrilSword = new item(name: MYTHRIL_SWORD,
                     description: "A magnificent sword made from the mythical metal mythril. Many muse the metal is magical, maybe.",
                     price: 100,
                     attributeValue: 0,
@@ -421,7 +421,7 @@ public class ItemList {
 
         #region Armor
         // ***
-        item bronzeArmor = new item(name: "Bronze Armor",
+        item bronzeArmor = new item(name: BRONZE_ARMOR,
             description: "Armor made from bronze.",
             price: 100,
             attributeValue: 0.95f,
@@ -445,7 +445,7 @@ public class ItemList {
         itemMasterList[BRONZE_ARMOR] = bronzeArmor;
 
         // ***
-        item ironArmor = new item(name: "Iron Armor",
+        item ironArmor = new item(name: IRON_ARMOR,
             description: "Armor made from iron.",
             price: 100,
             attributeValue: 0.9f,
@@ -469,7 +469,7 @@ public class ItemList {
         itemMasterList[IRON_ARMOR] = ironArmor;
 
         // ***
-        item steelArmor = new item(name: "Steel Armor",
+        item steelArmor = new item(name: STEEL_ARMOR,
             description: "Armor made from steel.",
             price: 100,
             attributeValue: 0.85f,
@@ -493,7 +493,7 @@ public class ItemList {
         itemMasterList[STEEL_ARMOR] = steelArmor;
 
         // ***
-        item sandSteelArmor = new item(name: "Sand Steel Armor",
+        item sandSteelArmor = new item(name: SAND_ARMOR,
             description: "Armor made from sand steel.",
             price: 100,
             attributeValue: 0.75f,
@@ -517,7 +517,7 @@ public class ItemList {
         itemMasterList[SAND_ARMOR] = sandSteelArmor;
 
         // ***
-        item orchalcumArmor = new item(name: "Orichalcum Armor",
+        item orchalcumArmor = new item(name: ORICH_ARMOR,
             description: "Armor made from orichalcum.",
             price: 100,
             attributeValue: 0.80f,
@@ -541,7 +541,7 @@ public class ItemList {
         itemMasterList[ORICH_ARMOR] = orchalcumArmor;
 
         // ***
-        item mythrilArmor = new item(name: "Mythril Armor",
+        item mythrilArmor = new item(name: MYTHRIL_ARMOR,
             description: "Armor made from mythril.",
             price: 100,
             attributeValue: 0.70f,
@@ -565,7 +565,7 @@ public class ItemList {
         itemMasterList[MYTHRIL_ARMOR] = mythrilArmor;
 
         // ***
-        item jadeArmor = new item(name: "Jade Armor",
+        item jadeArmor = new item(name: JADE_ARMOR,
             description: "Armor made from jade.",
             price: 100,
             attributeValue: 0.65f,
@@ -589,7 +589,7 @@ public class ItemList {
         itemMasterList[JADE_ARMOR] = jadeArmor;
 
         // ***
-        item obsidianArmor = new item(name: "Obsidian Armor",
+        item obsidianArmor = new item(name: OBSIDIAN_ARMOR,
             description: "Armor made from obsidian.",
             price: 100,
             attributeValue: 0.60f,

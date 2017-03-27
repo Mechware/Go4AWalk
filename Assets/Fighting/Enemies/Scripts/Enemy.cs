@@ -129,14 +129,14 @@ public class Enemy : MonoBehaviour {
         item healthPotion = ItemList.itemMasterList[ItemList.HEALTH_POTION];
         item critPotion = ItemList.itemMasterList[ItemList.CRIT_POTION];
         item attackPotion = ItemList.itemMasterList[ItemList.ATTACK_POTION];
-        item lootDrop = ItemList.itemMasterList[itemName];
 
         int luckyNumberH = Random.Range(1, 100);
         int luckyNumberC = Random.Range(1, 100);
         int luckyNumberA = Random.Range(1, 100);
         int luckyNumberLoot = Random.Range(1, 100);
 
-        if (lootSpawnRate >= luckyNumberLoot) {
+        if (lootSpawnRate >= luckyNumberLoot && itemName != null) {
+            item lootDrop = ItemList.itemMasterList[itemName];
             items = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
             items.GetComponent<ItemContainer>().setItem(lootDrop);
             items.GetComponent<ItemContainer>().launchItem();

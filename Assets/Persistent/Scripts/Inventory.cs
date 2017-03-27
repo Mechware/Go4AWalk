@@ -77,7 +77,17 @@ public class Inventory : MonoBehaviour {
             _items = value;
         }
     }
-     public static string getInventory() {
-        return _items.ToString();
+    public static string[] getInventory() {
+        List<string> itemNames = new List<string>();
+        foreach(item it in _items) {
+            itemNames.Add(it.name);
+        }
+        return itemNames.ToArray();
+    }
+
+    public static void setInventory(string[] itemNames) {
+        foreach(string itemName in itemNames) {
+            items.Add(ItemList.itemMasterList[itemName]);
+        }
     }
 }
