@@ -3788,7 +3788,7 @@ MonoBehaviour:
   - {fileID: 1000010445682320, guid: 8f9b78f164f743b4e9c75da4ded72fe6, type: 2}
   bosses:
   - {fileID: 1000010445682320, guid: 8f9b78f164f743b4e9c75da4ded72fe6, type: 2}
-  - {fileID: 1000013902114332, guid: 310bfd0a0b714df469b1d32a44e2cb3f, type: 2}
+  - {fileID: 1000013427855644, guid: cbe5082627cb5a34da9fae37129bbfe4, type: 2}
   randomEncounterButton: {fileID: 0}
   fw: {fileID: 0}
   enemiesLeft: {fileID: 0}
