@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 
 /***** EXAMPLE USAGE:
@@ -24,6 +25,15 @@ using UnityEngine.UI;
         characterName: "Moik", 
         characterSprite: characterSprite, 
         closePopUpWhenHit: new bool[] { false, true, true });
+
+    or
+
+    showDialog(
+            dialog: "Hello this is a test, oh yes it is.Hello this is a test, oh yes it is.Hello this is a test, oh yes it is. Hello this is a test, oh yes it is.Hello this is a test, oh yes it is.Hello this is a test, oh yes it is.Hello this is a test, oh yes it is.Hello this is a test, oh yes it is.Hello this is a test, oh yes it is.",
+            characterName: "Moik",
+            characterSprite: Resources.Load<Sprite>("Item Sprites/Armor-Bronze"),
+            functionToCallWhenDialogFinished: new Action(() => { print("Done!"); })
+            );
  * 
  */
 
@@ -34,12 +44,14 @@ public class DialoguePopUp : MonoBehaviour {
     public GameObject[] dialogOptions;
     public GameObject dialogPanel;
     public Text dialogText, characterNameText;
+    public int charactersPerPage = 10;
 
-    private UnityEngine.Events.UnityAction closePopUp;
+    private UnityEngine.Events.UnityAction closeDialog;
+    //private List<string> currentMessagesToShow;
 
     void Awake() {
         instance = this;
-        closePopUp = new UnityEngine.Events.UnityAction(() => {
+        closeDialog = new UnityEngine.Events.UnityAction(() => {
             dialogPanel.SetActive(false);
         });
         
@@ -53,6 +65,50 @@ public class DialoguePopUp : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+    }
+
+    // Used for showing large amounts of dialog. Will show dialog in multiple chunks
+    public void showDialog(string dialog, 
+        string characterName, 
+        Sprite characterSprite,
+        Action functionToCallWhenDialogFinished) {
+        
+        string[] words = dialog.Split(new char[] { ' ' });
+        List<string> messages = new List<string>();
+        string message = "";
+        int i;
+
+        for(i = 0 ; i < words.Length ; i++) {
+            if(words[i].Length+message.Length > charactersPerPage) {
+                messages.Add(message + words[i]);
+                message = "";
+            } else {
+                message += words[i] + " ";
+            }
+        }
+        if(!message.Equals("")) {
+            messages.Add(message);
+        }
+        
+        i = 0;
+
+        showDialog(
+            dialog: messages[0],
+            buttonsText: new string[] { "Next" },
+            buttonsAction: new Action[] { () => {
+                i++;
+                if(i >= messages.Count) {
+                    closeDialog();
+                    functionToCallWhenDialogFinished();
+                    return;
+                }
+                
+                dialogText.text = messages[i];
+                
+            } },
+            characterName: characterName,
+            characterSprite: characterSprite,
+            closePopUpWhenHit: new bool[] { false });
     }
 
     public void showDialog(string dialog, string[] buttonsText, Action[] buttonsAction, 
@@ -90,7 +146,7 @@ public class DialoguePopUp : MonoBehaviour {
             dialogOptions[i].GetComponentInChildren<Text>().text = buttonsText[i];
             UnityEngine.Events.UnityAction action = new UnityEngine.Events.UnityAction(buttonsAction[i]);
             if (closePopUpWhenHit[i])
-                dialogOptions[i].GetComponent<Button>().onClick.AddListener(closePopUp);
+                dialogOptions[i].GetComponent<Button>().onClick.AddListener(closeDialog);
             dialogOptions[i].GetComponent<Button>().onClick.AddListener(action);
         }
 
