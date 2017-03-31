@@ -100,6 +100,12 @@ public class Questing : MonoBehaviour {
         instance = this;
     }
 
+    void Start() {
+        if(currentQuest.active == false && GameState.walking) {
+            StoryOverlord.startQuest(StoryOverlord.currentLevel);
+        }
+    }
+
     // Update is called once per frame
     void Update() {
 
@@ -120,6 +126,7 @@ public class Questing : MonoBehaviour {
         if (q.timeToComplete != -1) {
             instance.StartCoroutine("checkQuestEnd");
         }
+        DialoguePopUp.instance.showDialog(StoryOverlord.questStartDialogue, StoryOverlord.characterNameStart, StoryOverlord.characterSpriteStart, () => { });
     }
 
     public static void endQuest(bool userFinished) {
@@ -137,18 +144,27 @@ public class Questing : MonoBehaviour {
             Inventory.items.Add(ItemList.itemMasterList[ItemList.JADE_SWORD]);
             Inventory.items.Add(ItemList.itemMasterList[ItemList.OBSIDIAN_SWORD]);
             print(Inventory.getInventory());
-            StoryOverlord.currentLevel++;
+            DialoguePopUp.instance.showDialog(StoryOverlord.questEndDialogue, StoryOverlord.characterNameEnd, StoryOverlord.characterSpriteEnd, () => {
+            PopUp.instance.showPopUp("QUEST COMPLETE! \n \n" + "Continue on your journey." + "\n\n",
+                new string[] { "Continue"},
+                new System.Action[] {
+                    new System.Action(() => {
+                        StoryOverlord.currentLevel++;
+                        currentQuest.active = false;
+                        GameState.loadScene(GameState.scene.WALKING_LEVEL);                        
+                        }),
+                     });
+            });
+        
         } else {
             print("Quest failed!");
-        }
-
-        currentQuest.active = false;
-        StoryOverlord.startQuest(StoryOverlord.currentLevel);
-        
-        PopUp.instance.showPopUp("QUEST COMPLETE! \nYou defeated the boss! \n"+"Continue on your journey or make camp for some much needed rest?" + "\n\n" + "Reward: " + StoryOverlord.reward.name, 
-                new string[] { "Continue", "Camp" },
+            Player.distance.Value -= 100; // Sets the player back 100m.
+            PopUp.instance.showPopUp("QUEST FAILED! \nOh no you were defeated! \n" + "You run away and returned to camp." + "\n\n",
+                new string[] { "Continue" },
                 new System.Action[] {
-                    new System.Action(() => {GameState.loadScene(GameState.scene.WALKING_LEVEL); }), () => {GameState.loadScene(GameState.scene.CAMPSITE); } }) ;
+                    new System.Action(() => {GameState.loadScene(GameState.scene.CAMPSITE); }) });
+        }           
+        
     }
 
 

@@ -267,7 +267,7 @@ MonoBehaviour:
   armor: 1
   sturdy: 1
   timeBetweenAttacks: 3
-  spawnRate: 80
+  spawnRate: 100
   itemName: 
   lootSpawnRate: -1
 --- !u!114 &114000012615831684

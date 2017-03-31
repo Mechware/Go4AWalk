@@ -279,8 +279,8 @@ MonoBehaviour:
   sturdy: 0.3
   timeBetweenAttacks: 5
   spawnRate: 100
-  itemName: 
-  lootSpawnRate: -1
+  itemName: Wood Sword
+  lootSpawnRate: 100
 --- !u!212 &212000010484641318
 SpriteRenderer:
   m_ObjectHideFlags: 1

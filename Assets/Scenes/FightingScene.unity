@@ -2153,6 +2153,16 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11479734, guid: 4a187a1269eacec448f50be39ba7b217, type: 2}
+      propertyPath: particles
+      value: 
+      objectReference: {fileID: 198000013443366914, guid: 4a187a1269eacec448f50be39ba7b217,
+        type: 2}
+    - target: {fileID: 11479734, guid: 4a187a1269eacec448f50be39ba7b217, type: 2}
+      propertyPath: drop
+      value: 
+      objectReference: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4a187a1269eacec448f50be39ba7b217, type: 2}
   m_IsPrefabParent: 0

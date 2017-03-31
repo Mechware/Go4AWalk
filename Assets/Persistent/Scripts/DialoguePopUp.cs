@@ -44,7 +44,7 @@ public class DialoguePopUp : MonoBehaviour {
     public GameObject[] dialogOptions;
     public GameObject dialogPanel;
     public Text dialogText, characterNameText;
-    public int charactersPerPage = 10;
+    public int charactersPerPage = 100;
 
     private UnityEngine.Events.UnityAction closeDialog;
     //private List<string> currentMessagesToShow;

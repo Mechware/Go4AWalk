@@ -47,15 +47,13 @@ public class FightingWatchdog : MonoBehaviour {
 
         yield return new WaitForSeconds(1.2f);
 
+        System.Action whenDone = () => {
+            EnemyWatchdog.isBoss = false;
+            Questing.endQuest(true);
+        };
+
         treasureChest.SetActive(true);
-        StartCoroutine(treasureChest.GetComponent<TreasureChest>().openChest());
-
-        Destroy(treasureChest, 5.1f);
-        yield return new WaitForSeconds(5.1f);
-        
-        EnemyWatchdog.isBoss = false;
-        Questing.endQuest(true);
-
+        StartCoroutine(treasureChest.GetComponent<TreasureChest>().itemDrop(StoryOverlord.reward, whenDone));
     }
 
     #endregion

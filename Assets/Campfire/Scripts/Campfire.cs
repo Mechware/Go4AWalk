@@ -22,13 +22,9 @@ public class Campfire : MonoBehaviour {
         toForest();
     }
 
-    public void toForest() {
-        if(Questing.currentQuest.active == true) {
-            GameState.loadScene(GameState.scene.WALKING_LEVEL);
-        } else {
-            StoryOverlord.startQuest(StoryOverlord.currentLevel);
-            GameState.loadScene(GameState.scene.WALKING_LEVEL);
-        }
+    public void toForest() {  
+        GameState.loadScene(GameState.scene.WALKING_LEVEL);
+    }
 
         
         /*
@@ -41,7 +37,7 @@ public class Campfire : MonoBehaviour {
         thisQuest.active = true;
         Questing.startQuest(thisQuest);
         */
-    }
+    
 
     public void openSleepPopUp() {
         //restPopUp.SetActive(true);
