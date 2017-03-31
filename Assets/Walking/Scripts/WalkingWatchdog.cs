@@ -10,6 +10,7 @@ public class WalkingWatchdog : MonoBehaviour {
     public static WalkingWatchdog instance;
     public Vector2 startPosition, endPosition;
     public GameObject characterSprite;
+    public GameObject equippedWeaponSprite;
 
     public GameObject goToTownPanel, slowDownAlertObject;
     public Button takeStepButton, randomEncounterButton, fightEnemiesButton;
@@ -46,11 +47,16 @@ public class WalkingWatchdog : MonoBehaviour {
         }
 
         updateDistanceTravelledUI();
+        setEquippedItemIcon();
     }
 	
 	// Update is called once per frame
 	void Update () {
        
+    }
+
+    public void setEquippedItemIcon() {
+        equippedWeaponSprite.GetComponent<SpriteRenderer>().sprite = Player.equippedWeapon.icon;
     }
 
 
