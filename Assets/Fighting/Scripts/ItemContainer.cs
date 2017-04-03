@@ -4,11 +4,17 @@ using System.Collections;
 public class ItemContainer : MonoBehaviour {
 
     public item containingItem;
+    public AudioSource sound;
+    public AudioClip pickUpPotionSound;
+    public AudioClip pickUpItemSound;
+    public AudioClip shootItemSound;
     private float xforce, yforce;
+    private bool alreadyGotThatOne = false;
 
     // Use this for initialization
     void Start() {
-
+        sound.clip = shootItemSound;
+        sound.Play();
 
     }
 
@@ -32,24 +38,36 @@ public class ItemContainer : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        CheckInput.checkTapOrMouseDown(itemSelected);
+        CheckInput.checkTapOrMouseDown((Collider2D hitCollider) => {
+            StartCoroutine(itemSelected(hitCollider));
+        });
     }
 
-    void itemSelected(Collider2D hitCollider) {
+    IEnumerator itemSelected(Collider2D hitCollider) {
 
         if (hitCollider != this.GetComponentInChildren<Collider2D>())
-            return;
+            yield break;
 
-        if (containingItem.type == itemType.Potion) {
+        if (containingItem.type == itemType.Potion && alreadyGotThatOne == false) {
             PotionInventory.addPotion(containingItem);
+            sound.clip = pickUpPotionSound;
+            sound.Play();
+            GetComponentInChildren<SpriteRenderer>().sprite = null;
+            alreadyGotThatOne = true;
+            yield return new WaitForSeconds(1f);
             Destroy(gameObject);
-        } else {
+        } else if (alreadyGotThatOne == false){
             Inventory.items.Add(containingItem);
+            sound.clip = pickUpItemSound;
+            sound.Play();
+            GetComponentInChildren<SpriteRenderer>().sprite = null;
+            alreadyGotThatOne = true;
+            yield return new WaitForSeconds(1f);
             Destroy(gameObject);
         }
-
-
-
-        return;
+        yield break;
     }
-}
+
+
+    }
+

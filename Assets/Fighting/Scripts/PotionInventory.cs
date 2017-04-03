@@ -14,6 +14,9 @@ public class PotionInventory : MonoBehaviour {
     public static item critPot;
     public static item attackPot;
 
+    public AudioClip health, crit, attack;
+    public AudioSource sound;
+
     // Use this for initialization
     void Awake() {
         if (numHealthPots == null)
@@ -119,6 +122,8 @@ public class PotionInventory : MonoBehaviour {
 
     public void useHealthPot() {
         if (numHealthPots.Value != 0) {
+            sound.clip = health;
+            sound.Play();
             healthPot.useItem();
             removePotion(healthPot);
         }
@@ -126,6 +131,8 @@ public class PotionInventory : MonoBehaviour {
     }
     public void useCritPot() {
         if (numCritPots.Value != 0) {
+            sound.clip = crit;
+            sound.Play();
             critPot.useItem();
             removePotion(critPot);
         }
@@ -133,6 +140,8 @@ public class PotionInventory : MonoBehaviour {
     }
     public void useAttackPot() {
         if (numAttackPots.Value != 0) {
+            sound.clip = attack;
+            sound.Play();
             attackPot.useItem();
             removePotion(attackPot);
         }

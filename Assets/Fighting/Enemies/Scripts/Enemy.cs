@@ -5,6 +5,8 @@ public class Enemy : MonoBehaviour {
 
     public GameObject damageIndicator, critIndicator, poisonIndicator, expIndicator, goldIndicator, item;
     public int health, damage, goldToGive, expToGive;
+    public AudioClip dieSound, attackSound;
+    public AudioSource sound;
     // Armor and sturdy are modifiers that dictate how much reduced damage enemies take from normal and critical strikes. Small values = less damage (obvs)
     // its just kinda weird that "high" armor is actually a low number.
     // Also balance wise, it probably makes sense to make a highly armored enemy have low sturdy so that when you do land a critical strike it does extra damage
@@ -73,6 +75,8 @@ public class Enemy : MonoBehaviour {
 
         if (isCrit) {
             health -= Mathf.RoundToInt(damage * sturdy);
+            sound.clip = dieSound;
+            sound.Play();
         } else {
             health -= Mathf.RoundToInt(damage * armor);
         }
@@ -92,6 +96,8 @@ public class Enemy : MonoBehaviour {
             if (GetComponentInChildren<Animator>().GetBool("dying"))
                 break;
             GetComponentInChildren<Animator>().SetTrigger("attacking");
+            sound.clip = attackSound;
+            sound.Play();
             Player.damage(damage);
         }
     }
@@ -100,6 +106,8 @@ public class Enemy : MonoBehaviour {
         print("Oh no I'm dead!");
         GetComponentInChildren<Animator>().SetBool("dying", true);
         Destroy(healthBar.transform.parent.gameObject);
+        sound.clip = dieSound;
+        sound.Play();
 
         Player.giveLootGold(goldToGive);
         Player.giveExperience(expToGive);

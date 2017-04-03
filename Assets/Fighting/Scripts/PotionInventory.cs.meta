@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: f1493cd61139c2441a290832963a9c29
-timeCreated: 1487357549
+timeCreated: 1491251267
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - healthPotsText: {instanceID: 0}
+  - critPotsText: {instanceID: 0}
+  - attackPotsText: {instanceID: 0}
+  - health: {fileID: 8300000, guid: 471c09f30456ca840927c660dde336e6, type: 3}
+  - crit: {fileID: 8300000, guid: c36cf5caa9b8b38499f20a3269a1eb56, type: 3}
+  - attack: {fileID: 8300000, guid: 37c13cc84f374d34fb2b2a052417c121, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

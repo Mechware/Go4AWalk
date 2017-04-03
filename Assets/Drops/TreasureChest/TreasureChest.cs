@@ -6,6 +6,8 @@ public class TreasureChest : MonoBehaviour {
 	public GameObject drop;
     public ParticleSystem particles;
     public GameObject itemContainer;
+    public AudioSource openSound;
+
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +26,7 @@ public class TreasureChest : MonoBehaviour {
         print(booty.name);
         // open chest
         GetComponentInChildren<Animator>().SetTrigger("Open");
+        openSound.Play();
         yield return new WaitForSeconds(2);
         // shoot gold particles
         particles.gameObject.SetActive(true);

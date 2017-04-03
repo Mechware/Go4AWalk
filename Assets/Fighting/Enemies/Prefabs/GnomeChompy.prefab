@@ -54,6 +54,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010457149662}
   - 114: {fileID: 114000014090076890}
+  - 82: {fileID: 82000010554101224}
   m_Layer: 0
   m_Name: GnomeChompy
   m_TagString: Untagged
@@ -206,6 +207,80 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 2.3}
   serializedVersion: 2
   m_Size: {x: 10, y: 10}
+--- !u!82 &82000010554101224
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012047393502}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &95000013504810832
 Animator:
   serializedVersion: 3
@@ -275,6 +350,9 @@ MonoBehaviour:
   damage: 4
   goldToGive: 15
   expToGive: 10
+  dieSound: {fileID: 8300000, guid: 95cb0b4ad2e6b5245a3bad2156ba5ed0, type: 3}
+  attackSound: {fileID: 8300000, guid: 15ff48278ca7f9c418f895694d028810, type: 3}
+  sound: {fileID: 82000010554101224}
   armor: 1
   sturdy: 1
   timeBetweenAttacks: 3
