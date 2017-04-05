@@ -7,6 +7,7 @@ public class TreasureChest : MonoBehaviour {
     public ParticleSystem particles;
     public GameObject itemContainer;
     public AudioSource openSound;
+    public AudioSource goldSound;
 
 
 	// Use this for initialization
@@ -14,13 +15,8 @@ public class TreasureChest : MonoBehaviour {
 
 	}
 
-	public IEnumerator openChest () {
-        GetComponentInChildren<Animator>().SetTrigger("Open");
-        yield return new WaitForSeconds(2);
-        particles.gameObject.SetActive(true);
-        yield return new WaitForSeconds(3);
-        particles.Stop();
-	}
+	
+	
 
     public IEnumerator itemDrop(item booty, System.Action callWhenDone) {
         print(booty.name);
@@ -30,8 +26,10 @@ public class TreasureChest : MonoBehaviour {
         yield return new WaitForSeconds(2);
         // shoot gold particles
         particles.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        particles.Play();
+        yield return new WaitForSeconds(1f);
         particles.Stop();
+        goldSound.Stop();
         // shoot item
         GameObject item = GameObject.Instantiate(itemContainer, this.transform) as GameObject;
         print(item);

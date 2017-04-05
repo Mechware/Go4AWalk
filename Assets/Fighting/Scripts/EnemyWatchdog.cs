@@ -21,7 +21,7 @@ public class EnemyWatchdog : MonoBehaviour {
     public static GameObject currentEnemy;
     private static EnemyQueue enemiesQueue;
     public Text enemiesLeft;
- 
+
 
     // Distance will be anywhere from this distance to 10 times this distance
     public static float maxRandomEncounterDistance = 100f;
@@ -36,7 +36,7 @@ public class EnemyWatchdog : MonoBehaviour {
             enemiesQueue = new EnemyQueue(this);
         }
         instance = this;
-        
+
     }
 
     // Use this for initialization
@@ -90,7 +90,7 @@ public class EnemyWatchdog : MonoBehaviour {
             currentEnemyPrefab = enemiesQueue.removeEnemy();
             GameState.loadScene(GameState.scene.FIGHTING_LEVEL);
         }
-        
+
     }
 
     public void startFighting() {
@@ -105,12 +105,16 @@ public class EnemyWatchdog : MonoBehaviour {
     }
 
     public void startBossFight() {
-        isBoss = true;        
+        isBoss = true;
         clearEnemies();
         print("" + StoryOverlord.currentLevel);
-        currentEnemyPrefab = bosses[StoryOverlord.currentLevel];
-        GameState.loadScene(GameState.scene.FIGHTING_LEVEL);
+        DialoguePopUp.instance.showDialog(StoryOverlord.bossFightDialogue, StoryOverlord.bossfightName, StoryOverlord.bossfightSprite, () => {
+            currentEnemyPrefab = bosses[StoryOverlord.currentLevel];
+            GameState.loadScene(GameState.scene.FIGHTING_LEVEL);
+        });
+        
     }
+        
 
     public void clearEnemies() {
         enemiesQueue.emptyQueue();

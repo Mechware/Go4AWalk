@@ -182,7 +182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000010621169920
 GameObject:
   m_ObjectHideFlags: 1
@@ -1448,7 +1448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4000011089418154
 Transform:
   m_ObjectHideFlags: 1
@@ -2217,7 +2217,7 @@ MonoBehaviour:
   dialogPanel: {fileID: 1000010660594560}
   dialogText: {fileID: 114000012892637178}
   characterNameText: {fileID: 114000013176182778}
-  charactersPerPage: 150
+  charactersPerPage: 300
 --- !u!114 &114000011147086294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2947,7 +2947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: -0.008819014}
+  m_Color: {r: 0, g: 0, b: 0, a: -0.013672508}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3707,7 +3707,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Well, if you're set on going on an adventure you'll need a sword.Tell you
+    what, I'll give you my old sword if you can get it back from those pesky gnomes
 --- !u!114 &114000012971496490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4005,7 +4006,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Next
 --- !u!114 &114000013113710632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4092,7 +4093,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Character Name
+  m_Text: Old Man
 --- !u!114 &114000013198003828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4271,7 +4272,7 @@ MonoBehaviour:
   - {fileID: 1000010445682320, guid: 8f9b78f164f743b4e9c75da4ded72fe6, type: 2}
   bosses:
   - {fileID: 1000012475826692, guid: 246168b928e0b2a4caffdfb013d8cea6, type: 2}
-  - {fileID: 1000013427855644, guid: cbe5082627cb5a34da9fae37129bbfe4, type: 2}
+  - {fileID: 1000011934624438, guid: bd1b02c7805dee741923a77a0814ac78, type: 2}
   randomEncounterButton: {fileID: 0}
   fw: {fileID: 0}
   enemiesLeft: {fileID: 0}
@@ -4387,7 +4388,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 24776e61d02cd4c409e996b22ef4b665, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -6263,7 +6264,7 @@ RectTransform:
   m_RootOrder: 5
   m_AnchorMin: {x: 1, y: 0.6945}
   m_AnchorMax: {x: 1, y: 0.6945}
-  m_AnchoredPosition: {x: -702, y: -518.62}
+  m_AnchoredPosition: {x: -702, y: -505.7}
   m_SizeDelta: {x: 258, y: 302}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000012163305562

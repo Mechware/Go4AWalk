@@ -50,6 +50,7 @@ MonoBehaviour:
   itemContainer: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae,
     type: 2}
   openSound: {fileID: 82000013721782276}
+  goldSound: {fileID: 82000014183435082}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -372,7 +373,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012914684026}
   serializedVersion: 2
-  lengthInSec: 10
+  lengthInSec: 2
   startDelay:
     scalar: 0
     maxCurve:
@@ -410,7 +411,7 @@ ParticleSystem:
     minMaxState: 0
   speed: 1
   randomSeed: 1111302376
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   moveWithTransform: 1

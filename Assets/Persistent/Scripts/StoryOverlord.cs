@@ -9,12 +9,17 @@ public class StoryOverlord : MonoBehaviour {
     public static int lastEnemy = 9;
     private Questing quest;
     public static item reward;
+    private static Texture2D texture;
+    private static Texture2D textureBoss;
+    private static Texture2D textureEnd;
     public static string questStartDialogue = "";
     public static string bossFightDialogue = "";
     public static string questEndDialogue = "";
     public static Sprite characterSpriteStart;
+    public static Sprite bossfightSprite;
     public static Sprite characterSpriteEnd;
     public static string characterNameStart = "";
+    public static string bossfightName = "";
     public static string characterNameEnd = "";
 	// Use this for initialization
 	void Start () {
@@ -36,18 +41,27 @@ public class StoryOverlord : MonoBehaviour {
             // Enemy Spawns: GnomeChompy
             // Boss: GreenChompy
             // Reward: Bronze Sword
-            characterSpriteStart = Resources.Load("Characters/Moik") as Sprite; // Old Guy
-            characterSpriteEnd = Resources.Load("Characters/Moik") as Sprite; // Old Guy
+            texture = Resources.Load("Characters/Old Man") as Texture2D; // Old Guy
+            characterSpriteStart = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            textureBoss = Resources.Load("Characters/Gnome Chompy") as Texture2D; // Gnome Chompy
+            bossfightSprite = Sprite.Create(textureBoss, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            textureEnd = Resources.Load("Characters/Old Man") as Texture2D; // Old Guy
+            characterSpriteEnd = Sprite.Create(textureEnd, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
             characterNameStart = "Old Man";
+            bossfightName = "Gnome Chompy";
             characterNameEnd = "OldMan";
-            questStartDialogue = "Well, if you're set on going on an adventure you'll need a sword."+
-                "Tell you what, I'll give you my old sword if you can get it back from those pesky gnomes that stole it."+
+            questStartDialogue = "Well, if you're set on going on an adventure you'll need a sword. "+
+                "Tell you what, I'll give you my old sword if you can get it back from those pesky gnomes that stole it. "+
                 "They should be out in the garden somewhere, and watch out they like to bite.";
 
-            questEndDialogue = "Well look at that, you actually did it."+
-                "Hope that old thing works for you, I'd give you my new sword but its actually nice and I like it."+
-                "Anyway, if you're set on going on this adventure the mountain is 100km away so I hope you brought your walking shoes cause you're in for quite the trip."+
-                "The next town is a few kilometers down the road, you can't miss it. I would start there is I were you."+
+            bossFightDialogue = "So you finally found me eh? Well its too late! Now that I have this sword I have become more powerful than you can even imagine! "+
+                "With this sword I shall rule over every garden in the world! MUAHAHAHAHAH!";
+
+            questEndDialogue = "Well look at that, you actually did it. "+
+                "Hope that old thing works for you, I'd give you my new sword but its actually nice and I like it. "+
+                "Anyway, if you're set on going on this adventure the mountain is 100 km away so I hope you brought your walking shoes cause you're in for quite the trip. "+
+                "The next town is a few kilometers down the road, you can't miss it. I would start there is I were you. "+
                 "Well, good luck, and don't come crying to me when you get yourself killed.";
                
             firstEnemy = 0;
@@ -66,16 +80,23 @@ public class StoryOverlord : MonoBehaviour {
             // Enemy Spawns: GnomeChompy, GreenChompy, Goblin
             // Boss: Red Goblin
             // Reward: Bronze Armor
-            characterSpriteStart = Resources.Load("Characters/Moik") as Sprite; // Narrator            
+            texture = Resources.Load("Characters/Narrator") as Texture2D; // Narrator  
+            characterSpriteStart = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             characterNameStart = "Narrator";      
             questStartDialogue = "With your \"new\" sword you start out on your quest. In the distance you see the first town, but you'll have to go through the forest to get there." +
-                "The entrance to the forest is 1 km down the road so you head out towards the forest";
+                "You see the entrance to the forest down the road and start walking in that direction.";
 
-            characterSpriteEnd = Resources.Load("Characters/Moik") as Sprite; // Red Goblin
+            textureBoss = Resources.Load("Characters/Red Goblin") as Texture2D; // Narrator  
+            bossfightSprite = Sprite.Create(textureBoss, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            bossfightName = "Red Goblin";
+            bossFightDialogue = "Hah! You thought we would just let you through into the forest for free? Hah! I don't think so! " +
+                "Hah! You'll have to pay the toll if you want to pass! " +
+                "What's that? You won't pay the toll? Hah! Then prepare to die! Hah! Hah!"; 
+
+            textureEnd = Resources.Load("Characters/Red Goblin") as Texture2D; // Red Goblin
+            characterSpriteEnd = Sprite.Create(textureEnd, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             characterNameEnd = "Red Goblin";
-            questEndDialogue = "Hah! You thought we would just let you through into the forest for free? Hah! I don't think so!"+
-                "Hah! You'll have to pay the toll if you want to pass!" +
-                "What's that? You won't pay the toll? Hah! Then prepare to die! Hah! Hah!";
+            questEndDialogue = "Urrgg. Fine you win. You may have defeated me but you'll never survive in the forest all alone! Its way too spooky for the likes of you! Hah! Hah! Hrrrnngg.";
 
             firstEnemy = 0;
             lastEnemy = 2;
@@ -93,17 +114,24 @@ public class StoryOverlord : MonoBehaviour {
             // Enemy Spawns: Goblin, Evil Tree, Red Goblin, Slime
             // Boss: Red Goblin
             // Reward: Bronze Armor
-            characterSpriteStart = Resources.Load("Characters/Moik") as Sprite; // Narrator            
+            // Reward: Bronze Armor
+            texture = Resources.Load("Characters/Narrator") as Texture2D; // Narrator  
+            characterSpriteStart = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             characterNameStart = "Narrator";
-            questStartDialogue = "After defeating the goblin you begin to make your way through the forest."+
-                "The sign at the entrance of the forest says that the next town is 3km through the forest.";
+            questStartDialogue = "After defeating the goblin you continue your journey throught the forest. The overgrowth is thick and the trees tower above you. "+
+                "You feel like you are being watched everywhere you go and the trees themselves feel alive. Man, that goblin was right, this place is pretty spooky.";
 
-            characterSpriteEnd = Resources.Load("Characters/Moik") as Sprite; // Red Goblin
-            characterNameEnd = "Red Goblin";
-            questEndDialogue = "Hah! You thought we would just let you through into the forest for free? Hah! I don't think so!" +
-                "Hah! You'll have to pay the toll if you want to pass!" +
-                "What's that? You won't pay the toll? Hah! Then prepare to die! Hah! Hah!";
+            textureBoss = Resources.Load("Characters/Tree") as Texture2D; // Narrator  
+            bossfightSprite = Sprite.Create(textureBoss, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            bossfightName = "Giant Tree";
+            bossFightDialogue = "Hey it's me the narrator. Theres a giant tree blocking the path. The tree would probably say something here but trees can't talk, and even if they did they probably "+
+                "can't speak English. Anyway defeat this tree so you can get out of the forest. ";
 
+            textureEnd = Resources.Load("Characters/Narrator") as Texture2D; // Red Goblin
+            characterSpriteEnd = Sprite.Create(textureEnd, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            characterNameEnd = "Narrator";
+            questEndDialogue = "";
+            
             firstEnemy = 2;
             lastEnemy = 5;
             reward = ItemList.itemMasterList[ItemList.BRONZE_ARMOR];
