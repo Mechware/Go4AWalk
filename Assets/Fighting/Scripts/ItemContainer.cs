@@ -25,9 +25,10 @@ public class ItemContainer : MonoBehaviour {
     }
 
     public void launchItem() {
-        xforce = Random.Range(-200f, 200);
-        yforce = Random.Range(-400f, 400);
+        xforce = Random.Range(-500f, 500);
+        yforce = Random.Range(-1000f, 1000);
         this.GetComponent<Rigidbody2D>().AddForce(new Vector2(xforce, yforce));
+        print("xforce = "+xforce+ " yforce = "+yforce);
     }
 
     public void launchItemSlow() {

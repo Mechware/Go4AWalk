@@ -146,38 +146,38 @@ public class Enemy : MonoBehaviour {
 
         if (lootSpawnRate >= luckyNumberLoot && itemName != null) {
             item lootDrop = ItemList.itemMasterList[itemName];
-            items = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
+            items = (GameObject)Instantiate(item, new Vector3(0,-3, 0), Quaternion.identity);
             items.GetComponent<ItemContainer>().setItem(lootDrop);
             items.GetComponent<ItemContainer>().launchItem();
         }
         if (healthPotion.spawnRate >= luckyNumberH) {
-            items = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
+            items = (GameObject)Instantiate(item, new Vector3(0, -3, 0), Quaternion.identity);
             items.GetComponent<ItemContainer>().setItem(healthPotion);
             items.GetComponent<ItemContainer>().launchItem();
             if (healthPotion.spawnRate >= luckyNumberH * 2) {
-                items = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
+                items = (GameObject)Instantiate(item, new Vector3(0, -3, 0), Quaternion.identity);
                 items.GetComponent<ItemContainer>().setItem(healthPotion);
                 items.GetComponent<ItemContainer>().launchItem();
             }
         }
 
         if (critPotion.spawnRate >= luckyNumberC) {
-            items = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
+            items = (GameObject)Instantiate(item, new Vector3(0, -3, 0), Quaternion.identity);
             items.GetComponent<ItemContainer>().setItem(critPotion);
             items.GetComponent<ItemContainer>().launchItem();
             if (critPotion.spawnRate >= luckyNumberC * 2) {
-                items = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
+                items = (GameObject)Instantiate(item, new Vector3(0, -3, 0), Quaternion.identity);
                 items.GetComponent<ItemContainer>().setItem(critPotion);
                 items.GetComponent<ItemContainer>().launchItem();
             }
         }
 
         if (attackPotion.spawnRate >= luckyNumberA) {
-            items = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
+            items = (GameObject)Instantiate(item, new Vector3(0, -3, 0), Quaternion.identity);
             items.GetComponent<ItemContainer>().setItem(attackPotion);
             items.GetComponent<ItemContainer>().launchItem();
             if (attackPotion.spawnRate >= luckyNumberA * 2) {
-                items = (GameObject)Instantiate(item, new Vector2(1, 1), Quaternion.identity);
+                items = (GameObject)Instantiate(item, new Vector3(0, -3, 0), Quaternion.identity);
                 items.GetComponent<ItemContainer>().setItem(attackPotion);
                 items.GetComponent<ItemContainer>().launchItem();
             }
