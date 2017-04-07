@@ -114,7 +114,7 @@ public class StoryOverlord : MonoBehaviour {
             // Enemy Spawns: Goblin, Evil Tree, Red Goblin, Slime
             // Boss: Red Goblin
             // Reward: Bronze Armor
-            // Reward: Bronze Armor
+         
             texture = Resources.Load("Characters/Narrator") as Texture2D; // Narrator  
             characterSpriteStart = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             characterNameStart = "Narrator";

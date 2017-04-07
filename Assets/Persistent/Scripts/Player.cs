@@ -57,15 +57,15 @@ public class Player : MonoBehaviour {
         critFactor = 4 + Mathf.RoundToInt((equippedWeapon.critModifier - 1f) * 40);
 
         if (Player.equippedWeapon.Equals(ItemList.noItem) || Player.equippedWeapon.Equals(default(item))) {
-            Inventory.items.Add(ItemList.itemMasterList[ItemList.STEEL_RAPIER]);
-            equipWeapon(ItemList.itemMasterList[ItemList.STEEL_RAPIER]);
+            Inventory.items.Add(ItemList.itemMasterList[ItemList.WOOD_SWORD]);
+            equipWeapon(ItemList.itemMasterList[ItemList.WOOD_SWORD]);
 
         }
-        if (Player.equippedArmor.Equals(ItemList.noItem) || Player.equippedArmor.Equals(default(item))) {
-            Inventory.items.Add(ItemList.itemMasterList[ItemList.BRONZE_ARMOR]);
-            equipArmor(ItemList.itemMasterList[ItemList.BRONZE_ARMOR]);
+        //if (Player.equippedArmor.Equals(ItemList.noItem) || Player.equippedArmor.Equals(default(item))) {
+         //   Inventory.items.Add(ItemList.itemMasterList[ItemList.BRONZE_ARMOR]);
+         //   equipArmor(ItemList.itemMasterList[ItemList.BRONZE_ARMOR]);
 
-        }
+       // }
 
 
         if (died) {

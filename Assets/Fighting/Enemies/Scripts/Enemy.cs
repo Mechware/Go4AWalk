@@ -71,6 +71,7 @@ public class Enemy : MonoBehaviour {
 
         }
 
+        GetComponentInChildren<Animator>().ResetTrigger("flinch");
         GetComponentInChildren<Animator>().SetTrigger("flinch");
 
         if (isCrit) {
