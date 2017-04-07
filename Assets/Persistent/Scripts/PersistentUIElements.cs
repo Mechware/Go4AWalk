@@ -184,7 +184,7 @@ public class PersistentUIElements : MonoBehaviour {
 
         playerStats.text =
             "ATK:  " + Player.attackStrength + "\n" +
-            "DEF:  " + Mathf.Round((1 - Player.defenseModifier) * 100) + "\n" + //Defence now shows how much damage the player avoids with a max of 99;
+            "DEF:  " + Mathf.Round((1 - Player.defenseModifier) * 100) + "\n" + //Defence now shows how much damage the player avoids with a max of 99; 
             "HP:   " + Player.getMaxHealth() + "\n" +
             "CRIT: " + Player.critModifier + "\n" +
             "PWR:  " + Player.attackModifier;

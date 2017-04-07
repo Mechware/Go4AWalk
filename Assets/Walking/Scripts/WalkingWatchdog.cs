@@ -10,7 +10,7 @@ public class WalkingWatchdog : MonoBehaviour {
     public static WalkingWatchdog instance;
     public Vector2 startPosition, endPosition;
     public GameObject characterSprite;
-    public GameObject equippedWeaponSprite;
+    public GameObject equippedWeaponSprite, equippedArmorSprite;
 
     public GameObject goToTownPanel, slowDownAlertObject;
     public Button takeStepButton, randomEncounterButton, fightEnemiesButton;
@@ -57,6 +57,13 @@ public class WalkingWatchdog : MonoBehaviour {
 
     public void setEquippedItemIcon() {
         equippedWeaponSprite.GetComponent<SpriteRenderer>().sprite = Player.equippedWeapon.icon;
+        if (!Player.equippedArmor.Equals(ItemList.noItem) && !Player.equippedArmor.Equals(default(item))) {
+            equippedArmorSprite.GetComponentInChildren<SpriteRenderer>().enabled = true;            
+            Texture2D texture = Resources.Load("EquippedItems/" + Player.equippedArmor.name) as Texture2D;
+            Sprite armorIcon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            equippedArmorSprite.GetComponent<SpriteRenderer>().sprite = armorIcon;
+        }             
+                    
     }
 
 

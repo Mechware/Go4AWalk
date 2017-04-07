@@ -137,7 +137,7 @@ public class Player : MonoBehaviour {
 
         defenseModifier -= equippedArmor.attributeValue;
         equippedArmor = newItem;
-        defenseModifier += equippedArmor.attributeValue;
+        defenseModifier = equippedArmor.attributeValue;
         GetComponent<PersistentUIElements>().updateItems();
     }
 
