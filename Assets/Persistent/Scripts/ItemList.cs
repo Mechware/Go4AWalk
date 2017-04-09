@@ -15,8 +15,7 @@ public enum itemType
 }
 public class ItemList {
 
-
-
+    
     public const string HEALTH_POTION = "Health Potion";
     public const string CRIT_POTION = "Crit Potion";
     public const string MUNNY_POUCH = "Munny Pouch";
@@ -81,6 +80,7 @@ public class ItemList {
 
         healthPotion.useItem += () => {
             Player.giveHealth(Mathf.RoundToInt((float)Player.getMaxHealth()*0.35f));
+            BuffManager.instance.healthParticlesPlay();
             return true;
         };
         itemMasterList[HEALTH_POTION] = healthPotion;

@@ -4,6 +4,13 @@ using System.Collections.Generic;
 
 public class BuffManager : MonoBehaviour {
 
+    public GameObject critParticles;
+    public GameObject attackParticles;
+    public GameObject healthParticles;
+
+    public static GameObject critParticlesInstance;
+    public static GameObject attackParticlesInstance;
+
     public enum BuffType {
         attack,
         fire,
@@ -17,6 +24,8 @@ public class BuffManager : MonoBehaviour {
 
     void Awake() {
         instance = this;
+        critParticlesInstance = critParticles;
+        attackParticlesInstance = attackParticles;
     }
 	// Use this for initialization
 	void Start () {
@@ -27,6 +36,16 @@ public class BuffManager : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void healthParticlesPlay() {
+        StartCoroutine(healthParticlesStart());
+    }
+
+    IEnumerator healthParticlesStart() {
+        healthParticles.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        healthParticles.SetActive(false);
+    }
 
     public void CreateBuff(string statName, BuffType statType, float modifier, int duration, GameObject target) {
 
@@ -47,15 +66,13 @@ public class BuffManager : MonoBehaviour {
     }
 
     public static void removeCurrentBuff(string statName) {
+        print(statName);
         if (buffs.ContainsKey(statName) && buffs[statName] != null) {
             buffs[statName].endBuff();
             Destroy(buffs[statName].gameObject);
             buffs.Remove(statName);
         } else if (buffs.ContainsKey(statName) && buffs[statName] == null) {
             buffs.Remove(statName);
-        } else {
-            return;
         }
-        
     }
 }

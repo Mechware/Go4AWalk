@@ -595,6 +595,7 @@ GameObject:
   - 114: {fileID: 114000010764528370}
   - 114: {fileID: 114000011106697776}
   - 82: {fileID: 82000012076679392}
+  - 114: {fileID: 114000013343032216}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -2097,6 +2098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a818a164ac58c140a8bb090990ad9eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthParticles: {fileID: 0}
 --- !u!114 &114000011054688010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4034,6 +4036,25 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Enable Walking Mode
+--- !u!114 &114000013343032216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011551358684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eaa71c66ec3849449a3db38c48c4322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statName: 
+  statType: 0
+  modifier: 0
+  frequency: 0
+  duration: 0
+  target: {fileID: 0}
+  critParticles: {fileID: 0}
+  attackParticles: {fileID: 0}
 --- !u!114 &114000013377236792
 MonoBehaviour:
   m_ObjectHideFlags: 1

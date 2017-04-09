@@ -22,10 +22,12 @@ public class Buff : MonoBehaviour {
         if (target.GetComponent<Player>() != null) {
             if (statType == BuffManager.BuffType.attack) {
                 Player.attackModifier += modifier;
+                BuffManager.attackParticlesInstance.SetActive(true);
                 print("attack " + Player.attackModifier);
                 StartCoroutine(timer(() => {
                     print("buff done");
                     Player.attackModifier -= modifier;
+                    BuffManager.attackParticlesInstance.SetActive(false);
                     Destroy(this.gameObject);
                     return true;
                 }));
@@ -42,10 +44,12 @@ public class Buff : MonoBehaviour {
 
             } else if (statType == BuffManager.BuffType.crit) {
                 Player.critModifier += modifier;
+                BuffManager.critParticlesInstance.SetActive(true);
                 print("crit");
                 StartCoroutine(timer(() => {
                     print("buff done");
                     Player.critModifier -= modifier;
+                    BuffManager.critParticlesInstance.SetActive(false);
                     Destroy(this.gameObject);
                     return true;
                 }));
