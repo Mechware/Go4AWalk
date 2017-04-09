@@ -8,6 +8,7 @@ public class TreasureChest : MonoBehaviour {
     public GameObject itemContainer;
     public AudioSource openSound;
     public AudioSource goldSound;
+   
 
 
 	// Use this for initialization
@@ -34,7 +35,7 @@ public class TreasureChest : MonoBehaviour {
         GameObject item = GameObject.Instantiate(itemContainer, this.transform) as GameObject;
         print(item);
         item.GetComponent<ItemContainer>().setItem(booty);
-        item.GetComponent<ItemContainer>().launchItem();
+        item.GetComponent<ItemContainer>().chestItem();
         yield return new WaitForSeconds(3f);
         callWhenDone();
         // shoot amount of gold gotten

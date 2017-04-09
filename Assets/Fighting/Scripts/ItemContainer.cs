@@ -31,9 +31,10 @@ public class ItemContainer : MonoBehaviour {
         print("xforce = "+xforce+ " yforce = "+yforce);
     }
 
-    public void launchItemSlow() {
-        xforce = Random.Range(-100f, 100f);
-        yforce = Random.Range(-100f, 100f);
+    public void chestItem() {
+        this.GetComponent<Transform>().position = new Vector3(0, 1.5f, 0);
+        xforce = 0;
+        yforce = 300;
         this.GetComponent<Rigidbody2D>().AddForce(new Vector2(xforce, yforce));
     }
 
