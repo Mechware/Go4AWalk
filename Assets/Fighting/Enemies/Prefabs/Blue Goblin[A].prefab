@@ -72,6 +72,7 @@ GameObject:
   - 4: {fileID: 4000012090929558}
   - 114: {fileID: 114000010947183598}
   - 82: {fileID: 82000010441793204}
+  - 114: {fileID: 114000011823795094}
   m_Layer: 0
   m_Name: Blue Goblin[A]
   m_TagString: Untagged
@@ -290,7 +291,7 @@ Animator:
   m_GameObject: {fileID: 1000010979923784}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1ebc42c733e4560489be25f0414ec9b9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 01dd9f2034c51f849a2f48224a86b71f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -359,6 +360,23 @@ MonoBehaviour:
   spawnRate: 10
   itemName: Orichalcum Armor
   lootSpawnRate: 50
+--- !u!114 &114000011823795094
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011775013434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5e34c6463586e47b3bd8ddeb26b14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacementClips:
+  - {fileID: 7400000, guid: 4d3a4d68714e1fe48b6a5de2e71e8231, type: 2}
+  - {fileID: 7400000, guid: 6917248da6680ec4da54ccef9e0b9614, type: 2}
+  - {fileID: 7400000, guid: 9b79e76454cfa14468958b0da3af3e99, type: 2}
+  - {fileID: 7400000, guid: e9dce6ab26411ff469d9ca0a97150b43, type: 2}
+  - {fileID: 7400000, guid: 61566e4dd5ccbbe42a9d266d41e4cf17, type: 2}
 --- !u!212 &212000012145962204
 SpriteRenderer:
   m_ObjectHideFlags: 1

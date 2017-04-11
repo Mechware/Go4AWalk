@@ -69,6 +69,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011592050994}
   - 114: {fileID: 114000012095665224}
+  - 114: {fileID: 114000011925255942}
   m_Layer: 0
   m_Name: Red Goblin[A]
   m_TagString: Untagged
@@ -215,7 +216,7 @@ Animator:
   m_GameObject: {fileID: 1000011050336214}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7536d32caa981cf489f37a62713f0ef0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 01dd9f2034c51f849a2f48224a86b71f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -238,6 +239,23 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114000011925255942
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011934624438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5e34c6463586e47b3bd8ddeb26b14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacementClips:
+  - {fileID: 7400000, guid: 99a1e6b50a1694b47aed5ebaea0c9be5, type: 2}
+  - {fileID: 7400000, guid: ee5087d924356e642afa59bd34cde2f3, type: 2}
+  - {fileID: 7400000, guid: 403724de9d1981641b377e6a38176666, type: 2}
+  - {fileID: 7400000, guid: 4c4a763bf2e482044b8e48452575a96e, type: 2}
+  - {fileID: 7400000, guid: 63eec104a218bfe47a7a184defa3b95e, type: 2}
 --- !u!114 &114000012095665224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -264,6 +282,9 @@ MonoBehaviour:
   damage: 10
   goldToGive: 60
   expToGive: 50
+  dieSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  sound: {fileID: 0}
   armor: 0.5
   sturdy: 1.25
   timeBetweenAttacks: 3

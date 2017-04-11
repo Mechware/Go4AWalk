@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011692543214}
   - 114: {fileID: 114000012563126400}
+  - 114: {fileID: 114000011373480844}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -215,7 +216,7 @@ Animator:
   m_GameObject: {fileID: 1000011563334202}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7685ac80b72e59047acea34926df6def, type: 2}
+  m_Controller: {fileID: 9100000, guid: 01dd9f2034c51f849a2f48224a86b71f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -238,6 +239,23 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114000011373480844
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010445682320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5e34c6463586e47b3bd8ddeb26b14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacementClips:
+  - {fileID: 7400000, guid: f0e5ab0de333a6742938e347c1252498, type: 2}
+  - {fileID: 7400000, guid: ba34561ede39a6a4aa6c6382f32b17ce, type: 2}
+  - {fileID: 7400000, guid: 8160375e6e2ab26478a6b1818e566423, type: 2}
+  - {fileID: 7400000, guid: 11fbb4d7916076b4e861f505471ea104, type: 2}
+  - {fileID: 7400000, guid: 568fe043f2fd7b346a5d6e587b98ab74, type: 2}
 --- !u!114 &114000012563126400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -264,6 +282,9 @@ MonoBehaviour:
   damage: 6
   goldToGive: 25
   expToGive: 20
+  dieSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  sound: {fileID: 0}
   armor: 1
   sturdy: 1
   timeBetweenAttacks: 3

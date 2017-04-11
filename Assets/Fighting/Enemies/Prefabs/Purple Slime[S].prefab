@@ -36,6 +36,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010277532024}
   - 114: {fileID: 114000012976545522}
+  - 114: {fileID: 114000013439046970}
   m_Layer: 0
   m_Name: Purple Slime[S]
   m_TagString: Untagged
@@ -215,7 +216,7 @@ Animator:
   m_GameObject: {fileID: 1000013258511684}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5740e41813c68c24089b6a0eb881515c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 01dd9f2034c51f849a2f48224a86b71f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -275,12 +276,32 @@ MonoBehaviour:
   damage: 50
   goldToGive: 250
   expToGive: 80
+  dieSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  sound: {fileID: 0}
   armor: 1
   sturdy: 0.3
   timeBetweenAttacks: 9
   spawnRate: 60
   itemName: 
   lootSpawnRate: -1
+--- !u!114 &114000013439046970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010675719640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5e34c6463586e47b3bd8ddeb26b14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacementClips:
+  - {fileID: 7400000, guid: 72c85dd282b17704cbc39fb77df4ae5e, type: 2}
+  - {fileID: 7400000, guid: 41b57f6177b94bb4cbba8600866a4f2d, type: 2}
+  - {fileID: 7400000, guid: 691066e90c9a41b4a93671bc9cc74e50, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!212 &212000010792392336
 SpriteRenderer:
   m_ObjectHideFlags: 1

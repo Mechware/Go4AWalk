@@ -102,6 +102,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011637003516}
   - 114: {fileID: 114000010680618226}
+  - 114: {fileID: 114000010316485986}
   m_Layer: 0
   m_Name: GoblinChamp[S]
   m_TagString: Untagged
@@ -215,7 +216,7 @@ Animator:
   m_GameObject: {fileID: 1000012110164486}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4ac192630c8e9174aafec722b3343993, type: 2}
+  m_Controller: {fileID: 9100000, guid: 01dd9f2034c51f849a2f48224a86b71f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -249,6 +250,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fd8b201bf690741b83ebbaf5e65956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114000010316485986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013902114332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5e34c6463586e47b3bd8ddeb26b14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacementClips:
+  - {fileID: 7400000, guid: 1f0becc5a14bf2f419042c0d699157e8, type: 2}
+  - {fileID: 7400000, guid: 7604e67cd8ca06b4893bac86c33f296c, type: 2}
+  - {fileID: 7400000, guid: 886b020ed81970d4fab9621e3e1ecc1c, type: 2}
+  - {fileID: 7400000, guid: 65ca65d94c68f004180b35f397dc6558, type: 2}
+  - {fileID: 7400000, guid: 5f5c98b785c3a284e9de4ce2883a121d, type: 2}
 --- !u!114 &114000010680618226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -275,6 +293,9 @@ MonoBehaviour:
   damage: 25
   goldToGive: 600
   expToGive: 150
+  dieSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  sound: {fileID: 0}
   armor: 1
   sturdy: 0.1
   timeBetweenAttacks: 4

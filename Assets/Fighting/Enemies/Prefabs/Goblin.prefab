@@ -37,6 +37,7 @@ GameObject:
   - 4: {fileID: 4000011423264466}
   - 114: {fileID: 114000011664670838}
   - 82: {fileID: 82000011697056236}
+  - 114: {fileID: 114000010788709710}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -290,7 +291,7 @@ Animator:
   m_GameObject: {fileID: 1000013613791506}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 111d9b95562ff98459aa4087bbf78c80, type: 2}
+  m_Controller: {fileID: 9100000, guid: 01dd9f2034c51f849a2f48224a86b71f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -313,6 +314,23 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114000010788709710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013167591610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5e34c6463586e47b3bd8ddeb26b14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacementClips:
+  - {fileID: 7400000, guid: 3c82726113f03074fb298b0043be1ace, type: 2}
+  - {fileID: 7400000, guid: 199f3bc3bf14fc146a0e7cd19d25da27, type: 2}
+  - {fileID: 7400000, guid: 309b4baf2988a2547a62ff2abf2725bd, type: 2}
+  - {fileID: 7400000, guid: 5d2af750e70348d4b90e0214deb97d27, type: 2}
+  - {fileID: 7400000, guid: 10161129da3d36740993b5d221797463, type: 2}
 --- !u!114 &114000011664670838
 MonoBehaviour:
   m_ObjectHideFlags: 1

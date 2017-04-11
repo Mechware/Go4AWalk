@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012323072606}
   - 114: {fileID: 114000013238215238}
+  - 114: {fileID: 114000013575490926}
   m_Layer: 0
   m_Name: RockGolem[A]
   m_TagString: Untagged
@@ -215,7 +216,7 @@ Animator:
   m_GameObject: {fileID: 1000011453755414}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9639966dbfd00734e9c13f02e94cadd4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 01dd9f2034c51f849a2f48224a86b71f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -275,12 +276,32 @@ MonoBehaviour:
   damage: 10
   goldToGive: 60
   expToGive: 50
+  dieSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  sound: {fileID: 0}
   armor: 0.5
   sturdy: 1.25
   timeBetweenAttacks: 3
   spawnRate: 50
   itemName: Iron Armor
   lootSpawnRate: 25
+--- !u!114 &114000013575490926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010466509708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5e34c6463586e47b3bd8ddeb26b14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacementClips:
+  - {fileID: 7400000, guid: d9248ddff775cec46941e3ce9dcc90ed, type: 2}
+  - {fileID: 7400000, guid: 67e520f990c463d4680f56ca2fcfea06, type: 2}
+  - {fileID: 7400000, guid: 6c3df9c24c3615d4093ba19105d10949, type: 2}
+  - {fileID: 7400000, guid: bd5c2fd9f56381b439ee99fb241627b5, type: 2}
+  - {fileID: 7400000, guid: c3ae8fca0ffc78d49a57b7dce894965d, type: 2}
 --- !u!212 &212000011135427250
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -55,6 +55,7 @@ GameObject:
   - 4: {fileID: 4000010457149662}
   - 114: {fileID: 114000014090076890}
   - 82: {fileID: 82000010554101224}
+  - 114: {fileID: 114000011565378210}
   m_Layer: 0
   m_Name: GnomeChompy
   m_TagString: Untagged
@@ -313,6 +314,23 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114000011565378210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012047393502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5e34c6463586e47b3bd8ddeb26b14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacementClips:
+  - {fileID: 7400000, guid: 1838a862f3f7dc34abfe326a4ae70335, type: 2}
+  - {fileID: 7400000, guid: 8cb0e9fc7f320eb4c96244309acb2ae5, type: 2}
+  - {fileID: 7400000, guid: 43570f206193fea4c9ae1b83f4bebc05, type: 2}
+  - {fileID: 7400000, guid: 307c9054b55aa1b42ab04b4df2fb82c3, type: 2}
+  - {fileID: 7400000, guid: bef373441e047a4449c8c5a7792eaaec, type: 2}
 --- !u!114 &114000012915108504
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012986904734}
   - 114: {fileID: 114000012151010552}
+  - 114: {fileID: 114000013205546226}
   m_Layer: 0
   m_Name: GoblinKing
   m_TagString: Untagged
@@ -215,7 +216,7 @@ Animator:
   m_GameObject: {fileID: 1000011698798672}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5fa0d8e0e5279a14b81bf29cc86f226b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 01dd9f2034c51f849a2f48224a86b71f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -264,6 +265,9 @@ MonoBehaviour:
   damage: 10
   goldToGive: 1000
   expToGive: 100
+  dieSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  sound: {fileID: 0}
   armor: 1
   sturdy: 1
   timeBetweenAttacks: 3
@@ -281,6 +285,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fd8b201bf690741b83ebbaf5e65956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114000013205546226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010147549132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5e34c6463586e47b3bd8ddeb26b14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacementClips:
+  - {fileID: 7400000, guid: 4b3f15e289095a74890c019012c35c93, type: 2}
+  - {fileID: 7400000, guid: 3315f92f3cb6da0439733871abd76ae8, type: 2}
+  - {fileID: 7400000, guid: 0578879128e619d43a14bd9fff43986c, type: 2}
+  - {fileID: 7400000, guid: f9816da52f430c94aa8680f92ab5924a, type: 2}
+  - {fileID: 7400000, guid: 0f40190047ae5634f85ce55ca42d363e, type: 2}
 --- !u!212 &212000010795525118
 SpriteRenderer:
   m_ObjectHideFlags: 1
