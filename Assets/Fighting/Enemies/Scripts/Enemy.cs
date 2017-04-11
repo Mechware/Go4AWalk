@@ -76,8 +76,10 @@ public class Enemy : MonoBehaviour {
 
         if (isCrit) {
             health -= Mathf.RoundToInt(damage * sturdy);
-            sound.clip = dieSound;
-            sound.Play();
+            if(dieSound != null) {
+                sound.clip = dieSound;
+                sound.Play();
+            }
         } else {
             health -= Mathf.RoundToInt(damage * armor);
         }
@@ -97,8 +99,10 @@ public class Enemy : MonoBehaviour {
             if (GetComponentInChildren<Animator>().GetBool("dying"))
                 break;
             GetComponentInChildren<Animator>().SetTrigger("attacking");
-            sound.clip = attackSound;
-            sound.Play();
+            if(attackSound != null) {
+                sound.clip = attackSound;
+                sound.Play();
+            }
             Player.damage(damage);
         }
     }
@@ -106,8 +110,11 @@ public class Enemy : MonoBehaviour {
     void die() {
         GetComponentInChildren<Animator>().SetBool("dying", true);
         Destroy(healthBar.transform.parent.gameObject);
-        sound.clip = dieSound;
-        sound.Play();
+        if(dieSound != null) {
+            sound.clip = dieSound;
+            sound.Play();
+        }
+        
 
         Player.giveLootGold(goldToGive);
         Player.giveExperience(expToGive);

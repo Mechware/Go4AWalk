@@ -4,11 +4,10 @@ using UnityEngine.UI;
 using System;
 
 public class Tavern : MonoBehaviour {
-    TownWatchdog townWatchdog;
+
     public GameObject fadePopUp;
     // Use this for initialization
     void Start() {
-        townWatchdog = GetComponent<TownWatchdog>();
     }
 
     public void rest() {
@@ -22,7 +21,6 @@ public class Tavern : MonoBehaviour {
                 new string[] { "Ok" }, 
                 new Action[] { () => { } });
         }
-
     }
 
     IEnumerator fadeRestScreen() {
@@ -31,10 +29,6 @@ public class Tavern : MonoBehaviour {
         yield return new WaitForSeconds(1);
         yield return FadingUtils.fadeImage(fadePopUp.GetComponent<Image>(), 0.5f, 1, 0);
         fadePopUp.SetActive(false);
-    }
-
-    public void openTavern() {
-        townWatchdog.open(townWatchdog.tavern);
     }
 
     public void openRestPopUp() {
