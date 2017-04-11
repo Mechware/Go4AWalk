@@ -99,20 +99,6 @@ public class Player : MonoBehaviour {
                     })
                 }, new bool[] { true, false });
             died = false;
-        } else if (GameState.walking) {
-            if (Questing.currentQuest.name == null) {
-                quest testQuest = new quest(
-                    name: "Test Quest",
-                    shortOverview: "You're exploring in the forest",
-                    description: "Find new enemies and get experience and gold!",
-                    goldReward: 0,
-                    xpReward: 0,
-                    rewards: null,
-                    timeToComplete: -1,
-                    distance: -1,
-                    difficulty: 1);
-                Questing.startQuest(testQuest);
-            }
         }
 
         if (experience.Value == 0)
