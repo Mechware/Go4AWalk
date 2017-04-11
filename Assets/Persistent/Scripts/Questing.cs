@@ -143,7 +143,7 @@ public class Questing : MonoBehaviour {
           //  Inventory.items.Add(ItemList.itemMasterList[ItemList.SAND_SWORD]);
           //  Inventory.items.Add(ItemList.itemMasterList[ItemList.JADE_SWORD]);
           //  Inventory.items.Add(ItemList.itemMasterList[ItemList.OBSIDIAN_SWORD]);
-            print(Inventory.getInventory());
+
             DialoguePopUp.instance.showDialog(StoryOverlord.questEndDialogue, StoryOverlord.characterNameEnd, StoryOverlord.characterSpriteEnd, () => {
             PopUp.instance.showPopUp("QUEST COMPLETE! \n \n" + "Continue on your journey." + "\n\n",
                 new string[] { "Continue"},

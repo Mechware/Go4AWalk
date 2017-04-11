@@ -77,7 +77,6 @@ public class EnemyWatchdog : MonoBehaviour {
     public IEnumerator enemyHasDied(bool isBoss) {
         if (isBoss == true) {
             endFight();
-            print("" + isBoss + " " + EnemyWatchdog.isBoss);
             yield return fw.questFightEnd();
         } else if (enemiesQueue.IsEmpty()) {
             endFight();
@@ -95,7 +94,6 @@ public class EnemyWatchdog : MonoBehaviour {
 
     public void startFighting() {
         if (enemiesQueue.IsEmpty()) {
-            print("There are no enemies to fight ya dummy!");
             return;
         } else {
             isBoss = false;
@@ -107,7 +105,6 @@ public class EnemyWatchdog : MonoBehaviour {
     public void startBossFight() {
         isBoss = true;
         clearEnemies();
-        print("" + StoryOverlord.currentLevel);
         DialoguePopUp.instance.showDialog(StoryOverlord.bossFightDialogue, StoryOverlord.bossfightName, StoryOverlord.bossfightSprite, () => {
             currentEnemyPrefab = bosses[StoryOverlord.currentLevel];
             GameState.loadScene(GameState.scene.FIGHTING_LEVEL);

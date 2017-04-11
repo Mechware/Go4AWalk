@@ -20,7 +20,7 @@ public class TreasureChest : MonoBehaviour {
 	
 
     public IEnumerator itemDrop(item booty, System.Action callWhenDone) {
-        print(booty.name);
+
         // open chest
         GetComponentInChildren<Animator>().SetTrigger("Open");
         openSound.Play();
@@ -33,7 +33,6 @@ public class TreasureChest : MonoBehaviour {
         goldSound.Stop();
         // shoot item
         GameObject item = GameObject.Instantiate(itemContainer, this.transform) as GameObject;
-        print(item);
         item.GetComponent<ItemContainer>().setItem(booty);
         item.GetComponent<ItemContainer>().chestItem();
         yield return new WaitForSeconds(3f);

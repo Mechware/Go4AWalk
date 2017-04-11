@@ -207,7 +207,6 @@ public class PersistentUIElements : MonoBehaviour {
         Sprite icon;
 
         Button button = itemsPanel.GetComponentInChildren<Button>();
-        print(button);
         RectTransform buttonTransform = button.gameObject.transform as RectTransform;
        
         currentButton = button.gameObject;
