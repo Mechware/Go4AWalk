@@ -1164,6 +1164,7 @@ GameObject:
   - 222: {fileID: 222000011387105872}
   - 114: {fileID: 114000010221366146}
   - 114: {fileID: 114000011360425948}
+  - 114: {fileID: 114000012647470068}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1853,7 +1854,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 114000012868695992}
+  m_TargetGraphic: {fileID: 114000012647470068}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3530,6 +3531,33 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114000012647470068
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012955823400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &114000012654860848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4402,20 +4430,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 1000012047393502, guid: 118dcb26d73d8b0408e2f08bfbb8e932, type: 2}
+  - {fileID: 1000013167591610, guid: c8f72edb6d9db6547a14d1096f212fb7, type: 2}
   - {fileID: 1000012475826692, guid: 246168b928e0b2a4caffdfb013d8cea6, type: 2}
   - {fileID: 1000013167591610, guid: c8f72edb6d9db6547a14d1096f212fb7, type: 2}
   - {fileID: 1000011934624438, guid: bd1b02c7805dee741923a77a0814ac78, type: 2}
-  - {fileID: 1000012618533784, guid: faa9b8b65c9e89f47afd986b5c9376fc, type: 2}
-  - {fileID: 1000011775013434, guid: 0ee424966617024419608ed366e24e49, type: 2}
-  - {fileID: 1000010147549132, guid: 31a4441a8fa5c61408f2f77f2b3fd3e0, type: 2}
   - {fileID: 1000010675719640, guid: 3a6535983835b814f8758e657270dc3e, type: 2}
-  - {fileID: 1000010466509708, guid: 3e99fdd10b719dc4fb017ff22c9e4ce7, type: 2}
+  - {fileID: 1000012618533784, guid: faa9b8b65c9e89f47afd986b5c9376fc, type: 2}
   - {fileID: 1000013427855644, guid: cbe5082627cb5a34da9fae37129bbfe4, type: 2}
   - {fileID: 1000010445682320, guid: 8f9b78f164f743b4e9c75da4ded72fe6, type: 2}
+  - {fileID: 1000011775013434, guid: 0ee424966617024419608ed366e24e49, type: 2}
+  - {fileID: 1000010466509708, guid: 3e99fdd10b719dc4fb017ff22c9e4ce7, type: 2}
+  - {fileID: 1000010147549132, guid: 31a4441a8fa5c61408f2f77f2b3fd3e0, type: 2}
+  - {fileID: 1000013902114332, guid: 310bfd0a0b714df469b1d32a44e2cb3f, type: 2}
   bosses:
   - {fileID: 1000012475826692, guid: 246168b928e0b2a4caffdfb013d8cea6, type: 2}
-  - {fileID: 1000013167591610, guid: c8f72edb6d9db6547a14d1096f212fb7, type: 2}
+  - {fileID: 1000011934624438, guid: bd1b02c7805dee741923a77a0814ac78, type: 2}
+  - {fileID: 1000012618533784, guid: faa9b8b65c9e89f47afd986b5c9376fc, type: 2}
+  - {fileID: 1000013427855644, guid: cbe5082627cb5a34da9fae37129bbfe4, type: 2}
+  - {fileID: 1000013902114332, guid: 310bfd0a0b714df469b1d32a44e2cb3f, type: 2}
   randomEncounterButton: {fileID: 0}
   fw: {fileID: 0}
   enemiesLeft: {fileID: 0}
