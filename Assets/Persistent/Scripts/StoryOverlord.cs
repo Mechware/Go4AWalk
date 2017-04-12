@@ -33,10 +33,6 @@ public class StoryOverlord : MonoBehaviour {
 	
 	}
 
-    public void setLevel(int storyLevel) {
-        currentLevel = storyLevel;
-    }
-
     // This could end up being a massive class with a bajillion if statements for each possible level. There might be a better way to do it but `\_("/)_/`
     public static void startQuest(int level, float progress) {
         if(level == 0) {

@@ -105,6 +105,8 @@ public class Questing : MonoBehaviour {
             float progressThroughQuest = PlayerPrefs.GetFloat(QUESTING_DISTANCE, 0);
             StoryOverlord.startQuest(StoryOverlord.currentLevel, progressThroughQuest);
         }
+        if(GameState.walking)
+            WalkingWatchdog.instance.setQuestStuff();
     }
 
     // Update is called once per frame
@@ -137,6 +139,8 @@ public class Questing : MonoBehaviour {
                 new System.Action[] {
                     new System.Action(() => {
                         StoryOverlord.currentLevel++;
+                        print("Current level in quest complete: " + StoryOverlord.currentLevel);
+                        Player.instance.savePlayer();
                         currentQuest.active = false;
                         GameState.loadScene(GameState.scene.WALKING_LEVEL);                        
                         }),

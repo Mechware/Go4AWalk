@@ -20,14 +20,14 @@ public class WalkingWatchdog : MonoBehaviour {
     public Text enemyQueueCount;
     private GPS gps;
     
-
-    // Use this for initialization
-    void Start () {
+    void Awake() {
         instance = this;
         gps = GetComponent<GPS>();
 
-        backgroundTexture.GetComponent<MeshRenderer>().material = StoryOverlord.walkingBackground;
+    }
 
+    // Use this for initialization
+    void Start () {
         // Make it so when the GPS changes, increase player distance is called
         gps.deltaDistance.OnValueChange += increasePlayerDistance;
 
@@ -35,24 +35,27 @@ public class WalkingWatchdog : MonoBehaviour {
             // Move 1 meter per step click
             updateDistance(25, 25);
         });
+    }
+	
+    public void setQuestStuff() {
+
+        backgroundTexture.GetComponent<MeshRenderer>().material = StoryOverlord.walkingBackground;
 
         // Display the correct distance to travel
         if (Questing.currentQuest.distance == -1) {
             questDistanceToTravel.text = "∞";
         } else {
             if (Questing.currentQuest.distance > 1001f) {
-                questDistanceToTravel.text = Questing.currentQuest.distance/1000 + "km";
-            }
-            else {
+                questDistanceToTravel.text = Questing.currentQuest.distance / 1000 + "km";
+            } else {
                 questDistanceToTravel.text = Questing.currentQuest.distance + "m";
             }
-            
+
         }
 
         updateDistanceTravelledUI();
         setEquippedItemIcon();
     }
-	
 	// Update is called once per frame
 	void Update () {
        

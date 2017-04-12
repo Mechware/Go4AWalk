@@ -145,11 +145,9 @@ public class PersistentUIElements : MonoBehaviour {
 
     public void updateItems() {
 
-        if (WalkingWatchdog.instance == null)
-            return;
-
         if (GameState.walking) {
-            WalkingWatchdog.instance.setEquippedItemIcon();
+            if(WalkingWatchdog.instance != null)
+                WalkingWatchdog.instance.setEquippedItemIcon();
         }
 
         GameObject currentButton;
