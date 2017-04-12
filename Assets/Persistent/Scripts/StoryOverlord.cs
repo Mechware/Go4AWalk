@@ -21,6 +21,8 @@ public class StoryOverlord : MonoBehaviour {
     public static string characterNameStart = "";
     public static string bossfightName = "";
     public static string characterNameEnd = "";
+    public static Material walkingBackground;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -38,6 +40,7 @@ public class StoryOverlord : MonoBehaviour {
     // This could end up being a massive class with a bajillion if statements for each possible level. There might be a better way to do it but `\_("/)_/`
     public static void startQuest(int level, float progress) {
         if(level == 0) {
+            walkingBackground = Resources.Load("Materials/garden") as Material;
             // Enemy Spawns: GnomeChompy
             // Boss: GreenChompy
             // Reward: Bronze Sword
@@ -77,6 +80,7 @@ public class StoryOverlord : MonoBehaviour {
             Questing.startQuest(thisQuest, progress);            
         }
         if(level == 1) {
+            walkingBackground = Resources.Load("Materials/grass") as Material;
             // Enemy Spawns: GnomeChompy, GreenChompy, Goblin
             // Boss: Red Goblin
             // Reward: Bronze Armor
@@ -111,10 +115,11 @@ public class StoryOverlord : MonoBehaviour {
             Questing.startQuest(thisQuest, progress);
         }
         if (level == 2) {
+            walkingBackground = Resources.Load("Materials/forest") as Material;
             // Enemy Spawns: Goblin, Evil Tree, Red Goblin, Slime
             // Boss: Evil Dead Tree
             // Reward: Iron Armor
-         
+
             texture = Resources.Load("Characters/Narrator") as Texture2D; // Narrator  
             characterSpriteStart = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             characterNameStart = "Narrator";
@@ -146,6 +151,7 @@ public class StoryOverlord : MonoBehaviour {
             Questing.startQuest(thisQuest, progress);
         }
         if (level == 3) {
+            walkingBackground = Resources.Load("Materials/hauntedForest") as Material;
             // Enemy Spawns: Blue Goblin, Dead Tree, Spooky Ghost, Skeleton
             // Boss: Ghost
             // Reward: Steel Sword
@@ -178,6 +184,7 @@ public class StoryOverlord : MonoBehaviour {
             Questing.startQuest(thisQuest, progress);
         }
         if (level == 4) {
+            walkingBackground = Resources.Load("Materials/grass") as Material;
             // Enemy Spawns: Blue Goblin, Goblin King, Rock Golem
             // Boss: Goblin Champ
             // Reward: Orichalcum Sword
@@ -217,6 +224,7 @@ public class StoryOverlord : MonoBehaviour {
             Questing.startQuest(thisQuest, progress);
         }
         if (level == 5) {
+            walkingBackground = Resources.Load("Materials/grass") as Material;
             // Enemy Spawns: All
             // Boss: N/A
             // Reward: Orichalcum Sword

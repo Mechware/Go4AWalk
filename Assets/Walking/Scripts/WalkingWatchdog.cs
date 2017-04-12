@@ -11,8 +11,9 @@ public class WalkingWatchdog : MonoBehaviour {
     public Vector2 startPosition, endPosition;
     public GameObject characterSprite;
     public GameObject equippedWeaponSprite, equippedArmorSprite;
-
+    public Material garden, grass, forest, hauntedForest;
     public GameObject goToTownPanel, slowDownAlertObject;
+    public GameObject backgroundTexture;
     public Button takeStepButton, randomEncounterButton, fightEnemiesButton;
     public Text walkingStats, questDistanceTravelled;
     public Text questDistanceToTravel;
@@ -24,6 +25,8 @@ public class WalkingWatchdog : MonoBehaviour {
     void Start () {
         instance = this;
         gps = GetComponent<GPS>();
+
+        backgroundTexture.GetComponent<MeshRenderer>().material = StoryOverlord.walkingBackground;
 
         // Make it so when the GPS changes, increase player distance is called
         gps.deltaDistance.OnValueChange += increasePlayerDistance;
