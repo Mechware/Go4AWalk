@@ -30,8 +30,6 @@ public class PersistentUIElements : MonoBehaviour {
     void Start() {
         walkingScript = GPS.gpsObject;
 
-        Inventory.onValueChanged += updateItems;
-
         // Set the stats
         level.text = Player.level.Value.ToString();
         totalGold.text = Player.gold.Value.ToString();
@@ -147,6 +145,9 @@ public class PersistentUIElements : MonoBehaviour {
 
     public void updateItems() {
 
+        if (WalkingWatchdog.instance == null)
+            return;
+
         if (GameState.walking) {
             WalkingWatchdog.instance.setEquippedItemIcon();
         }
@@ -183,11 +184,11 @@ public class PersistentUIElements : MonoBehaviour {
         equippedAccessory.text = "Accessory:" + "\n" + "None";
 
         playerStats.text =
-            "ATK:  " + Player.attackStrength + "\n" +
-            "DEF:  " + Mathf.Round((1 - Player.defenseModifier) * 100) + "\n" + //Defence now shows how much damage the player avoids with a max of 99; 
-            "HP:   " + Player.getMaxHealth() + "\n" +
-            "CRIT: " + Player.critModifier + "\n" +
-            "PWR:  " + Player.attackModifier;
+                "ATK:  " + Player.attackStrength + "\n" +
+                "DEF:  " + Mathf.Round((1 - Player.defenseModifier) * 100) + "\n" + //Defence now shows how much damage the player avoids with a max of 99; 
+                "HP:   " + Player.getMaxHealth() + "\n" +
+                "CRIT: " + Player.critModifier + "\n" +
+                "PWR:  " + Player.attackModifier;
 
         // Uncomment this out when accessories are actually in place
 

@@ -36,7 +36,7 @@ public class StoryOverlord : MonoBehaviour {
     }
 
     // This could end up being a massive class with a bajillion if statements for each possible level. There might be a better way to do it but `\_("/)_/`
-    public static void startQuest(int level) {
+    public static void startQuest(int level, float progress) {
         if(level == 0) {
             // Enemy Spawns: GnomeChompy
             // Boss: GreenChompy
@@ -74,7 +74,7 @@ public class StoryOverlord : MonoBehaviour {
             float difficulty = 1;
             quest thisQuest = new quest("Quest 1", "Get your first sword!", "This is the start of your adventure! Prove yourself by getting back the sword that the gnome stole.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
-            Questing.startQuest(thisQuest);            
+            Questing.startQuest(thisQuest, progress);            
         }
         if(level == 1) {
             // Enemy Spawns: GnomeChompy, GreenChompy, Goblin
@@ -108,7 +108,7 @@ public class StoryOverlord : MonoBehaviour {
             float difficulty = 1;
             quest thisQuest = new quest("Quest 2", "Get to the forest.", "Now that you have a weapon your adventure can begin! Make it to the forest.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
-            Questing.startQuest(thisQuest);
+            Questing.startQuest(thisQuest, progress);
         }
         if (level == 2) {
             // Enemy Spawns: Goblin, Evil Tree, Red Goblin, Slime
@@ -143,7 +143,7 @@ public class StoryOverlord : MonoBehaviour {
             float difficulty = 1;
             quest thisQuest = new quest("Quest 3", "Get through the forest.", "Make your way through the forest to get to Meadsville.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
-            Questing.startQuest(thisQuest);
+            Questing.startQuest(thisQuest, progress);
         }
         if (level == 3) {
             // Enemy Spawns: Blue Goblin, Dead Tree, Spooky Ghost, Skeleton
@@ -175,7 +175,7 @@ public class StoryOverlord : MonoBehaviour {
             float difficulty = 1;
             quest thisQuest = new quest("Quest 4", "Get through the HAUNTED forest.", "You're almost through the forest, push on and get to Meadsville.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
-            Questing.startQuest(thisQuest);
+            Questing.startQuest(thisQuest, progress);
         }
         if (level == 4) {
             // Enemy Spawns: Blue Goblin, Goblin King, Rock Golem
@@ -214,7 +214,7 @@ public class StoryOverlord : MonoBehaviour {
             float difficulty = 1;
             quest thisQuest = new quest("Quest 5", "Get to Meadsville.", "You've made it out of the forest now get to Meadsville and see what the problem is.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
-            Questing.startQuest(thisQuest);
+            Questing.startQuest(thisQuest, progress);
         }
         if (level == 5) {
             // Enemy Spawns: All
@@ -255,7 +255,7 @@ public class StoryOverlord : MonoBehaviour {
             float difficulty = 1;
             quest thisQuest = new quest("Quest 5", "Thanks for playing!", "Keep walking and fighting enemies for as long as your heart desires.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
-            Questing.startQuest(thisQuest);
+            Questing.startQuest(thisQuest, progress);
         }
     }
 

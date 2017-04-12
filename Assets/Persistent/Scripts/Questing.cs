@@ -84,6 +84,7 @@ public struct quest {
 
 public class Questing : MonoBehaviour {
 
+    private const string QUESTING_DISTANCE = "QuestingDistance";
 
     // Questing
     public static quest currentQuest;
@@ -92,17 +93,17 @@ public class Questing : MonoBehaviour {
 
     // Use this for initialization
     void Awake() {
-        if (currentQuest.active) {
-            // Stop it to make sure it's not running twice
-            StopCoroutine("checkQuestEnd");
-            StartCoroutine("checkQuestEnd");
-        }
         instance = this;
+    }
+
+    void OnApplicationPause() {
+
     }
 
     void Start() {
         if(currentQuest.active == false && GameState.walking) {
-            StoryOverlord.startQuest(StoryOverlord.currentLevel);
+            float progressThroughQuest = PlayerPrefs.GetFloat(QUESTING_DISTANCE, 0);
+            StoryOverlord.startQuest(StoryOverlord.currentLevel, progressThroughQuest);
         }
     }
 
@@ -111,22 +112,16 @@ public class Questing : MonoBehaviour {
 
     }
 
-    public static int waitTime = 5;
-    IEnumerator checkQuestEnd() {
-        while (currentQuest.endTime > System.DateTime.UtcNow) {
-            yield return new WaitForSeconds(waitTime);
-        }
-
-        print("Didn't finish quest in time");
-        endQuest(false);
-    }
-
-    public static void startQuest(quest q) {
+    public static void startQuest(quest q, float progress) {
         currentQuest = q;
-        if (q.timeToComplete != -1) {
-            instance.StartCoroutine("checkQuestEnd");
+        if(progress == 0) {
+            DialoguePopUp.instance.showDialog(StoryOverlord.questStartDialogue, 
+                StoryOverlord.characterNameStart, 
+                StoryOverlord.characterSpriteStart, 
+                () => { });
+        } else {
+            currentQuest.distanceProgress = progress;
         }
-        DialoguePopUp.instance.showDialog(StoryOverlord.questStartDialogue, StoryOverlord.characterNameStart, StoryOverlord.characterSpriteStart, () => { });
     }
 
     public static void endQuest(bool userFinished) {
@@ -135,14 +130,6 @@ public class Questing : MonoBehaviour {
             print("Quest passed!");
             Player.giveGold(currentQuest.goldReward);
             Player.giveExperience(currentQuest.xpReward);
-
-            //Inventory.items.Add(StoryOverlord.reward);
-            //Inventory.items.Add(ItemList.itemMasterList[ItemList.IRON_SWORD]);
-           // Inventory.items.Add(ItemList.itemMasterList[ItemList.STEEL_SWORD]);
-           // Inventory.items.Add(ItemList.itemMasterList[ItemList.ORICH_SWORD]);
-          //  Inventory.items.Add(ItemList.itemMasterList[ItemList.SAND_SWORD]);
-          //  Inventory.items.Add(ItemList.itemMasterList[ItemList.JADE_SWORD]);
-          //  Inventory.items.Add(ItemList.itemMasterList[ItemList.OBSIDIAN_SWORD]);
 
             DialoguePopUp.instance.showDialog(StoryOverlord.questEndDialogue, StoryOverlord.characterNameEnd, StoryOverlord.characterSpriteEnd, () => {
             PopUp.instance.showPopUp("QUEST COMPLETE! \n \n" + "Continue on your journey." + "\n\n",
@@ -153,9 +140,9 @@ public class Questing : MonoBehaviour {
                         currentQuest.active = false;
                         GameState.loadScene(GameState.scene.WALKING_LEVEL);                        
                         }),
-                     });
+                     }
+                );
             });
-        
         } else {
             print("Quest failed!");
             Player.distance.Value -= 100; // Sets the player back 100m.
@@ -163,10 +150,10 @@ public class Questing : MonoBehaviour {
                 new string[] { "Continue" },
                 new System.Action[] {
                     new System.Action(() => {GameState.loadScene(GameState.scene.CAMPSITE); }) });
-        }           
-        
-    }
+        }
 
+        PlayerPrefs.DeleteKey(QUESTING_DISTANCE);
+    }
 
     public static void makeCamp() {
         GameState.loadScene(GameState.scene.CAMPSITE);
@@ -174,34 +161,13 @@ public class Questing : MonoBehaviour {
 
     public static void move(float distance) {
         currentQuest.distanceProgress += distance;
+        PlayerPrefs.SetFloat(QUESTING_DISTANCE, currentQuest.distanceProgress);
 
         if (currentQuest.distanceProgress >= currentQuest.distance) {
             if (currentQuest.distance != -1) {
                 currentQuest.distanceProgress = currentQuest.distance;
-                // PopUp.instance.showPopUp("A BOSS HAS APPEARED!",
-                //     new string[] { "FIGHT" },
-                //    new System.Action[] { EnemyWatchdog.instance.startBossFight() }
-                //);
                 EnemyWatchdog.instance.startBossFight();
-
-                //endQuest(true);
             }
         }
-    }
-   
-    public static quest createRandomQuest() {
-
-        float randomVal = Random.Range(0f, 1f);
-
-        string name = "bounty " + randomVal;
-        string shortOverview = "This is the first bounty";
-        string description = "This is the description of the first bounty where you will go for walks and do amazing things";
-        int goldReward = 50 + Mathf.RoundToInt(500f * randomVal);
-        int xpReward = 10 + Mathf.RoundToInt(100f * randomVal);
-        int timeToComplete = 1000 + Mathf.RoundToInt(randomVal * 1500f);
-        int distance = Mathf.RoundToInt(1000f * randomVal);
-        int difficulty = 1;
-        quest q = new quest(name, shortOverview, description, goldReward, xpReward, null, timeToComplete, distance, difficulty);
-        return q;
     }
 }

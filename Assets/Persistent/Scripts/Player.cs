@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
+    private const string EQUIPPED_WEAPON = "equipped_weapon";
+    private const string EQUIPPED_ARMOR = "equipped_armor";
+    private const string EQUIPPED_ACCESSORY = "equipped_accessory";
 
     public static bool died = false;
 
@@ -26,6 +29,7 @@ public class Player : MonoBehaviour {
     public static float critModifier = 1;
     public static item equippedWeapon;
     public static item equippedArmor;
+    internal static item equippedAccessory;
 
 
     #region nonstatic
@@ -56,37 +60,31 @@ public class Player : MonoBehaviour {
         maxHealth = 100 + 10 * level.Value;
         critFactor = 4 + Mathf.RoundToInt((equippedWeapon.critModifier - 1f) * 40);
 
-        if (Player.equippedWeapon.Equals(ItemList.noItem) || Player.equippedWeapon.Equals(default(item))) {
+        loadPlayer();
+
+        if (equippedWeapon.Equals(ItemList.noItem) || equippedWeapon.Equals(default(item))) {
             Inventory.items.Add(ItemList.itemMasterList[ItemList.WOOD_SWORD]);
             equipWeapon(ItemList.itemMasterList[ItemList.WOOD_SWORD]);
-
         }
-        //if (Player.equippedArmor.Equals(ItemList.noItem) || Player.equippedArmor.Equals(default(item))) {
-         //   Inventory.items.Add(ItemList.itemMasterList[ItemList.BRONZE_ARMOR]);
-         //   equipArmor(ItemList.itemMasterList[ItemList.BRONZE_ARMOR]);
-
-       // }
-
 
         if (died) {
             health.Value = maxHealth / 2;
             lootGold = new ObservedValue<int>(0);
         }
 
-        if (GameState.inTown) {
-            gold.Value += lootGold.Value;
-            lootGold.Value = 0;
-        }
         if (GameState.atCamp) {
             gold.Value += lootGold.Value;
             lootGold.Value = 0;
+            EnemyWatchdog.enemiesQueue.Clear();
+            EnemyWatchdog.instance.saveQueue();
+            savePlayer();
         }
 
         instance = this;
     }
 
     void Start() {
-
+        loadOthers();
         // Let user know they died
         if (died) {
             PopUp.instance.showPopUp("Oh no! You were defeated! \n You conveniently find yourself back at camp, \n but the gold you have accumulated has been stolen.", new string[] { "Okay", "No." },
@@ -100,13 +98,6 @@ public class Player : MonoBehaviour {
                 }, new bool[] { true, false });
             died = false;
         }
-
-        if (experience.Value == 0)
-            load();
-        else {
-            save();
-        }
-
     }
 
     public void equipWeapon(item newItem) {
@@ -116,6 +107,7 @@ public class Player : MonoBehaviour {
         equippedWeapon = newItem;
         attackStrength += equippedWeapon.baseAttack;
         GetComponent<PersistentUIElements>().updateItems();
+        savePlayer();
     }
 
     public void equipArmor(item newItem) {
@@ -125,8 +117,18 @@ public class Player : MonoBehaviour {
         equippedArmor = newItem;
         defenseModifier = equippedArmor.attributeValue;
         GetComponent<PersistentUIElements>().updateItems();
+        savePlayer();
     }
 
+    public void equipAccessory(item newItem) {
+        UnityEngine.Assertions.Assert.AreEqual(newItem.type, itemType.Accessory, "Trying to equip something that is not an accessory.");
+
+        defenseModifier -= equippedArmor.attributeValue;
+        equippedArmor = newItem;
+        defenseModifier = equippedArmor.attributeValue;
+        GetComponent<PersistentUIElements>().updateItems();
+        savePlayer();
+    }
 
     #endregion
 
@@ -210,48 +212,70 @@ public class Player : MonoBehaviour {
     #endregion
 
     #region savingAndLoading
-    public void save() {
+
+    void OnApplicationPause(bool isPaused) {
+        if (isPaused) {
+            savePlayer();
+        }
+    }
+
+    public void savePlayer() {
         PlayerPrefs.SetInt("Health", health.Value);
         PlayerPrefs.SetInt("Gold", gold.Value);
         PlayerPrefs.SetInt("XP", experience.Value);
         PlayerPrefs.SetFloat("Distance", totalDistance.Value);
         PlayerPrefs.SetInt("Level", level.Value);
-        PlayerPrefs.SetInt("HealthPotions", PotionInventory.numHealthPots.Value);
-        PlayerPrefs.SetInt("CritPotions", PotionInventory.numCritPots.Value);
-        PlayerPrefs.SetInt("AttackPotions", PotionInventory.numAttackPots.Value);
         PlayerPrefs.SetInt("StoryLevel", StoryOverlord.currentLevel);
-        string[] itemNames = Inventory.getInventory();
-        for(int i =0 ; i < itemNames.Length ; i++) {
-            PlayerPrefs.SetString("Inventory_" + i, itemNames[i]);
-        }
+        PlayerPrefs.SetFloat("LevelProgress", Questing.currentQuest.distanceProgress);
+        PlayerPrefs.SetInt("LootGold", lootGold.Value);
+        saveEquippedItems();
+
         PlayerPrefs.Save();
     }
 
-    public void load() {
+    void saveEquippedItems() {
+        if (!equippedWeapon.Equals(default(item)) &&
+            !equippedWeapon.Equals(ItemList.noItem))
+            PlayerPrefs.SetString(EQUIPPED_WEAPON, equippedWeapon.name);
+        if (!equippedArmor.Equals(default(item)) &&
+            !equippedArmor.Equals(ItemList.noItem))
+            PlayerPrefs.SetString(EQUIPPED_ARMOR, equippedArmor.name);
+        if (!equippedAccessory.Equals(default(item)) &&
+            !equippedAccessory.Equals(ItemList.noItem))
+            PlayerPrefs.SetString(EQUIPPED_ACCESSORY, equippedAccessory.name);
+    }
+
+    public void loadPlayer() {
         health.Value = PlayerPrefs.GetInt("Health", health.Value);
         gold.Value = PlayerPrefs.GetInt("Gold", gold.Value);
         experience.Value = PlayerPrefs.GetInt("XP", experience.Value);
         totalDistance.Value = PlayerPrefs.GetFloat("Distance", totalDistance.Value);
         level.Value = PlayerPrefs.GetInt("Level", level.Value);
+        lootGold.Value = PlayerPrefs.GetInt("LootGold", lootGold.Value);
         StoryOverlord.currentLevel = PlayerPrefs.GetInt("StoryLevel", StoryOverlord.currentLevel);
-        List<string> itemNames = new List<string>();
-        int i=0;
-        while(true) {
-            if(!PlayerPrefs.HasKey("Inventory_"+i)) {
-                break;
-            }
-            itemNames.Add(PlayerPrefs.GetString("Inventory_" + i));
-            i++;
-        }
-        if(itemNames.Count > 0) {
-            Inventory.items = new List<item>();
-            Inventory.setInventory(itemNames.ToArray());
-        }
-        
+        loadEquippedItems();
+    }
 
-        PotionInventory.numHealthPots.Value = PlayerPrefs.GetInt("HealthPotions", PotionInventory.numHealthPots.Value);
-        PotionInventory.numCritPots.Value = PlayerPrefs.GetInt("CritPotions", PotionInventory.numCritPots.Value);
-        PotionInventory.numAttackPots.Value = PlayerPrefs.GetInt("AttackPotions", PotionInventory.numAttackPots.Value);
+    private void loadEquippedItems() {
+        string equipped;
+        if (PlayerPrefs.HasKey(EQUIPPED_WEAPON)) {
+            equipped = PlayerPrefs.GetString(EQUIPPED_WEAPON);
+            equipWeapon(ItemList.itemMasterList[equipped]);
+        }
+        if (PlayerPrefs.HasKey(EQUIPPED_ARMOR)) {
+            equipped = PlayerPrefs.GetString(EQUIPPED_ARMOR);
+            equipArmor(ItemList.itemMasterList[equipped]);
+        }
+        if (PlayerPrefs.HasKey(EQUIPPED_ACCESSORY)) {
+            equipped = PlayerPrefs.GetString(EQUIPPED_ACCESSORY);
+            equipAccessory(ItemList.itemMasterList[equipped]);
+        }
+    }
+
+    public void loadOthers() {
+        Inventory.load();
+        PotionInventory.load();
+        EnemyWatchdog.instance.loadQueue();
     }
 
     public void clearStats() {
@@ -260,29 +284,23 @@ public class Player : MonoBehaviour {
             new System.Action[] {
                 new System.Action(()=> {
                     PlayerPrefs.DeleteAll();
-                    /*
-                    PlayerPrefs.DeleteKey("Health");
-                    PlayerPrefs.DeleteKey("Gold");
-                    PlayerPrefs.DeleteKey("XP");
-                    PlayerPrefs.DeleteKey("Distance");
-                    PlayerPrefs.DeleteKey("Level");
-                    PlayerPrefs.DeleteKey("HealthPotions");
-                    PlayerPrefs.DeleteKey("CritPotions");
-                    PlayerPrefs.DeleteKey("AttackPotions");
-                    */
-                    
-                    PotionInventory.numHealthPots.Value = 0;
-                    PotionInventory.numCritPots.Value = 0;
-                    PotionInventory.numAttackPots.Value = 0;
-                    Inventory.items = new List<item>();
+
+                    PotionInventory.clear();
+                    Inventory.clear();
+                    StoryOverlord.currentLevel = 0;
+
                     health.Value = 100;
-                    maxHealth = 100;
+                    maxHealth = 110;
                     gold.Value = 0;
                     experience.Value = 0;
                     totalDistance.Value = 0;
                     level.Value = 0;
-                    StoryOverlord.currentLevel = 0;
-                    save();
+                    equippedWeapon = ItemList.noItem;
+                    equippedArmor = ItemList.noItem;
+                    equippedAccessory = ItemList.noItem;
+                    
+                    
+                    savePlayer();
                     GameState.loadScene(GameState.scene.CAMPSITE);
                      }),
                 new System.Action(()=> { })

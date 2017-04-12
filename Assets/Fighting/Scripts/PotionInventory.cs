@@ -58,7 +58,6 @@ public class PotionInventory : MonoBehaviour {
                 attackPotsText.text = "x" + numAttackPots.Value;
             };
         }
-
     }
 
     public static void addPotion(item item) {
@@ -80,9 +79,8 @@ public class PotionInventory : MonoBehaviour {
             } else {
                 numAttackPots.Value++;
             }
-        } else {
-            return;
         }
+        save();
 
     }
 
@@ -102,9 +100,8 @@ public class PotionInventory : MonoBehaviour {
                 numAttackPots.Value = 0;
             else
                 numAttackPots.Value--;
-        } else {
-            return;
         }
+        save();
 
     }
 
@@ -145,6 +142,24 @@ public class PotionInventory : MonoBehaviour {
             attackPot.useItem();
             removePotion(attackPot);
         }
+    }
 
+    public static void load() {
+        numHealthPots.Value = PlayerPrefs.GetInt("HealthPotions", numHealthPots.Value);
+        numCritPots.Value = PlayerPrefs.GetInt("CritPotions", numCritPots.Value);
+        numAttackPots.Value = PlayerPrefs.GetInt("AttackPotions", numAttackPots.Value);
+    }
+
+    public static void save() {
+        PlayerPrefs.SetInt("HealthPotions", numHealthPots.Value);
+        PlayerPrefs.SetInt("CritPotions", numCritPots.Value);
+        PlayerPrefs.SetInt("AttackPotions", numAttackPots.Value);
+        PlayerPrefs.Save();
+    }
+
+    public static void clear() {
+        numHealthPots.Value = 0;
+        numCritPots.Value = 0;
+        numAttackPots.Value = 0;
     }
 }

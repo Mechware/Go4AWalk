@@ -74,6 +74,7 @@ public class GameState : MonoBehaviour {
 
     public static void loadScene(scene scene) {
         _instance.StartCoroutine(_instance.fadeToLoadScene(scene));
+        Player.instance.savePlayer();
     }
 
     private static string getLevelName(scene scene) {

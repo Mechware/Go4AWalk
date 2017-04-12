@@ -70,6 +70,8 @@ public class EnemyWatchdog : MonoBehaviour {
         }
 
         this.currentEnemy = Instantiate(currentEnemy);
+        saveQueue();
+        PlayerPrefs.Save();
     }
 
     // Update is called once per frame
@@ -83,6 +85,7 @@ public class EnemyWatchdog : MonoBehaviour {
                 enemiesQueue.Enqueue(pickEnemy());
                 WalkingWatchdog.instance.setQueueSize(enemiesQueue.Count);
                 nextEncounterDistance += maxRandomEncounterDistance * Random.Range(0.1f, 1f);
+                saveQueue();
             }
         }
     }
@@ -117,6 +120,7 @@ public class EnemyWatchdog : MonoBehaviour {
     public void startBossFight() {
         isBoss = true;
         enemiesQueue.Clear();
+        saveQueue();
         DialoguePopUp.instance.showDialog(
             dialog: StoryOverlord.bossFightDialogue,
             characterName: StoryOverlord.bossfightName, 
@@ -148,4 +152,29 @@ public class EnemyWatchdog : MonoBehaviour {
         return bosses[StoryOverlord.currentLevel];
     }
 
+    const string SAVE_QUEUE_STRING = "Monster_Queue";
+
+    public void saveQueue() {
+        int i = 0;
+        while(PlayerPrefs.HasKey(SAVE_QUEUE_STRING+i)) {
+            PlayerPrefs.DeleteKey(SAVE_QUEUE_STRING+i);
+            i++;
+        }
+        
+        int[] monsters = enemiesQueue.ToArray();
+        for(i = 0 ; i < monsters.Length ; i++) {
+            PlayerPrefs.SetInt(SAVE_QUEUE_STRING + i, monsters[i]);
+        }
+    }
+
+    public void loadQueue() {
+        int i = 0;
+        int monster;
+        enemiesQueue = new Queue<int>();
+        while(PlayerPrefs.HasKey(SAVE_QUEUE_STRING+i)) {
+            monster = PlayerPrefs.GetInt(SAVE_QUEUE_STRING + i);
+            enemiesQueue.Enqueue(monster);
+            i++;
+        }
+    }
 }

@@ -58,7 +58,7 @@ public class ItemContainer : MonoBehaviour {
             yield return new WaitForSeconds(1f);
             Destroy(gameObject);
         } else if (alreadyGotThatOne == false){
-            Inventory.items.Add(containingItem);
+            Inventory.addItem(containingItem);
             sound.clip = pickUpItemSound;
             sound.Play();
             GetComponentInChildren<SpriteRenderer>().sprite = null;

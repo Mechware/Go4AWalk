@@ -11,7 +11,8 @@ public enum itemType
     Poison,
     Equipment,
     Weapon,
-    Armor
+    Armor,
+    Accessory
 }
 public class ItemList {
 

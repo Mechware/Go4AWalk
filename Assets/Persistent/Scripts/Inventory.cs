@@ -63,9 +63,7 @@ public struct item {
 
 public class Inventory : MonoBehaviour {
 
-    
     public const int INVENTORY_SIZE = 10;
-    public static Action onValueChanged;
     private static List<item> _items;
     public static List<item> items {
         get {
@@ -73,13 +71,18 @@ public class Inventory : MonoBehaviour {
                 _items = new List<item>();
             return _items;
         }
-        set {
-            _items = value;
-        }
     }
+
+    public static void addItem(item item) {
+        if (items == null)
+            _items = new List<item>();
+        items.Add(item);
+        save();
+    }
+
     public static string[] getInventory() {
         List<string> itemNames = new List<string>();
-        foreach(item it in _items) {
+        foreach(item it in items) {
             itemNames.Add(it.name);
         }
         return itemNames.ToArray();
@@ -89,5 +92,34 @@ public class Inventory : MonoBehaviour {
         foreach(string itemName in itemNames) {
             items.Add(ItemList.itemMasterList[itemName]);
         }
+    }
+
+    public static void save() {
+        string[] itemNames = getInventory();
+        for (int i = 0 ; i < itemNames.Length ; i++) {
+            PlayerPrefs.SetString("Inventory_" + i, itemNames[i]);
+        }
+        PlayerPrefs.Save();
+    }
+
+    public static void load() {
+        List<string> itemNames = new List<string>();
+        int i = 0;
+        while (true) {
+            if (!PlayerPrefs.HasKey("Inventory_" + i)) {
+                break;
+            }
+            itemNames.Add(PlayerPrefs.GetString("Inventory_" + i));
+            i++;
+        }
+        if (itemNames.Count > 0) {
+            _items = new List<item>();
+            setInventory(itemNames.ToArray());
+        }
+
+    }
+
+    public static void clear() {
+        _items = null;
     }
 }
