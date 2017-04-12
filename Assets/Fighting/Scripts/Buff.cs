@@ -43,7 +43,9 @@ public class Buff : MonoBehaviour {
                 BuffManager.critParticlesInstance.SetActive(true);
                 StartCoroutine(timer(() => {
                     Player.critModifier -= modifier;
-                    BuffManager.critParticlesInstance.SetActive(false);
+                    if(BuffManager.critParticlesInstance != null) {
+                        BuffManager.critParticlesInstance.SetActive(false);
+                    }
                     Destroy(this.gameObject);
                     return true;
                 }));

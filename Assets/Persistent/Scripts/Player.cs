@@ -169,7 +169,7 @@ public class Player : MonoBehaviour {
     }
 
     private static void die() {
-        EnemyWatchdog.instance.clearEnemies();
+        EnemyWatchdog.enemiesQueue.Clear();
         died = true;
         Questing.makeCamp();
     }

@@ -59,6 +59,7 @@ public class EnemyController : MonoBehaviour {
 
     AnimationClip getClipWithName(string name) {
         foreach(AnimationClip clip in replacementClips) {
+            if (clip == null) continue;
             if (name.Equals(clip.name))
                 return clip;
         }

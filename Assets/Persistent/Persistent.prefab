@@ -4430,7 +4430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 1000013167591610, guid: c8f72edb6d9db6547a14d1096f212fb7, type: 2}
+  - {fileID: 1000012047393502, guid: 118dcb26d73d8b0408e2f08bfbb8e932, type: 2}
   - {fileID: 1000012475826692, guid: 246168b928e0b2a4caffdfb013d8cea6, type: 2}
   - {fileID: 1000013167591610, guid: c8f72edb6d9db6547a14d1096f212fb7, type: 2}
   - {fileID: 1000011934624438, guid: bd1b02c7805dee741923a77a0814ac78, type: 2}
@@ -4450,6 +4450,7 @@ MonoBehaviour:
   - {fileID: 1000013902114332, guid: 310bfd0a0b714df469b1d32a44e2cb3f, type: 2}
   randomEncounterButton: {fileID: 0}
   fw: {fileID: 0}
+  currentEnemy: {fileID: 0}
   enemiesLeft: {fileID: 0}
 --- !u!114 &114000013525115666
 MonoBehaviour:

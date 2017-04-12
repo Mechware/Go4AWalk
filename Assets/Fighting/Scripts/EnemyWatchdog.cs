@@ -17,10 +17,12 @@ public class EnemyWatchdog : MonoBehaviour {
     public GameObject[] bosses;
     public GameObject randomEncounterButton;
     public FightingWatchdog fw;
-    public static EnemyWatchdog instance;
-    public static GameObject currentEnemy;
-    private static EnemyQueue enemiesQueue;
+    public GameObject currentEnemy;
     public Text enemiesLeft;
+
+    public static EnemyWatchdog instance;
+    public static Queue<int> enemiesQueue;
+    
 
 
     // Distance will be anywhere from this distance to 10 times this distance
@@ -29,14 +31,17 @@ public class EnemyWatchdog : MonoBehaviour {
 
     private static float lastEncounterDistance;
     private static float nextEncounterDistance;
-    private static GameObject currentEnemyPrefab;
 
     void Awake() {
         if (enemiesQueue == null) {
-            enemiesQueue = new EnemyQueue(this);
+            enemiesQueue = new Queue<int>();
         }
         instance = this;
 
+        if (GameState.fighting) {
+            spawnEnemyFromQueue();
+            enemiesLeft.text = "" + (enemiesQueue.Count + 1);
+        }
     }
 
     // Use this for initialization
@@ -45,18 +50,27 @@ public class EnemyWatchdog : MonoBehaviour {
             // Initialize encounter variables
             lastEncounterDistance = Player.totalDistance.Value;
             nextEncounterDistance = lastEncounterDistance + Random.Range(50f, 150f);
-            WalkingWatchdog.instance.setQueueSize(enemiesQueue.getSize());
-        } else if (GameState.fighting) {
-            if (currentEnemyPrefab != null) {
-                // Spawn enemy decided in the walking screen
-                currentEnemy = Instantiate(currentEnemyPrefab);
-            } else {
-                currentEnemy = Instantiate(enemies[0]);
-            }
-            enemiesLeft.text = "" + (enemiesQueue.getSize() + 1);
+            WalkingWatchdog.instance.setQueueSize(enemiesQueue.Count);
         }
     }
 
+    void spawnEnemyFromQueue() {
+        GameObject currentEnemy;
+
+        if (isBoss) {
+            currentEnemy = bosses[StoryOverlord.currentLevel];
+        } else {
+            currentEnemy = enemies[enemiesQueue.Dequeue()];
+            print("Removing " + currentEnemy.name + " from the queue and spawning them");
+        }
+
+        if (currentEnemy == null) {
+            print("No enemy created, spawning gnome chompy.");
+            currentEnemy = enemies[0];
+        }
+
+        this.currentEnemy = Instantiate(currentEnemy);
+    }
 
     // Update is called once per frame
     void Update() {
@@ -66,8 +80,8 @@ public class EnemyWatchdog : MonoBehaviour {
             if (Questing.currentQuest.distance != -1 && Questing.currentQuest.distance <= Questing.currentQuest.distanceProgress) {
                 nextEncounterDistance = float.MaxValue;
             } else if (Player.totalDistance.Value > nextEncounterDistance) {
-                enemiesQueue.putEnemy();
-                WalkingWatchdog.instance.setQueueSize(enemiesQueue.getSize());
+                enemiesQueue.Enqueue(pickEnemy());
+                WalkingWatchdog.instance.setQueueSize(enemiesQueue.Count);
                 nextEncounterDistance += maxRandomEncounterDistance * Random.Range(0.1f, 1f);
             }
         }
@@ -78,47 +92,39 @@ public class EnemyWatchdog : MonoBehaviour {
         if (isBoss == true) {
             endFight();
             yield return fw.questFightEnd();
-        } else if (enemiesQueue.IsEmpty()) {
+        } else if (enemiesQueue.Count == 0) {
             endFight();
             StartCoroutine(fw.endRegularFight());
         } else {
             fw.fadeOutStats();
-            enemiesLeft.text = "" + enemiesQueue.getSize();
+            enemiesLeft.text = "" + enemiesQueue.Count;
             yield return new WaitForSeconds(2);
 
-            currentEnemyPrefab = enemiesQueue.removeEnemy();
             GameState.loadScene(GameState.scene.FIGHTING_LEVEL);
         }
 
     }
 
     public void startFighting() {
-        if (enemiesQueue.IsEmpty()) {
+        if (enemiesQueue.Count == 0) {
             return;
         } else {
             isBoss = false;
-            enemiesQueue.removeEnemy();
             GameState.loadScene(GameState.scene.FIGHTING_LEVEL);
         }
     }
 
     public void startBossFight() {
         isBoss = true;
-        clearEnemies();
-        DialoguePopUp.instance.showDialog(StoryOverlord.bossFightDialogue, StoryOverlord.bossfightName, StoryOverlord.bossfightSprite, () => {
-            currentEnemyPrefab = bosses[StoryOverlord.currentLevel];
+        enemiesQueue.Clear();
+        DialoguePopUp.instance.showDialog(
+            dialog: StoryOverlord.bossFightDialogue,
+            characterName: StoryOverlord.bossfightName, 
+            characterSprite: StoryOverlord.bossfightSprite, 
+            functionToCallWhenDialogFinished: () => {
             GameState.loadScene(GameState.scene.FIGHTING_LEVEL);
         });
         
-    }
-        
-
-    public void clearEnemies() {
-        enemiesQueue.emptyQueue();
-    }
-
-    public bool isEmpty() {
-        return enemiesQueue.IsEmpty();
     }
 
 
@@ -127,13 +133,12 @@ public class EnemyWatchdog : MonoBehaviour {
         lastEncounterDistance = Player.totalDistance.Value;
     }
 
-    public GameObject pickEnemy() {
+    public int pickEnemy() {
         int randomEnemyNum = Random.Range(StoryOverlord.firstEnemy, StoryOverlord.lastEnemy+1);
-
         Enemy possibleEnemy = enemies[randomEnemyNum].GetComponent<Enemy>();
         int spawnRateComparer = Random.Range(0, 100);
         if (spawnRateComparer < possibleEnemy.spawnRate) {
-            return enemies[randomEnemyNum];
+            return randomEnemyNum;
         } else {
             return pickEnemy();
         }

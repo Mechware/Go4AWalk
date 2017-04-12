@@ -9,9 +9,12 @@ public class Attacking : MonoBehaviour {
     public int swipingID;
     public IDictionary<int, Vector2> touchesToSwipes = new Dictionary<int,Vector2>();
 
+    public GameObject enemyObject;
+
+
     // Use this for initialization
     void Start () {
-        
+        enemyObject = EnemyWatchdog.instance.currentEnemy;
 	}
 	
 	// Update is called once per frame
@@ -49,8 +52,8 @@ public class Attacking : MonoBehaviour {
         if (swipe.magnitude > Screen.width/4) {
 
             // Hit enemy with damage dictated by Player class
-            if (EnemyWatchdog.currentEnemy != null && EnemyWatchdog.currentEnemy.GetComponentInChildren<Collider2D>() != null) {
-                EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getCriticalAttack(swipe), true);
+            if (enemyObject != null && enemyObject.GetComponentInChildren<Collider2D>() != null) {
+                enemyObject.GetComponent<Enemy>().hit(Player.getCriticalAttack(swipe), true);
                 Player.resetCrit();
             }
 
@@ -64,9 +67,9 @@ public class Attacking : MonoBehaviour {
         // IF statement assumes enemy is only collider on screen
         if (hit.collider != null) {
             // Hit enemy with power dictated by Player class
-            if(EnemyWatchdog.currentEnemy != null) {
-                EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getRegularAttack(), false);
-                BuffManager.instance.CreateDOT("EnemyDOTFire", BuffManager.BuffType.fire, 10, 5, 1, EnemyWatchdog.currentEnemy.gameObject);
+            if(enemyObject != null) {
+                enemyObject.GetComponent<Enemy>().hit(Player.getRegularAttack(), false);
+                BuffManager.instance.CreateDOT("EnemyDOTFire", BuffManager.BuffType.fire, 10, 5, 1, enemyObject);
             }
                 
         }
