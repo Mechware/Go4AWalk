@@ -58,7 +58,7 @@ public class BuffManager : MonoBehaviour {
 
     public void CreateDOT(string statName, BuffType statType, float modifier, int duration, int frequency, GameObject target) {
 
-        removeCurrentBuff(statName);
+        //removeCurrentBuff(statName);
         GameObject buffGo = new GameObject();
         Buff buff = buffGo.AddComponent<Buff>();
         buff.setBuff(statName, statType, modifier, frequency, duration, target);

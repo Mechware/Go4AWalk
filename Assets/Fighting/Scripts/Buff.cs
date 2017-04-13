@@ -12,6 +12,8 @@ public class Buff : MonoBehaviour {
     public int duration;
     public GameObject target;
 
+
+
     public void setBuff(string statName, BuffManager.BuffType statType, float modifier, int duration, GameObject target) {
         this.statName = statName;
         this.statType = statType;
@@ -23,6 +25,7 @@ public class Buff : MonoBehaviour {
             if (statType == BuffManager.BuffType.attack) {
                 Player.attackModifier += modifier;
                 BuffManager.attackParticlesInstance.SetActive(true);
+                print(Player.attackModifier);
                 StartCoroutine(timer(() => {
                     Player.attackModifier -= modifier;
                     BuffManager.attackParticlesInstance.SetActive(false);
@@ -88,22 +91,32 @@ public class Buff : MonoBehaviour {
     }
 
     IEnumerator hurtPlayer() {
-        for(int i = 0 ; i < duration ; i += frequency) {
-            Player.damage(Mathf.RoundToInt(modifier));
-            yield return new WaitForSeconds(frequency);
-        }
+
+            for (int i = 0 ; i < duration ; i += frequency) {
+
+                Player.damage(Mathf.RoundToInt(modifier));
+                yield return new WaitForSeconds(frequency);
+            }
+        BuffManager.removeCurrentBuff(statName);
+
         Destroy(this.gameObject);
     }
 
     IEnumerator hurtEnemy(Enemy enemy) {
-        for (int i = 0 ; i < duration ; i += frequency) {
-            if (target != null) {
-                enemy.poison(Mathf.RoundToInt(modifier));
-                yield return new WaitForSeconds(frequency);
-            } else
-                break;
-           
-        }
+  
+            for (int i = 0 ; i < duration ; i += frequency) {
+ 
+                if (target != null) {
+                    enemy.poison(Mathf.RoundToInt(modifier));
+                    yield return new WaitForSeconds(frequency);
+                } else
+                    break;
+
+            }
+        
+
+        BuffManager.removeCurrentBuff(statName);
+
         Destroy(this.gameObject);
     }
 
@@ -142,6 +155,7 @@ public class Buff : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
+
 }

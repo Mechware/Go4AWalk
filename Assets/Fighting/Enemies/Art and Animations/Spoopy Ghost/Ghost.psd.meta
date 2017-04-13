@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 053a1f282f688ad44953246b606fd730
-timeCreated: 1490506040
+timeCreated: 1492049732
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -19,6 +19,7 @@ TextureImporter:
     21300024: Ghost_12
     21300026: Ghost_13
     21300028: Ghost_14
+    21300030: Ghost_15
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -259,6 +260,19 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ghost_15
+      rect:
+        serializedVersion: 2
+        x: 192
         y: 0
         width: 64
         height: 64
