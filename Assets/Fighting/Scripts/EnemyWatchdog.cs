@@ -50,7 +50,6 @@ public class EnemyWatchdog : MonoBehaviour {
             // Initialize encounter variables
             lastEncounterDistance = Player.totalDistance.Value;
             nextEncounterDistance = lastEncounterDistance + Random.Range(50f, 150f);
-            WalkingWatchdog.instance.setQueueSize(enemiesQueue.Count);
         }
     }
 
@@ -82,8 +81,9 @@ public class EnemyWatchdog : MonoBehaviour {
             if (Questing.currentQuest.distance != -1 && Questing.currentQuest.distance <= Questing.currentQuest.distanceProgress) {
                 nextEncounterDistance = float.MaxValue;
             } else if (Player.totalDistance.Value > nextEncounterDistance) {
-                enemiesQueue.Enqueue(pickEnemy());
-                WalkingWatchdog.instance.setQueueSize(enemiesQueue.Count);
+                if(enemiesQueue.Count <= 9) {
+                    enemiesQueue.Enqueue(pickEnemy());
+                }
                 nextEncounterDistance += maxRandomEncounterDistance * Random.Range(0.1f, 1f);
                 saveQueue();
             }
@@ -93,10 +93,12 @@ public class EnemyWatchdog : MonoBehaviour {
     // Called to end an encounter
     public IEnumerator enemyHasDied(bool isBoss) {
         if (isBoss == true) {
-            endFight();
+            currentEnemy = null;
+            lastEncounterDistance = Player.totalDistance.Value;
             yield return fw.questFightEnd();
         } else if (enemiesQueue.Count == 0) {
-            endFight();
+            currentEnemy = null;
+            lastEncounterDistance = Player.totalDistance.Value;
             StartCoroutine(fw.endRegularFight());
         } else {
             fw.fadeOutStats();
@@ -129,12 +131,6 @@ public class EnemyWatchdog : MonoBehaviour {
             GameState.loadScene(GameState.scene.FIGHTING_LEVEL);
         });
         
-    }
-
-
-    private void endFight() {
-        currentEnemy = null;
-        lastEncounterDistance = Player.totalDistance.Value;
     }
 
     public int pickEnemy() {
