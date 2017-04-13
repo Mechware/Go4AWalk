@@ -22,7 +22,7 @@ public class Attacking : MonoBehaviour {
 
 #if UNITY_EDITOR || UNITY_WEBGL
 
-
+   
         if (Input.GetMouseButtonUp(0)) {
             checkAttack(startPosition, Input.mousePosition);
 
@@ -69,9 +69,17 @@ public class Attacking : MonoBehaviour {
             // Hit enemy with power dictated by Player class
             if(enemyObject != null) {
                 enemyObject.GetComponent<Enemy>().hit(Player.getRegularAttack(), false);
-                BuffManager.instance.CreateDOT("EnemyDOTFire", BuffManager.BuffType.fire, 10, 5, 1, enemyObject);
+                // BuffManager.instance.CreateDOT("EnemyDOTFire", BuffManager.BuffType.fire, 10, 5, 1, enemyObject);
+                attackWithDOT("EnemyDOTFire", BuffManager.BuffType.fire, 10, 5, 1, enemyObject);
             }
-                
+
+        }
+    }
+
+    void attackWithDOT(string name, BuffManager.BuffType statType, int modifier, int duration, int frequency,GameObject target) {
+
+        if(!BuffManager.buffs.ContainsKey(name)) {
+            BuffManager.instance.CreateDOT(name, statType, modifier, duration, frequency, target);
         }
     }
 }
