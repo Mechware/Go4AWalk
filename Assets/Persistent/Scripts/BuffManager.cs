@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class BuffManager : MonoBehaviour {
 
+
+    //Moving to Buff.cs
     public GameObject critParticles;
     public GameObject attackParticles;
     public GameObject healthParticles;
@@ -24,8 +26,15 @@ public class BuffManager : MonoBehaviour {
 
     void Awake() {
         instance = this;
+        //moving to Buff.cs
         critParticlesInstance = critParticles;
         attackParticlesInstance = attackParticles;
+        if (Buff.critActive) {
+            critParticlesInstance.SetActive(true);
+        }
+        if (Buff.attackActive) {
+            attackParticlesInstance.SetActive(true);
+        }
 
     }
 	// Use this for initialization

@@ -12,6 +12,18 @@ public class Buff : MonoBehaviour {
     public int duration;
     public GameObject target;
 
+    public static bool critActive = false;
+    public static bool attackActive = false;
+
+   /* public GameObject critParticles;
+    public GameObject attackParticles;
+
+    public static GameObject critParticlesInstance;
+    public static GameObject attackParticlesInstance;
+
+    public Buff instance;*/
+
+    
 
     public void setBuff(string statName, BuffManager.BuffType statType, float modifier, int duration, GameObject target) {
         this.statName = statName;
@@ -24,11 +36,17 @@ public class Buff : MonoBehaviour {
             if (statType == BuffManager.BuffType.attack) {
                 Player.attackModifier += modifier;
                 BuffManager.attackParticlesInstance.SetActive(true);
+                attackActive = true;
+               // attackParticlesInstance.SetActive(true);
                 print(Player.attackModifier);
                 StartCoroutine(timer(() => {
                     Player.attackModifier -= modifier;
-                    BuffManager.attackParticlesInstance.SetActive(false);
+                    if (BuffManager.attackParticlesInstance!=null) {
+                        BuffManager.attackParticlesInstance.SetActive(false);
+                    }             
+                    //attackParticlesInstance.SetActive(false);
                     Destroy(this.gameObject);
+                    attackActive=false;
                     return true;
                 }));
 
@@ -43,12 +61,18 @@ public class Buff : MonoBehaviour {
             } else if (statType == BuffManager.BuffType.crit) {
                 Player.critModifier += modifier;
                 BuffManager.critParticlesInstance.SetActive(true);
+                critActive = true;
+                //critParticlesInstance.SetActive(true);
                 StartCoroutine(timer(() => {
                     Player.critModifier -= modifier;
                     if(BuffManager.critParticlesInstance != null) {
+                    //if(critParticlesInstance != null) {
                         BuffManager.critParticlesInstance.SetActive(false);
+
+                        //critParticlesInstance.SetActive(false);
                     }
                     Destroy(this.gameObject);
+                    critActive=false;
                     return true;
                 }));
 
@@ -150,12 +174,22 @@ public class Buff : MonoBehaviour {
     // Use this for initialization
     void Start () {
         DontDestroyOnLoad(this.gameObject);
+     
+    }
 
-	}
+   /* void Awake() {
+        instance = this;
+        critParticlesInstance = critParticles;
+        attackParticlesInstance = attackParticles;
+        critParticlesInstance.SetActive(false);
+        attackParticlesInstance.SetActive(false);
+    }*/
 	
 	// Update is called once per frame
 	void Update () {
 
 	}
+
+
 
 }

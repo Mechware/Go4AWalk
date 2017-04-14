@@ -11,6 +11,7 @@ public class FightingWatchdog : MonoBehaviour {
     public GameObject treasureChest, critBarObject, healthBarObject;
 
 
+
     public void fadeOutStats() {
         foreach (SpriteRenderer sp in critBarObject.GetComponentsInChildren<SpriteRenderer>()) {
             StartCoroutine(FadingUtils.fadeSpriteRenderer(sp, 1, 1, 0));
