@@ -15,13 +15,6 @@ public class Buff : MonoBehaviour {
     public static bool critActive = false;
     public static bool attackActive = false;
 
-   /* public GameObject critParticles;
-    public GameObject attackParticles;
-
-    public static GameObject critParticlesInstance;
-    public static GameObject attackParticlesInstance;
-
-    public Buff instance;*/
 
     
 
@@ -37,14 +30,12 @@ public class Buff : MonoBehaviour {
                 Player.attackModifier += modifier;
                 BuffManager.attackParticlesInstance.SetActive(true);
                 attackActive = true;
-               // attackParticlesInstance.SetActive(true);
                 print(Player.attackModifier);
                 StartCoroutine(timer(() => {
                     Player.attackModifier -= modifier;
                     if (BuffManager.attackParticlesInstance!=null) {
                         BuffManager.attackParticlesInstance.SetActive(false);
                     }             
-                    //attackParticlesInstance.SetActive(false);
                     Destroy(this.gameObject);
                     attackActive=false;
                     return true;
@@ -62,14 +53,14 @@ public class Buff : MonoBehaviour {
                 Player.critModifier += modifier;
                 BuffManager.critParticlesInstance.SetActive(true);
                 critActive = true;
-                //critParticlesInstance.SetActive(true);
+
                 StartCoroutine(timer(() => {
                     Player.critModifier -= modifier;
                     if(BuffManager.critParticlesInstance != null) {
-                    //if(critParticlesInstance != null) {
+
                         BuffManager.critParticlesInstance.SetActive(false);
 
-                        //critParticlesInstance.SetActive(false);
+
                     }
                     Destroy(this.gameObject);
                     critActive=false;
@@ -99,7 +90,7 @@ public class Buff : MonoBehaviour {
 
     public void setBuff(string statName, BuffManager.BuffType statType, float modifier, int frequency, int duration, GameObject target) {
         this.statName = statName;
-       // gameObject.tag = statName;
+
         this.statType = statType;
         this.modifier = modifier;
         this.frequency = frequency;
@@ -177,13 +168,7 @@ public class Buff : MonoBehaviour {
      
     }
 
-   /* void Awake() {
-        instance = this;
-        critParticlesInstance = critParticles;
-        attackParticlesInstance = attackParticles;
-        critParticlesInstance.SetActive(false);
-        attackParticlesInstance.SetActive(false);
-    }*/
+
 	
 	// Update is called once per frame
 	void Update () {
