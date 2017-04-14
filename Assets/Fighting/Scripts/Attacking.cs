@@ -76,10 +76,13 @@ public class Attacking : MonoBehaviour {
             if(enemyObject != null) {
                 enemyObject.GetComponent<Enemy>().hit(Player.getRegularAttack(), false);
                 // BuffManager.instance.CreateDOT("EnemyDOTFire", BuffManager.BuffType.fire, 10, 5, 1, enemyObject);
-                attackWithDOT(dotName, BuffManager.BuffType.fire, 10, 5, 1, enemyObject);
+                if (Player.isDOT) {
+                    attackWithDOT(dotName, BuffManager.BuffType.fire, Player.dotHit, 5, 1, enemyObject);
+                }
             }
 
         }
+
     }
 
     void attackWithDOT(string name, BuffManager.BuffType statType, int modifier, int duration, int frequency,GameObject target) {

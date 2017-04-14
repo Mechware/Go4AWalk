@@ -18,6 +18,9 @@ public class Player : MonoBehaviour {
     public static ObservedValue<int> gold, experience, level, lootGold, distance;
     public static int experienceOfLastLevel = 0;
 
+    public static int dotHit;
+    public static bool isDOT;
+
     private static int maxHealth = 100;
     public static ObservedValue<int> health;
 
@@ -123,12 +126,50 @@ public class Player : MonoBehaviour {
     public void equipAccessory(item newItem) {
         UnityEngine.Assertions.Assert.AreEqual(newItem.type, itemType.Accessory, "Trying to equip something that is not an accessory.");
 
-        defenseModifier -= equippedArmor.attributeValue;
-        equippedArmor = newItem;
-        defenseModifier = equippedArmor.attributeValue;
-        GetComponent<PersistentUIElements>().updateItems();
-        savePlayer();
+        if((int)newItem.otherInfo == (int)BuffManager.BuffType.attack) {
+            equippedAccessory = newItem;
+            attackModifier = equippedAccessory.attributeValue;
+            GetComponent<PersistentUIElements>().updateItems();
+            savePlayer();
+        }
+        if ((int) newItem.otherInfo == (int) BuffManager.BuffType.crit) {
+            equippedAccessory = newItem;
+            critModifier = equippedAccessory.attributeValue;
+            GetComponent<PersistentUIElements>().updateItems();
+            savePlayer();
+        }
+        if ((int) newItem.otherInfo == (int) BuffManager.BuffType.defense) {
+            equippedAccessory = newItem;
+            defenseModifier = equippedAccessory.attributeValue;
+            GetComponent<PersistentUIElements>().updateItems();
+            savePlayer();
+        }
+        if ((int)newItem.otherInfo == (int)BuffManager.BuffType.fire) {
+            isDOT=true;
+            equippedAccessory = newItem;
+            dotHit = Mathf.RoundToInt(equippedAccessory.attributeValue);
+            savePlayer();
+        }
+
     }
+
+    public void removeAccessory(BuffManager.BuffType type) {
+        if (type == BuffManager.BuffType.attack) {
+            attackModifier -= equippedAccessory.attributeValue;
+        }
+        if (type == BuffManager.BuffType.crit) {
+            critModifier -= equippedAccessory.attributeValue;
+        }
+        if (type == BuffManager.BuffType.defense) {
+            defenseModifier -= equippedAccessory.attributeValue;
+        }
+        if (type == BuffManager.BuffType.fire) {
+            isDOT = false;
+            dotHit -= Mathf.RoundToInt(equippedAccessory.attributeValue);
+
+        }
+    }
+
 
     #endregion
 

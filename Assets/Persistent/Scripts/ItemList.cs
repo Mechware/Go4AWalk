@@ -43,6 +43,16 @@ public class ItemList {
     public const string JADE_ARMOR = "Jade Armor";
     public const string OBSIDIAN_ARMOR = "Obsidian Armor";
 
+    public const string CROWN = "Crown";
+    public const string SKULL = "Skull";
+    public const string GNOME_HAT = "Gnome Hat";
+    public const string VISOR = "Visor";
+
+    
+
+
+
+
     private static IDictionary<string, item> _itemMasterList = null;
     public static IDictionary<string, item> itemMasterList {
         get {
@@ -613,6 +623,44 @@ public class ItemList {
 
         itemMasterList[OBSIDIAN_ARMOR] = obsidianArmor;
         #endregion
+
+        #region Accessories
+        //***
+   BuffManager.BuffType lastBuff = default(BuffManager.BuffType);
+
+    item crown = new item(name: CROWN,
+            description: "Crown stolen from a goblin king.",
+            price: 1000000,
+            attributeValue: 0.95f,
+            otherInfo: (int)BuffManager.BuffType.crit,
+            type: itemType.Accessory,
+            useItem: null,
+            icon: null,
+            spawnRate: 0,
+            baseAttack: 0,
+            attackModifier: 1,
+            critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/Armor-Bronze") as Texture2D;
+        crown.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        crown.useItem += () => {
+            if (lastBuff != default(BuffManager.BuffType)) {
+            Player.instance.removeAccessory(lastBuff);
+        }
+            Player.instance.equipAccessory(crown);
+            lastBuff=BuffManager.BuffType.crit;
+            return true;
+        };
+
+
+        itemMasterList[CROWN] = crown;
+        #endregion
+
+      
     }
+
+
+    
 
 }
