@@ -712,7 +712,6 @@ public class ItemList {
             return true;
         };
 
-
         itemMasterList[SKULL] = skull;
         #endregion
 
