@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour {
     private int maxHealth;
     public static float attackModifierEnemy = 1;
     public static float defenseModifierEnemy = 1;
+    public bool isDead = false;
 
 
 
@@ -109,12 +110,12 @@ public class Enemy : MonoBehaviour {
 
     void die() {
         GetComponentInChildren<Animator>().SetBool("dying", true);
+        isDead = true;
         Destroy(healthBar.transform.parent.gameObject);
         if(dieSound != null) {
             sound.clip = dieSound;
             sound.Play();
         }
-        
 
         Player.giveLootGold(goldToGive);
         Player.giveExperience(expToGive);

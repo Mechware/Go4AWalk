@@ -26,11 +26,12 @@ public class BuffManager : MonoBehaviour {
         instance = this;
         critParticlesInstance = critParticles;
         attackParticlesInstance = attackParticles;
+
     }
 	// Use this for initialization
 	void Start () {
-	
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {

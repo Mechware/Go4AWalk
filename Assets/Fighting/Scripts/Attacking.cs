@@ -8,6 +8,7 @@ public class Attacking : MonoBehaviour {
     public GameObject buff;
     public int swipingID;
     public IDictionary<int, Vector2> touchesToSwipes = new Dictionary<int,Vector2>();
+    public string dotName = "EnemyDOTFire";
 
     public GameObject enemyObject;
 
@@ -42,6 +43,11 @@ public class Attacking : MonoBehaviour {
             }
         }
 #endif
+
+        if (enemyObject.GetComponent<Enemy>().isDead) {
+            BuffManager.removeCurrentBuff(dotName);
+        }
+
     }
 
     void checkAttack(Vector2 startPos, Vector2 endPos) {
@@ -70,7 +76,7 @@ public class Attacking : MonoBehaviour {
             if(enemyObject != null) {
                 enemyObject.GetComponent<Enemy>().hit(Player.getRegularAttack(), false);
                 // BuffManager.instance.CreateDOT("EnemyDOTFire", BuffManager.BuffType.fire, 10, 5, 1, enemyObject);
-                attackWithDOT("EnemyDOTFire", BuffManager.BuffType.fire, 10, 5, 1, enemyObject);
+                attackWithDOT(dotName, BuffManager.BuffType.fire, 10, 5, 1, enemyObject);
             }
 
         }
@@ -78,8 +84,9 @@ public class Attacking : MonoBehaviour {
 
     void attackWithDOT(string name, BuffManager.BuffType statType, int modifier, int duration, int frequency,GameObject target) {
 
-        if(!BuffManager.buffs.ContainsKey(name)) {
+        if(!BuffManager.buffs.ContainsKey(name) && !enemyObject.GetComponent<Enemy>().isDead) {
             BuffManager.instance.CreateDOT(name, statType, modifier, duration, frequency, target);
         }
+
     }
 }
