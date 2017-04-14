@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 753516c006b4ca047ad1faa89c9489e6
-timeCreated: 1487703405
+timeCreated: 1492202196
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -21,6 +21,7 @@ TextureImporter:
     21300028: GoblinKing_14
     21300030: GoblinKing_15
     21300032: GoblinKing_16
+    21300034: GoblinKing_17
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -284,6 +285,19 @@ TextureImporter:
       tessellationDetail: 0
     - serializedVersion: 2
       name: GoblinKing_16
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoblinKing_17
       rect:
         serializedVersion: 2
         x: 256
