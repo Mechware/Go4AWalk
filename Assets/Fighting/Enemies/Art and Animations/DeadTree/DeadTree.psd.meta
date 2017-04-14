@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 4d24652c5b5c1ae449d4c41789e7b4eb
-timeCreated: 1492139407
+guid: 6903ed611e0c10b4996e9f3e66f615d4
+timeCreated: 1492140696
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: CursedTree_0
-    21300002: CursedTree_1
-    21300004: CursedTree_2
-    21300006: CursedTree_3
-    21300008: CursedTree_4
-    21300010: CursedTree_5
-    21300012: CursedTree_6
-    21300014: CursedTree_7
-    21300016: CursedTree_8
-    21300018: CursedTree_9
-    21300020: CursedTree_10
-    21300022: CursedTree_11
-    21300024: CursedTree_12
-    21300026: CursedTree_13
-    21300028: CursedTree_14
-    21300030: CursedTree_15
+    21300000: DeadTree_0
+    21300002: DeadTree_1
+    21300004: DeadTree_2
+    21300006: DeadTree_3
+    21300008: DeadTree_4
+    21300010: DeadTree_5
+    21300012: DeadTree_6
+    21300014: DeadTree_7
+    21300016: DeadTree_8
+    21300018: DeadTree_9
+    21300020: DeadTree_10
+    21300022: DeadTree_11
+    21300024: DeadTree_12
+    21300026: DeadTree_13
+    21300028: DeadTree_14
+    21300030: DeadTree_15
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -70,16 +70,11 @@ TextureImporter:
     textureFormat: -3
     compressionQuality: 50
     allowsAlphaSplitting: 0
-  - buildTarget: Standalone
-    maxTextureSize: 2048
-    textureFormat: -3
-    compressionQuality: 50
-    allowsAlphaSplitting: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CursedTree_0
+      name: DeadTree_0
       rect:
         serializedVersion: 2
         x: 0
@@ -92,7 +87,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_1
+      name: DeadTree_1
       rect:
         serializedVersion: 2
         x: 64
@@ -105,7 +100,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_2
+      name: DeadTree_2
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +113,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_3
+      name: DeadTree_3
       rect:
         serializedVersion: 2
         x: 64
@@ -131,7 +126,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_4
+      name: DeadTree_4
       rect:
         serializedVersion: 2
         x: 128
@@ -144,7 +139,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_5
+      name: DeadTree_5
       rect:
         serializedVersion: 2
         x: 192
@@ -157,7 +152,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_6
+      name: DeadTree_6
       rect:
         serializedVersion: 2
         x: 0
@@ -170,7 +165,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_7
+      name: DeadTree_7
       rect:
         serializedVersion: 2
         x: 64
@@ -183,7 +178,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_8
+      name: DeadTree_8
       rect:
         serializedVersion: 2
         x: 128
@@ -196,7 +191,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_9
+      name: DeadTree_9
       rect:
         serializedVersion: 2
         x: 192
@@ -209,7 +204,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_10
+      name: DeadTree_10
       rect:
         serializedVersion: 2
         x: 256
@@ -222,7 +217,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_11
+      name: DeadTree_11
       rect:
         serializedVersion: 2
         x: 320
@@ -235,7 +230,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_12
+      name: DeadTree_12
       rect:
         serializedVersion: 2
         x: 384
@@ -248,7 +243,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_13
+      name: DeadTree_13
       rect:
         serializedVersion: 2
         x: 0
@@ -261,7 +256,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_14
+      name: DeadTree_14
       rect:
         serializedVersion: 2
         x: 64
@@ -274,7 +269,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CursedTree_15
+      name: DeadTree_15
       rect:
         serializedVersion: 2
         x: 128
