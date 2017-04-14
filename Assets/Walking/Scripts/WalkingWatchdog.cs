@@ -111,7 +111,7 @@ public class WalkingWatchdog : MonoBehaviour {
 
         // Check if going too fast ( > 20 km/h || > 5.56 m/s)
         if (speed > 5.56f) {
-            StartCoroutine(slowDownAlert(speed));
+            slowDownAlert(speed);
             return;
         }
 
@@ -150,14 +150,11 @@ public class WalkingWatchdog : MonoBehaviour {
     /// </summary>
     /// <param name="speed">The speed the user was travelling</param>
     /// <returns></returns>
-    IEnumerator slowDownAlert(float speed) {
-        slowDownAlertObject.SetActive(true);
+    void slowDownAlert(float speed) {
+        
         speed *= 1000 / 3600;
-        slowDownAlertObject.GetComponentInChildren<Text>().text = "Slow the fuck down speed racer!\n" +
-                                                              "You were going " + speed + " km/h";
-
-        yield return new WaitForSeconds(5);
-        slowDownAlertObject.SetActive(false);
+        PopUp.instance.showPopUp(string.Format("It seems like you're going too fast, please slow down for us to track you.\nYou were going {0} km\\h", speed), 
+            new string[] { "Okay" });
     }
 
     /// <summary>

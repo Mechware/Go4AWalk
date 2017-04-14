@@ -28,7 +28,8 @@ public class PopUp : MonoBehaviour {
         
     }
 
-    public void showPopUp(string title, string[] buttonTitles, Action[] actionWhenButtonHit, 
+    public void showPopUp(string title, string[] buttonTitles, 
+        Action[] actionWhenButtonHit = null, 
         bool[] closePopUpWhenHit = null) {
 
         int i;
@@ -36,6 +37,13 @@ public class PopUp : MonoBehaviour {
             closePopUpWhenHit = new bool[buttonTitles.Length];
             for (i = 0 ; i < closePopUpWhenHit.Length ; i++) {
                 closePopUpWhenHit[i] = true;
+            }
+        }
+
+        if(actionWhenButtonHit == null) {
+            actionWhenButtonHit = new Action[buttonTitles.Length];
+            for(i = 0 ; i < actionWhenButtonHit.Length ; i++) {
+                actionWhenButtonHit[i] = () => { };
             }
         }
 

@@ -149,23 +149,16 @@ public class GPS : MonoBehaviour
                 if (gpsUpdates == GPSUpdatesBeforeAverage) {
                     longitude = totalLong / GPSUpdatesBeforeAverage;
                     latitude = totalLat / GPSUpdatesBeforeAverage;
-                    deltaDistance.Value = Haversine(prevLongitude, prevLatitude, longitude, latitude) * 1000f;
-
                     prevLongitude = longitude;
                     prevLatitude = latitude;
-
-                    if (deltaDistance.Value > 0f) {
-                        DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0,
-                                                                System.DateTimeKind.Utc);
-
-                        double curTime = (DateTime.UtcNow - epochStart).TotalSeconds;
-                        deltaTime = (float) (curTime - timeOfLastDistanceUpdate);
-                        timeOfLastDistanceUpdate = curTime;
-                    }
-
-                    gpsUpdates = 1;
                     totalLong = longitude;
                     totalLat = latitude;
+
+                    deltaDistance.Value = Haversine(prevLongitude, prevLatitude, longitude, latitude) * 1000f;
+                    updateChangeInTime();
+                    
+
+                    gpsUpdates = 1;
 
                 } else {
                     latitude = Input.location.lastData.latitude;
@@ -174,6 +167,15 @@ public class GPS : MonoBehaviour
             } // If timestamp has been updated
             yield return new WaitForSeconds(timeBetweenChecks);
         }
+    }
+
+    private void updateChangeInTime() {
+        DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0,
+                                                                System.DateTimeKind.Utc);
+
+        double curTime = (DateTime.UtcNow - epochStart).TotalSeconds;
+        deltaTime = (float) (curTime - timeOfLastDistanceUpdate);
+        timeOfLastDistanceUpdate = curTime;
     }
 
     public string getGPSData() {
