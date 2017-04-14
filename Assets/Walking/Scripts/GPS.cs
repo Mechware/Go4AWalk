@@ -67,6 +67,8 @@ public class GPS : MonoBehaviour
 
         if(state.Value == LocationState.Enabled) {
             initializeVariables();
+        } else {
+            PopUp.instance.showPopUp("Could not connect to GPS.", new string[] { "Okay" });
         }
     }
 
@@ -93,6 +95,9 @@ public class GPS : MonoBehaviour
         else
         {
             StartCoroutine(initializeGPS());
+            if (state.Value != LocationState.Enabled) {
+                PopUp.instance.showPopUp("Could not connect to GPS.", new string[] { "Okay" });
+            }
         }
     }
 

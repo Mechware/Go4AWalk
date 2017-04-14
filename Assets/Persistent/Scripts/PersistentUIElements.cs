@@ -79,7 +79,7 @@ public class PersistentUIElements : MonoBehaviour {
     public void openJournal() {
 
         JournalMenu.SetActive(true);
-        Time.timeScale = 0;
+        GameState.pause();
         JournalButton.SetActive(false);
         if (currentPanel.Equals("")) {
             currentPanel = "Quests";
@@ -94,7 +94,7 @@ public class PersistentUIElements : MonoBehaviour {
     public void closeJournal() {
         JournalButton.SetActive(true);
         JournalMenu.SetActive(false);
-        Time.timeScale = 1;
+        GameState.resume();
     }
 
     // Used for opening panels via buttons

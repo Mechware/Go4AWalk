@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class GameState : MonoBehaviour {
 
@@ -8,6 +9,8 @@ public class GameState : MonoBehaviour {
     private const string FIGHTING_LEVEL = "FightingScene";
     private const string WALKING_LEVEL = "WalkingScreen";
     private const string CAMPSITE = "Campsite";
+
+    public static bool paused = false;
 
     public enum scene {
         TOWN_LEVEL,
@@ -47,6 +50,7 @@ public class GameState : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
         StartCoroutine(fadeIn());
 	}
 	
@@ -89,5 +93,15 @@ public class GameState : MonoBehaviour {
         } else {
             throw new System.Exception("Tried to load non-existent scene");
         }
+    }
+
+    internal static void pause() {
+        Time.timeScale = 0;
+        paused = true;
+    }
+
+    internal static void resume() {
+        Time.timeScale = 1;
+        paused = false;
     }
 }

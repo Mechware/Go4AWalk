@@ -60,7 +60,6 @@ public class EnemyWatchdog : MonoBehaviour {
             currentEnemy = bosses[StoryOverlord.currentLevel];
         } else {
             currentEnemy = enemies[enemiesQueue.Dequeue()];
-            print("Removing " + currentEnemy.name + " from the queue and spawning them");
         }
 
         if (currentEnemy == null) {

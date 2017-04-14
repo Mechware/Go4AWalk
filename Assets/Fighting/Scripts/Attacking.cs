@@ -21,6 +21,11 @@ public class Attacking : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if(GameState.paused) {
+            return;
+        }
+
+
 #if UNITY_EDITOR || UNITY_WEBGL
 
    
