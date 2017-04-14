@@ -655,9 +655,69 @@ public class ItemList {
 
 
         itemMasterList[CROWN] = crown;
+
+
+
+        item gnomeHat = new item(name: GNOME_HAT,
+           description: "Crown stolen from a gnome chompy.",
+           price: 100,
+           attributeValue: 0.95f,
+           otherInfo: (int) BuffManager.BuffType.attack,
+           type: itemType.Accessory,
+           useItem: null,
+           icon: null,
+           spawnRate: 0,
+           baseAttack: 0,
+           attackModifier: 1,
+           critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/Armor-Bronze") as Texture2D;
+        gnomeHat.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        gnomeHat.useItem += () => {
+            if (lastBuff != default(BuffManager.BuffType)) {
+                Player.instance.removeAccessory(lastBuff);
+            }
+            Player.instance.equipAccessory(gnomeHat);
+            lastBuff=BuffManager.BuffType.attack;
+            return true;
+        };
+
+
+        itemMasterList[GNOME_HAT] = gnomeHat;
+
+
+        item skull = new item(name: SKULL,
+           description: "Skull from a spooky skeleton",
+           price: 1000,
+           attributeValue: 0.95f,
+           otherInfo: (int) BuffManager.BuffType.defense,
+           type: itemType.Accessory,
+           useItem: null,
+           icon: null,
+           spawnRate: 0,
+           baseAttack: 0,
+           attackModifier: 1,
+           critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/Armor-Bronze") as Texture2D;
+        skull.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        skull.useItem += () => {
+            if (lastBuff != default(BuffManager.BuffType)) {
+                Player.instance.removeAccessory(lastBuff);
+            }
+            Player.instance.equipAccessory(skull);
+            lastBuff=BuffManager.BuffType.defense;
+            return true;
+        };
+
+
+        itemMasterList[SKULL] = skull;
         #endregion
 
-      
+
+
     }
 
 
