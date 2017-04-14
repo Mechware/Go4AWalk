@@ -13,7 +13,6 @@ public class Buff : MonoBehaviour {
     public GameObject target;
 
 
-
     public void setBuff(string statName, BuffManager.BuffType statType, float modifier, int duration, GameObject target) {
         this.statName = statName;
         this.statType = statType;
@@ -151,6 +150,7 @@ public class Buff : MonoBehaviour {
     // Use this for initialization
     void Start () {
         DontDestroyOnLoad(this.gameObject);
+
 	}
 	
 	// Update is called once per frame

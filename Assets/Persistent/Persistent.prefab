@@ -4470,10 +4470,11 @@ MonoBehaviour:
   - {fileID: 1000010466509708, guid: 3e99fdd10b719dc4fb017ff22c9e4ce7, type: 2}
   - {fileID: 1000010147549132, guid: 31a4441a8fa5c61408f2f77f2b3fd3e0, type: 2}
   - {fileID: 1000013902114332, guid: 310bfd0a0b714df469b1d32a44e2cb3f, type: 2}
+  - {fileID: 1000011806226404, guid: 7808643baed44cf4591cba049ed443a8, type: 2}
   bosses:
   - {fileID: 1000012475826692, guid: 246168b928e0b2a4caffdfb013d8cea6, type: 2}
   - {fileID: 1000011934624438, guid: bd1b02c7805dee741923a77a0814ac78, type: 2}
-  - {fileID: 1000012618533784, guid: faa9b8b65c9e89f47afd986b5c9376fc, type: 2}
+  - {fileID: 1000011806226404, guid: 7808643baed44cf4591cba049ed443a8, type: 2}
   - {fileID: 1000013427855644, guid: cbe5082627cb5a34da9fae37129bbfe4, type: 2}
   - {fileID: 1000013902114332, guid: 310bfd0a0b714df469b1d32a44e2cb3f, type: 2}
   randomEncounterButton: {fileID: 0}
