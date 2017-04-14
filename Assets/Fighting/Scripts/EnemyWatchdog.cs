@@ -82,7 +82,13 @@ public class EnemyWatchdog : MonoBehaviour {
             } else if (Player.totalDistance.Value > nextEncounterDistance) {
                 if(enemiesQueue.Count <= 9) {
                     enemiesQueue.Enqueue(pickEnemy());
+                    if (enemiesQueue.Count >= 10) {
+                        PopUp.instance.showPopUp("Enemy queue is full! Be sure to defeat all of the enemies!",
+                            new string[] { "Okay" });
+                    }
+                    Handheld.Vibrate();
                 }
+                
                 nextEncounterDistance += maxRandomEncounterDistance * Random.Range(0.1f, 1f);
                 saveQueue();
             }
