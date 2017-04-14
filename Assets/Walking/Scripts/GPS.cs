@@ -9,7 +9,8 @@ public enum LocationState
     TimedOut,
     Failed,
     Enabled,
-    Stopped
+    Stopped,
+    Initializing
 }
 
 public class GPS : MonoBehaviour
@@ -19,10 +20,11 @@ public class GPS : MonoBehaviour
     public int GPSUpdatesBeforeAverage = 5;
     public float desiredAccuracyInMeters = 1f;
     public float updateDistanceInMeters = 0f;
+    public float timeBetweenChecks = 1f;
 
     [HideInInspector]
     // Approximate radius of the earth (in kilometers)
-    public LocationState state;
+    public ObservedValue<LocationState> state;
 
     // Position on earth (in degrees)
     public float latitude;
@@ -53,7 +55,7 @@ public class GPS : MonoBehaviour
         gpsObject = this;
         deltaDistance = new ObservedValue<float>(0);
         timeOfLastDistanceUpdate = DateTime.UtcNow.Second;
-        state = LocationState.Disabled;
+        state = new ObservedValue<LocationState>(LocationState.Initializing);
         latitude = 0f;
         longitude = 0f;
     }
@@ -63,20 +65,22 @@ public class GPS : MonoBehaviour
 
         yield return StartCoroutine(initializeGPS());
 
-        if(state == LocationState.Enabled) {
-            // Initialize all variables
-            gpsUpdates = 1;
-            timestamp = Input.location.lastData.timestamp;
-            latitude = Input.location.lastData.latitude;
-            longitude = Input.location.lastData.longitude;
-            prevLatitude = latitude;
-            prevLongitude = longitude;
-            totalLong = prevLongitude;
-            totalLat = prevLatitude;
-            DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0,
-                                                            System.DateTimeKind.Utc);
-            timeOfLastDistanceUpdate = (int) (DateTime.UtcNow - epochStart).TotalSeconds;
+        if(state.Value == LocationState.Enabled) {
+            initializeVariables();
         }
+    }
+
+    void initializeVariables() {
+        gpsUpdates = 1;
+        timestamp = Input.location.lastData.timestamp;
+        latitude = Input.location.lastData.latitude;
+        longitude = Input.location.lastData.longitude;
+        prevLatitude = latitude;
+        prevLongitude = longitude;
+        totalLong = prevLongitude;
+        totalLat = prevLatitude;
+        DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        timeOfLastDistanceUpdate = (int) (DateTime.UtcNow - epochStart).TotalSeconds;
     }
 
     void OnApplicationPause(bool pauseState)
@@ -84,7 +88,7 @@ public class GPS : MonoBehaviour
         if (pauseState)
         {
             Input.location.Stop();
-            state = LocationState.Disabled;
+            state.Value = LocationState.Disabled;
         }
         else
         {
@@ -95,7 +99,7 @@ public class GPS : MonoBehaviour
     IEnumerator initializeGPS() {
 
         if (!Input.location.isEnabledByUser) {
-            state = LocationState.Disabled;
+            state.Value = LocationState.Disabled;
             yield break;
         }
 
@@ -109,11 +113,12 @@ public class GPS : MonoBehaviour
         }
 
         if (waitTime == 0) {
-            state = LocationState.TimedOut;
+            state.Value = LocationState.TimedOut;
         } else if (Input.location.status == LocationServiceStatus.Failed) {
-            state = LocationState.Failed;
+            state.Value = LocationState.Failed;
         } else {
-            state = LocationState.Enabled;
+            state.Value = LocationState.Enabled;
+            StartCoroutine(checkForUpdates());
         }
     }
 
@@ -132,12 +137,8 @@ public class GPS : MonoBehaviour
         return EARTH_RADIUS * c;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (state == LocationState.Enabled)
-        {
-            
+    IEnumerator checkForUpdates() {
+        while(state.Value == LocationState.Enabled) {
             if (timestamp != Input.location.lastData.timestamp) {
 
                 totalLat += Input.location.lastData.latitude;
@@ -161,7 +162,7 @@ public class GPS : MonoBehaviour
                         deltaTime = (float) (curTime - timeOfLastDistanceUpdate);
                         timeOfLastDistanceUpdate = curTime;
                     }
-                    
+
                     gpsUpdates = 1;
                     totalLong = longitude;
                     totalLat = latitude;
@@ -170,14 +171,15 @@ public class GPS : MonoBehaviour
                     latitude = Input.location.lastData.latitude;
                     longitude = Input.location.lastData.longitude;
                 } // if averaging updates
-            } // If timestamp has been updated 
-        } // if state is enabled
-    } // update
+            } // If timestamp has been updated
+            yield return new WaitForSeconds(timeBetweenChecks);
+        }
+    }
 
     public string getGPSData() {
 
         string text;
-        switch (state) {
+        switch (state.Value) {
             case LocationState.Enabled:
                 DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0,
                                                                 DateTimeKind.Utc);
@@ -207,6 +209,9 @@ public class GPS : MonoBehaviour
                 break;
             case LocationState.Stopped:
                 text = "GPS stopped";
+                break;
+            case LocationState.Initializing:
+                text = "GPS initializing";
                 break;
             default:
                 text = "GPS error occurred";

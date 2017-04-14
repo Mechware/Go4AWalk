@@ -10,6 +10,7 @@
 
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// A structure that is an item. I left the "otherInfo" object
@@ -26,7 +27,7 @@ public struct item {
     // The amount of stuff it gives you, ex:
     // Amount of health given make, duration of
     // lure/repel, amount of attack boost, etc.
-    public int attributeValue;
+    public float attributeValue;
     // Just other info that was may need 
     public object otherInfo;
     // The item type
@@ -36,8 +37,14 @@ public struct item {
     public Func<bool> useItem;
     // Item's icon
     public Sprite icon;
+    // Item's spawnrate (based on the item not on the enemy, which might be a different thing to add later)
+    public int spawnRate;
+    // Stats of weapons
+    public int baseAttack;
+    public float attackModifier;
+    public float critModifier;
 
-    public item(string name, string description, int price, int attributeValue, object otherInfo, itemType type, Func<bool> useItem, Sprite icon) {
+    public item(string name, string description, int price, float attributeValue, object otherInfo, itemType type, Func<bool> useItem, Sprite icon, int spawnRate, int baseAttack, float attackModifier, float critModifier) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -46,90 +53,73 @@ public struct item {
         this.type = type;
         this.useItem = useItem;
         this.icon = icon;
+        this.spawnRate = spawnRate;
+        this.baseAttack = baseAttack; ;
+        this.attackModifier = attackModifier;
+        this.critModifier = critModifier;
     }
 }
 
-/// <summary>
-/// All the different item types that exist in our game.
-/// </summary>
-public enum itemType {
-    Potion,
-    Poison,
-    Equipment,
-}
 
 public class Inventory : MonoBehaviour {
 
-    public static item noItem = new item("", "", 0, 0, null, itemType.Equipment, () => { return false; }, null);
-    public const int INVENTORY_SIZE = 6;
-    public static Action onValueChanged;
-    private static item[] items;
-
-    // Use this for initialization
-    void Awake() {
-        initalizeInventory();
-        onValueChanged = null;
-    }
-
-    static void initalizeInventory() {
-        if (items != null)
-            return;
-        items = new item[INVENTORY_SIZE];
-        for(int i = 0 ; i < INVENTORY_SIZE ; i++) {
-            items[i] = noItem;
+    public const int INVENTORY_SIZE = 10;
+    private static List<item> _items;
+    public static List<item> items {
+        get {
+            if (_items == null)
+                _items = new List<item>();
+            return _items;
         }
     }
 
-    public static void addItem(item it, int pos) {
-        initalizeInventory();
-        items[pos] = it;
-        onValueChanged.Invoke();
+    public static void addItem(item item) {
+        if (items == null)
+            _items = new List<item>();
+        items.Add(item);
+        save();
     }
 
-    public static void addItem(item it) {
-        initalizeInventory();
+    public static string[] getInventory() {
+        List<string> itemNames = new List<string>();
+        foreach(item it in items) {
+            itemNames.Add(it.name);
+        }
+        return itemNames.ToArray();
+    }
 
-        for(int i = 0 ; i < INVENTORY_SIZE ; i++) {
-            if (items[i].Equals(noItem)) {
-                addItem(it, i);
-                return;
+    public static void setInventory(string[] itemNames) {
+        foreach(string itemName in itemNames) {
+            items.Add(ItemList.itemMasterList[itemName]);
+        }
+    }
+
+    public static void save() {
+        string[] itemNames = getInventory();
+        for (int i = 0 ; i < itemNames.Length ; i++) {
+            PlayerPrefs.SetString("Inventory_" + i, itemNames[i]);
+        }
+        PlayerPrefs.Save();
+    }
+
+    public static void load() {
+        List<string> itemNames = new List<string>();
+        int i = 0;
+        while (true) {
+            if (!PlayerPrefs.HasKey("Inventory_" + i)) {
+                break;
             }
+            itemNames.Add(PlayerPrefs.GetString("Inventory_" + i));
+            i++;
         }
-    }
-
-    public static void removeItem(int pos) {
-
-        initalizeInventory();
-
-        if (items[pos].Equals(noItem)) {
-            print("Inventory does not contain an item at position: " + pos);
-            return;
+        if (itemNames.Count > 0) {
+            _items = new List<item>();
+            setInventory(itemNames.ToArray());
         }
-        
-        items[pos] = noItem;
-        onValueChanged.Invoke();
+
     }
 
-    private static void Items_OnValueChange() {
-        print("Okay now it's being thronw?");
-    }
-
-    public static void use(item it) {
-        it.useItem();
-    }
-
-    public static void use(int number) {
-        bool shouldRemoveItem = items[number].useItem();
-        if(shouldRemoveItem)
-            removeItem(number);
-    }
-
-    // Non-static method for inventory buttons to use
-    public void useItem(int number) {
-        use(number);
-    }
-
-    public static item getItem(int pos) {
-        return items[pos];
+    public static void clear() {
+        _items = null;
     }
 }

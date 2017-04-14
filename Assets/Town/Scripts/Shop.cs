@@ -1,22 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class Shop : MonoBehaviour {
 
-    public GameObject itemButton0, itemButton1, itemButton2, itemButton3, itemButton4, itemButton5, itemButton6;
-    public GameObject itemBackPanel, itemQuests;
-    public GameObject itemInfoPanel, itemContentPanel, itemAddedPrefab;
-    public Text itemPageTitle, itemPageOverview;
-    public Image itemImage;
+    public GameObject[] itemButtons;
+    public GameObject shopPanel;
+    public GameObject listOfItemsViewer, itemAddedFeedbackText;
+
+    public GameObject itemViewerPanel;
+    public Text itemViewerTitle, itemViewerDescription;
+    public Image itemViewerImage;
 
     item[] items;
-    int currentItemNum = -1;
+    item currentItem;
 
-    public TownWatchdog townWatchdog;
     // Use this for initialization
     void Start() {
-        townWatchdog = GetComponent<TownWatchdog>();
     }
 
     // Update is called once per frame
@@ -25,35 +26,48 @@ public class Shop : MonoBehaviour {
     }
 
     public void openShop() {
+        shopPanel.SetActive(true);
+        listOfItemsViewer.SetActive(true);
+        itemViewerPanel.SetActive(false);
         setItems();
-        townWatchdog.open(townWatchdog.shop);
+    }
+
+    public void closeShop() {
+        shopPanel.SetActive(false);
     }
 
     public void openItem(item it) {
-        itemPageTitle.text = it.name;
-        itemPageOverview.text = it.description;
-        itemImage.sprite = it.icon;
-        itemInfoPanel.SetActive(true);
+        currentItem = it;
+        itemViewerTitle.text = it.name;
+        itemViewerDescription.text = it.description;
+        itemViewerImage.sprite = it.icon;
+        itemViewerPanel.SetActive(true);
     }
 
     public void acceptItem() {
-        if (currentItemNum == -1) {
+        if (currentItem.Equals(ItemList.noItem) || currentItem.Equals(default(item))) {
             print("No item selected");
             return;
         }
 
-        if(items[currentItemNum].price > Player.gold.Value) {
+        if(currentItem.price > Player.gold.Value) {
             StartCoroutine(showNotEnoughGold());
         } else {
-            Player.takeGold(items[currentItemNum].price);
-            Inventory.addItem(items[currentItemNum]);
+            Player.takeGold(currentItem.price);
+            Inventory.items.Add(currentItem);
             StartCoroutine(buyItemFeedback());
         }
     }
 
+    public void ignoreItem() {
+       itemViewerPanel.SetActive(false);
+    }
+
     IEnumerator buyItemFeedback() {
-        GameObject addedPrefab = Instantiate(itemAddedPrefab, itemContentPanel.transform, false)
+        GameObject addedPrefab = Instantiate(itemAddedFeedbackText, itemViewerPanel.transform, false)
             as GameObject;
+
+        addedPrefab.SetActive(true);
 
         // Fade color
         Color startColor = addedPrefab.GetComponent<Text>().color;
@@ -73,52 +87,42 @@ public class Shop : MonoBehaviour {
         Destroy(addedPrefab);
     }
 
-    public void ignoreItem() {
-        itemInfoPanel.SetActive(false);
-    }
-
-    public void selectItem(int buttonNum) {
-        openItem(items[buttonNum]);
-        currentItemNum = buttonNum;
-    }
-
     void setItems() {
         int sizeOfShop = 7;
         items = new item[sizeOfShop];
-        
+        int i;
+
+        for (i = 0; i < sizeOfShop; i++) {
+            items[i] = ItemList.noItem;
+        }
 
         items[0] = ItemList.itemMasterList[ItemList.HEALTH_POTION];
         items[1] = ItemList.itemMasterList[ItemList.CRIT_POTION];
 		items [2] = ItemList.itemMasterList [ItemList.ATTACK_POTION];
+        items[3] = ItemList.itemMasterList[ItemList.BRONZE_SWORD];
 
-        for(int i = 2 ; i < sizeOfShop ; i++) {
-            items[i] = Inventory.noItem;
+        Action<Button, item> setOnClick = (Button itemButton, item it) => {
+            itemButton.onClick.AddListener(() => { openItem(it); });
+        };
+
+        for(i=0 ; i < items.Length && !items[i].Equals(ItemList.noItem) ; i++) { 
+            itemButtons[i].GetComponentInChildren<Text>().text = items[i].name + "\n" + items[i].description + "\nPrice: " + items[i].price;
+            itemButtons[i].GetComponentsInChildren<Image>()[1].sprite = items[i].icon;
+            setOnClick(itemButtons[i].GetComponent<Button>(), items[i]);
         }
-
-        itemButton0.GetComponentInChildren<Text>().text = items[0].name + "\n" + items[0].description;
-        itemButton1.GetComponentInChildren<Text>().text = items[1].name + "\n" + items[1].description;
-        itemButton2.GetComponentInChildren<Text>().text = items[2].name + "\n" + items[2].description;
-        itemButton3.GetComponentInChildren<Text>().text = items[3].name + "\n" + items[3].description;
-        itemButton4.GetComponentInChildren<Text>().text = items[4].name + "\n" + items[4].description;
-        itemButton5.GetComponentInChildren<Text>().text = items[5].name + "\n" + items[5].description;
-        itemButton6.GetComponentInChildren<Text>().text = items[6].name + "\n" + items[6].description;
-        itemButton0.GetComponentsInChildren<Image>()[1].sprite = items[0].icon;
-        itemButton1.GetComponentsInChildren<Image>()[1].sprite = items[1].icon;
-        itemButton2.GetComponentsInChildren<Image>()[1].sprite = items[2].icon;
-        itemButton3.GetComponentsInChildren<Image>()[1].sprite = items[3].icon;
-        itemButton4.GetComponentsInChildren<Image>()[1].sprite = items[4].icon;
-        itemButton5.GetComponentsInChildren<Image>()[1].sprite = items[5].icon;
-        itemButton6.GetComponentsInChildren<Image>()[1].sprite = items[6].icon;
+        for(; i < itemButtons.Length ; i++) {
+            itemButtons[i].SetActive(false);
+        }
     }
 
     IEnumerator showNotEnoughGold() {
-        string prev = itemPageOverview.GetComponent<Text>().text;
+        string prev = itemViewerDescription.GetComponent<Text>().text;
         if (prev.Equals("Not enough gold...")) {
             yield break;
         }
             
-        itemPageOverview.GetComponent<Text>().text = "Not enough gold...";
+        itemViewerDescription.GetComponent<Text>().text = "Not enough gold...";
         yield return new WaitForSeconds(2);
-        itemPageOverview.GetComponent<Text>().text = prev;
+        itemViewerDescription.GetComponent<Text>().text = prev;
     }
 }

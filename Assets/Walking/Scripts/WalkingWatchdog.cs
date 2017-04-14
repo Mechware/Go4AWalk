@@ -7,44 +7,90 @@ public class WalkingWatchdog : MonoBehaviour {
 
 
     // UI for walking
+    public static WalkingWatchdog instance;
     public Vector2 startPosition, endPosition;
     public GameObject characterSprite;
-
+    public GameObject equippedWeaponSprite, equippedArmorSprite;
+    public Material garden, grass, forest, hauntedForest;
     public GameObject goToTownPanel, slowDownAlertObject;
-    public Button takeStepButton, randomEncounterButton;
+    public GameObject backgroundTexture;
+    public Button takeStepButton, randomEncounterButton, fightEnemiesButton;
     public Text walkingStats, questDistanceTravelled;
     public Text questDistanceToTravel;
+    public Text enemyQueueCount;
     private GPS gps;
     
+    void Awake() {
+        instance = this;
+        gps = GetComponent<GPS>();
+
+    }
 
     // Use this for initialization
     void Start () {
 
-        gps = GetComponent<GPS>();
+        StartCoroutine(checkQueueSize());
 
         // Make it so when the GPS changes, increase player distance is called
         gps.deltaDistance.OnValueChange += increasePlayerDistance;
 
         takeStepButton.onClick.AddListener(() => {
             // Move 1 meter per step click
-            updateDistance(1, 1);
+            updateDistance(25, 25);
         });
+    }
+	
+    public void setQuestStuff() {
+
+        backgroundTexture.GetComponent<MeshRenderer>().material = StoryOverlord.walkingBackground;
 
         // Display the correct distance to travel
         if (Questing.currentQuest.distance == -1) {
             questDistanceToTravel.text = "∞";
         } else {
-            questDistanceToTravel.text = Questing.currentQuest.distance/100 + "";
+            if (Questing.currentQuest.distance > 1001f) {
+                questDistanceToTravel.text = Questing.currentQuest.distance / 1000 + "km";
+            } else {
+                questDistanceToTravel.text = Questing.currentQuest.distance + "m";
+            }
+
         }
 
         updateDistanceTravelledUI();
+        setEquippedItemIcon();
     }
-	
 	// Update is called once per frame
 	void Update () {
-       
+        
     }
 
+    public void setEquippedItemIcon() {
+        equippedWeaponSprite.GetComponent<SpriteRenderer>().sprite = Player.equippedWeapon.icon;
+        if (!Player.equippedArmor.Equals(ItemList.noItem) && !Player.equippedArmor.Equals(default(item))) {
+            equippedArmorSprite.GetComponentInChildren<SpriteRenderer>().enabled = true;            
+            Texture2D texture = Resources.Load("EquippedItems/" + Player.equippedArmor.name) as Texture2D;
+            Sprite armorIcon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            equippedArmorSprite.GetComponent<SpriteRenderer>().sprite = armorIcon;
+        }             
+                    
+    }
+
+    private int lastQueueSize;
+    const float UPDATE_QUEUE_TIME = 1;
+    IEnumerator checkQueueSize() {
+
+        enemyQueueCount.text = string.Format("{0}", EnemyWatchdog.enemiesQueue.Count);
+        lastQueueSize = EnemyWatchdog.enemiesQueue.Count;
+
+        while (true) {
+            if (EnemyWatchdog.enemiesQueue.Count != lastQueueSize) {
+                enemyQueueCount.text = string.Format("{0}", EnemyWatchdog.enemiesQueue.Count);
+                lastQueueSize = EnemyWatchdog.enemiesQueue.Count;
+            }
+            yield return new WaitForSeconds(UPDATE_QUEUE_TIME);
+        }
+    }
+    
 
     void increasePlayerDistance() {
         updateDistance(gps.deltaDistance.Value, gps.deltaTime);
@@ -70,8 +116,7 @@ public class WalkingWatchdog : MonoBehaviour {
         }
 
         // Update player values
-        Player.giveExperience(Mathf.RoundToInt(changeInDistance));
-        Player.totalDistance += changeInDistance;
+        Player.totalDistance.Value += changeInDistance;
 
         // Update quest values
         Questing.move(changeInDistance);
@@ -85,19 +130,19 @@ public class WalkingWatchdog : MonoBehaviour {
     void updateDistanceTravelledUI() {
 
         // Update questing distance travelled text
-        questDistanceTravelled.text = string.Format("{0:0.00}", Questing.currentQuest.distanceProgress/100);
+        questDistanceTravelled.text = "" + Mathf.RoundToInt(Questing.currentQuest.distanceProgress);
 
         // Update position of character sprite on screen
         if (Questing.currentQuest.distance == -1 || Questing.currentQuest.distance == 0) {
-            characterSprite.transform.position = startPosition;
-        } else {
+            //characterSprite.transform.position = startPosition;
+        } /*else {
             float percentToEnd = Questing.currentQuest.distanceProgress/Questing.currentQuest.distance;
             float xDistanceDifference = endPosition.x - startPosition.x;
             float yDistanceDifference = endPosition.y - startPosition.y;
             float xPos = xDistanceDifference * percentToEnd + startPosition.x;
             float yPos = yDistanceDifference * percentToEnd + startPosition.y;
             characterSprite.transform.position = new Vector2(xPos, yPos);
-        }
+        }*/
     }
 
     /// <summary>
@@ -126,6 +171,16 @@ public class WalkingWatchdog : MonoBehaviour {
         randomEncounterButton.GetComponent<Button>().onClick.AddListener(() => {
             encounter();
         });
+    }
+
+    public void fightEnemiesFromQueue(Action encounter)
+    {
+        fightEnemiesButton.gameObject.SetActive(true);
+        fightEnemiesButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            encounter();
+        });
+
     }
 
     /// <summary>

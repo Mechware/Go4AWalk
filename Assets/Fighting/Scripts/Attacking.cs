@@ -1,39 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Attacking : MonoBehaviour {
 
     private Vector2 startPosition, swipe;
+    public GameObject buff;
+    public int swipingID;
+    public IDictionary<int, Vector2> touchesToSwipes = new Dictionary<int,Vector2>();
+
+    public GameObject enemyObject;
+
 
     // Use this for initialization
     void Start () {
-        
+        enemyObject = EnemyWatchdog.instance.currentEnemy;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WebGLPlayer) {
-            if (Input.GetMouseButtonUp(0)) {
-                checkAttack(startPosition, Input.mousePosition);
+#if UNITY_EDITOR || UNITY_WEBGL
 
-            } else if (Input.GetMouseButtonDown(0)) {
-                Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                startPosition = mousePos;
-            }
-        } else {
-            if (Input.touchCount > 0) {
-                Touch t = Input.GetTouch(0);
+   
+        if (Input.GetMouseButtonUp(0)) {
+            checkAttack(startPosition, Input.mousePosition);
 
+        } else if (Input.GetMouseButtonDown(0)) {
+            Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            startPosition = mousePos;
+        }
+#else
+        if (Input.touchCount > 0) {
+            foreach(Touch t in Input.touches) {
                 if (t.phase == TouchPhase.Ended) {
-
-                    checkAttack(startPosition, t.position);
-
+                    checkAttack(touchesToSwipes[t.fingerId], t.position);
+                    touchesToSwipes.Remove(t.fingerId);
                 } else if (t.phase == TouchPhase.Began) {
-                    startPosition = t.position;
+                    touchesToSwipes.Add(t.fingerId, t.position);
                 }
             }
         }
+#endif
     }
 
     void checkAttack(Vector2 startPos, Vector2 endPos) {
@@ -44,8 +52,8 @@ public class Attacking : MonoBehaviour {
         if (swipe.magnitude > Screen.width/4) {
 
             // Hit enemy with damage dictated by Player class
-            if (EnemyWatchdog.currentEnemy != null && EnemyWatchdog.currentEnemy.GetComponentInChildren<Collider2D>() != null) {
-                EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getCriticalAttack(swipe), true);
+            if (enemyObject != null && enemyObject.GetComponentInChildren<Collider2D>() != null) {
+                enemyObject.GetComponent<Enemy>().hit(Player.getCriticalAttack(swipe), true);
                 Player.resetCrit();
             }
 
@@ -59,8 +67,19 @@ public class Attacking : MonoBehaviour {
         // IF statement assumes enemy is only collider on screen
         if (hit.collider != null) {
             // Hit enemy with power dictated by Player class
-            if(EnemyWatchdog.currentEnemy != null)
-                EnemyWatchdog.currentEnemy.GetComponent<Enemy>().hit(Player.getRegularAttack(), false);
+            if(enemyObject != null) {
+                enemyObject.GetComponent<Enemy>().hit(Player.getRegularAttack(), false);
+                // BuffManager.instance.CreateDOT("EnemyDOTFire", BuffManager.BuffType.fire, 10, 5, 1, enemyObject);
+                attackWithDOT("EnemyDOTFire", BuffManager.BuffType.fire, 10, 5, 1, enemyObject);
+            }
+
+        }
+    }
+
+    void attackWithDOT(string name, BuffManager.BuffType statType, int modifier, int duration, int frequency,GameObject target) {
+
+        if(!BuffManager.buffs.ContainsKey(name)) {
+            BuffManager.instance.CreateDOT(name, statType, modifier, duration, frequency, target);
         }
     }
 }

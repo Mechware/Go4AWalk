@@ -4,18 +4,43 @@ using System.Collections;
 public class TreasureChest : MonoBehaviour {
 
 	public GameObject drop;
-    public ParticleSystem ps;
+    public ParticleSystem particles;
+    public GameObject itemContainer;
+    public AudioSource openSound;
+    public AudioSource goldSound;
+   
+
 
 	// Use this for initialization
 	void Start () {
 
 	}
 
-	public IEnumerator openChest () {
+	
+	
+
+    public IEnumerator itemDrop(item booty, System.Action callWhenDone) {
+
+        // open chest
         GetComponentInChildren<Animator>().SetTrigger("Open");
-        yield return new WaitForSeconds(1);
-        ps.gameObject.SetActive(true);
-        yield return new WaitForSeconds(3);
-        ps.Stop();
-	}
+        openSound.Play();
+        yield return new WaitForSeconds(2);
+        // shoot gold particles
+        particles.gameObject.SetActive(true);
+        particles.Play();
+        yield return new WaitForSeconds(1f);
+        particles.Stop();
+        goldSound.Stop();
+        // shoot item
+        GameObject item = GameObject.Instantiate(itemContainer, this.transform) as GameObject;
+        item.GetComponent<ItemContainer>().setItem(booty);
+        item.GetComponent<ItemContainer>().chestItem();
+        yield return new WaitForSeconds(3f);
+        callWhenDone();
+        // shoot amount of gold gotten
+        
+
+
+
+    }
 }

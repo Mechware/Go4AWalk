@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 #region Queststruct
 public struct quest {
     public string name;
@@ -40,7 +41,7 @@ public struct quest {
     }
 
     public string getStats() {
-        
+
         if (!active)
             return "No active quest";
 
@@ -50,14 +51,14 @@ public struct quest {
         s += "Xp Reward: " + xpReward + "\n";
 
         if (timeToComplete != -1) {
-            s += "Quest time length: " + string.Format("{0:0.00}", timeToComplete/60f) + " minutes\n";
+            s += "Quest time length: " + string.Format("{0:0.00}", timeToComplete / 60f) + " minutes\n";
         } else {
             s += "Quest time length: Unlimited\n";
         }
 
         double timeLeft = (endTime - System.DateTime.UtcNow).TotalMinutes;
         if (timeLeft < 5) {
-            s += "Time left: " + string.Format("{0:0.00}", timeLeft*60) + " seconds\n";
+            s += "Time left: " + string.Format("{0:0.00}", timeLeft * 60) + " seconds\n";
         } else if (timeLeft > 1000000) {
             s += "Time left: Unlimited\n";
         }
@@ -83,42 +84,46 @@ public struct quest {
 
 public class Questing : MonoBehaviour {
 
+    private const string QUESTING_DISTANCE = "QuestingDistance";
 
     // Questing
     public static quest currentQuest;
     public static Questing instance;
+    public EnemyWatchdog ew;
 
     // Use this for initialization
-    void Awake () {
-        if (currentQuest.active) {
-            // Stop it to make sure it's not running twice
-            StopCoroutine("checkQuestEnd");
-            StartCoroutine("checkQuestEnd");
-        }
+    void Awake() {
         instance = this;
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-    public static int waitTime = 5;
-    IEnumerator checkQuestEnd() {
-        while (currentQuest.endTime > System.DateTime.UtcNow) {
-            yield return new WaitForSeconds(waitTime);
-        }
-        print("Didn't finish quest in time");
-        endQuest(false);
+    void OnApplicationPause() {
+
     }
 
-    public static void startQuest(quest q) {
-        currentQuest = q;
-        if (q.timeToComplete != -1) {
-            instance.StartCoroutine("checkQuestEnd");
+    void Start() {
+        if(currentQuest.active == false && GameState.walking) {
+            float progressThroughQuest = PlayerPrefs.GetFloat(QUESTING_DISTANCE, 0);
+            StoryOverlord.startQuest(StoryOverlord.currentLevel, progressThroughQuest);
         }
+        if(GameState.walking)
+            WalkingWatchdog.instance.setQuestStuff();
+    }
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(Player.WALKING_LEVEL);
+    // Update is called once per frame
+    void Update() {
+
+    }
+
+    public static void startQuest(quest q, float progress) {
+        currentQuest = q;
+        if(progress == 0) {
+            DialoguePopUp.instance.showDialog(StoryOverlord.questStartDialogue, 
+                StoryOverlord.characterNameStart, 
+                StoryOverlord.characterSpriteStart, 
+                () => { });
+        } else {
+            currentQuest.distanceProgress = progress;
+        }
     }
 
     public static void endQuest(bool userFinished) {
@@ -127,40 +132,46 @@ public class Questing : MonoBehaviour {
             print("Quest passed!");
             Player.giveGold(currentQuest.goldReward);
             Player.giveExperience(currentQuest.xpReward);
+
+            DialoguePopUp.instance.showDialog(StoryOverlord.questEndDialogue, StoryOverlord.characterNameEnd, StoryOverlord.characterSpriteEnd, () => {
+            PopUp.instance.showPopUp("QUEST COMPLETE! \n \n" + "Continue on your journey." + "\n\n",
+                new string[] { "Continue"},
+                new System.Action[] {
+                    new System.Action(() => {
+                        StoryOverlord.currentLevel++;
+                        print("Current level in quest complete: " + StoryOverlord.currentLevel);
+                        Player.instance.savePlayer();
+                        currentQuest.active = false;
+                        GameState.loadScene(GameState.scene.WALKING_LEVEL);                        
+                        }),
+                     }
+                );
+            });
         } else {
             print("Quest failed!");
+            Player.distance.Value -= 100; // Sets the player back 100m.
+            PopUp.instance.showPopUp("QUEST FAILED! \nOh no you were defeated! \n" + "You run away and returned to camp." + "\n\n",
+                new string[] { "Continue" },
+                new System.Action[] {
+                    new System.Action(() => {GameState.loadScene(GameState.scene.CAMPSITE); }) });
         }
 
-        currentQuest.active = false;
+        PlayerPrefs.DeleteKey(QUESTING_DISTANCE);
+    }
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(Player.TOWN_LEVEL);
+    public static void makeCamp() {
+        GameState.loadScene(GameState.scene.CAMPSITE);
     }
 
     public static void move(float distance) {
-
         currentQuest.distanceProgress += distance;
-        
+        PlayerPrefs.SetFloat(QUESTING_DISTANCE, currentQuest.distanceProgress);
+
         if (currentQuest.distanceProgress >= currentQuest.distance) {
             if (currentQuest.distance != -1) {
                 currentQuest.distanceProgress = currentQuest.distance;
-                //endQuest(true);
-            }   
+                EnemyWatchdog.instance.startBossFight();
+            }
         }
-    }
-
-    public static quest createRandomQuest() {
-
-        float randomVal = Random.Range(0f, 1f);
-
-        string name = "bounty " + randomVal;
-        string shortOverview = "This is the first bounty";
-        string description = "This is the description of the first bounty where you will go for walks and do amazing things";
-        int goldReward = 50 + Mathf.RoundToInt(500f*randomVal);
-        int xpReward = 10 + Mathf.RoundToInt(100f*randomVal);
-        int timeToComplete = 1000 + Mathf.RoundToInt(randomVal*1500f);
-        int distance = Mathf.RoundToInt(1000f*randomVal);
-        int difficulty = 1;
-        quest q = new quest(name, shortOverview, description, goldReward, xpReward, null, timeToComplete, distance, difficulty);
-        return q;
     }
 }

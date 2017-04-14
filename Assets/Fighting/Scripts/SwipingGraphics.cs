@@ -3,11 +3,12 @@ using System.Collections;
 
 public class SwipingGraphics : MonoBehaviour {
 
-    public float lineUpdateSpeed = 0.005f;
+    public float secondsPerLineUpdate = 0.005f;
     public float maxLineDurationInSeconds = 0.5f;
     private LineRenderer lineRenderer;
     private int numOfVerticesOnLine;
     private bool swiping = false;
+    int swipingId;
 
     void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
@@ -20,50 +21,56 @@ public class SwipingGraphics : MonoBehaviour {
 
         // If using editor, you want to use a mouse
         if (Input.GetMouseButtonUp(0) && swiping) {
-            // Mouse button released
-            CancelInvoke("AddPoint");
-            lineRenderer.SetVertexCount(0);
-            numOfVerticesOnLine = 0;
-            swiping = false;
+            endSwiping();
         } else if (Input.GetMouseButtonDown(0)) {
             // Mouse button released
-            InvokeRepeating("AddPoint", 0, lineUpdateSpeed);
+            StartCoroutine(invokeRepeatingImmediate(AddPoint, secondsPerLineUpdate));
             swiping = true;
-        } else if (Input.GetMouseButton(0)) {
-            // Swiping
-        } else if (swiping) {
-            print("Still swiping but no released");
-        }
+        } 
 #else
-        // If not using editor, find touches    
-        if (Input.touchCount > 0) {
-            if (Input.touches[0].phase == TouchPhase.Began) {
-                InvokeRepeating("AddPoint", 0, lineUpdateSpeed);
-                swiping = true;
+        // If not using editor, find touches   
+        if (Input.touchCount > 0 && !swiping) {
+            foreach(Touch t in Input.touches) {
+                if(t.phase == TouchPhase.Began) {
+                    StartCoroutine(invokeRepeatingImmediate(AddPoint, secondsPerLineUpdate));
+                    swipingId = t.fingerId;
+                    swiping = true;
+                }
             }
-        } else if (swiping) {
-            CancelInvoke("AddPoint");
-            lineRenderer.SetVertexCount(0);
-            numOfVerticesOnLine = 0;
-            swiping = false;
         }
 #endif
     }
 
-
     // Used for drawing attack lines while doing criticals
     public void AddPoint() {
-        Vector3 inputPoint;
+        Vector3 inputPoint = new Vector3();
 
 #if UNITY_WEBGL || DEBUG
-            if (!Input.GetMouseButton(0))
-                return;
-            inputPoint = Input.mousePosition;
+        if (!Input.GetMouseButton(0))
+            return;
+        inputPoint = Input.mousePosition;
 
 #else
-        if (Input.touchCount == 0)
-                return;
-            inputPoint = Input.touches[0].position;
+        
+        if (Input.touchCount == 0) {
+            endSwiping();
+            return;
+        }
+            
+
+        bool foundTouch = false;
+        foreach(Touch t in Input.touches) {
+            if (t.fingerId == swipingId) {
+                inputPoint = t.position;
+                foundTouch = true;
+                break;
+            }     
+        }
+
+        if(!foundTouch) {
+            endSwiping();
+            return;
+        }
 #endif
         // Change input point to 
         inputPoint.z = 10;
@@ -71,11 +78,26 @@ public class SwipingGraphics : MonoBehaviour {
         lineRenderer.SetVertexCount(++numOfVerticesOnLine);
         lineRenderer.SetPosition(numOfVerticesOnLine-1, inputPoint);
 
-        // Check if swipe has taken too long
-        if (numOfVerticesOnLine*lineUpdateSpeed > maxLineDurationInSeconds) {
-            numOfVerticesOnLine = 0;
-            lineRenderer.SetVertexCount(0);
-            CancelInvoke("AddPoint");
+    }
+
+    private void endSwiping() {
+        stopInvokingRepeating();
+        lineRenderer.SetVertexCount(0);
+        numOfVerticesOnLine = 0;
+        swiping = false;
+    }
+
+    private bool stopInvoking = false;
+    void stopInvokingRepeating() {
+        stopInvoking = true;
+    }
+
+    IEnumerator invokeRepeatingImmediate(System.Action method, float repeatTime) {
+        if (stopInvoking)
+            stopInvoking = false;
+        while (!stopInvoking) {
+            method();
+            yield return new WaitForSeconds(repeatTime);
         }
     }
 }
