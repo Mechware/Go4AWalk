@@ -129,12 +129,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114000013343032216, guid: da687c2027639a24583cf909cdae1990,
+    - target: {fileID: 114000010764528370, guid: da687c2027639a24583cf909cdae1990,
         type: 2}
       propertyPath: critParticles
       value: 
       objectReference: {fileID: 1533834118}
-    - target: {fileID: 114000013343032216, guid: da687c2027639a24583cf909cdae1990,
+    - target: {fileID: 114000010764528370, guid: da687c2027639a24583cf909cdae1990,
         type: 2}
       propertyPath: attackParticles
       value: 
@@ -169,18 +169,7 @@ Prefab:
       propertyPath: attackPotsText
       value: 
       objectReference: {fileID: 76974837}
-    - target: {fileID: 114000010764528370, guid: da687c2027639a24583cf909cdae1990,
-        type: 2}
-      propertyPath: attackParticles
-      value: 
-      objectReference: {fileID: 1154904208}
-    - target: {fileID: 114000010764528370, guid: da687c2027639a24583cf909cdae1990,
-        type: 2}
-      propertyPath: critParticles
-      value: 
-      objectReference: {fileID: 1533834118}
-    m_RemovedComponents:
-    - {fileID: 114000013343032216, guid: da687c2027639a24583cf909cdae1990, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da687c2027639a24583cf909cdae1990, type: 2}
   m_IsPrefabParent: 0
 --- !u!20 &31599320 stripped
@@ -599,6 +588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buff: {fileID: 1207423575966482, guid: 558c7b438bd58994a9c1e9e6de201acf, type: 2}
   swipingID: 0
+  enemyObject: {fileID: 0}
 --- !u!1 &201205858
 GameObject:
   m_ObjectHideFlags: 0

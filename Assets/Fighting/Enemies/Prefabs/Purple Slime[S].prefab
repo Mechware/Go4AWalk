@@ -299,9 +299,9 @@ MonoBehaviour:
   replacementClips:
   - {fileID: 7400000, guid: 72c85dd282b17704cbc39fb77df4ae5e, type: 2}
   - {fileID: 7400000, guid: 41b57f6177b94bb4cbba8600866a4f2d, type: 2}
-  - {fileID: 7400000, guid: 691066e90c9a41b4a93671bc9cc74e50, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7400000, guid: c1e5188e166507d43b9fedc62f7972e0, type: 2}
+  - {fileID: 7400000, guid: 034c0b72e0c8cc346b5be6f5b5a45a03, type: 2}
+  - {fileID: 7400000, guid: ffb7d80ce7f3449429f6d7f7f21378a5, type: 2}
 --- !u!212 &212000010792392336
 SpriteRenderer:
   m_ObjectHideFlags: 1
