@@ -641,7 +641,7 @@ public class ItemList {
             attackModifier: 1,
             critModifier: 1);
 
-        texture = Resources.Load("Item Sprites/Armor-Bronze") as Texture2D;
+        texture = Resources.Load("EquippedItems/Crown") as Texture2D;
         crown.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         crown.useItem += () => {
