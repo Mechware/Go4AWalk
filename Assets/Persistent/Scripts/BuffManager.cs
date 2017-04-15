@@ -26,9 +26,9 @@ public class BuffManager : MonoBehaviour {
 
     void Awake() {
         instance = this;
-
         critParticlesInstance = critParticles;
         attackParticlesInstance = attackParticles;
+
         if (Buff.critActive) {
             critParticlesInstance.SetActive(true);
         }
