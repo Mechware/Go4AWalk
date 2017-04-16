@@ -75,14 +75,12 @@ public class Player : MonoBehaviour {
             lootGold = new ObservedValue<int>(0);
         }
 
-        if (GameState.atCamp) {
+        if(GameState.atCamp) {
             gold.Value += lootGold.Value;
             lootGold.Value = 0;
-            EnemyWatchdog.enemiesQueue.Clear();
-            EnemyWatchdog.instance.saveQueue();
-            savePlayer();
         }
-
+        
+        savePlayer();
         instance = this;
     }
 
@@ -100,6 +98,12 @@ public class Player : MonoBehaviour {
                     })
                 }, new bool[] { true, false });
             died = false;
+        }
+
+        if (GameState.atCamp) {
+            EnemyWatchdog.enemiesQueue.Clear();
+            EnemyWatchdog.instance.saveQueue();
+
         }
     }
 

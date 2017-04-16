@@ -50,6 +50,8 @@ public class GPS : MonoBehaviour
 
     private const float EARTH_RADIUS = 6371;
 
+    private bool initialized = false;
+
     // Use this for initialization
     void Awake() {
         gpsObject = this;
@@ -62,13 +64,16 @@ public class GPS : MonoBehaviour
 
     IEnumerator Start()
     {
+        state.OnValueChange += () => {
+            if (state.Value != LocationState.Enabled && state.Value != LocationState.Initializing) {
+                PopUp.instance.showPopUp("Could not connect to GPS!", new string[] { "Okay" });
+            }
+        };
 
         yield return StartCoroutine(initializeGPS());
 
         if(state.Value == LocationState.Enabled) {
             initializeVariables();
-        } else {
-            PopUp.instance.showPopUp("Could not connect to GPS.", new string[] { "Okay" });
         }
     }
 
@@ -89,22 +94,24 @@ public class GPS : MonoBehaviour
     {
         if (pauseState)
         {
+            initialized = false;
             Input.location.Stop();
-            state.Value = LocationState.Disabled;
+            state.Value = LocationState.Initializing;
         }
         else
         {
             StartCoroutine(initializeGPS());
-            if (state.Value != LocationState.Enabled) {
-                PopUp.instance.showPopUp("Could not connect to GPS.", new string[] { "Okay" });
-            }
         }
     }
 
     IEnumerator initializeGPS() {
-
+        if(initialized) {
+            yield break;
+        }
+        
         if (!Input.location.isEnabledByUser) {
             state.Value = LocationState.Disabled;
+            initialized = true;
             yield break;
         }
 
@@ -125,6 +132,7 @@ public class GPS : MonoBehaviour
             state.Value = LocationState.Enabled;
             StartCoroutine(checkForUpdates());
         }
+        initialized = true;
     }
 
     // The Haversine formula
@@ -144,43 +152,42 @@ public class GPS : MonoBehaviour
 
     IEnumerator checkForUpdates() {
         while(state.Value == LocationState.Enabled) {
-            if (timestamp != Input.location.lastData.timestamp) {
+            if (timestamp == Input.location.lastData.timestamp) {
+                yield return new WaitForSecondsRealtime(timeBetweenChecks);
+                continue;
+            }
+            print("Update!");
+            totalLat += Input.location.lastData.latitude;
+            totalLong += Input.location.lastData.longitude;
+            timestamp = Input.location.lastData.timestamp;
+            gpsUpdates++;
 
-                totalLat += Input.location.lastData.latitude;
-                totalLong += Input.location.lastData.longitude;
-                timestamp = Input.location.lastData.timestamp;
-                gpsUpdates++;
+            if (gpsUpdates == GPSUpdatesBeforeAverage) {
+                longitude = totalLong / GPSUpdatesBeforeAverage;
+                latitude = totalLat / GPSUpdatesBeforeAverage;
+                prevLongitude = longitude;
+                prevLatitude = latitude;
 
-                if (gpsUpdates == GPSUpdatesBeforeAverage) {
-                    longitude = totalLong / GPSUpdatesBeforeAverage;
-                    latitude = totalLat / GPSUpdatesBeforeAverage;
-                    prevLongitude = longitude;
-                    prevLatitude = latitude;
-                    totalLong = longitude;
-                    totalLat = latitude;
-
-                    deltaDistance.Value = Haversine(prevLongitude, prevLatitude, longitude, latitude) * 1000f;
-                    updateChangeInTime();
+                updateChangeInTime();
+                deltaDistance.Value = Haversine(prevLongitude, prevLatitude, longitude, latitude) * 1000f;
+                
                     
 
-                    gpsUpdates = 1;
+                gpsUpdates = 1;
+                totalLong = Input.location.lastData.longitude;
+                totalLat = Input.location.lastData.latitude;
+            }
 
-                } else {
-                    latitude = Input.location.lastData.latitude;
-                    longitude = Input.location.lastData.longitude;
-                } // if averaging updates
-            } // If timestamp has been updated
-            yield return new WaitForSeconds(timeBetweenChecks);
+            latitude = Input.location.lastData.latitude;
+            longitude = Input.location.lastData.longitude;
         }
     }
 
     private void updateChangeInTime() {
-        DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0,
-                                                                System.DateTimeKind.Utc);
-
-        double curTime = (DateTime.UtcNow - epochStart).TotalSeconds;
-        deltaTime = (float) (curTime - timeOfLastDistanceUpdate);
-        timeOfLastDistanceUpdate = curTime;
+        DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        double currentTime = (DateTime.UtcNow - epochStart).TotalSeconds;
+        deltaTime = (float) (currentTime - timeOfLastDistanceUpdate);
+        timeOfLastDistanceUpdate = currentTime;
     }
 
     public string getGPSData() {
@@ -199,8 +206,8 @@ public class GPS : MonoBehaviour
                 text =  "Time since last update: " + timeChange + "\n" +
                         "Previous Latitude: " + prevLatitude + "\n" +
                         "Previous Longitude: " + prevLongitude + "\n" +
-                        "Current Longitude: " + longitude + "\n" +
                         "Current Latitude: " + latitude + "\n" +
+                        "Current Longitude: " + longitude + "\n" +
                         "Delta Distance: " + deltaDistance.Value + "\n" +
                         "GPS updates: " + gpsUpdates;
 
