@@ -10,6 +10,7 @@ public class PopUp : MonoBehaviour {
     public GameObject popUpPanel, popUpTitle;
 
     private UnityEngine.Events.UnityAction closePopUp;
+    private bool currentlyOpen = false;
 
     void Awake() {
         instance = this;
