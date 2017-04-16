@@ -19,7 +19,9 @@ public class Player : MonoBehaviour {
     public static int experienceOfLastLevel = 0;
 
     public static int dotHit;
+    public static int healAmount;
     public static bool isDOT;
+    public static bool isHeal;
 
     private static int maxHealth = 100;
     public static ObservedValue<int> health;
@@ -154,6 +156,19 @@ public class Player : MonoBehaviour {
             dotHit = Mathf.RoundToInt(equippedAccessory.attributeValue);
             savePlayer();
         }
+        if((int)newItem.otherInfo == (int) BuffManager.BuffType.heal) {
+            isHeal = true;
+            equippedAccessory = newItem;
+            healAmount = Mathf.RoundToInt(equippedAccessory.attributeValue);
+            BuffManager.instance.CreateDOT("Heal_Over_Time", BuffManager.BuffType.heal, -1*healAmount, -1, 1, gameObject);
+            savePlayer();
+        }
+        if ((int) newItem.otherInfo==(int) BuffManager.BuffType.health) {
+            equippedAccessory = newItem;
+            maxHealth += Mathf.RoundToInt(equippedAccessory.attributeValue);
+            GetComponent<PersistentUIElements>().updateItems();
+            savePlayer();
+        }
 
     }
 
@@ -170,9 +185,16 @@ public class Player : MonoBehaviour {
         if (type == BuffManager.BuffType.fire) {
             isDOT = false;
             dotHit -= Mathf.RoundToInt(equippedAccessory.attributeValue);
-
+        }
+        if (type == BuffManager.BuffType.heal) {
+            isHeal = false;
+            healAmount -= Mathf.RoundToInt(equippedAccessory.attributeValue);
+        }
+        if (type == BuffManager.BuffType.health) {
+            maxHealth -= Mathf.RoundToInt(equippedAccessory.attributeValue);
         }
     }
+
 
 
     #endregion
@@ -316,6 +338,8 @@ public class Player : MonoBehaviour {
             equipAccessory(ItemList.itemMasterList[equipped]);
         }
     }
+
+
 
     public void loadOthers() {
         Inventory.load();

@@ -105,12 +105,21 @@ public class Buff : MonoBehaviour {
     }
 
     IEnumerator hurtPlayer() {
-
+        if (duration >= 0) {
             for (int i = 0 ; i < duration ; i += frequency) {
 
                 Player.damage(Mathf.RoundToInt(modifier));
                 yield return new WaitForSeconds(frequency);
             }
+
+        } else {
+            Player.damage(Mathf.RoundToInt(modifier));
+            yield return new WaitForSeconds(frequency);
+            if (Player.isHeal) {
+                setBuff(statName, statType, modifier, frequency, duration, target);
+            }
+        }
+
         BuffManager.removeCurrentBuff(statName);
 
         Destroy(this.gameObject);

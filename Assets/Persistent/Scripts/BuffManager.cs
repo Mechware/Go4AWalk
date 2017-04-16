@@ -17,7 +17,9 @@ public class BuffManager : MonoBehaviour {
         attack,
         fire,
         defense,
-        crit
+        crit,
+        heal,
+        health
     }
 
     public static IDictionary<string, Buff> buffs = new Dictionary<string, Buff>();

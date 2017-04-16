@@ -46,7 +46,9 @@ public class ItemList {
     public const string CROWN = "Crown";
     public const string SKULL = "Skull";
     public const string GNOME_HAT = "Gnome Hat";
-    public const string VISOR = "Visor";
+    public const string FIRE_HAIR = "Fire Hair";
+    public const string HEART_HAT = "Heart Hat";
+    
 
     
 
@@ -713,6 +715,60 @@ public class ItemList {
         };
 
         itemMasterList[SKULL] = skull;
+
+        item heartHat = new item(name: HEART_HAT,
+            description: "heals over time",
+            price: 1000,
+            attributeValue: 5,
+            otherInfo: (int) BuffManager.BuffType.heal,
+            type: itemType.Accessory,
+            useItem: null,
+            icon: null,
+            spawnRate: 0,
+            baseAttack: 0,
+            attackModifier: 1,
+            critModifier: 1);
+
+        texture = Resources.Load("EquippedItems/Heart-Hat") as Texture2D;
+        heartHat.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        heartHat.useItem += () => {
+            if (lastBuff != default(BuffManager.BuffType)) {
+                Player.instance.removeAccessory(lastBuff);
+            }
+            Player.instance.equipAccessory(heartHat);
+            lastBuff=BuffManager.BuffType.heal;
+            return true;
+        };
+
+        itemMasterList[HEART_HAT] = heartHat;
+
+        item fireHair = new item(name: FIRE_HAIR,
+           description: "does DOT",
+           price: 1000,
+           attributeValue: 11,
+           otherInfo: (int) BuffManager.BuffType.fire,
+           type: itemType.Accessory,
+           useItem: null,
+           icon: null,
+           spawnRate: 0,
+           baseAttack: 0,
+           attackModifier: 1,
+           critModifier: 1);
+
+        texture = Resources.Load("EquippedItems/Fire-Hat") as Texture2D;
+        fireHair.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        fireHair.useItem += () => {
+            if (lastBuff != default(BuffManager.BuffType)) {
+                Player.instance.removeAccessory(lastBuff);
+            }
+            Player.instance.equipAccessory(fireHair);
+            lastBuff=BuffManager.BuffType.fire;
+            return true;
+        };
+
+        itemMasterList[FIRE_HAIR] = fireHair;
         #endregion
 
 
