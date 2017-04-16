@@ -288,9 +288,10 @@ MonoBehaviour:
   armor: 1
   sturdy: 1
   timeBetweenAttacks: 3
-  spawnRate: 80
-  itemName: 
-  lootSpawnRate: -1
+  spawnRate: 100
+  itemName: Skull
+  lootSpawnRate: 100
+  isDead: 0
 --- !u!114 &114000013449506606
 MonoBehaviour:
   m_ObjectHideFlags: 1

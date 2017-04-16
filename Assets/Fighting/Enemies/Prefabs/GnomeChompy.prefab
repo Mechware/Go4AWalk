@@ -259,7 +259,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -281,7 +281,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!95 &95000013504810832
 Animator:
   serializedVersion: 3
@@ -375,8 +375,9 @@ MonoBehaviour:
   sturdy: 1
   timeBetweenAttacks: 3
   spawnRate: 100
-  itemName: 
-  lootSpawnRate: -1
+  itemName: Gnome Hat
+  lootSpawnRate: 100
+  isDead: 0
 --- !u!212 &212000012901826658
 SpriteRenderer:
   m_ObjectHideFlags: 1
