@@ -671,7 +671,7 @@ public class ItemList {
            attackModifier: 1,
            critModifier: 1);
 
-        texture = Resources.Load("Item Sprites/Armor-Bronze") as Texture2D;
+        texture = Resources.Load("EquippedItems/GnomeChompy Hat") as Texture2D;
         gnomeHat.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         gnomeHat.useItem += () => {
@@ -700,7 +700,7 @@ public class ItemList {
            attackModifier: 1,
            critModifier: 1);
 
-        texture = Resources.Load("Item Sprites/Armor-Bronze") as Texture2D;
+        texture = Resources.Load("EquippedItems/Skeleton Head") as Texture2D;
         skull.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         skull.useItem += () => {
