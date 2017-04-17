@@ -27,9 +27,9 @@ public class Shop : MonoBehaviour {
 
     public void openShop() {
         shopPanel.SetActive(true);
-        listOfItemsViewer.SetActive(true);
-        itemViewerPanel.SetActive(false);
-        setItems();
+        //listOfItemsViewer.SetActive(true);
+        //itemViewerPanel.SetActive(false);
+        //setItems();
     }
 
     public void closeShop() {
@@ -63,7 +63,7 @@ public class Shop : MonoBehaviour {
        itemViewerPanel.SetActive(false);
     }
 
-    IEnumerator buyItemFeedback() {
+    public IEnumerator buyItemFeedback() {
         GameObject addedPrefab = Instantiate(itemAddedFeedbackText, itemViewerPanel.transform, false)
             as GameObject;
 

@@ -16,6 +16,9 @@ public class AlchemyPanel : MonoBehaviour {
     item yellowLeaf;
     item blueLeaf;
 
+    public AudioSource audio;
+    public AudioClip success, negative;
+
     // Use this for initialization
     void Start() {
         healthPot = ItemList.itemMasterList[ItemList.HEALTH_POTION];
@@ -47,8 +50,12 @@ public class AlchemyPanel : MonoBehaviour {
             Player.takeGold(healthPotPrice);
             PotionInventory.removeLeaf(redLeaf, 3);
             PotionInventory.addPotion(healthPot);
+            audio.clip = success;
+            audio.Play();
         } else {
             print("You dont have the necessary ingredients!");
+            audio.clip = negative;
+            audio.Play();
         };
     }
     public void makeCritPot() {
@@ -56,8 +63,12 @@ public class AlchemyPanel : MonoBehaviour {
             Player.takeGold(critPotPrice);
             PotionInventory.removeLeaf(yellowLeaf, 4);
             PotionInventory.addPotion(critPot);
+            audio.clip = success;
+            audio.Play();
         } else {
             print("You dont have the necessary ingredients!");
+            audio.clip = negative;
+            audio.Play();
         };
     }
     public void makeAttackPot() {
@@ -65,8 +76,12 @@ public class AlchemyPanel : MonoBehaviour {
             Player.takeGold(attackPotPrice);
             PotionInventory.removeLeaf(blueLeaf, 5);
             PotionInventory.addPotion(attackPot);
+            audio.clip = success;
+            audio.Play();
         } else {
             print("You dont have the necessary ingredients!");
+            audio.clip = negative;
+            audio.Play();
         };
     }
 }
