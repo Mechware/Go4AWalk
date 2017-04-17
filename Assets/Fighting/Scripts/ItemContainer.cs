@@ -50,7 +50,7 @@ public class ItemContainer : MonoBehaviour {
             yield break;
 
         if (containingItem.type == itemType.Potion && alreadyGotThatOne == false) {
-            PotionInventory.addPotion(containingItem);
+            PotionInventory.addLeaf(containingItem);
             sound.clip = pickUpPotionSound;
             sound.Play();
             GetComponentInChildren<SpriteRenderer>().sprite = null;

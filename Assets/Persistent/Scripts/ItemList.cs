@@ -21,6 +21,9 @@ public class ItemList {
     public const string CRIT_POTION = "Crit Potion";
     public const string MUNNY_POUCH = "Munny Pouch";
 	public const string ATTACK_POTION = "Attack Potion";
+    public const string RED_LEAF = "Red Leaf";
+    public const string YELLOW_LEAF = "Yellow Leaf";
+    public const string BLUE_LEAF = "Blue Leaf";
 
     public const string BRONZE_SWORD = "Bronze Sword";
     public const string BRONZE_SABER = "Bronze Saber";
@@ -48,11 +51,6 @@ public class ItemList {
     public const string GNOME_HAT = "Gnome Hat";
     public const string FIRE_HAIR = "Fire Hair";
     public const string HEART_HAT = "Heart Hat";
-    
-
-    
-
-
 
 
     private static IDictionary<string, item> _itemMasterList = null;
@@ -97,10 +95,10 @@ public class ItemList {
             return true;
         };
         itemMasterList[HEALTH_POTION] = healthPotion;
-// ***
+        // ***
         item critPotion = new item(name: CRIT_POTION,
             description: "When used the critical bar will not reset for a short amount of time.",
-            price: 10,
+            price: 20,
             attributeValue: 10,
             otherInfo: null,
             type: itemType.Potion,
@@ -162,6 +160,75 @@ public class ItemList {
 			return true;        
         };
         itemMasterList[ATTACK_POTION] = attackPotion;
+
+        // ***
+        item redLeaf = new item(name: RED_LEAF,
+            description: "A red herb used for creating potions.",
+            price: 0,
+            attributeValue: 50,
+            otherInfo: null,
+            type: itemType.Potion,
+            useItem: null,
+            icon: null,
+            spawnRate: 50,
+            baseAttack: 0,
+            attackModifier: 1,
+            critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/RedLeaf") as Texture2D;
+        redLeaf.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        redLeaf.useItem += () => {
+            return true;
+        };
+
+        itemMasterList[RED_LEAF] = redLeaf;
+
+        // ***
+        item yellowLeaf = new item(name: YELLOW_LEAF,
+            description: "A yellow herb used for creating potions.",
+            price: 0,
+            attributeValue: 50,
+            otherInfo: null,
+            type: itemType.Potion,
+            useItem: null,
+            icon: null,
+            spawnRate: 30,
+            baseAttack: 0,
+            attackModifier: 1,
+            critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/YellowLeaf") as Texture2D;
+        yellowLeaf.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        yellowLeaf.useItem += () => {
+            return true;
+        };
+
+        itemMasterList[YELLOW_LEAF] = yellowLeaf;
+
+        // ***
+        item blueLeaf = new item(name: BLUE_LEAF,
+            description: "A blue herb used for creating potions.",
+            price: 0,
+            attributeValue: 50,
+            otherInfo: null,
+            type: itemType.Potion,
+            useItem: null,
+            icon: null,
+            spawnRate: 30,
+            baseAttack: 0,
+            attackModifier: 1,
+            critModifier: 1);
+
+        texture = Resources.Load("Item Sprites/BlueLeaf") as Texture2D;
+        blueLeaf.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+        blueLeaf.useItem += () => {
+            return true;
+        };
+
+        itemMasterList[BLUE_LEAF] = blueLeaf;
 
         #endregion
 
@@ -717,7 +784,7 @@ public class ItemList {
         itemMasterList[SKULL] = skull;
 
         item heartHat = new item(name: HEART_HAT,
-            description: "heals over time",
+            description: "Heals over time",
             price: 1000,
             attributeValue: 5,
             otherInfo: (int) BuffManager.BuffType.heal,
@@ -744,7 +811,7 @@ public class ItemList {
         itemMasterList[HEART_HAT] = heartHat;
 
         item fireHair = new item(name: FIRE_HAIR,
-           description: "does DOT",
+           description: "This hot hair-do with heat your enemies up!",
            price: 1000,
            attributeValue: 11,
            otherInfo: (int) BuffManager.BuffType.fire,
