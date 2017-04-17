@@ -11,7 +11,6 @@ public class FightingWatchdog : MonoBehaviour {
     public GameObject treasureChest, critBarObject, healthBarObject;
 
 
-
     public void fadeOutStats() {
         foreach (SpriteRenderer sp in critBarObject.GetComponentsInChildren<SpriteRenderer>()) {
             StartCoroutine(FadingUtils.fadeSpriteRenderer(sp, 1, 1, 0));
@@ -62,6 +61,7 @@ public class FightingWatchdog : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        //background.sprite = StoryOverlord.fightingBackground;
         Player.crit.OnValueChange += updateCritBar;
         Player.health.OnValueChange += updateHealthBar;
         updateCritBar();

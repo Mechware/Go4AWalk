@@ -588,6 +588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buff: {fileID: 1207423575966482, guid: 558c7b438bd58994a9c1e9e6de201acf, type: 2}
   swipingID: 0
+  dotName: EnemyDOTFire
   enemyObject: {fileID: 0}
 --- !u!1 &201205858
 GameObject:
@@ -613,7 +614,7 @@ Transform:
   m_GameObject: {fileID: 201205858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 666534760}
@@ -647,7 +648,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1948785401
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 07b519ef2a0984d439ab3220d7fd3474, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b41f55aacc155ec4abc2543af22a4c7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
