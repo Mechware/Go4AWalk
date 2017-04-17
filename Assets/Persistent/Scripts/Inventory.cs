@@ -88,6 +88,11 @@ public class Inventory : MonoBehaviour {
         return itemNames.ToArray();
     }
 
+    public static void removeItem(item item) {
+        items.Remove(item);
+        save();
+    }
+
     public static void setInventory(string[] itemNames) {
         foreach(string itemName in itemNames) {
             items.Add(ItemList.itemMasterList[itemName]);

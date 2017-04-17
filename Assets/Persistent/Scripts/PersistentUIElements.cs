@@ -177,6 +177,12 @@ public class PersistentUIElements : MonoBehaviour {
             equippedArmor.text = "Armor:" + "\n" + Player.equippedArmor.name.ToString();
             equippedItem2.sprite = Player.equippedArmor.icon;
         }
+        if (Player.equippedAccessory.Equals(ItemList.noItem) || Player.equippedAccessory.Equals(default(item))) {
+            equippedAccessory.text = "Accessory:" + "\n" + "None";
+        } else {
+            equippedAccessory.text = "Accessory:" + "\n" + Player.equippedAccessory.name.ToString();
+            equippedItem3.sprite = Player.equippedAccessory.icon;
+        }
 
 
         equippedAccessory.text = "Accessory:" + "\n" + "None";
