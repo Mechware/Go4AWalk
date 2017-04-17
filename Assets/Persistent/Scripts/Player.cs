@@ -134,19 +134,19 @@ public class Player : MonoBehaviour {
 
         if((int)newItem.otherInfo == (int)BuffManager.BuffType.attack) {
             equippedAccessory = newItem;
-            attackModifier = equippedAccessory.attributeValue;
+            attackModifier += equippedAccessory.attributeValue;
             GetComponent<PersistentUIElements>().updateItems();
             savePlayer();
         }
         if ((int) newItem.otherInfo == (int) BuffManager.BuffType.crit) {
             equippedAccessory = newItem;
-            critModifier = equippedAccessory.attributeValue;
+            critModifier += equippedAccessory.attributeValue;
             GetComponent<PersistentUIElements>().updateItems();
             savePlayer();
         }
         if ((int) newItem.otherInfo == (int) BuffManager.BuffType.defense) {
             equippedAccessory = newItem;
-            defenseModifier = equippedAccessory.attributeValue;
+            defenseModifier += equippedAccessory.attributeValue;
             GetComponent<PersistentUIElements>().updateItems();
             savePlayer();
         }
@@ -172,26 +172,26 @@ public class Player : MonoBehaviour {
 
     }
 
-    public void removeAccessory(BuffManager.BuffType type) {
+    public void removeAccessory(BuffManager.BuffType type, float attrib) {
         if (type == BuffManager.BuffType.attack) {
-            attackModifier -= equippedAccessory.attributeValue;
+            attackModifier -= attrib;
         }
         if (type == BuffManager.BuffType.crit) {
-            critModifier -= equippedAccessory.attributeValue;
+            critModifier -= attrib;
         }
         if (type == BuffManager.BuffType.defense) {
-            defenseModifier -= equippedAccessory.attributeValue;
+            defenseModifier -= attrib;
         }
         if (type == BuffManager.BuffType.fire) {
             isDOT = false;
-            dotHit -= Mathf.RoundToInt(equippedAccessory.attributeValue);
+            dotHit -= Mathf.RoundToInt(attrib);
         }
         if (type == BuffManager.BuffType.heal) {
             isHeal = false;
-            healAmount -= Mathf.RoundToInt(equippedAccessory.attributeValue);
+            healAmount -= Mathf.RoundToInt(attrib);
         }
         if (type == BuffManager.BuffType.health) {
-            maxHealth -= Mathf.RoundToInt(equippedAccessory.attributeValue);
+            maxHealth -= Mathf.RoundToInt(attrib);
         }
     }
 
