@@ -4788,6 +4788,9 @@ MonoBehaviour:
   healthPotsText: {fileID: 0}
   critPotsText: {fileID: 0}
   attackPotsText: {fileID: 0}
+  redLeafText: {fileID: 0}
+  yellowLeafText: {fileID: 0}
+  blueLeafText: {fileID: 0}
   health: {fileID: 8300000, guid: c36cf5caa9b8b38499f20a3269a1eb56, type: 3}
   crit: {fileID: 8300000, guid: 471c09f30456ca840927c660dde336e6, type: 3}
   attack: {fileID: 8300000, guid: 37c13cc84f374d34fb2b2a052417c121, type: 3}

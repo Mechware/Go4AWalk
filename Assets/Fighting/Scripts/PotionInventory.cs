@@ -8,7 +8,10 @@ public class PotionInventory : MonoBehaviour {
     public static ObservedValue<int> numCritPots;
     public static ObservedValue<int> numAttackPots;
 
+    public static int numRedLeaf, numYellowLeaf, numBlueLeaf;
+
     public Text healthPotsText, critPotsText, attackPotsText;
+    public Text redLeafText, yellowLeafText, blueLeafText;
 
     public static item healthPot;
     public static item critPot;
@@ -58,6 +61,52 @@ public class PotionInventory : MonoBehaviour {
                 attackPotsText.text = "x" + numAttackPots.Value;
             };
         }
+    }
+
+    public static void addLeaf(item item) {
+        if (item.name == "Red Leaf") {
+            if (numRedLeaf >= 99) {
+                numRedLeaf = 99;
+            } else {
+                numRedLeaf++;
+            }
+        } else if (item.name == "Yellow Leaf") {
+            if (numYellowLeaf >= 99) {
+                numYellowLeaf = 99;
+            } else {
+                numYellowLeaf++;
+            }
+        } else if (item.name == "Blue Leaf") {
+            if (numBlueLeaf >= 99) {
+                numBlueLeaf = 99;
+            } else {
+                numBlueLeaf++;
+            }
+        }
+        save();
+    }
+
+    public static void removeLeaf(item item, int num) {
+        if (item.name == "Red Leaf") {
+            if (numRedLeaf <= 0) {
+                numRedLeaf = 0;
+            } else {
+                numRedLeaf = numRedLeaf - num;
+            }
+        } else if (item.name == "Yellow Leaf") {
+            if (numYellowLeaf <= 0) {
+                numYellowLeaf = 0;
+            } else {
+                numYellowLeaf = numYellowLeaf - num;
+            }
+        } else if (item.name == "Blue Leaf") {
+            if (numBlueLeaf <= 0) {
+                numBlueLeaf = 0;
+            } else {
+                numBlueLeaf = numBlueLeaf - num;
+            }
+        }
+        save();
     }
 
     public static void addPotion(item item) {
@@ -148,12 +197,18 @@ public class PotionInventory : MonoBehaviour {
         numHealthPots.Value = PlayerPrefs.GetInt("HealthPotions", numHealthPots.Value);
         numCritPots.Value = PlayerPrefs.GetInt("CritPotions", numCritPots.Value);
         numAttackPots.Value = PlayerPrefs.GetInt("AttackPotions", numAttackPots.Value);
+        numRedLeaf = PlayerPrefs.GetInt("RedLeaf", numRedLeaf);
+        numYellowLeaf = PlayerPrefs.GetInt("YellowLeaf", numYellowLeaf);
+        numBlueLeaf = PlayerPrefs.GetInt("BlueLeaf", numBlueLeaf);
     }
 
     public static void save() {
         PlayerPrefs.SetInt("HealthPotions", numHealthPots.Value);
         PlayerPrefs.SetInt("CritPotions", numCritPots.Value);
         PlayerPrefs.SetInt("AttackPotions", numAttackPots.Value);
+        PlayerPrefs.SetInt("RedLeaf", numRedLeaf);
+        PlayerPrefs.SetInt("YellowLeaf", numYellowLeaf);
+        PlayerPrefs.SetInt("BlueLeaf", numBlueLeaf);
         PlayerPrefs.Save();
     }
 
@@ -161,5 +216,8 @@ public class PotionInventory : MonoBehaviour {
         numHealthPots.Value = 0;
         numCritPots.Value = 0;
         numAttackPots.Value = 0;
+        numBlueLeaf = 0;
+        numRedLeaf = 0;
+        numYellowLeaf = 0;
     }
 }
