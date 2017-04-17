@@ -695,8 +695,8 @@ public class ItemList {
 
         #region Accessories
         //***
-   BuffManager.BuffType lastBuff = default(BuffManager.BuffType);
-        float lastAttrib = 0;
+    public static BuffManager.BuffType lastBuff = default(BuffManager.BuffType);
+    public static float lastAttrib = 0;
 
     item crown = new item(name: CROWN,
             description: "Crown stolen from a goblin king.",
@@ -747,8 +747,8 @@ public class ItemList {
 
         gnomeHat.useItem += () => {
             if (lastBuff != default(BuffManager.BuffType)) {
-                Player.instance.removeAccessory(lastBuff,lastAttrib);
-            }
+            Player.instance.removeAccessory(lastBuff,lastAttrib);
+        }
             Player.instance.equipAccessory(gnomeHat);
             lastBuff=BuffManager.BuffType.attack;
             lastAttrib=gnomeHat.attributeValue;
@@ -762,7 +762,7 @@ public class ItemList {
         item skull = new item(name: SKULL,
            description: "Skull from a spooky skeleton",
            price: 1000,
-           attributeValue: 1.5f,
+           attributeValue: -0.1f,
            otherInfo: (int) BuffManager.BuffType.defense,
            type: itemType.Accessory,
            useItem: null,
@@ -778,7 +778,9 @@ public class ItemList {
         skull.useItem += () => {
             if (lastBuff != default(BuffManager.BuffType)) {
                 Player.instance.removeAccessory(lastBuff,lastAttrib);
+
             }
+
             Player.instance.equipAccessory(skull);
             lastBuff=BuffManager.BuffType.defense;
             lastAttrib=skull.attributeValue;
@@ -816,7 +818,7 @@ public class ItemList {
         itemMasterList[HEART_HAT] = heartHat;
 
         item fireHair = new item(name: FIRE_HAIR,
-           description: "This hot hair-do with heat your enemies up!",
+           description: "This hot hair-do will heat your enemies up!",
            price: 1000,
            attributeValue: 11,
            otherInfo: (int) BuffManager.BuffType.fire,
@@ -836,7 +838,7 @@ public class ItemList {
                 Player.instance.removeAccessory(lastBuff,lastAttrib);
             }
             Player.instance.equipAccessory(fireHair);
-            lastBuff=BuffManager.BuffType.fire;
+            lastBuff = BuffManager.BuffType.fire;
             lastAttrib = fireHair.attributeValue;
             return true;
         };

@@ -160,7 +160,7 @@ public class Player : MonoBehaviour {
             isHeal = true;
             equippedAccessory = newItem;
             healAmount = Mathf.RoundToInt(equippedAccessory.attributeValue);
-            BuffManager.instance.CreateDOT("Heal_Over_Time", BuffManager.BuffType.heal, -1*healAmount, -1, 1, gameObject);
+           // BuffManager.instance.CreateDOT("Heal_Over_Time", BuffManager.BuffType.heal, -1*healAmount, -1, 1, gameObject);
             savePlayer();
         }
         if ((int) newItem.otherInfo==(int) BuffManager.BuffType.health) {
@@ -336,6 +336,7 @@ public class Player : MonoBehaviour {
         if (PlayerPrefs.HasKey(EQUIPPED_ACCESSORY)) {
             equipped = PlayerPrefs.GetString(EQUIPPED_ACCESSORY);
             equipAccessory(ItemList.itemMasterList[equipped]);
+
         }
     }
 
