@@ -10,7 +10,7 @@ public class WalkingWatchdog : MonoBehaviour {
     public static WalkingWatchdog instance;
     public Vector2 startPosition, endPosition;
     public GameObject characterSprite;
-    public GameObject equippedWeaponSprite, equippedArmorSprite;
+    public GameObject equippedWeaponSprite, equippedArmorSprite, equippedAccessorySprite;
     public Material garden, grass, forest, hauntedForest;
     public GameObject goToTownPanel, slowDownAlertObject;
     public GameObject backgroundTexture;
@@ -71,8 +71,14 @@ public class WalkingWatchdog : MonoBehaviour {
             Texture2D texture = Resources.Load("EquippedItems/" + Player.equippedArmor.name) as Texture2D;
             Sprite armorIcon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             equippedArmorSprite.GetComponent<SpriteRenderer>().sprite = armorIcon;
-        }             
-                    
+        }
+        if (!Player.equippedAccessory.Equals(ItemList.noItem) && !Player.equippedAccessory.Equals(default(item))) {
+            equippedAccessorySprite.GetComponentInChildren<SpriteRenderer>().enabled = true;
+            Texture2D texture = Resources.Load("EquippedItems/" + Player.equippedAccessory.name) as Texture2D;
+            Sprite armorIcon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            equippedAccessorySprite.GetComponent<SpriteRenderer>().sprite = armorIcon;
+        }
+
     }
 
     private int lastQueueSize;
