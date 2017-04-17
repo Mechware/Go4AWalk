@@ -52,6 +52,9 @@ public class ItemList {
     public const string FIRE_HAIR = "Fire Hair";
     public const string HEART_HAT = "Heart Hat";
 
+    public static BuffManager.BuffType lastBuff = default(BuffManager.BuffType);
+    public static float lastAttrib = 0;
+
 
     private static IDictionary<string, item> _itemMasterList = null;
     public static IDictionary<string, item> itemMasterList {
@@ -695,8 +698,7 @@ public class ItemList {
 
         #region Accessories
         //***
-    public static BuffManager.BuffType lastBuff = default(BuffManager.BuffType);
-    public static float lastAttrib = 0;
+
 
     item crown = new item(name: CROWN,
             description: "Crown stolen from a goblin king.",
