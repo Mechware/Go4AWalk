@@ -155,6 +155,7 @@ public class Player : MonoBehaviour {
         if ((int)newItem.otherInfo == (int)BuffManager.BuffType.fire) {
             isDOT=true;
             equippedAccessory = newItem;
+            GetComponent<PersistentUIElements>().updateItems();
             dotHit = Mathf.RoundToInt(equippedAccessory.attributeValue);
             savePlayer();
         }
