@@ -1177,6 +1177,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 82000012076679392, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82000012076679392, guid: da687c2027639a24583cf909cdae1990,
+        type: 2}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da687c2027639a24583cf909cdae1990, type: 2}
   m_IsPrefabParent: 0
@@ -1444,6 +1454,7 @@ MonoBehaviour:
   characterSprite: {fileID: 0}
   equippedWeaponSprite: {fileID: 1658429054}
   equippedArmorSprite: {fileID: 33140644}
+  equippedAccessorySprite: {fileID: 581458220}
   garden: {fileID: 2100000, guid: a94df9092c800c6469e6aa78ca523556, type: 2}
   grass: {fileID: 2100000, guid: ae864ec7ad5358841a6ba8f8a1b5f56d, type: 2}
   forest: {fileID: 2100000, guid: ec7099a8c5227cf438f56464d0c65641, type: 2}
