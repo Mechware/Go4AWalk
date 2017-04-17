@@ -364,8 +364,9 @@ MonoBehaviour:
   sturdy: 1
   timeBetweenAttacks: 3
   spawnRate: 100
-  itemName: 
-  lootSpawnRate: -1
+  itemName: Heart Hat
+  lootSpawnRate: 100
+  isDead: 0
 --- !u!114 &114000012615831684
 MonoBehaviour:
   m_ObjectHideFlags: 1

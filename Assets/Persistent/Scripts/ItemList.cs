@@ -643,7 +643,7 @@ public class ItemList {
             attackModifier: 1,
             critModifier: 1);
 
-        texture = Resources.Load("EquippedItems/Crown") as Texture2D;
+        texture = Resources.Load("Item Sprites/Accessories-Crown") as Texture2D;
         crown.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         crown.useItem += () => {
@@ -673,7 +673,7 @@ public class ItemList {
            attackModifier: 1,
            critModifier: 1);
 
-        texture = Resources.Load("EquippedItems/GnomeChompy-Hat") as Texture2D;
+        texture = Resources.Load("Item Sprites/Accessories-GnomeChompyHat") as Texture2D;
         gnomeHat.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         gnomeHat.useItem += () => {
@@ -702,7 +702,7 @@ public class ItemList {
            attackModifier: 1,
            critModifier: 1);
 
-        texture = Resources.Load("EquippedItems/Skeleton-Head") as Texture2D;
+        texture = Resources.Load("Item Sprites/Accessories-Skull") as Texture2D;
         skull.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         skull.useItem += () => {
@@ -729,7 +729,7 @@ public class ItemList {
             attackModifier: 1,
             critModifier: 1);
 
-        texture = Resources.Load("EquippedItems/Heart-Hat") as Texture2D;
+        texture = Resources.Load("Item Sprites/Accessories-HeartHat") as Texture2D;
         heartHat.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         heartHat.useItem += () => {
@@ -756,7 +756,7 @@ public class ItemList {
            attackModifier: 1,
            critModifier: 1);
 
-        texture = Resources.Load("EquippedItems/Fire-Hat") as Texture2D;
+        texture = Resources.Load("Item Sprites/Accessories-FireHair") as Texture2D;
         fireHair.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         fireHair.useItem += () => {

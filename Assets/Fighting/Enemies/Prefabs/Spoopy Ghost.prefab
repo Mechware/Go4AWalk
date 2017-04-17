@@ -300,8 +300,9 @@ MonoBehaviour:
   sturdy: 1
   timeBetweenAttacks: 3
   spawnRate: 80
-  itemName: 
-  lootSpawnRate: -1
+  itemName: Fire Hair
+  lootSpawnRate: 100
+  isDead: 0
 --- !u!212 &212000011168270170
 SpriteRenderer:
   m_ObjectHideFlags: 1
