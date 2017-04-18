@@ -351,11 +351,11 @@ MonoBehaviour:
   damage: 15
   goldToGive: 400
   expToGive: 100
-  dieSound: {fileID: 0}
-  attackSound: {fileID: 0}
+  dieSound: {fileID: 8300000, guid: d45b783037d7fe64aba73f79bd09e1f4, type: 3}
+  attackSound: {fileID: 8300000, guid: d4384e2a2f66f834f8e03e3d9e83653b, type: 3}
   sound: {fileID: 82000010441793204}
   armor: 0.05
-  sturdy: 2
+  sturdy: 1.5
   timeBetweenAttacks: 3
   spawnRate: 10
   itemName: Orichalcum Armor

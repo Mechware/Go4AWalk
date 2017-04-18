@@ -70,6 +70,7 @@ GameObject:
   - 4: {fileID: 4000011592050994}
   - 114: {fileID: 114000012095665224}
   - 114: {fileID: 114000011925255942}
+  - 82: {fileID: 82000010738734948}
   m_Layer: 0
   m_Name: Red Goblin[A]
   m_TagString: Untagged
@@ -207,6 +208,80 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 2.3}
   serializedVersion: 2
   m_Size: {x: 10, y: 10}
+--- !u!82 &82000010738734948
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011934624438}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95000011413386442
 Animator:
   serializedVersion: 3
@@ -282,15 +357,16 @@ MonoBehaviour:
   damage: 10
   goldToGive: 60
   expToGive: 50
-  dieSound: {fileID: 0}
-  attackSound: {fileID: 0}
-  sound: {fileID: 0}
+  dieSound: {fileID: 8300000, guid: d45b783037d7fe64aba73f79bd09e1f4, type: 3}
+  attackSound: {fileID: 8300000, guid: d4384e2a2f66f834f8e03e3d9e83653b, type: 3}
+  sound: {fileID: 82000010738734948}
   armor: 0.5
   sturdy: 1.25
   timeBetweenAttacks: 3
   spawnRate: 50
   itemName: Iron Armor
   lootSpawnRate: 25
+  isDead: 0
 --- !u!114 &114000014211924666
 MonoBehaviour:
   m_ObjectHideFlags: 1

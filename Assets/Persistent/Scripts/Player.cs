@@ -9,6 +9,8 @@ public class Player : MonoBehaviour {
     private const string EQUIPPED_WEAPON = "equipped_weapon";
     private const string EQUIPPED_ARMOR = "equipped_armor";
     private const string EQUIPPED_ACCESSORY = "equipped_accessory";
+    private const string LAST_ATTRIB = "last_accessory_attribute";
+    private const string LAST_TYPE = "last_accessory_type";
 
     public static bool died = false;
 
@@ -35,6 +37,8 @@ public class Player : MonoBehaviour {
     public static item equippedWeapon;
     public static item equippedArmor;
     internal static item equippedAccessory;
+
+    public AudioSource equipSound;
 
 
     #region nonstatic
@@ -116,6 +120,7 @@ public class Player : MonoBehaviour {
         equippedWeapon = newItem;
         attackStrength += equippedWeapon.baseAttack;
         GetComponent<PersistentUIElements>().updateItems();
+        equipSound.Play();
         savePlayer();
     }
 
@@ -126,6 +131,7 @@ public class Player : MonoBehaviour {
         equippedArmor = newItem;
         defenseModifier = equippedArmor.attributeValue;
         GetComponent<PersistentUIElements>().updateItems();
+        equipSound.Play();
         savePlayer();
     }
 
@@ -153,6 +159,7 @@ public class Player : MonoBehaviour {
         if ((int)newItem.otherInfo == (int)BuffManager.BuffType.fire) {
             isDOT=true;
             equippedAccessory = newItem;
+            GetComponent<PersistentUIElements>().updateItems();
             dotHit = Mathf.RoundToInt(equippedAccessory.attributeValue);
             savePlayer();
         }
@@ -160,7 +167,7 @@ public class Player : MonoBehaviour {
             isHeal = true;
             equippedAccessory = newItem;
             healAmount = Mathf.RoundToInt(equippedAccessory.attributeValue);
-            BuffManager.instance.CreateDOT("Heal_Over_Time", BuffManager.BuffType.heal, -1*healAmount, -1, 1, gameObject);
+           // BuffManager.instance.CreateDOT("Heal_Over_Time", BuffManager.BuffType.heal, -1*healAmount, -1, 1, gameObject);
             savePlayer();
         }
         if ((int) newItem.otherInfo==(int) BuffManager.BuffType.health) {
@@ -169,22 +176,27 @@ public class Player : MonoBehaviour {
             GetComponent<PersistentUIElements>().updateItems();
             savePlayer();
         }
+        equipSound.Play();
 
     }
 
     public void removeAccessory(BuffManager.BuffType type, float attrib) {
         if (type == BuffManager.BuffType.attack) {
             attackModifier -= attrib;
+            print("reduce attack");
         }
         if (type == BuffManager.BuffType.crit) {
             critModifier -= attrib;
+            print("reduce crit");
         }
         if (type == BuffManager.BuffType.defense) {
             defenseModifier -= attrib;
+            print("reduce defense");
         }
         if (type == BuffManager.BuffType.fire) {
             isDOT = false;
             dotHit -= Mathf.RoundToInt(attrib);
+            print("nomoreDOT (TM)");
         }
         if (type == BuffManager.BuffType.heal) {
             isHeal = false;
@@ -308,8 +320,11 @@ public class Player : MonoBehaviour {
             !equippedArmor.Equals(ItemList.noItem))
             PlayerPrefs.SetString(EQUIPPED_ARMOR, equippedArmor.name);
         if (!equippedAccessory.Equals(default(item)) &&
-            !equippedAccessory.Equals(ItemList.noItem))
+            !equippedAccessory.Equals(ItemList.noItem)) {
             PlayerPrefs.SetString(EQUIPPED_ACCESSORY, equippedAccessory.name);
+            PlayerPrefs.SetFloat(LAST_ATTRIB, equippedAccessory.attributeValue);
+            PlayerPrefs.SetInt(LAST_TYPE, (int) equippedAccessory.otherInfo);
+        }
     }
 
     public void loadPlayer() {
@@ -336,7 +351,27 @@ public class Player : MonoBehaviour {
         if (PlayerPrefs.HasKey(EQUIPPED_ACCESSORY)) {
             equipped = PlayerPrefs.GetString(EQUIPPED_ACCESSORY);
             equipAccessory(ItemList.itemMasterList[equipped]);
+            ItemList.lastAttrib=PlayerPrefs.GetFloat(LAST_ATTRIB);
+            if (PlayerPrefs.GetInt(LAST_TYPE)==(int) BuffManager.BuffType.attack) {
+                ItemList.lastBuff = BuffManager.BuffType.attack;
+            }
+            if (PlayerPrefs.GetInt(LAST_TYPE)==(int) BuffManager.BuffType.crit) {
+                ItemList.lastBuff = BuffManager.BuffType.crit;
+            }
+            if (PlayerPrefs.GetInt(LAST_TYPE)==(int) BuffManager.BuffType.defense) {
+                ItemList.lastBuff = BuffManager.BuffType.defense;
+            }
+            if (PlayerPrefs.GetInt(LAST_TYPE)==(int) BuffManager.BuffType.fire) {
+                ItemList.lastBuff = BuffManager.BuffType.fire;
+            }
+            if (PlayerPrefs.GetInt(LAST_TYPE)==(int) BuffManager.BuffType.heal) {
+                ItemList.lastBuff = BuffManager.BuffType.heal;
+            }
+            if (PlayerPrefs.GetInt(LAST_TYPE)==(int) BuffManager.BuffType.health) {
+                ItemList.lastBuff = BuffManager.BuffType.health;
+            }
         }
+
     }
 
 

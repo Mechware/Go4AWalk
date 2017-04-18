@@ -59,14 +59,12 @@ public class GPS : MonoBehaviour
         deltaDistance = new ObservedValue<float>(0);
         timeOfLastDistanceUpdate = DateTime.UtcNow.Second;
         state = new ObservedValue<LocationState>(LocationState.Initializing);
-        print(state.Value);
         latitude = 0f;
         longitude = 0f;
     }
 
     IEnumerator Start()
     {
-        print(state.Value);
         state.OnValueChange += () => {
             if (state.Value != LocationState.Enabled && state.Value != LocationState.Initializing) {
                 PopUp.instance.showPopUp("Could not connect to GPS!", new string[] { "Okay" });

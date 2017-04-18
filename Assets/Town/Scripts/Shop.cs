@@ -14,6 +14,7 @@ public class Shop : MonoBehaviour {
     public Image itemViewerImage;
 
     public static Shop instance;
+    public AudioSource audio;
 
     item[] items;
     item currentItem;
@@ -39,6 +40,8 @@ public class Shop : MonoBehaviour {
     }
 
     public void closeShop() {
+        
+        audio.Play();
         shopPanel.SetActive(false);
     }
 

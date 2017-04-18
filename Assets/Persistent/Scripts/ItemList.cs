@@ -52,6 +52,9 @@ public class ItemList {
     public const string FIRE_HAIR = "Fire Hair";
     public const string HEART_HAT = "Heart Hat";
 
+    public static BuffManager.BuffType lastBuff = default(BuffManager.BuffType);
+    public static float lastAttrib = 0;
+
 
     private static IDictionary<string, item> _itemMasterList = null;
     public static IDictionary<string, item> itemMasterList {
@@ -695,11 +698,10 @@ public class ItemList {
 
         #region Accessories
         //***
-   BuffManager.BuffType lastBuff = default(BuffManager.BuffType);
-        float lastAttrib = 0;
+
 
     item crown = new item(name: CROWN,
-            description: "Crown stolen from a goblin king.",
+            description: "Crown stolen from a goblin king. ",
             price: 1000000,
             attributeValue: 0.5f,
             otherInfo: (int)BuffManager.BuffType.crit,
@@ -727,10 +729,10 @@ public class ItemList {
 
         itemMasterList[CROWN] = crown;
 
-
+        //***
 
         item gnomeHat = new item(name: GNOME_HAT,
-           description: "Crown stolen from a gnome chompy.",
+           description: "Crown stolen from a gnome chompy. Its a little small.",
            price: 100,
            attributeValue: 0.25f,
            otherInfo: (int) BuffManager.BuffType.attack,
@@ -747,22 +749,22 @@ public class ItemList {
 
         gnomeHat.useItem += () => {
             if (lastBuff != default(BuffManager.BuffType)) {
-                Player.instance.removeAccessory(lastBuff,lastAttrib);
-            }
+            Player.instance.removeAccessory(lastBuff,lastAttrib);
+        }
             Player.instance.equipAccessory(gnomeHat);
-            lastBuff=BuffManager.BuffType.attack;
-            lastAttrib=gnomeHat.attributeValue;
+            lastBuff = BuffManager.BuffType.attack;
+            lastAttrib = gnomeHat.attributeValue;
             return true;
         };
 
 
         itemMasterList[GNOME_HAT] = gnomeHat;
 
-
+        //***
         item skull = new item(name: SKULL,
-           description: "Skull from a spooky skeleton",
+           description: "Skull from a spooky skeleton. Just don't think about where this has been.",
            price: 1000,
-           attributeValue: 1.5f,
+           attributeValue: -0.1f,
            otherInfo: (int) BuffManager.BuffType.defense,
            type: itemType.Accessory,
            useItem: null,
@@ -778,7 +780,9 @@ public class ItemList {
         skull.useItem += () => {
             if (lastBuff != default(BuffManager.BuffType)) {
                 Player.instance.removeAccessory(lastBuff,lastAttrib);
+
             }
+
             Player.instance.equipAccessory(skull);
             lastBuff=BuffManager.BuffType.defense;
             lastAttrib=skull.attributeValue;
@@ -787,8 +791,10 @@ public class ItemList {
 
         itemMasterList[SKULL] = skull;
 
+        //***
+
         item heartHat = new item(name: HEART_HAT,
-            description: "Heals over time",
+            description: "Heals over time.",
             price: 1000,
             attributeValue: 5,
             otherInfo: (int) BuffManager.BuffType.heal,
@@ -815,8 +821,10 @@ public class ItemList {
 
         itemMasterList[HEART_HAT] = heartHat;
 
+        //***
+
         item fireHair = new item(name: FIRE_HAIR,
-           description: "This hot hair-do with heat your enemies up!",
+           description: "This hot hair-do will heat your enemies up!",
            price: 1000,
            attributeValue: 11,
            otherInfo: (int) BuffManager.BuffType.fire,
@@ -836,7 +844,7 @@ public class ItemList {
                 Player.instance.removeAccessory(lastBuff,lastAttrib);
             }
             Player.instance.equipAccessory(fireHair);
-            lastBuff=BuffManager.BuffType.fire;
+            lastBuff = BuffManager.BuffType.fire;
             lastAttrib = fireHair.attributeValue;
             return true;
         };

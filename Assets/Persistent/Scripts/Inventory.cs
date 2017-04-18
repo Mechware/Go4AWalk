@@ -63,6 +63,7 @@ public struct item {
 
 public class Inventory : MonoBehaviour {
 
+
     public const int INVENTORY_SIZE = 10;
     private static List<item> _items;
     public static List<item> items {
@@ -86,6 +87,11 @@ public class Inventory : MonoBehaviour {
             itemNames.Add(it.name);
         }
         return itemNames.ToArray();
+    }
+
+    public static void removeItem(item item) {
+        items.Remove(item);
+        save();
     }
 
     public static void setInventory(string[] itemNames) {

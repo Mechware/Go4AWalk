@@ -14,6 +14,7 @@ public class BuffManager : MonoBehaviour {
     public static GameObject attackParticlesInstance;
 
     public enum BuffType {
+        emptyBuff,
         attack,
         fire,
         defense,
