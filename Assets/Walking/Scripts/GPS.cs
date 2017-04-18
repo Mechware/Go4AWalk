@@ -51,6 +51,7 @@ public class GPS : MonoBehaviour
     private const float EARTH_RADIUS = 6371;
 
     private bool initialized = false;
+    private bool started = false;
 
     // Use this for initialization
     void Awake() {
@@ -58,12 +59,14 @@ public class GPS : MonoBehaviour
         deltaDistance = new ObservedValue<float>(0);
         timeOfLastDistanceUpdate = DateTime.UtcNow.Second;
         state = new ObservedValue<LocationState>(LocationState.Initializing);
+        print(state.Value);
         latitude = 0f;
         longitude = 0f;
     }
 
     IEnumerator Start()
     {
+        print(state.Value);
         state.OnValueChange += () => {
             if (state.Value != LocationState.Enabled && state.Value != LocationState.Initializing) {
                 PopUp.instance.showPopUp("Could not connect to GPS!", new string[] { "Okay" });
@@ -76,6 +79,7 @@ public class GPS : MonoBehaviour
         if(state.Value == LocationState.Enabled) {
             initializeVariables();
         }
+        started = true;
     }
 
     void initializeVariables() {
@@ -93,6 +97,9 @@ public class GPS : MonoBehaviour
 
     void OnApplicationPause(bool pauseState)
     {
+        if (!started)
+            return;
+
         if (pauseState)
         {
             initialized = false;
