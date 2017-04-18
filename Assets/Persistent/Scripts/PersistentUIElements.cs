@@ -15,16 +15,22 @@ public class PersistentUIElements : MonoBehaviour {
     public GameObject statsPanel, questPanel, optionsPanel, itemsPanel;
     public string currentPanel = "";
     public Sprite panelBackground1, panelBackground2, panelBackground3, panelBackground4;
+
     // Inventory Stuff
     public Text equippedWeapon, equippedArmor, equippedAccessory, playerStats;
     public Image equippedItem1, equippedItem2, equippedItem3;
 
+    public static PersistentUIElements instance;
 
     //Prefabs
     public GameObject item;
 
     // Script for walking data
     private GPS walkingScript;
+
+    void Awake() {
+        instance = this;
+    }
 
     // Use this for initialization
     void Start() {

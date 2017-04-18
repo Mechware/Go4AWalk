@@ -13,8 +13,14 @@ public class Shop : MonoBehaviour {
     public Text itemViewerTitle, itemViewerDescription;
     public Image itemViewerImage;
 
+    public static Shop instance;
+
     item[] items;
     item currentItem;
+
+    void Awake() {
+        instance = this;
+    }
 
     // Use this for initialization
     void Start() {

@@ -345,6 +345,7 @@ public class Player : MonoBehaviour {
         Inventory.load();
         PotionInventory.load();
         EnemyWatchdog.instance.loadQueue();
+        Tutorial.load();
     }
 
     public void clearStats() {
@@ -356,7 +357,9 @@ public class Player : MonoBehaviour {
 
                     PotionInventory.clear();
                     Inventory.clear();
+                    Tutorial.clear();
                     StoryOverlord.currentLevel = 0;
+
 
                     health.Value = 100;
                     maxHealth = 110;

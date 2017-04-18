@@ -4,6 +4,10 @@ using System.Collections;
 
 public class AlchemyPanel : MonoBehaviour {
 
+    public const int RED_LEAVES_FOR_HEALTH = 3;
+    public const int YELLOW_LEAVES_FOR_CRIT = 4;
+    public const int BLUE_LEAVES_FOR_POWER = 5;
+
     public Text redLeafText, yellowLeafText, blueLeafText;
     public Text healthPrice, critPrice, attackPrice;
     public Button makeHealth, makeCrit, makeAttack;
@@ -46,9 +50,11 @@ public class AlchemyPanel : MonoBehaviour {
     }
 
     public void makeHealthPot() {
-        if (PotionInventory.numRedLeaf >= 3 && Player.gold.Value >= healthPotPrice) {
+        if (PotionInventory.numRedLeaf >= RED_LEAVES_FOR_HEALTH && 
+            Player.gold.Value >= healthPotPrice) {
+
             Player.takeGold(healthPotPrice);
-            PotionInventory.removeLeaf(redLeaf, 3);
+            PotionInventory.removeLeaf(redLeaf, RED_LEAVES_FOR_HEALTH);
             PotionInventory.addPotion(healthPot);
             audio.clip = success;
             audio.Play();
@@ -59,9 +65,9 @@ public class AlchemyPanel : MonoBehaviour {
         };
     }
     public void makeCritPot() {
-        if (PotionInventory.numYellowLeaf >= 4 && Player.gold.Value >= critPotPrice) {
+        if (PotionInventory.numYellowLeaf >= YELLOW_LEAVES_FOR_CRIT && Player.gold.Value >= critPotPrice) {
             Player.takeGold(critPotPrice);
-            PotionInventory.removeLeaf(yellowLeaf, 4);
+            PotionInventory.removeLeaf(yellowLeaf, YELLOW_LEAVES_FOR_CRIT);
             PotionInventory.addPotion(critPot);
             audio.clip = success;
             audio.Play();
@@ -72,9 +78,9 @@ public class AlchemyPanel : MonoBehaviour {
         };
     }
     public void makeAttackPot() {
-        if (PotionInventory.numBlueLeaf >= 5 && Player.gold.Value >= attackPotPrice) {
+        if (PotionInventory.numBlueLeaf >= BLUE_LEAVES_FOR_POWER && Player.gold.Value >= attackPotPrice) {
             Player.takeGold(attackPotPrice);
-            PotionInventory.removeLeaf(blueLeaf, 5);
+            PotionInventory.removeLeaf(blueLeaf, BLUE_LEAVES_FOR_POWER);
             PotionInventory.addPotion(attackPot);
             audio.clip = success;
             audio.Play();
