@@ -701,7 +701,7 @@ public class ItemList {
 
 
     item crown = new item(name: CROWN,
-            description: "Crown stolen from a goblin king.",
+            description: "Crown stolen from a goblin king. ",
             price: 1000000,
             attributeValue: 0.5f,
             otherInfo: (int)BuffManager.BuffType.crit,
@@ -732,7 +732,7 @@ public class ItemList {
 
 
         item gnomeHat = new item(name: GNOME_HAT,
-           description: "Crown stolen from a gnome chompy.",
+           description: "Crown stolen from a gnome chompy. Its a little small.",
            price: 100,
            attributeValue: 0.25f,
            otherInfo: (int) BuffManager.BuffType.attack,
@@ -762,7 +762,7 @@ public class ItemList {
 
 
         item skull = new item(name: SKULL,
-           description: "Skull from a spooky skeleton",
+           description: "Skull from a spooky skeleton. Just don't think about where this has been.",
            price: 1000,
            attributeValue: -0.1f,
            otherInfo: (int) BuffManager.BuffType.defense,
@@ -792,7 +792,7 @@ public class ItemList {
         itemMasterList[SKULL] = skull;
 
         item heartHat = new item(name: HEART_HAT,
-            description: "Heals over time",
+            description: "Heals over time.",
             price: 1000,
             attributeValue: 5,
             otherInfo: (int) BuffManager.BuffType.heal,
