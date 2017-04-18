@@ -70,6 +70,7 @@ public class GPS : MonoBehaviour
             }
         };
 
+        yield return 0; // Delay for a frame so state.OnValueChange isn't called right away.
         yield return StartCoroutine(initializeGPS());
 
         if(state.Value == LocationState.Enabled) {

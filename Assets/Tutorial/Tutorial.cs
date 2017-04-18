@@ -19,6 +19,8 @@ public class Tutorial : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+        load();
+
         if (!doneRestingTutorial && GameState.atCamp) {
             StartCoroutine(callAfterOneFrame(restingTutorial()));
         }
