@@ -265,8 +265,8 @@ MonoBehaviour:
   damage: 10
   goldToGive: 1000
   expToGive: 100
-  dieSound: {fileID: 0}
-  attackSound: {fileID: 0}
+  dieSound: {fileID: 8300000, guid: d45b783037d7fe64aba73f79bd09e1f4, type: 3}
+  attackSound: {fileID: 8300000, guid: d4384e2a2f66f834f8e03e3d9e83653b, type: 3}
   sound: {fileID: 0}
   armor: 1
   sturdy: 1

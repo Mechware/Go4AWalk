@@ -63,6 +63,7 @@ public struct item {
 
 public class Inventory : MonoBehaviour {
 
+
     public const int INVENTORY_SIZE = 10;
     private static List<item> _items;
     public static List<item> items {

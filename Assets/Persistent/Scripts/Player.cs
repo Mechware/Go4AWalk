@@ -38,6 +38,8 @@ public class Player : MonoBehaviour {
     public static item equippedArmor;
     internal static item equippedAccessory;
 
+    public AudioSource equipSound;
+
 
     #region nonstatic
 
@@ -118,6 +120,7 @@ public class Player : MonoBehaviour {
         equippedWeapon = newItem;
         attackStrength += equippedWeapon.baseAttack;
         GetComponent<PersistentUIElements>().updateItems();
+        equipSound.Play();
         savePlayer();
     }
 
@@ -128,6 +131,7 @@ public class Player : MonoBehaviour {
         equippedArmor = newItem;
         defenseModifier = equippedArmor.attributeValue;
         GetComponent<PersistentUIElements>().updateItems();
+        equipSound.Play();
         savePlayer();
     }
 
@@ -172,6 +176,7 @@ public class Player : MonoBehaviour {
             GetComponent<PersistentUIElements>().updateItems();
             savePlayer();
         }
+        equipSound.Play();
 
     }
 
