@@ -183,16 +183,20 @@ public class Player : MonoBehaviour {
     public void removeAccessory(BuffManager.BuffType type, float attrib) {
         if (type == BuffManager.BuffType.attack) {
             attackModifier -= attrib;
+            print("reduce attack");
         }
         if (type == BuffManager.BuffType.crit) {
             critModifier -= attrib;
+            print("reduce crit");
         }
         if (type == BuffManager.BuffType.defense) {
             defenseModifier -= attrib;
+            print("reduce defense");
         }
         if (type == BuffManager.BuffType.fire) {
             isDOT = false;
             dotHit -= Mathf.RoundToInt(attrib);
+            print("nomoreDOT (TM)");
         }
         if (type == BuffManager.BuffType.heal) {
             isHeal = false;

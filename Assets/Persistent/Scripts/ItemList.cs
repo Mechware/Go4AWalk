@@ -729,7 +729,7 @@ public class ItemList {
 
         itemMasterList[CROWN] = crown;
 
-
+        //***
 
         item gnomeHat = new item(name: GNOME_HAT,
            description: "Crown stolen from a gnome chompy. Its a little small.",
@@ -752,15 +752,15 @@ public class ItemList {
             Player.instance.removeAccessory(lastBuff,lastAttrib);
         }
             Player.instance.equipAccessory(gnomeHat);
-            lastBuff=BuffManager.BuffType.attack;
-            lastAttrib=gnomeHat.attributeValue;
+            lastBuff = BuffManager.BuffType.attack;
+            lastAttrib = gnomeHat.attributeValue;
             return true;
         };
 
 
         itemMasterList[GNOME_HAT] = gnomeHat;
 
-
+        //***
         item skull = new item(name: SKULL,
            description: "Skull from a spooky skeleton. Just don't think about where this has been.",
            price: 1000,
@@ -791,6 +791,8 @@ public class ItemList {
 
         itemMasterList[SKULL] = skull;
 
+        //***
+
         item heartHat = new item(name: HEART_HAT,
             description: "Heals over time.",
             price: 1000,
@@ -818,6 +820,8 @@ public class ItemList {
         };
 
         itemMasterList[HEART_HAT] = heartHat;
+
+        //***
 
         item fireHair = new item(name: FIRE_HAIR,
            description: "This hot hair-do will heat your enemies up!",
