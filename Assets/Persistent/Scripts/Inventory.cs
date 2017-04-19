@@ -69,6 +69,8 @@ public class Inventory : MonoBehaviour {
     private static List<item> _items;
     public static bool selling = false;
     public GameObject itemsPanel,sellButton;
+    public GameObject confirm;
+    private static item itemToSell;
 
     public static List<item> items {
         get {
@@ -95,6 +97,7 @@ public class Inventory : MonoBehaviour {
 
     public static void removeItem(item item) {
         items.Remove(item);
+        PersistentUIElements.instance.updateItems();
         save();
     }
 
@@ -135,11 +138,33 @@ public class Inventory : MonoBehaviour {
             selling = false;
             sellButton.GetComponent<Toggle>().isOn = false;
         }
-        print(selling);
-        
+        print(selling);     
+    }
+
+    public void openConfirm() {
+        confirm.SetActive(true);
+    }
+
+    public void closeConfirm() {
+        confirm.SetActive(false);
     }
 
     public static void clear() {
         _items = null;
     }
+
+    public static void sell(item item) {
+        itemToSell = item;
+        GameObject.Find("Managers").GetComponent<Inventory>().openConfirm();
+        //NEED TO DEACTIVATE CLICKING ON OTHER ITEMS>>
+    }
+
+    public void confirmSell() {
+        //NEED TO CHECK IF ITEM IS EQUIPPED
+        Player.giveGold(itemToSell.price);
+        removeItem(itemToSell);
+        closeConfirm();
+    }
+
+
 }

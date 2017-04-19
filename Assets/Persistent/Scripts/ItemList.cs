@@ -257,8 +257,7 @@ public class ItemList {
 
         bronzeSword.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(bronzeSword.price);
-                Inventory.removeItem(bronzeSword);
+                Inventory.sell(bronzeSword);
             } else {
                 Player.instance.equipWeapon(bronzeSword);
             }
@@ -285,8 +284,7 @@ public class ItemList {
 
         bronzeSaber.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(bronzeSaber.price);
-                Inventory.removeItem(bronzeSaber);
+                Inventory.sell(bronzeSaber);
             } else {
                 Player.instance.equipWeapon(bronzeSaber);
             }
@@ -313,8 +311,7 @@ public class ItemList {
 
         woodSword.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(woodSword.price);
-                Inventory.removeItem(woodSword);
+                Inventory.sell(woodSword);
             } else {
                 Player.instance.equipWeapon(woodSword);
             }
@@ -342,8 +339,7 @@ public class ItemList {
 
         ironSword.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(ironSword.price);
-                Inventory.removeItem(ironSword);
+                Inventory.sell(ironSword);
             } else {
                 Player.instance.equipWeapon(ironSword);
             }
@@ -371,8 +367,7 @@ public class ItemList {
 
         steelSword.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(steelSword.price);
-                Inventory.removeItem(steelSword);
+                Inventory.sell(steelSword);
             } else {
                 Player.instance.equipWeapon(steelSword);
                 }
@@ -400,8 +395,7 @@ public class ItemList {
 
         orichalcumSword.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(orichalcumSword.price);
-                Inventory.removeItem(orichalcumSword);
+                Inventory.sell(orichalcumSword);
             } else {
                 Player.instance.equipWeapon(orichalcumSword);
             }
@@ -429,8 +423,7 @@ public class ItemList {
 
         sandSteelSword.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(sandSteelSword.price);
-                Inventory.removeItem(sandSteelSword);
+                Inventory.sell(sandSteelSword);
             } else {
                 Player.instance.equipWeapon(sandSteelSword);
             }
@@ -458,8 +451,7 @@ public class ItemList {
 
         jadeSword.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(jadeSword.price);
-                Inventory.removeItem(jadeSword);
+                Inventory.sell(jadeSword);
             } else {
                 Player.instance.equipWeapon(jadeSword);
             }
@@ -487,8 +479,7 @@ public class ItemList {
 
         obsidianSword.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(obsidianSword.price);
-                Inventory.removeItem(obsidianSword);
+                Inventory.sell(obsidianSword);
             } else {
                 Player.instance.equipWeapon(obsidianSword);
             }
@@ -516,8 +507,7 @@ public class ItemList {
 
         steelRapier.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(steelRapier.price);
-                Inventory.removeItem(steelRapier);
+                Inventory.sell(steelRapier);
             } else {
                 Player.instance.equipWeapon(steelRapier);
             }
@@ -545,8 +535,7 @@ public class ItemList {
 
         mythrilSword.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(mythrilSword.price);
-                Inventory.removeItem(mythrilSword);
+                Inventory.sell(mythrilSword);
             } else {
                 Player.instance.equipWeapon(mythrilSword);
             }
@@ -577,8 +566,7 @@ public class ItemList {
 
         bronzeArmor.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(bronzeArmor.price);
-                Inventory.removeItem(bronzeArmor);
+                Inventory.sell(bronzeArmor);
             } else {
                 Player.instance.equipArmor(bronzeArmor);
             }
@@ -606,8 +594,7 @@ public class ItemList {
 
         ironArmor.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(ironArmor.price);
-                Inventory.removeItem(ironArmor);
+                Inventory.sell(ironArmor);
             } else {
                 Player.instance.equipArmor(ironArmor);
             }
@@ -635,8 +622,7 @@ public class ItemList {
 
         steelArmor.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(steelArmor.price);
-                Inventory.removeItem(steelArmor);
+                Inventory.sell(steelArmor);
             } else {
                 Player.instance.equipArmor(steelArmor);
             }
@@ -664,8 +650,7 @@ public class ItemList {
 
         sandSteelArmor.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(sandSteelArmor.price);
-                Inventory.removeItem(sandSteelArmor);
+                Inventory.sell(sandSteelArmor);
             } else {
                 Player.instance.equipArmor(sandSteelArmor);
             }
@@ -693,8 +678,7 @@ public class ItemList {
 
         orchalcumArmor.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(orchalcumArmor.price);
-                Inventory.removeItem(orchalcumArmor);
+                Inventory.sell(orchalcumArmor);
             } else {
                 Player.instance.equipArmor(orchalcumArmor);
             }
@@ -722,8 +706,7 @@ public class ItemList {
 
         mythrilArmor.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(mythrilArmor.price);
-                Inventory.removeItem(mythrilArmor);
+                Inventory.sell(mythrilArmor);
             } else {
                 Player.instance.equipArmor(mythrilArmor);
             }
@@ -751,8 +734,7 @@ public class ItemList {
 
         jadeArmor.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(jadeArmor.price);
-                Inventory.removeItem(jadeArmor);
+                Inventory.sell(jadeArmor);
             } else {
                 Player.instance.equipArmor(jadeArmor);
             }
@@ -780,8 +762,7 @@ public class ItemList {
 
         obsidianArmor.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(obsidianArmor.price);
-                Inventory.removeItem(obsidianArmor);
+                Inventory.sell(obsidianArmor);
             } else {
                 Player.instance.equipArmor(obsidianArmor);
             }
@@ -813,8 +794,7 @@ public class ItemList {
 
         crown.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(crown.price);
-                Inventory.removeItem(crown);
+                Inventory.sell(crown);
             } else {
                 if (lastBuff != default(BuffManager.BuffType)) {
                     Player.instance.removeAccessory(lastBuff, lastAttrib);
@@ -849,8 +829,7 @@ public class ItemList {
 
         gnomeHat.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(gnomeHat.price);
-                Inventory.removeItem(gnomeHat);
+                Inventory.sell(gnomeHat);
             } else {
                 if (lastBuff != default(BuffManager.BuffType)) {
                     Player.instance.removeAccessory(lastBuff, lastAttrib);
@@ -884,8 +863,7 @@ public class ItemList {
 
         skull.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(skull.price);
-                Inventory.removeItem(skull);
+                Inventory.sell(skull);
             } else {
                 if (lastBuff != default(BuffManager.BuffType)) {
                     Player.instance.removeAccessory(lastBuff, lastAttrib);
@@ -919,8 +897,7 @@ public class ItemList {
 
         heartHat.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(heartHat.price);
-                Inventory.removeItem(heartHat);
+                Inventory.sell(heartHat);
             } else {
                 if (lastBuff != default(BuffManager.BuffType)) {
                     Player.instance.removeAccessory(lastBuff, lastAttrib);
@@ -954,8 +931,7 @@ public class ItemList {
 
         fireHair.useItem += () => {
             if (Inventory.selling) {
-                Player.giveGold(fireHair.price);
-                Inventory.removeItem(fireHair);
+                Inventory.sell(fireHair);
             } else {
                 if (lastBuff != default(BuffManager.BuffType)) {
                     Player.instance.removeAccessory(lastBuff, lastAttrib);
