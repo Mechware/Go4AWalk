@@ -263,7 +263,11 @@ public class PersistentUIElements : MonoBehaviour {
     void setButtonClick(Button button, item it) {
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(new UnityEngine.Events.UnityAction(() => {
-            it.useItem();
+            if(SellingInventory.currentlySellingItems) {
+                SellingInventory.sell(it);
+            } else {
+                it.useItem();
+            }
         }));
     }
     #endregion

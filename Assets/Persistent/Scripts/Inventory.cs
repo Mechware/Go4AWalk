@@ -67,10 +67,6 @@ public class Inventory : MonoBehaviour {
 
     public const int INVENTORY_SIZE = 10;
     private static List<item> _items;
-    public static bool selling = false;
-    public GameObject itemsPanel,sellButton;
-    public GameObject confirm;
-    private static item itemToSell;
 
     public static List<item> items {
         get {
@@ -97,6 +93,7 @@ public class Inventory : MonoBehaviour {
 
     public static void removeItem(item item) {
         items.Remove(item);
+        items.TrimExcess();
         PersistentUIElements.instance.updateItems();
         save();
     }
@@ -108,9 +105,15 @@ public class Inventory : MonoBehaviour {
     }
 
     public static void save() {
+        
         string[] itemNames = getInventory();
-        for (int i = 0 ; i < itemNames.Length ; i++) {
+        int i;
+        for (i = 0 ; i < itemNames.Length ; i++) {
             PlayerPrefs.SetString("Inventory_" + i, itemNames[i]);
+        }
+        while(PlayerPrefs.HasKey("Inventory_"+i)) {
+            PlayerPrefs.DeleteKey("Inventory_" + i);
+            i++;
         }
         PlayerPrefs.Save();
     }
@@ -132,39 +135,7 @@ public class Inventory : MonoBehaviour {
 
     }
 
-    public void sellItems(bool sell) {
-        selling = sell;
-        if (!itemsPanel.activeInHierarchy) {
-            selling = false;
-            sellButton.GetComponent<Toggle>().isOn = false;
-        }
-        print(selling);     
-    }
-
-    public void openConfirm() {
-        confirm.SetActive(true);
-    }
-
-    public void closeConfirm() {
-        confirm.SetActive(false);
-    }
-
     public static void clear() {
         _items = null;
     }
-
-    public static void sell(item item) {
-        itemToSell = item;
-        GameObject.Find("Managers").GetComponent<Inventory>().openConfirm();
-        //NEED TO DEACTIVATE CLICKING ON OTHER ITEMS>>
-    }
-
-    public void confirmSell() {
-        //NEED TO CHECK IF ITEM IS EQUIPPED
-        Player.giveGold(itemToSell.price);
-        removeItem(itemToSell);
-        closeConfirm();
-    }
-
-
 }
