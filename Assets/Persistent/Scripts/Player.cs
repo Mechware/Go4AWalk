@@ -36,7 +36,7 @@ public class Player : MonoBehaviour {
     public static float critModifier = 1;
     public static item equippedWeapon;
     public static item equippedArmor;
-    internal static item equippedAccessory;
+    public static item equippedAccessory;
 
     public AudioSource equipSound;
 
