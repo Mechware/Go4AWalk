@@ -116,7 +116,7 @@ public class ItemList {
         critPotion.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         critPotion.useItem += () => {
-            BuffManager.instance.CreateBuff("PlayerCritBoost", BuffManager.BuffType.crit, 1f, 5, Player.instance.gameObject);
+                BuffManager.instance.CreateBuff("PlayerCritBoost", BuffManager.BuffType.crit, 1f, 5, Player.instance.gameObject);            
             return true;
         };
 
@@ -256,7 +256,11 @@ public class ItemList {
         bronzeSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         bronzeSword.useItem += () => {
-            Player.instance.equipWeapon(bronzeSword);
+            if (Inventory.selling) {
+                Inventory.sell(bronzeSword);
+            } else {
+                Player.instance.equipWeapon(bronzeSword);
+            }
             return true;
         };
 
@@ -279,7 +283,11 @@ public class ItemList {
         bronzeSaber.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         bronzeSaber.useItem += () => {
-            Player.instance.equipWeapon(bronzeSaber);
+            if (Inventory.selling) {
+                Inventory.sell(bronzeSaber);
+            } else {
+                Player.instance.equipWeapon(bronzeSaber);
+            }
             return true;
         };
 
@@ -302,7 +310,11 @@ public class ItemList {
         woodSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         woodSword.useItem += () => {
-            Player.instance.equipWeapon(woodSword);
+            if (Inventory.selling) {
+                Inventory.sell(woodSword);
+            } else {
+                Player.instance.equipWeapon(woodSword);
+            }
             return true;
         };
 
@@ -326,7 +338,11 @@ public class ItemList {
         ironSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         ironSword.useItem += () => {
-            Player.instance.equipWeapon(ironSword);
+            if (Inventory.selling) {
+                Inventory.sell(ironSword);
+            } else {
+                Player.instance.equipWeapon(ironSword);
+            }
             return true;
         };
 
@@ -350,7 +366,11 @@ public class ItemList {
         steelSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         steelSword.useItem += () => {
-            Player.instance.equipWeapon(steelSword);
+            if (Inventory.selling) {
+                Inventory.sell(steelSword);
+            } else {
+                Player.instance.equipWeapon(steelSword);
+                }
             return true;
         };
 
@@ -374,7 +394,11 @@ public class ItemList {
         orichalcumSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         orichalcumSword.useItem += () => {
-            Player.instance.equipWeapon(orichalcumSword);
+            if (Inventory.selling) {
+                Inventory.sell(orichalcumSword);
+            } else {
+                Player.instance.equipWeapon(orichalcumSword);
+            }
             return true;
         };
 
@@ -398,7 +422,11 @@ public class ItemList {
         sandSteelSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         sandSteelSword.useItem += () => {
-            Player.instance.equipWeapon(sandSteelSword);
+            if (Inventory.selling) {
+                Inventory.sell(sandSteelSword);
+            } else {
+                Player.instance.equipWeapon(sandSteelSword);
+            }
             return true;
         };
 
@@ -422,7 +450,11 @@ public class ItemList {
         jadeSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         jadeSword.useItem += () => {
-            Player.instance.equipWeapon(jadeSword);
+            if (Inventory.selling) {
+                Inventory.sell(jadeSword);
+            } else {
+                Player.instance.equipWeapon(jadeSword);
+            }
             return true;
         };
 
@@ -446,7 +478,11 @@ public class ItemList {
         obsidianSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         obsidianSword.useItem += () => {
-            Player.instance.equipWeapon(obsidianSword);
+            if (Inventory.selling) {
+                Inventory.sell(obsidianSword);
+            } else {
+                Player.instance.equipWeapon(obsidianSword);
+            }
             return true;
         };
 
@@ -470,7 +506,11 @@ public class ItemList {
         steelRapier.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         steelRapier.useItem += () => {
-            Player.instance.equipWeapon(steelRapier);
+            if (Inventory.selling) {
+                Inventory.sell(steelRapier);
+            } else {
+                Player.instance.equipWeapon(steelRapier);
+            }
             return true;
         };
 
@@ -494,7 +534,11 @@ public class ItemList {
         mythrilSword.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         mythrilSword.useItem += () => {
-            Player.instance.equipWeapon(mythrilSword);
+            if (Inventory.selling) {
+                Inventory.sell(mythrilSword);
+            } else {
+                Player.instance.equipWeapon(mythrilSword);
+            }
             return true;
         };
 
@@ -521,7 +565,11 @@ public class ItemList {
         bronzeArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         bronzeArmor.useItem += () => {
-            Player.instance.equipArmor(bronzeArmor);
+            if (Inventory.selling) {
+                Inventory.sell(bronzeArmor);
+            } else {
+                Player.instance.equipArmor(bronzeArmor);
+            }
             return true;
         };
 
@@ -545,7 +593,11 @@ public class ItemList {
         ironArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         ironArmor.useItem += () => {
-            Player.instance.equipArmor(ironArmor);
+            if (Inventory.selling) {
+                Inventory.sell(ironArmor);
+            } else {
+                Player.instance.equipArmor(ironArmor);
+            }
             return true;
         };
 
@@ -569,7 +621,11 @@ public class ItemList {
         steelArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         steelArmor.useItem += () => {
-            Player.instance.equipArmor(steelArmor);
+            if (Inventory.selling) {
+                Inventory.sell(steelArmor);
+            } else {
+                Player.instance.equipArmor(steelArmor);
+            }
             return true;
         };
 
@@ -593,7 +649,11 @@ public class ItemList {
         sandSteelArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         sandSteelArmor.useItem += () => {
-            Player.instance.equipArmor(sandSteelArmor);
+            if (Inventory.selling) {
+                Inventory.sell(sandSteelArmor);
+            } else {
+                Player.instance.equipArmor(sandSteelArmor);
+            }
             return true;
         };
 
@@ -617,7 +677,11 @@ public class ItemList {
         orchalcumArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         orchalcumArmor.useItem += () => {
-            Player.instance.equipArmor(orchalcumArmor);
+            if (Inventory.selling) {
+                Inventory.sell(orchalcumArmor);
+            } else {
+                Player.instance.equipArmor(orchalcumArmor);
+            }
             return true;
         };
 
@@ -641,7 +705,11 @@ public class ItemList {
         mythrilArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         mythrilArmor.useItem += () => {
-            Player.instance.equipArmor(mythrilArmor);
+            if (Inventory.selling) {
+                Inventory.sell(mythrilArmor);
+            } else {
+                Player.instance.equipArmor(mythrilArmor);
+            }
             return true;
         };
 
@@ -665,7 +733,11 @@ public class ItemList {
         jadeArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         jadeArmor.useItem += () => {
-            Player.instance.equipArmor(jadeArmor);
+            if (Inventory.selling) {
+                Inventory.sell(jadeArmor);
+            } else {
+                Player.instance.equipArmor(jadeArmor);
+            }
             return true;
         };
 
@@ -689,7 +761,11 @@ public class ItemList {
         obsidianArmor.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         obsidianArmor.useItem += () => {
-            Player.instance.equipArmor(obsidianArmor);
+            if (Inventory.selling) {
+                Inventory.sell(obsidianArmor);
+            } else {
+                Player.instance.equipArmor(obsidianArmor);
+            }
             return true;
         };
 
@@ -717,12 +793,16 @@ public class ItemList {
         crown.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         crown.useItem += () => {
-            if (lastBuff != default(BuffManager.BuffType)) {
-            Player.instance.removeAccessory(lastBuff,lastAttrib);
-        }
-            Player.instance.equipAccessory(crown);
-            lastBuff=BuffManager.BuffType.crit;
-            lastAttrib = crown.attributeValue;
+            if (Inventory.selling) {
+                Inventory.sell(crown);
+            } else {
+                if (lastBuff != default(BuffManager.BuffType)) {
+                    Player.instance.removeAccessory(lastBuff, lastAttrib);
+                }
+                Player.instance.equipAccessory(crown);
+                lastBuff=BuffManager.BuffType.crit;
+                lastAttrib = crown.attributeValue;
+            }
             return true;
         };
 
@@ -748,12 +828,16 @@ public class ItemList {
         gnomeHat.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         gnomeHat.useItem += () => {
-            if (lastBuff != default(BuffManager.BuffType)) {
-            Player.instance.removeAccessory(lastBuff,lastAttrib);
-        }
-            Player.instance.equipAccessory(gnomeHat);
-            lastBuff = BuffManager.BuffType.attack;
-            lastAttrib = gnomeHat.attributeValue;
+            if (Inventory.selling) {
+                Inventory.sell(gnomeHat);
+            } else {
+                if (lastBuff != default(BuffManager.BuffType)) {
+                    Player.instance.removeAccessory(lastBuff, lastAttrib);
+                }
+                Player.instance.equipAccessory(gnomeHat);
+                lastBuff = BuffManager.BuffType.attack;
+                lastAttrib = gnomeHat.attributeValue;
+            }
             return true;
         };
 
@@ -778,14 +862,16 @@ public class ItemList {
         skull.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         skull.useItem += () => {
-            if (lastBuff != default(BuffManager.BuffType)) {
-                Player.instance.removeAccessory(lastBuff,lastAttrib);
-
+            if (Inventory.selling) {
+                Inventory.sell(skull);
+            } else {
+                if (lastBuff != default(BuffManager.BuffType)) {
+                    Player.instance.removeAccessory(lastBuff, lastAttrib);
+                }
+                Player.instance.equipAccessory(skull);
+                lastBuff=BuffManager.BuffType.defense;
+                lastAttrib=skull.attributeValue;
             }
-
-            Player.instance.equipAccessory(skull);
-            lastBuff=BuffManager.BuffType.defense;
-            lastAttrib=skull.attributeValue;
             return true;
         };
 
@@ -810,12 +896,16 @@ public class ItemList {
         heartHat.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         heartHat.useItem += () => {
-            if (lastBuff != default(BuffManager.BuffType)) {
-                Player.instance.removeAccessory(lastBuff,lastAttrib);
+            if (Inventory.selling) {
+                Inventory.sell(heartHat);
+            } else {
+                if (lastBuff != default(BuffManager.BuffType)) {
+                    Player.instance.removeAccessory(lastBuff, lastAttrib);
+                }
+                Player.instance.equipAccessory(heartHat);
+                lastBuff=BuffManager.BuffType.heal;
+                lastAttrib = heartHat.attributeValue;
             }
-            Player.instance.equipAccessory(heartHat);
-            lastBuff=BuffManager.BuffType.heal;
-            lastAttrib = heartHat.attributeValue;
             return true;
         };
 
@@ -840,12 +930,16 @@ public class ItemList {
         fireHair.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         fireHair.useItem += () => {
-            if (lastBuff != default(BuffManager.BuffType)) {
-                Player.instance.removeAccessory(lastBuff,lastAttrib);
+            if (Inventory.selling) {
+                Inventory.sell(fireHair);
+            } else {
+                if (lastBuff != default(BuffManager.BuffType)) {
+                    Player.instance.removeAccessory(lastBuff, lastAttrib);
+                }
+                Player.instance.equipAccessory(fireHair);
+                lastBuff = BuffManager.BuffType.fire;
+                lastAttrib = fireHair.attributeValue;
             }
-            Player.instance.equipAccessory(fireHair);
-            lastBuff = BuffManager.BuffType.fire;
-            lastAttrib = fireHair.attributeValue;
             return true;
         };
 
