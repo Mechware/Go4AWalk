@@ -38,8 +38,8 @@ public class StoryOverlord : MonoBehaviour {
     public static void startQuest(int level, float progress) {
         if(level == 0) {
             walkingBackground = Resources.Load("Materials/garden") as Material;
-            //Texture2D fightingTexture = Resources.Load("Materials/SmallTreeFightingBackground") as Texture2D;
-            //fightingBackground = Sprite.Create(fightingTexture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            texture = Resources.Load("Materials/SmallTreeFightingBackground") as Texture2D;
+            fightingBackground = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             // Enemy Spawns: GnomeChompy
             // Boss: GreenChompy
             // Reward: Bronze Sword
@@ -80,8 +80,8 @@ public class StoryOverlord : MonoBehaviour {
         }
         if(level == 1) {
             walkingBackground = Resources.Load("Materials/grass") as Material;
-            //Texture2D fightingTexture = Resources.Load("Materials/SmallTreeFightingBackground") as Texture2D;
-            //fightingBackground = Sprite.Create(fightingTexture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            texture = Resources.Load("Materials/SmallTreeFightingBackground") as Texture2D;
+            fightingBackground = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             // Enemy Spawns: GnomeChompy, GreenChompy, Goblin
             // Boss: Red Goblin
             // Reward: Bronze Armor
@@ -117,8 +117,8 @@ public class StoryOverlord : MonoBehaviour {
         }
         if (level == 2) {
             walkingBackground = Resources.Load("Materials/forest") as Material;
-            //Texture2D fightingTexture = Resources.Load("Materials/BigTreeFightingBackground") as Texture2D;
-            //fightingBackground = Sprite.Create(fightingTexture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            texture = Resources.Load("Materials/BigTreeFightingBackground") as Texture2D;
+            fightingBackground = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             // Enemy Spawns: Goblin, Evil Tree, Red Goblin, Slime
             // Boss: Evil Dead Tree
             // Reward: Iron Armor
@@ -155,8 +155,8 @@ public class StoryOverlord : MonoBehaviour {
         }
         if (level == 3) {
             walkingBackground = Resources.Load("Materials/hauntedForest") as Material;
-            //Texture2D fightingTexture = Resources.Load("Materials/SpookyTreeFightingBackground") as Texture2D;
-            //fightingBackground = Sprite.Create(fightingTexture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            texture = Resources.Load("Materials/SpookyTreeFightingBackground") as Texture2D;
+            fightingBackground = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             // Enemy Spawns: Blue Goblin, Dead Tree, Spooky Ghost, Skeleton
             // Boss: Ghost
             // Reward: Steel Sword
@@ -190,8 +190,8 @@ public class StoryOverlord : MonoBehaviour {
         }
         if (level == 4) {
             walkingBackground = Resources.Load("Materials/grass") as Material;
-            //Texture2D fightingTexture = Resources.Load("Materials/SmallTreeFightingBackground") as Texture2D;
-            //fightingBackground = Sprite.Create(fightingTexture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            texture = Resources.Load("Materials/SmallTreeFightingBackground") as Texture2D;
+            fightingBackground = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             // Enemy Spawns: Blue Goblin, Goblin King, Rock Golem
             // Boss: Goblin Champ
             // Reward: Orichalcum Sword
@@ -232,8 +232,8 @@ public class StoryOverlord : MonoBehaviour {
         }
         if (level == 5) {
             walkingBackground = Resources.Load("Materials/grass") as Material;
-            //Texture2D fightingTexture = Resources.Load("Materials/SmallTreeFightingBackground") as Texture2D;
-            //fightingBackground = Sprite.Create(fightingTexture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            texture = Resources.Load("Materials/SmallTreeFightingBackground") as Texture2D;
+            fightingBackground = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             // Enemy Spawns: All
             // Boss: N/A
             // Reward: Orichalcum Sword

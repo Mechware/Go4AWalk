@@ -61,11 +61,16 @@ public class FightingWatchdog : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        //background.sprite = StoryOverlord.fightingBackground;
         Player.crit.OnValueChange += updateCritBar;
         Player.health.OnValueChange += updateHealthBar;
         updateCritBar();
         updateHealthBar();
+        StartCoroutine(waitForOneFrame());
+    }
+
+    IEnumerator waitForOneFrame() {
+        yield return 0;
+        background.sprite = StoryOverlord.fightingBackground;
     }
 
     // Used for update the health bar

@@ -52,10 +52,10 @@ public class SellingInventory : MonoBehaviour {
         itemToSell = item;
 
         PopUp.instance.showPopUp("Are you sure you want to sell this item for " + item.price + " gold?", 
-            new string[] { "Yes", "No" }, 
+            new string[] { "No", "Yes"  }, 
             new Action[] {
-                new Action(confirmSell),
-                new Action(() => { })
+                new Action(() => { }),
+                new Action(confirmSell)
             }
         );
     }
