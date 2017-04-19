@@ -10,6 +10,7 @@
 
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 /// <summary>
@@ -66,6 +67,9 @@ public class Inventory : MonoBehaviour {
 
     public const int INVENTORY_SIZE = 10;
     private static List<item> _items;
+    public static bool selling = false;
+    public GameObject itemsPanel,sellButton;
+
     public static List<item> items {
         get {
             if (_items == null)
@@ -123,6 +127,16 @@ public class Inventory : MonoBehaviour {
             setInventory(itemNames.ToArray());
         }
 
+    }
+
+    public void sellItems(bool sell) {
+        selling = sell;
+        if (!itemsPanel.activeInHierarchy) {
+            selling = false;
+            sellButton.GetComponent<Toggle>().isOn = false;
+        }
+        print(selling);
+        
     }
 
     public static void clear() {
