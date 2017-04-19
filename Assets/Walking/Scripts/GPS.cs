@@ -171,13 +171,12 @@ public class GPS : MonoBehaviour
             if (gpsUpdates == GPSUpdatesBeforeAverage) {
                 longitude = totalLong / GPSUpdatesBeforeAverage;
                 latitude = totalLat / GPSUpdatesBeforeAverage;
-                prevLongitude = longitude;
-                prevLatitude = latitude;
 
                 updateChangeInTime();
                 deltaDistance.Value = Haversine(prevLongitude, prevLatitude, longitude, latitude) * 1000f;
-                
-                    
+
+                prevLongitude = longitude;
+                prevLatitude = latitude;
 
                 gpsUpdates = 1;
                 totalLong = Input.location.lastData.longitude;
