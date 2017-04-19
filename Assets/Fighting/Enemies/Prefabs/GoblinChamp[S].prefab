@@ -103,6 +103,7 @@ GameObject:
   - 4: {fileID: 4000011637003516}
   - 114: {fileID: 114000010680618226}
   - 114: {fileID: 114000010316485986}
+  - 82: {fileID: 82000011662567358}
   m_Layer: 0
   m_Name: GoblinChamp[S]
   m_TagString: Untagged
@@ -207,6 +208,80 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 2.3}
   serializedVersion: 2
   m_Size: {x: 10, y: 10}
+--- !u!82 &82000011662567358
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013902114332}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95000012186498874
 Animator:
   serializedVersion: 3
@@ -293,15 +368,16 @@ MonoBehaviour:
   damage: 25
   goldToGive: 600
   expToGive: 150
-  dieSound: {fileID: 0}
-  attackSound: {fileID: 0}
-  sound: {fileID: 0}
+  dieSound: {fileID: 8300000, guid: 6aebb2d003aae2444ad260ff30ab7111, type: 3}
+  attackSound: {fileID: 8300000, guid: efd2b203601f2cf41b37d435ed2006f3, type: 3}
+  sound: {fileID: 82000011662567358}
   armor: 1
   sturdy: 0.1
   timeBetweenAttacks: 4
   spawnRate: 10
   itemName: 
   lootSpawnRate: -1
+  isDead: 0
 --- !u!212 &212000010982815360
 SpriteRenderer:
   m_ObjectHideFlags: 1
