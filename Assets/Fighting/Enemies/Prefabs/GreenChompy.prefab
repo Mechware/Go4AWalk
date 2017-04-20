@@ -364,8 +364,8 @@ MonoBehaviour:
   goldIndicator: {fileID: 1000010227259316, guid: 296d33ae00cdda04b8c818eb6dc9f709,
     type: 2}
   item: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae, type: 2}
-  health: 450
-  damage: 4
+  health: 1350
+  damage: 5
   goldToGive: 25
   expToGive: 20
   dieSound: {fileID: 8300000, guid: 95cb0b4ad2e6b5245a3bad2156ba5ed0, type: 3}
@@ -376,7 +376,7 @@ MonoBehaviour:
   timeBetweenAttacks: 2
   spawnRate: 100
   itemName: Gnome Hat
-  lootSpawnRate: 100
+  lootSpawnRate: 10
   isDead: 0
 --- !u!212 &212000013493875122
 SpriteRenderer:

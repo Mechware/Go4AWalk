@@ -138,7 +138,7 @@ public class StoryOverlord : MonoBehaviour {
             textureEnd = Resources.Load("Characters/Narrator") as Texture2D; // Narrator
             characterSpriteEnd = Sprite.Create(textureEnd, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             characterNameEnd = "Narrator";
-            questEndDialogue = "You defeat the tree and make your way past it. The trees begin to clear - oh wait, no they dont. The trees actually get thicker as you enter an even spookier"+
+            questEndDialogue = "You defeat the tree and make your way past it. The trees begin to clear - oh wait, no they dont. The trees actually get thicker as you enter an even spookier "+
                 "part of the forest! Oh no!";
             
             firstEnemy = 2;
