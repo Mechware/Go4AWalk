@@ -59,7 +59,7 @@ public class AlchemyPanel : MonoBehaviour {
             sound.clip = success;
             sound.Play();
         } else {
-            print("You dont have the necessary ingredients!");
+            PopUp.instance.showPopUp("You don't have the neccessary items!", new string[] { "Okay" });
             sound.clip = negative;
             sound.Play();
         };
@@ -72,7 +72,7 @@ public class AlchemyPanel : MonoBehaviour {
             sound.clip = success;
             sound.Play();
         } else {
-            print("You dont have the necessary ingredients!");
+            PopUp.instance.showPopUp("You don't have the neccessary items!", new string[] { "Okay" });
             sound.clip = negative;
             sound.Play();
         };
@@ -85,7 +85,7 @@ public class AlchemyPanel : MonoBehaviour {
             sound.clip = success;
             sound.Play();
         } else {
-            print("You dont have the necessary ingredients!");
+            PopUp.instance.showPopUp("You don't have the neccessary items!", new string[] { "Okay" });
             sound.clip = negative;
             sound.Play();
         };

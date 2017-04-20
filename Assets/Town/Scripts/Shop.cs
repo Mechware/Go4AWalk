@@ -40,8 +40,6 @@ public class Shop : MonoBehaviour {
     }
 
     public void closeShop() {
-        
-        sound.Play();
         shopPanel.SetActive(false);
     }
 

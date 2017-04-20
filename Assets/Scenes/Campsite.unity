@@ -4931,7 +4931,7 @@ MonoBehaviour:
   makeHealth: {fileID: 0}
   makeCrit: {fileID: 0}
   makeAttack: {fileID: 0}
-  sound: {fileID: 0}
+  sound: {fileID: 502108354}
   success: {fileID: 8300000, guid: 1de4e896dfbbd1c43b3580119bb05368, type: 3}
   negative: {fileID: 8300000, guid: e791d7d0dd3baf5489e4d0a46da4e103, type: 3}
 --- !u!82 &930438666

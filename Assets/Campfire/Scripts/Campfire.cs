@@ -8,7 +8,7 @@ public class Campfire : MonoBehaviour {
     public GameObject fadePopUp;
 	// Use this for initialization
 	void Start () {
-	
+        StartCoroutine(Ads.initializeAds());
 	}
 	
 	// Update is called once per frame
@@ -18,7 +18,7 @@ public class Campfire : MonoBehaviour {
 
     void goToSleep() {
         Player.giveHealth(Player.getMaxHealth());
-        // WATCH AD HERE!
+        Ads.showAd();
         toForest();
     }
 
