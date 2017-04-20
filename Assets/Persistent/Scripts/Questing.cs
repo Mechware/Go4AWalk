@@ -47,29 +47,8 @@ public struct quest {
 
         string s = "";
         s += "Name: " + name + "\n";
-        s += "Gold Reward: " + goldReward + "\n";
-        s += "Xp Reward: " + xpReward + "\n";
-
-        if (timeToComplete != -1) {
-            s += "Quest time length: " + string.Format("{0:0.00}", timeToComplete / 60f) + " minutes\n";
-        } else {
-            s += "Quest time length: Unlimited\n";
-        }
-
-        double timeLeft = (endTime - System.DateTime.UtcNow).TotalMinutes;
-        if (timeLeft < 5) {
-            s += "Time left: " + string.Format("{0:0.00}", timeLeft * 60) + " seconds\n";
-        } else if (timeLeft > 1000000) {
-            s += "Time left: Unlimited\n";
-        }
-
-        if (distance == -1) {
-            s += "Quest distance: In Forest\n";
-        } else {
-            s += "Quest distance: " + distance + " meters\n";
-        }
-
-        s += "Distance Travelled: " + distanceProgress + " meters\n";
+        s += "Quest distance (meters): " + Mathf.Round(distanceProgress) + "/" + distance + "\n";
+        s += "\n" + description;
         return s;
     }
 

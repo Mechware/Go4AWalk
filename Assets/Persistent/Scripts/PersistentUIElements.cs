@@ -75,10 +75,7 @@ public class PersistentUIElements : MonoBehaviour {
         if (questStats.IsActive()) {
             questStats.text = Questing.currentQuest.getStats();
         }
-
-
     }
-
 
     #region journal
 
@@ -183,6 +180,7 @@ public class PersistentUIElements : MonoBehaviour {
             equippedArmor.text = "Armor:" + "\n" + Player.equippedArmor.name.ToString();
             equippedItem2.sprite = Player.equippedArmor.icon;
         }
+
         if (Player.equippedAccessory.Equals(ItemList.noItem) || Player.equippedAccessory.Equals(default(item))) {
             equippedAccessory.text = "Accessory:" + "\n" + "None";
         } else {
@@ -190,28 +188,12 @@ public class PersistentUIElements : MonoBehaviour {
             equippedItem3.sprite = Player.equippedAccessory.icon;
         }
 
-
-        equippedAccessory.text = "Accessory:" + "\n" + "None";
-
         playerStats.text =
                 "ATK:  " + Player.attackStrength + "\n" +
                 "DEF:  " + Mathf.Round((1 - Player.defenseModifier) * 100) + "\n" + //Defence now shows how much damage the player avoids with a max of 99; 
                 "HP:   " + Player.getMaxHealth() + "\n" +
                 "CRIT: " + Player.critModifier + "\n" +
                 "PWR:  " + Player.attackModifier;
-
-        // Uncomment this out when accessories are actually in place
-
-        
-         
-
-        /**
-             if (Player.equippedAccessory.Equals(ItemList.noItem) || Player.equippedAccessory.Equals(default(item))) {
-                 equippedAccessory.text = "" + Player.equippedAccessory.name.ToString();
-             } else
-                 equippedAccessory.text = "None";
-
-         **/
 
         string itemDescription = "";
         string itemStats = "";
