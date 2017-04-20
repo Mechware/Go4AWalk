@@ -13,8 +13,8 @@ public class GoToCampFromWalking : MonoBehaviour {
             PopUp.instance.showPopUp("You cannot sleep while monsters are following you!", new string[] { "Okay" });
             return;
         }
-        PopUp.instance.showPopUp("WOULD YOU LIKE TO MAKE CAMP FOR THE NIGHT?",
-            new string[] { "YES", "NO" },
+        PopUp.instance.showPopUp("Would you like to make camp for the night?",
+            new string[] { "Yes", "No" },
             new Action[] { makeCamp, () => { } });
     }
 

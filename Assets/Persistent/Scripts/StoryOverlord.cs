@@ -206,7 +206,7 @@ public class StoryOverlord : MonoBehaviour {
             bossfightSprite = Sprite.Create(textureBoss, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             bossfightName = "Goblin Champion";
             bossFightDialogue = "Hey you! Get out of here. This town is mine to attack and plunder, go find your own! Oh wait, you're not an adventurer that's going to try and stop me are you? " +
-                "Oh bother, you are. Well then if you want a piece of the CHAMP then you're gonna regret it! YOUUU CAN'T SEEEE MEEE!! \n*waves hand in front of face*";
+                "Oh bother, you are. Well then if you want a piece of the CHAMP then you're gonna regret it!";
 
             textureEnd = Resources.Load("Characters/Old Man") as Texture2D; // Red Goblin
             characterSpriteEnd = Sprite.Create(textureEnd, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));

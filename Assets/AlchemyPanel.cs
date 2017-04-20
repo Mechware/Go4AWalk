@@ -5,8 +5,8 @@ using System.Collections;
 public class AlchemyPanel : MonoBehaviour {
 
     public const int RED_LEAVES_FOR_HEALTH = 3;
-    public const int YELLOW_LEAVES_FOR_CRIT = 4;
-    public const int BLUE_LEAVES_FOR_POWER = 5;
+    public const int YELLOW_LEAVES_FOR_CRIT = 3;
+    public const int BLUE_LEAVES_FOR_POWER = 3;
 
     public Text redLeafText, yellowLeafText, blueLeafText;
     public Text healthPrice, critPrice, attackPrice;
@@ -37,8 +37,8 @@ public class AlchemyPanel : MonoBehaviour {
         attackPotPrice = 30 * Player.level.Value;
 
         healthPrice.text = "Health Potion" + "\n" + "        : x3" + "\n\n" + "      : x" + healthPotPrice;
-        critPrice.text = "Crit Potion" + "\n" + "        : x4" + "\n\n" + "      : x" + critPotPrice;
-        attackPrice.text = "Attack Potion" + "\n" + "        : x5" + "\n\n" + "      : x" + attackPotPrice;
+        critPrice.text = "Crit Potion" + "\n" + "        : x3" + "\n\n" + "      : x" + critPotPrice;
+        attackPrice.text = "Attack Potion" + "\n" + "        : x3" + "\n\n" + "      : x" + attackPotPrice;
     }
 
     // Update is called once per frame

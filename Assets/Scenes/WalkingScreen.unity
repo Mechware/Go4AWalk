@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.05
-  renderer: {fileID: 0}
+  scrollRenderer: {fileID: 0}
 --- !u!23 &205204205
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -910,11 +910,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
---- !u!82 &535349221 stripped
-AudioSource:
-  m_PrefabParentObject: {fileID: 82000012076679392, guid: da687c2027639a24583cf909cdae1990,
-    type: 2}
-  m_PrefabInternal: {fileID: 645805559}
 --- !u!1 &536528506
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,24 +1177,20 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114000013946587988, guid: da687c2027639a24583cf909cdae1990,
-        type: 2}
-      propertyPath: m_Text
+    - target: {fileID: 1000010529937588, guid: da687c2027639a24583cf909cdae1990, type: 2}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 82000012076679392, guid: da687c2027639a24583cf909cdae1990,
-        type: 2}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: d914ae689eafbc843aa32ea435407445, type: 3}
-    - target: {fileID: 114000011747086444, guid: da687c2027639a24583cf909cdae1990,
-        type: 2}
-      propertyPath: audio
-      value: 
-      objectReference: {fileID: 535349221}
-    - target: {fileID: 82000012076679392, guid: da687c2027639a24583cf909cdae1990,
-        type: 2}
-      propertyPath: m_PlayOnAwake
+    - target: {fileID: 1000011785972262, guid: da687c2027639a24583cf909cdae1990, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012162485168, guid: da687c2027639a24583cf909cdae1990, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013767885410, guid: da687c2027639a24583cf909cdae1990, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1761,7 +1752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.02
-  renderer: {fileID: 0}
+  scrollRenderer: {fileID: 0}
 --- !u!23 &1058960704
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2477,7 +2468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.01
-  renderer: {fileID: 0}
+  scrollRenderer: {fileID: 0}
 --- !u!23 &1897428472
 MeshRenderer:
   m_ObjectHideFlags: 0
