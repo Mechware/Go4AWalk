@@ -353,7 +353,7 @@ MonoBehaviour:
   goldIndicator: {fileID: 1000010227259316, guid: 296d33ae00cdda04b8c818eb6dc9f709,
     type: 2}
   item: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae, type: 2}
-  health: 600
+  health: 10000
   damage: 6
   goldToGive: 25
   expToGive: 20
@@ -365,7 +365,7 @@ MonoBehaviour:
   timeBetweenAttacks: 3
   spawnRate: 100
   itemName: Skull
-  lootSpawnRate: 100
+  lootSpawnRate: 40
   isDead: 0
 --- !u!114 &114000013449506606
 MonoBehaviour:

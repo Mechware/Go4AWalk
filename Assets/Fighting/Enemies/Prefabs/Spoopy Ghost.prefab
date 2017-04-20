@@ -364,8 +364,8 @@ MonoBehaviour:
   goldIndicator: {fileID: 1000010227259316, guid: 296d33ae00cdda04b8c818eb6dc9f709,
     type: 2}
   item: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae, type: 2}
-  health: 600
-  damage: 6
+  health: 4000
+  damage: 50
   goldToGive: 25
   expToGive: 20
   dieSound: {fileID: 8300000, guid: 18b0ef6f583975443b626f43f20a3467, type: 3}
@@ -373,10 +373,10 @@ MonoBehaviour:
   sound: {fileID: 82000012345285334}
   armor: 1
   sturdy: 1
-  timeBetweenAttacks: 3
+  timeBetweenAttacks: 4
   spawnRate: 80
-  itemName: Fire Hair
-  lootSpawnRate: 100
+  itemName: 
+  lootSpawnRate: 0
   isDead: 0
 --- !u!212 &212000011168270170
 SpriteRenderer:

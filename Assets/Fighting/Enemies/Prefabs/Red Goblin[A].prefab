@@ -353,19 +353,19 @@ MonoBehaviour:
   goldIndicator: {fileID: 1000010227259316, guid: 296d33ae00cdda04b8c818eb6dc9f709,
     type: 2}
   item: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae, type: 2}
-  health: 750
-  damage: 10
+  health: 2250
+  damage: 15
   goldToGive: 60
   expToGive: 50
   dieSound: {fileID: 8300000, guid: d45b783037d7fe64aba73f79bd09e1f4, type: 3}
   attackSound: {fileID: 8300000, guid: d4384e2a2f66f834f8e03e3d9e83653b, type: 3}
   sound: {fileID: 82000010738734948}
   armor: 0.5
-  sturdy: 1.25
+  sturdy: 1.1
   timeBetweenAttacks: 3
   spawnRate: 50
-  itemName: Iron Armor
-  lootSpawnRate: 25
+  itemName: Iron Sword
+  lootSpawnRate: 35
   isDead: 0
 --- !u!114 &114000014211924666
 MonoBehaviour:
