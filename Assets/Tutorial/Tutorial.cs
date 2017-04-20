@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tutorial : MonoBehaviour {
 
     private const string DONE_WALKING = "Done Walking Tutorial";
+    private const string DONE_WALKING_BUTTONS = "Done Walking Buttons Tutorial";
     private const string DONE_FIGHTING = "Done Fighting Tutorial";
     private const string DONE_STURDY = "Done Sturdy Tutorial";
     private const string DONE_ARMORED = "Done Armored Tutorial";
@@ -13,7 +14,7 @@ public class Tutorial : MonoBehaviour {
     private const string DONE_RESTING = "Done Resting Tutorial";
     private const string DONE_GOTORESTING = "Done Go To Resting Tutorial";
 
-    private static bool doneWalkingTutorial, doneFightingTutorial, doneSturdyTutorial, doneArmoredTutorial;
+    private static bool doneWalkingTutorial, doneWalkingButtonTutorial, doneFightingTutorial, doneSturdyTutorial, doneArmoredTutorial;
     private static bool doneInventoryTutorial, doneAlchemyTutorial, doneRestingTutorial, doneGoToRestingTutorial;  
 
 	// Use this for initialization
@@ -27,6 +28,10 @@ public class Tutorial : MonoBehaviour {
 
         if (!doneWalkingTutorial && GameState.walking) {
             StartCoroutine(callAfterOneFrame(walkingTutorial()));
+        }
+
+        if(!doneWalkingButtonTutorial && GameState.walking) {
+            StartCoroutine(callAfterOneFrame(walkingButtonsTutorial()));
         }
 
         if(!doneInventoryTutorial && GameState.walking && Inventory.getInventory().Length > 1) {
@@ -80,15 +85,20 @@ public class Tutorial : MonoBehaviour {
     private const string WALKING_TUTORIAL_TEXT = "TUTORIAL\nWhile you walk in real life, you will walk through the game. As you walk enemies will follow you that you must defeat!";
     IEnumerator walkingTutorial() {
         tutorial(() => {
-            StartCoroutine(walkingButtonsTutorial());
+            doneWalkingTutorial = true;
+            save();
         }, WALKING_TUTORIAL_TEXT);
         yield break;
     }
 
-    private const string WALKING_BUTTON_TUTORIAL_TEXT = "TUTORIAL\nClicking the monster head on the bottom right will let you fight the monsters that are following you. The tent on the bottom left will set up camp and let you sleep for the night.";
+    private const string WALKING_BUTTON_TUTORIAL_TEXT = "TUTORIAL\nYou have a monster following you! By clicking the monster head on the bottom right you will be able to fight them.";
     IEnumerator walkingButtonsTutorial() {
+        while(EnemyWatchdog.enemiesQueue.Count == 0) {
+            yield return new WaitForSeconds(2);
+        }
+
         tutorial(() => {
-            doneWalkingTutorial = true;
+            doneWalkingButtonTutorial = true;
             save();
         }, WALKING_BUTTON_TUTORIAL_TEXT);
         yield break;
@@ -213,7 +223,7 @@ public class Tutorial : MonoBehaviour {
         yield break;
     }
 
-    private const string SHOULD_REST_TEXT = "TUTORIAL\nYour health is a little low, try building a camp using the camp button and resting for the night!";
+    private const string SHOULD_REST_TEXT = "TUTORIAL\nYour health is a little low, try building a camp using the camp button on the bottom left and resting for the night! This will also save all of the gold you have gotten from fighting monsters.";
     IEnumerator goToRestingTutorial() {
         tutorial(() => {
             doneGoToRestingTutorial = true;
@@ -247,6 +257,7 @@ public class Tutorial : MonoBehaviour {
         PlayerPrefs.SetString(DONE_STURDY, doneSturdyTutorial.ToString());
         PlayerPrefs.SetString(DONE_WALKING, doneWalkingTutorial.ToString());
         PlayerPrefs.SetString(DONE_GOTORESTING, doneGoToRestingTutorial.ToString());
+        PlayerPrefs.SetString(DONE_WALKING_BUTTONS, doneWalkingButtonTutorial.ToString());
         PlayerPrefs.Save();
     }
 
@@ -259,6 +270,7 @@ public class Tutorial : MonoBehaviour {
         doneSturdyTutorial = bool.Parse(PlayerPrefs.GetString(DONE_STURDY, bool.FalseString));
         doneWalkingTutorial = bool.Parse(PlayerPrefs.GetString(DONE_WALKING, bool.FalseString));
         doneGoToRestingTutorial = bool.Parse(PlayerPrefs.GetString(DONE_GOTORESTING, bool.FalseString));
+        doneWalkingButtonTutorial = bool.Parse(PlayerPrefs.GetString(DONE_WALKING_BUTTONS, bool.FalseString));
     }
 
     public static void clear() {
@@ -269,5 +281,6 @@ public class Tutorial : MonoBehaviour {
         doneRestingTutorial = false;
         doneSturdyTutorial = false;
         doneWalkingTutorial = false;
+        doneWalkingButtonTutorial = false;
     }
 }

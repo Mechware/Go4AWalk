@@ -4,12 +4,14 @@ using System.Collections;
 public class IntroToMainGame : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-        StartCoroutine(switchScenes());
-	}
-	
-	IEnumerator switchScenes() {
+	IEnumerator Start () {
         yield return new WaitForSeconds(2);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("WalkingScreen");
+        if (PlayerPrefs.HasKey("Done Intro")) {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("WalkingScreen");
+        } else {
+            PlayerPrefs.SetString("Done Intro", bool.TrueString);
+            PlayerPrefs.Save();
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Volcano");
+        }
     }
 }
