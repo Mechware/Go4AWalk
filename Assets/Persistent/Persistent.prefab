@@ -772,7 +772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000011839947530
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000012176131206
 GameObject:
   m_ObjectHideFlags: 1
@@ -1467,7 +1467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000013791679390
 GameObject:
   m_ObjectHideFlags: 1
@@ -2005,8 +2005,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: d914ae689eafbc843aa32ea435407445, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3112,40 +3112,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '***
-
-    Software Lead:
-
-    Micheal Demone
-
-
-    Additional Programming:
-
-    Gregory Perry
-
-    Dylan Reimer
-
-
-    Head Artist:
-
-    Gregory Perry
-
-
-    Additional Artists:
-
-    Dylan Reimer
-
-
-    Music by:
-
-    Adam
-
-
-    Sound Effects by:
-
-    GameBurp.com
-
-'
+  m_Text: "***\nSoftware Lead:\nMicheal Demone\n\nAdditional Programming:\nGregory
+    Perry\nDylan Reimer\n\nHead Artist:\nGregory Perry\n\nAdditional Artists:\nDylan
+    Reimer\n\nSound Effects by:\nGameBurp.com\n\nMusic:\n\"Monkeys Spinning Monkeys\"
+    Kevin MacLeod (incompetech.com)\r\n\n\"Unanswered Questions\" Kevin MacLeod (incompetech.com)\r\n\nLicensed
+    under Creative Commons: By Attribution 3.0 License\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n\n"
 --- !u!114 &114000011360425948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3485,6 +3456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemsPanel: {fileID: 1000012729461972}
   sellButton: {fileID: 1000010983700338}
+  audio: {fileID: 82000012076679392}
 --- !u!114 &114000011771967398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3550,9 +3522,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ddc38da461789f45bd7603f468032fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsPanel: {fileID: 0}
-  sellButton: {fileID: 0}
-  confirm: {fileID: 0}
 --- !u!114 &114000011893756200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5437,7 +5406,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2
+  m_Text: 1
 --- !u!114 &114000013965348852
 MonoBehaviour:
   m_ObjectHideFlags: 1

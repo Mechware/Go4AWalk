@@ -40,7 +40,7 @@ public class FightingWatchdog : MonoBehaviour {
     public IEnumerator questFightEnd() {
         fadeOutStats();
 
-        StartCoroutine(FadingUtils.fadeSpriteRenderer(background, 1, 1, 0));
+        
         StartCoroutine(FadingUtils.fadeSpriteRenderer(treasureBackground, 1, 0, 1));
 
         yield return new WaitForSeconds(1.2f);
