@@ -49,7 +49,7 @@ public class Attacking : MonoBehaviour {
         }
 #endif
 
-        if (enemyObject.GetComponent<Enemy>().isDead) {
+        if (enemyObject.GetComponent<Enemy>().isDead && enemyObject.GetComponent<Enemy>() != null) {
             BuffManager.removeCurrentBuff(dotName);
         }
 

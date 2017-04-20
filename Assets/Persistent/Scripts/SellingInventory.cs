@@ -10,6 +10,7 @@ public class SellingInventory : MonoBehaviour {
     public GameObject sellButton;
     public static SellingInventory instance;
     public static item itemToSell;
+    public AudioSource audio;
 
     void Awake() {
         instance = this;
@@ -65,15 +66,18 @@ public class SellingInventory : MonoBehaviour {
                 new string[] { "No", "Yes" },
                 new Action[] {
                 new Action(() => { }),
-                new Action(confirmSell)
+                new Action(confirmSell)          
                 }
             );
+
       //  }
 
     }
 
     public static void confirmSell() {
+
         Player.giveGold(itemToSell.price);
         Inventory.removeItem(itemToSell);
+        instance.audio.Play();
     }
 }
