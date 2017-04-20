@@ -20,7 +20,7 @@ public class AlchemyPanel : MonoBehaviour {
     item yellowLeaf;
     item blueLeaf;
 
-    public AudioSource audio;
+    public AudioSource sound;
     public AudioClip success, negative;
 
     // Use this for initialization
@@ -56,12 +56,12 @@ public class AlchemyPanel : MonoBehaviour {
             Player.takeGold(healthPotPrice);
             PotionInventory.removeLeaf(redLeaf, RED_LEAVES_FOR_HEALTH);
             PotionInventory.addPotion(healthPot);
-            audio.clip = success;
-            audio.Play();
+            sound.clip = success;
+            sound.Play();
         } else {
             print("You dont have the necessary ingredients!");
-            audio.clip = negative;
-            audio.Play();
+            sound.clip = negative;
+            sound.Play();
         };
     }
     public void makeCritPot() {
@@ -69,12 +69,12 @@ public class AlchemyPanel : MonoBehaviour {
             Player.takeGold(critPotPrice);
             PotionInventory.removeLeaf(yellowLeaf, YELLOW_LEAVES_FOR_CRIT);
             PotionInventory.addPotion(critPot);
-            audio.clip = success;
-            audio.Play();
+            sound.clip = success;
+            sound.Play();
         } else {
             print("You dont have the necessary ingredients!");
-            audio.clip = negative;
-            audio.Play();
+            sound.clip = negative;
+            sound.Play();
         };
     }
     public void makeAttackPot() {
@@ -82,12 +82,12 @@ public class AlchemyPanel : MonoBehaviour {
             Player.takeGold(attackPotPrice);
             PotionInventory.removeLeaf(blueLeaf, BLUE_LEAVES_FOR_POWER);
             PotionInventory.addPotion(attackPot);
-            audio.clip = success;
-            audio.Play();
+            sound.clip = success;
+            sound.Play();
         } else {
             print("You dont have the necessary ingredients!");
-            audio.clip = negative;
-            audio.Play();
+            sound.clip = negative;
+            sound.Play();
         };
     }
 }
