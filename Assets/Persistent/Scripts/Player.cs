@@ -116,6 +116,8 @@ public class Player : MonoBehaviour {
     public void equipWeapon(item newItem) {
         UnityEngine.Assertions.Assert.AreEqual(newItem.type, itemType.Weapon, "Trying to equip something that is not a weapon.");
 
+
+
         attackStrength -= equippedWeapon.baseAttack;
         equippedWeapon = newItem;
         attackStrength += equippedWeapon.baseAttack;

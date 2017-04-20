@@ -50,14 +50,26 @@ public class SellingInventory : MonoBehaviour {
         }*/
 
         itemToSell = item;
+        //~~~~~~ If we can get unique identifiers on objects, and we want to remove making equipped items dissapear 
+        /*if (itemToSell.name == Player.equippedAccessory.name || itemToSell.name == Player.equippedWeapon.name ||itemToSell.name == Player.equippedArmor.name) {
+            PopUp.instance.showPopUp("Can't sell equipped items. Please unequip and try again later",
+                new string[] { "Okay"},
+                new Action[] {
+                new Action(() => { })
 
-        PopUp.instance.showPopUp("Are you sure you want to sell this item for " + item.price + " gold?", 
-            new string[] { "No", "Yes"  }, 
-            new Action[] {
+                                }
+            );
+        } else {*/
+
+            PopUp.instance.showPopUp("Are you sure you want to sell this item for " + item.price + " gold?",
+                new string[] { "No", "Yes" },
+                new Action[] {
                 new Action(() => { }),
                 new Action(confirmSell)
-            }
-        );
+                }
+            );
+      //  }
+
     }
 
     public static void confirmSell() {

@@ -138,4 +138,22 @@ public class Inventory : MonoBehaviour {
     public static void clear() {
         _items = null;
     }
+
+    public static void equipWeapon(item item) {
+        addItem(Player.equippedWeapon);
+        Player.instance.equipWeapon(item);
+        removeItem(Player.equippedWeapon);
+    }
+
+    public static void equipArmor(item item) {
+        addItem(Player.equippedArmor);
+        Player.instance.equipArmor(item);
+        removeItem(Player.equippedArmor);
+    }
+
+    public static void equipAccessory(item item) {
+        addItem(Player.equippedAccessory);
+        Player.instance.equipAccessory(item);
+        removeItem(Player.equippedAccessory);
+    }
 }
