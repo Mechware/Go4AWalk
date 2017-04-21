@@ -34,7 +34,7 @@ public class Tutorial : MonoBehaviour {
             StartCoroutine(callAfterOneFrame(walkingButtonsTutorial()));
         }
 
-        if(!doneInventoryTutorial && GameState.walking && Inventory.getInventory().Length > 1) {
+        if(!doneInventoryTutorial && GameState.walking && Inventory.getInventory().Length > 0) {
             StartCoroutine(callAfterOneFrame(inventoryTutorial()));
         }
 

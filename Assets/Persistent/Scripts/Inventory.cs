@@ -140,19 +140,23 @@ public class Inventory : MonoBehaviour {
     }
 
     public static void equipWeapon(item item) {
-        addItem(Player.equippedWeapon);
+        if (!Player.equippedWeapon.Equals(ItemList.noItem))
+            addItem(Player.equippedWeapon);
         Player.instance.equipWeapon(item);
         removeItem(Player.equippedWeapon);
     }
 
     public static void equipArmor(item item) {
-        addItem(Player.equippedArmor);
+        if (!Player.equippedArmor.Equals(ItemList.noItem))
+            addItem(Player.equippedArmor);
         Player.instance.equipArmor(item);
         removeItem(Player.equippedArmor);
     }
 
     public static void equipAccessory(item item) {
-        addItem(Player.equippedAccessory);
+        if (!Player.equippedAccessory.Equals(ItemList.noItem))
+            addItem(Player.equippedAccessory);
+        
         Player.instance.equipAccessory(item);
         removeItem(Player.equippedAccessory);
     }

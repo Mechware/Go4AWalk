@@ -72,7 +72,6 @@ public class Player : MonoBehaviour {
         loadPlayer();
 
         if (equippedWeapon.Equals(ItemList.noItem) || equippedWeapon.Equals(default(item))) {
-            Inventory.items.Add(ItemList.itemMasterList[ItemList.WOOD_SWORD]);
             equipWeapon(ItemList.itemMasterList[ItemList.WOOD_SWORD]);
         }
 

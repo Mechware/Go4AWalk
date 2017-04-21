@@ -162,8 +162,15 @@ public class PersistentUIElements : MonoBehaviour {
                 inventoryButtons.RemoveAt(1);
                 DestroyImmediate(currentButton);
             }
-            if (inventoryButtons.Count == 1)
+            if (inventoryButtons.Count == 1) {
+                currentButton = inventoryButtons[0];
                 inventoryButtons.RemoveAt(0);
+                currentButton.GetComponentInChildren<Text>().text = "Inventory is empty!";
+                Texture2D noTexture = Resources.Load("Item Sprites/Empty Item") as Texture2D;
+                Sprite noSprite = Sprite.Create(noTexture, new Rect(0, 0, noTexture.width, noTexture.height), new Vector2(0.5f, 0.5f));
+                currentButton.GetComponentsInChildren<Image>()[1].sprite = noSprite;
+            }
+                
 
         }
 
@@ -204,10 +211,11 @@ public class PersistentUIElements : MonoBehaviour {
        
         currentButton = button.gameObject;
 
-
-
         if (Inventory.items.Count == 0) {
             button.GetComponentInChildren<Text>().text = "Inventory is empty!";
+            Texture2D noTexture = Resources.Load("Item Sprites/Empty Item") as Texture2D;
+            Sprite noSprite = Sprite.Create(noTexture, new Rect(0, 0, noTexture.width, noTexture.height), new Vector2(0.5f, 0.5f));
+            currentButton.GetComponentsInChildren<Image>()[1].sprite = noSprite;
             return;
         }
 
