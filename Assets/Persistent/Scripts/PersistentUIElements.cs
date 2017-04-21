@@ -169,8 +169,10 @@ public class PersistentUIElements : MonoBehaviour {
                 Texture2D noTexture = Resources.Load("Item Sprites/Empty Item") as Texture2D;
                 Sprite noSprite = Sprite.Create(noTexture, new Rect(0, 0, noTexture.width, noTexture.height), new Vector2(0.5f, 0.5f));
                 currentButton.GetComponentsInChildren<Image>()[1].sprite = noSprite;
+                currentButton.GetComponentsInChildren<Text>()[1].text = "";
+
             }
-                
+
 
         }
 
@@ -216,6 +218,7 @@ public class PersistentUIElements : MonoBehaviour {
             Texture2D noTexture = Resources.Load("Item Sprites/Empty Item") as Texture2D;
             Sprite noSprite = Sprite.Create(noTexture, new Rect(0, 0, noTexture.width, noTexture.height), new Vector2(0.5f, 0.5f));
             currentButton.GetComponentsInChildren<Image>()[1].sprite = noSprite;
+            currentButton.GetComponentsInChildren<Text>()[1].text = "";
             return;
         }
 

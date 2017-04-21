@@ -139,6 +139,7 @@ public class Player : MonoBehaviour {
     public void equipAccessory(item newItem) {
         UnityEngine.Assertions.Assert.AreEqual(newItem.type, itemType.Accessory, "Trying to equip something that is not an accessory.");
 
+        /*
         if((int)newItem.otherInfo == (int)BuffManager.BuffType.attack) {
             equippedAccessory = newItem;
             attackModifier += equippedAccessory.attributeValue;
@@ -176,9 +177,14 @@ public class Player : MonoBehaviour {
             maxHealth += Mathf.RoundToInt(equippedAccessory.attributeValue);
             GetComponent<PersistentUIElements>().updateItems();
             savePlayer();
-        }
+        }*/
         equipSound.Play();
 
+        AccessoryUnequip unequip = (AccessoryUnequip) equippedAccessory.otherInfo;
+        Action unequipAccessory = unequip.getUnequipCallback();
+        unequipAccessory();
+        equippedAccessory = newItem;
+        equippedAccessory.useItem();
     }
 
     public void removeAccessory(BuffManager.BuffType type, float attrib) {

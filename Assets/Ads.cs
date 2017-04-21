@@ -4,10 +4,8 @@ using UnityEngine.Advertisements; // Using the Unity Ads namespace.
 
 public class Ads : MonoBehaviour {
 
-#if !UNITY_ADS // If the Ads service is not enabled...
-    public static string gameId; // Set this value from the inspector.
-    public static bool enableTestMode = true;
-#endif
+    public static string gameId = "1391347"; // Set this value from the inspector.
+    public static bool enableTestMode = false;
 
     public static Ads instance;
 
@@ -16,19 +14,14 @@ public class Ads : MonoBehaviour {
     }
 
     void Start() {
-
-
-
         StartCoroutine(initializeAds());
     }
 
     public static IEnumerator initializeAds() {
 
-#if !UNITY_ADS // If the Ads service is not enabled...
         if (Advertisement.isSupported) { // If runtime platform is supported...
             Advertisement.Initialize(gameId, enableTestMode); // ...initialize.
         }
-#endif
 
         // Wait until Unity Ads is initialized,
         //  and the default ad placement is ready.

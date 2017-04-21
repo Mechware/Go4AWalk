@@ -735,7 +735,9 @@ public class ItemList {
            description: "Crown stolen from a gnome chompy. Its a little small.",
            price: 100,
            attributeValue: 0.25f,
-           otherInfo: (int) BuffManager.BuffType.attack,
+           otherInfo: new AccessoryUnequip(() => {
+               Player.attackModifier -= 0.25f;
+           }),
            type: itemType.Accessory,
            useItem: null,
            icon: null,
@@ -748,12 +750,7 @@ public class ItemList {
         gnomeHat.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         gnomeHat.useItem += () => {
-            if (lastBuff != default(BuffManager.BuffType)) {
-            Player.instance.removeAccessory(lastBuff,lastAttrib);
-        }
-            Inventory.equipAccessory(gnomeHat);
-            lastBuff = BuffManager.BuffType.attack;
-            lastAttrib = gnomeHat.attributeValue;
+            Player.attackModifier += 0.25f;
             return true;
         };
 
@@ -765,7 +762,9 @@ public class ItemList {
            description: "Skull from a spooky skeleton. Just don't think about where this has been.",
            price: 1000,
            attributeValue: -0.1f,
-           otherInfo: (int) BuffManager.BuffType.defense,
+           otherInfo: new AccessoryUnequip(() => {
+               Player.defenseModifier -= -0.1f;
+           }),
            type: itemType.Accessory,
            useItem: null,
            icon: null,
@@ -778,26 +777,21 @@ public class ItemList {
         skull.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         skull.useItem += () => {
-            if (lastBuff != default(BuffManager.BuffType)) {
-                Player.instance.removeAccessory(lastBuff,lastAttrib);
-
-            }
-
-            Inventory.equipAccessory(skull);
-            lastBuff=BuffManager.BuffType.defense;
-            lastAttrib=skull.attributeValue;
+            Player.defenseModifier += -0.1f;
             return true;
         };
 
         itemMasterList[SKULL] = skull;
 
         //***
-
+        /*
         item heartHat = new item(name: HEART_HAT,
             description: "Heals over time.",
             price: 1000,
             attributeValue: 5,
-            otherInfo: (int) BuffManager.BuffType.heal,
+            otherInfo: new AccessoryUnequip(() => {
+                Player.attackModifier -= 0.25f;
+            }),
             type: itemType.Accessory,
             useItem: null,
             icon: null,
@@ -849,14 +843,10 @@ public class ItemList {
             return true;
         };
 
-        itemMasterList[FIRE_HAIR] = fireHair;
+        itemMasterList[FIRE_HAIR] = fireHair;*/
         #endregion
 
 
 
     }
-
-
-    
-
 }
