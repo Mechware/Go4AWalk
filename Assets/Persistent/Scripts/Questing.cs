@@ -46,8 +46,8 @@ public struct quest {
             return "No active quest";
 
         string s = "";
-        s += "Name: " + name + "\n";
-        s += "Quest distance (meters): " + Mathf.Round(distanceProgress) + "/" + distance + "\n";
+        s += "<b>"+name+"</b>" + "\n\n";
+        s += "Quest progress: " + Mathf.Round(distanceProgress) + "/" + distance + "m\n";
         s += "\n" + description;
         return s;
     }

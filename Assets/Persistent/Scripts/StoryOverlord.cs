@@ -74,7 +74,7 @@ public class StoryOverlord : MonoBehaviour {
             float timeToComplete = -1;
             float distance = 100;
             float difficulty = 1;
-            quest thisQuest = new quest("Quest 1", "Get your first sword!", "This is the start of your adventure! Prove yourself by getting back the sword that the gnome stole.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
+            quest thisQuest = new quest("The Sword in the Gnome", "Get your first sword!", "This is the start of your adventure! Prove yourself by getting back the sword that the gnome stole.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
             Questing.startQuest(thisQuest, progress);            
         }
@@ -111,7 +111,7 @@ public class StoryOverlord : MonoBehaviour {
             float timeToComplete = -1;
             float distance = 1000;
             float difficulty = 1;
-            quest thisQuest = new quest("Quest 2", "Get to the forest.", "Now that you have a weapon your adventure can begin! Make it to the forest.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
+            quest thisQuest = new quest("Going on an Adventure", "Get to the forest.", "Now that you have a weapon your adventure can begin! Make it to the forest.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
             Questing.startQuest(thisQuest, progress);
         }
@@ -149,7 +149,7 @@ public class StoryOverlord : MonoBehaviour {
             float timeToComplete = -1;
             float distance = 3000;
             float difficulty = 1;
-            quest thisQuest = new quest("Quest 3", "Get through the forest.", "Make your way through the forest to get to Meadsville.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
+            quest thisQuest = new quest("Into the Woods", "Get through the forest.", "Make your way through the forest to get to Meadsville.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
             Questing.startQuest(thisQuest, progress);
         }
@@ -184,7 +184,7 @@ public class StoryOverlord : MonoBehaviour {
             float timeToComplete = -1;
             float distance = 2000;
             float difficulty = 1;
-            quest thisQuest = new quest("Quest 4", "Get through the HAUNTED forest.", "You're almost through the forest, push on and get to Meadsville.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
+            quest thisQuest = new quest("Into the SPOOOOOKY Woods", "Get through the HAUNTED forest.", "You're almost through the forest, push on and get to Meadsville.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
             Questing.startQuest(thisQuest, progress);
         }
@@ -226,7 +226,7 @@ public class StoryOverlord : MonoBehaviour {
             float timeToComplete = -1;
             float distance = 4000;
             float difficulty = 1;
-            quest thisQuest = new quest("Quest 5", "Get to Meadsville.", "You've made it out of the forest now get to Meadsville and see what the problem is.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
+            quest thisQuest = new quest("To the Rescue", "Get to Meadsville.", "You've made it out of the forest now get to Meadsville and see what the problem is.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
             Questing.startQuest(thisQuest, progress);
         }
@@ -270,7 +270,7 @@ public class StoryOverlord : MonoBehaviour {
             float timeToComplete = -1;
             float distance = -1;
             float difficulty = 1;
-            quest thisQuest = new quest("Quest 5", "Thanks for playing!", "Keep walking and fighting enemies for as long as your heart desires.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
+            quest thisQuest = new quest("Thanks for playing!", "Thanks for playing!", "Keep walking and fighting enemies for as long as your heart desires.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
             Questing.startQuest(thisQuest, progress);
         }
