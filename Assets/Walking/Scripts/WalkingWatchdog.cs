@@ -176,17 +176,5 @@ public class WalkingWatchdog : MonoBehaviour {
 
     }
 
-    /// <summary>
-    /// This is called from EnemyWatchdog to enable boss encounters and the "encounter" method
-    /// is usually just the spawnBoss() method in EnemyWatchdog
-    /// </summary>
-    /// <param name="encounter">Function called once user clicks boss</param>
-    public void enableBossEncounter(Action encounter) {
-        randomEncounterButton.GetComponentInChildren<Text>().text = "BOSS FIGHT";
-        randomEncounterButton.gameObject.SetActive(true);
-        randomEncounterButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        randomEncounterButton.GetComponent<Button>().onClick.AddListener(() => {
-            encounter();
-        });
-    }
+    
 }

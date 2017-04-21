@@ -126,6 +126,12 @@ public class EnemyWatchdog : MonoBehaviour {
     }
 
     public void startBossFight() {
+
+        if (EnemyWatchdog.enemiesQueue.Count != 0) {
+            PopUp.instance.showPopUp("You cannot fight the boss while monsters are following you!", new string[] { "Okay" });
+            return;
+        }
+
         isBoss = true;
         enemiesQueue.Clear();
         saveQueue();
