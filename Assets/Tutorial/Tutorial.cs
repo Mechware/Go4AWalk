@@ -179,7 +179,7 @@ public class Tutorial : MonoBehaviour {
         }, INVENTORY_OPEN_TEXT);
     }
 
-    private const string ITEMS_OPEN_TEXT = "TUTORIAL\nClick on the image of the items to equip them, and they will replace what is in either the weapon slot, armor slot, or the accessory slot, depending on what the item it is.";
+    private const string ITEMS_OPEN_TEXT = "TUTORIAL\nClick on the image of the items to equip them, and they will replace what is in either the weapon slot, armor slot, or the accessory slot, depending on what the item it is. Click on the piles of gold to sell items too!";
     IEnumerator openItemsTutorial() {
         while(!PersistentUIElements.instance.itemsPanel.activeInHierarchy) {
             yield return 0;
