@@ -3112,11 +3112,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "***\nSoftware Lead:\nMicheal Demone\n\nAdditional Programming:\nGregory
-    Perry\nDylan Reimer\n\nHead Artist:\nGregory Perry\n\nAdditional Artists:\nDylan
-    Reimer\n\nSound Effects by:\nGameBurp.com\n\nMusic:\n\"Monkeys Spinning Monkeys\"
-    Kevin MacLeod (incompetech.com)\r\n\n\"Unanswered Questions\" Kevin MacLeod (incompetech.com)\r\n\nLicensed
-    under Creative Commons: By Attribution 3.0 License\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n\n"
+  m_Text: "***\nGame Design:\nGregory Perry\n\nSoftware Lead:\nMicheal Demone\n\nAdditional
+    Programming:\nGregory Perry\nDylan Reimer\n\nHead Artist:\nGregory Perry\n\nAdditional
+    Artists:\nDylan Reimer\n\nSound Effects by:\nGameBurp.com\n\nMusic:\n\"Monkeys
+    Spinning Monkeys\" Kevin MacLeod (incompetech.com)\r\n\n\"Unanswered Questions\"
+    Kevin MacLeod (incompetech.com)\r\n\nLicensed under Creative Commons: By Attribution
+    3.0 License\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n\n"
 --- !u!114 &114000011360425948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3223,7 +3224,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -6721,7 +6722,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010529937588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00029265878}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.02, y: 0.02, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -6729,8 +6730,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.30005, y: -8.16}
-  m_SizeDelta: {x: 2061.2, y: 3182.51}
+  m_AnchoredPosition: {x: 0, y: -8}
+  m_SizeDelta: {x: 2061.2, y: 3500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000011019846454
 RectTransform:
@@ -7147,7 +7148,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.3, y: 30.1}
+  m_AnchoredPosition: {x: 0, y: 33.4}
   m_SizeDelta: {x: 2061.2, y: 831.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000012062423248
@@ -7405,7 +7406,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -49}
   m_SizeDelta: {x: 103, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000012606076592

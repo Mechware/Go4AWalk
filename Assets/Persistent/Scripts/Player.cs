@@ -93,15 +93,9 @@ public class Player : MonoBehaviour {
         loadOthers();
         // Let user know they died
         if (died) {
-            PopUp.instance.showPopUp("Oh no! You were defeated! \n You conveniently find yourself back at camp, \n but the gold you have accumulated has been stolen.", new string[] { "Okay", "No." },
-                new System.Action[] {
-                    new System.Action(() => {}),
-                    new System.Action(() => {
-                        PopUp.instance.showPopUp("Too bad.", new string[] {"Fine."}, new System.Action[] {
-                            new System.Action(()=> { })
-                        });
-                    })
-                }, new bool[] { true, false });
+            PopUp.instance.showPopUp(
+                "Oh no! You were defeated! \n You conveniently find yourself back at camp, \n but the gold you have accumulated has been stolen.", 
+                new string[] { "Okay"});
             died = false;
         }
 
@@ -138,53 +132,20 @@ public class Player : MonoBehaviour {
 
     public void equipAccessory(item newItem) {
         UnityEngine.Assertions.Assert.AreEqual(newItem.type, itemType.Accessory, "Trying to equip something that is not an accessory.");
-
-        /*
-        if((int)newItem.otherInfo == (int)BuffManager.BuffType.attack) {
-            equippedAccessory = newItem;
-            attackModifier += equippedAccessory.attributeValue;
-            GetComponent<PersistentUIElements>().updateItems();
-            savePlayer();
-        }
-        if ((int) newItem.otherInfo == (int) BuffManager.BuffType.crit) {
-            equippedAccessory = newItem;
-            critModifier += equippedAccessory.attributeValue;
-            GetComponent<PersistentUIElements>().updateItems();
-            savePlayer();
-        }
-        if ((int) newItem.otherInfo == (int) BuffManager.BuffType.defense) {
-            equippedAccessory = newItem;
-            defenseModifier += equippedAccessory.attributeValue;
-            GetComponent<PersistentUIElements>().updateItems();
-            savePlayer();
-        }
-        if ((int)newItem.otherInfo == (int)BuffManager.BuffType.fire) {
-            isDOT=true;
-            equippedAccessory = newItem;
-            GetComponent<PersistentUIElements>().updateItems();
-            dotHit = Mathf.RoundToInt(equippedAccessory.attributeValue);
-            savePlayer();
-        }
-        if((int)newItem.otherInfo == (int) BuffManager.BuffType.heal) {
-            isHeal = true;
-            equippedAccessory = newItem;
-            healAmount = Mathf.RoundToInt(equippedAccessory.attributeValue);
-           // BuffManager.instance.CreateDOT("Heal_Over_Time", BuffManager.BuffType.heal, -1*healAmount, -1, 1, gameObject);
-            savePlayer();
-        }
-        if ((int) newItem.otherInfo==(int) BuffManager.BuffType.health) {
-            equippedAccessory = newItem;
-            maxHealth += Mathf.RoundToInt(equippedAccessory.attributeValue);
-            GetComponent<PersistentUIElements>().updateItems();
-            savePlayer();
-        }*/
         equipSound.Play();
 
-        AccessoryUnequip unequip = (AccessoryUnequip) equippedAccessory.otherInfo;
-        Action unequipAccessory = unequip.getUnequipCallback();
-        unequipAccessory();
+        Accessory accessory = (Accessory) equippedAccessory.otherInfo;
+        if(accessory != null) {
+            Action unequipAccessory = accessory.getUnequipCallback();
+            unequipAccessory();
+        }
+        
         equippedAccessory = newItem;
-        equippedAccessory.useItem();
+        accessory = (Accessory) equippedAccessory.otherInfo;
+        if (accessory != null) {
+            Action equipAccessory = accessory.getEquipCallback();
+            equipAccessory();
+        }
     }
 
     public void removeAccessory(BuffManager.BuffType type, float attrib) {
@@ -329,8 +290,6 @@ public class Player : MonoBehaviour {
         if (!equippedAccessory.Equals(default(item)) &&
             !equippedAccessory.Equals(ItemList.noItem)) {
             PlayerPrefs.SetString(EQUIPPED_ACCESSORY, equippedAccessory.name);
-            PlayerPrefs.SetFloat(LAST_ATTRIB, equippedAccessory.attributeValue);
-            PlayerPrefs.SetInt(LAST_TYPE, (int) equippedAccessory.otherInfo);
         }
     }
 
@@ -358,25 +317,6 @@ public class Player : MonoBehaviour {
         if (PlayerPrefs.HasKey(EQUIPPED_ACCESSORY)) {
             equipped = PlayerPrefs.GetString(EQUIPPED_ACCESSORY);
             equipAccessory(ItemList.itemMasterList[equipped]);
-            ItemList.lastAttrib=PlayerPrefs.GetFloat(LAST_ATTRIB);
-            if (PlayerPrefs.GetInt(LAST_TYPE)==(int) BuffManager.BuffType.attack) {
-                ItemList.lastBuff = BuffManager.BuffType.attack;
-            }
-            if (PlayerPrefs.GetInt(LAST_TYPE)==(int) BuffManager.BuffType.crit) {
-                ItemList.lastBuff = BuffManager.BuffType.crit;
-            }
-            if (PlayerPrefs.GetInt(LAST_TYPE)==(int) BuffManager.BuffType.defense) {
-                ItemList.lastBuff = BuffManager.BuffType.defense;
-            }
-            if (PlayerPrefs.GetInt(LAST_TYPE)==(int) BuffManager.BuffType.fire) {
-                ItemList.lastBuff = BuffManager.BuffType.fire;
-            }
-            if (PlayerPrefs.GetInt(LAST_TYPE)==(int) BuffManager.BuffType.heal) {
-                ItemList.lastBuff = BuffManager.BuffType.heal;
-            }
-            if (PlayerPrefs.GetInt(LAST_TYPE)==(int) BuffManager.BuffType.health) {
-                ItemList.lastBuff = BuffManager.BuffType.health;
-            }
         }
 
     }

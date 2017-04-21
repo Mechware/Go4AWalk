@@ -704,7 +704,12 @@ public class ItemList {
             description: "Crown stolen from a goblin king. ",
             price: 1000000,
             attributeValue: 0.5f,
-            otherInfo: (int)BuffManager.BuffType.crit,
+            otherInfo: new Accessory(() => {
+                Player.critModifier += 0.5f;
+            },
+            () => {
+                Player.critModifier -= 0.5f;
+            }),
             type: itemType.Accessory,
             useItem: null,
             icon: null,
@@ -717,12 +722,7 @@ public class ItemList {
         crown.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         crown.useItem += () => {
-            if (lastBuff != default(BuffManager.BuffType)) {
-            Player.instance.removeAccessory(lastBuff,lastAttrib);
-        }
             Inventory.equipAccessory(crown);
-            lastBuff=BuffManager.BuffType.crit;
-            lastAttrib = crown.attributeValue;
             return true;
         };
 
@@ -735,8 +735,10 @@ public class ItemList {
            description: "Crown stolen from a gnome chompy. Its a little small.",
            price: 100,
            attributeValue: 0.25f,
-           otherInfo: new AccessoryUnequip(() => {
+           otherInfo: new Accessory(() => {
                Player.attackModifier -= 0.25f;
+           }, () => {
+               Player.attackModifier += 0.25f;
            }),
            type: itemType.Accessory,
            useItem: null,
@@ -750,7 +752,7 @@ public class ItemList {
         gnomeHat.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         gnomeHat.useItem += () => {
-            Player.attackModifier += 0.25f;
+            Inventory.equipAccessory(gnomeHat);
             return true;
         };
 
@@ -762,8 +764,10 @@ public class ItemList {
            description: "Skull from a spooky skeleton. Just don't think about where this has been.",
            price: 1000,
            attributeValue: -0.1f,
-           otherInfo: new AccessoryUnequip(() => {
+           otherInfo: new Accessory(() => {
                Player.defenseModifier -= -0.1f;
+           }, () => {
+               Player.defenseModifier += -0.1f;
            }),
            type: itemType.Accessory,
            useItem: null,
@@ -777,7 +781,7 @@ public class ItemList {
         skull.icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
         skull.useItem += () => {
-            Player.defenseModifier += -0.1f;
+            Inventory.equipAccessory(skull);
             return true;
         };
 
