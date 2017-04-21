@@ -69,6 +69,8 @@ public class Questing : MonoBehaviour {
     public static quest currentQuest;
     public static Questing instance;
     public EnemyWatchdog ew;
+    public GameObject bossHead;
+    public static GameObject _bossHead;
 
     // Use this for initialization
     void Awake() {
@@ -80,6 +82,7 @@ public class Questing : MonoBehaviour {
     }
 
     void Start() {
+        _bossHead = bossHead;
         if(currentQuest.active == false && GameState.walking) {
             float progressThroughQuest = PlayerPrefs.GetFloat(QUESTING_DISTANCE, 0);
             StoryOverlord.startQuest(StoryOverlord.currentLevel, progressThroughQuest);
@@ -149,7 +152,8 @@ public class Questing : MonoBehaviour {
         if (currentQuest.distanceProgress >= currentQuest.distance) {
             if (currentQuest.distance != -1) {
                 currentQuest.distanceProgress = currentQuest.distance;
-                EnemyWatchdog.instance.startBossFight();
+                _bossHead.SetActive(true);
+                //EnemyWatchdog.instance.startBossFight();
             }
         }
     }
