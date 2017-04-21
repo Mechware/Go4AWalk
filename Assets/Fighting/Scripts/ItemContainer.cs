@@ -54,6 +54,7 @@ public class ItemContainer : MonoBehaviour {
             sound.clip = pickUpPotionSound;
             sound.Play();
             GetComponentInChildren<SpriteRenderer>().sprite = null;
+            GetComponentInChildren<Collider2D>().gameObject.SetActive(false);
             alreadyGotThatOne = true;
             yield return new WaitForSeconds(1f);
             Destroy(gameObject);

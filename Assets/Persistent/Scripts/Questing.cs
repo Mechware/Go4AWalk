@@ -87,8 +87,11 @@ public class Questing : MonoBehaviour {
             float progressThroughQuest = PlayerPrefs.GetFloat(QUESTING_DISTANCE, 0);
             StoryOverlord.startQuest(StoryOverlord.currentLevel, progressThroughQuest);
         }
-        if(GameState.walking)
+        if(GameState.walking) {
             WalkingWatchdog.instance.setQuestStuff();
+            move(0); // Make boss head pop up
+        }
+            
     }
 
     // Update is called once per frame
@@ -130,8 +133,6 @@ public class Questing : MonoBehaviour {
                 );
             });
         } else {
-            print("Quest failed!");
-            Player.distance.Value -= 100; // Sets the player back 100m.
             PopUp.instance.showPopUp("QUEST FAILED! \nOh no you were defeated! \n" + "You run away and returned to camp." + "\n\n",
                 new string[] { "Continue" },
                 new System.Action[] {
@@ -151,7 +152,6 @@ public class Questing : MonoBehaviour {
 
         if (currentQuest.distanceProgress >= currentQuest.distance) {
             if (currentQuest.distance != -1) {
-                currentQuest.distanceProgress = currentQuest.distance;
                 _bossHead.SetActive(true);
                 //EnemyWatchdog.instance.startBossFight();
             }

@@ -29,7 +29,9 @@ public class WalkingWatchdog : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        StartCoroutine(checkQueueSize());
+        checkQueueSize();
+        Player.totalDistance.OnValueChange += checkQueueSize;
+
 
         // Make it so when the GPS changes, increase player distance is called
         gps.deltaDistance.OnValueChange += increasePlayerDistance;
@@ -81,20 +83,8 @@ public class WalkingWatchdog : MonoBehaviour {
 
     }
 
-    private int lastQueueSize;
-    const float UPDATE_QUEUE_TIME = 1;
-    IEnumerator checkQueueSize() {
-
+    private void checkQueueSize() {
         enemyQueueCount.text = string.Format("{0}", EnemyWatchdog.enemiesQueue.Count);
-        lastQueueSize = EnemyWatchdog.enemiesQueue.Count;
-
-        while (true) {
-            if (EnemyWatchdog.enemiesQueue.Count != lastQueueSize) {
-                enemyQueueCount.text = string.Format("{0}", EnemyWatchdog.enemiesQueue.Count);
-                lastQueueSize = EnemyWatchdog.enemiesQueue.Count;
-            }
-            yield return new WaitForSeconds(UPDATE_QUEUE_TIME);
-        }
     }
     
 

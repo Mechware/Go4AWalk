@@ -13,9 +13,10 @@ public class Tutorial : MonoBehaviour {
     private const string DONE_ALCHEMY = "Done Alchemy Tutorial";
     private const string DONE_RESTING = "Done Resting Tutorial";
     private const string DONE_GOTORESTING = "Done Go To Resting Tutorial";
+    private const string DONE_BOSS_FIGHT = "Done Go To Boss Fight";
 
     private static bool doneWalkingTutorial, doneWalkingButtonTutorial, doneFightingTutorial, doneSturdyTutorial, doneArmoredTutorial;
-    private static bool doneInventoryTutorial, doneAlchemyTutorial, doneRestingTutorial, doneGoToRestingTutorial;  
+    private static bool doneInventoryTutorial, doneAlchemyTutorial, doneRestingTutorial, doneGoToRestingTutorial, doneGoToBossFight;  
 
 	// Use this for initialization
 	void Start () {
@@ -57,6 +58,11 @@ public class Tutorial : MonoBehaviour {
         if(!doneGoToRestingTutorial && GameState.walking && Player.health.Value < Player.getMaxHealth()/2) {
             StartCoroutine(callAfterOneFrame(goToRestingTutorial()));
         }
+
+        if(!doneGoToBossFight && GameState.walking) {
+            StartCoroutine(callAfterOneFrame(bossTutorial()));
+        }
+
     }
 	
     private IEnumerator callAfterOneFrame(IEnumerator otherCoroutine) {
@@ -242,6 +248,37 @@ public class Tutorial : MonoBehaviour {
         yield break;
     }
 
+    private const string BOSS_TUTORIAL_TEXT = "TUTORIAL\nYou have walked all the way to the gnome! You can continue walking and fighting regular enemies or you can click on the scary boss head above the regular head and fight the boss!";
+    IEnumerator bossTutorial() {
+        Player.totalDistance.OnValueChange += bossTutorialCheck;
+        yield break;
+    }
+
+    private bool reachedBoss = false;
+    private void bossTutorialCheck() {
+        if(!reachedBoss)
+            StartCoroutine(delayedCheck());
+        
+    }
+
+    IEnumerator delayedCheck() {
+        yield return 0;
+        if (Questing.currentQuest.distanceProgress >= Questing.currentQuest.distance) {
+            reachedBoss = true;
+            StartCoroutine(actualBossTutorial());
+        }
+    }
+
+    IEnumerator actualBossTutorial() {
+        tutorial(() => {
+            doneGoToBossFight = true;
+            save();
+        }, BOSS_TUTORIAL_TEXT);
+        yield break;
+    }
+
+    
+
     void tutorial(Action whenDone, string text) {
         PopUp.instance.showPopUp(text,
             new string[] { "Got it." },
@@ -258,6 +295,7 @@ public class Tutorial : MonoBehaviour {
         PlayerPrefs.SetString(DONE_WALKING, doneWalkingTutorial.ToString());
         PlayerPrefs.SetString(DONE_GOTORESTING, doneGoToRestingTutorial.ToString());
         PlayerPrefs.SetString(DONE_WALKING_BUTTONS, doneWalkingButtonTutorial.ToString());
+        PlayerPrefs.SetString(DONE_BOSS_FIGHT, doneGoToBossFight.ToString());
         PlayerPrefs.Save();
     }
 
@@ -271,6 +309,7 @@ public class Tutorial : MonoBehaviour {
         doneWalkingTutorial = bool.Parse(PlayerPrefs.GetString(DONE_WALKING, bool.FalseString));
         doneGoToRestingTutorial = bool.Parse(PlayerPrefs.GetString(DONE_GOTORESTING, bool.FalseString));
         doneWalkingButtonTutorial = bool.Parse(PlayerPrefs.GetString(DONE_WALKING_BUTTONS, bool.FalseString));
+        doneGoToBossFight = bool.Parse(PlayerPrefs.GetString(DONE_BOSS_FIGHT, bool.FalseString));
     }
 
     public static void clear() {
@@ -282,5 +321,6 @@ public class Tutorial : MonoBehaviour {
         doneSturdyTutorial = false;
         doneWalkingTutorial = false;
         doneWalkingButtonTutorial = false;
+        doneGoToBossFight = false;
     }
 }

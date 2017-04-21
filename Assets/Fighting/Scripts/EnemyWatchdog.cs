@@ -49,7 +49,27 @@ public class EnemyWatchdog : MonoBehaviour {
         if (GameState.walking) {
             // Initialize encounter variables
             lastEncounterDistance = Player.totalDistance.Value;
-            nextEncounterDistance = lastEncounterDistance + Random.Range(50f, 150f);
+            nextEncounterDistance = lastEncounterDistance + UnityEngine.Random.Range(50f, 150f);
+        }
+        if(GameState.walking) {
+            Player.totalDistance.OnValueChange += checkNewEnemies;
+        }
+        
+    }
+
+    private void checkNewEnemies() {
+        if (Player.totalDistance.Value > nextEncounterDistance) {
+            if (enemiesQueue.Count <= 9) {
+                enemiesQueue.Enqueue(pickEnemy());
+                if (enemiesQueue.Count >= 10) {
+                    PopUp.instance.showPopUp("Enemy queue is full! Be sure to defeat all of the enemies!",
+                        new string[] { "Okay" });
+                }
+                Handheld.Vibrate();
+            }
+
+            nextEncounterDistance += maxRandomEncounterDistance * UnityEngine.Random.Range(0.1f, 1f);
+            saveQueue();
         }
     }
 
@@ -74,25 +94,6 @@ public class EnemyWatchdog : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
-        if (GameState.walking) {
-
-            if (Questing.currentQuest.distance != -1 && Questing.currentQuest.distance <= Questing.currentQuest.distanceProgress) {
-                nextEncounterDistance = float.MaxValue;
-            } else if (Player.totalDistance.Value > nextEncounterDistance) {
-                if(enemiesQueue.Count <= 9) {
-                    enemiesQueue.Enqueue(pickEnemy());
-                    if (enemiesQueue.Count >= 10) {
-                        PopUp.instance.showPopUp("Enemy queue is full! Be sure to defeat all of the enemies!",
-                            new string[] { "Okay" });
-                    }
-                    Handheld.Vibrate();
-                }
-                
-                nextEncounterDistance += maxRandomEncounterDistance * Random.Range(0.1f, 1f);
-                saveQueue();
-            }
-        }
     }
 
     // Called to end an encounter

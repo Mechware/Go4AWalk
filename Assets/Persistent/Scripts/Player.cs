@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
     public static Player instance;
 
     public static ObservedValue<float> totalDistance;
-    public static ObservedValue<int> gold, experience, level, lootGold, distance;
+    public static ObservedValue<int> gold, experience, level, lootGold;
     public static int experienceOfLastLevel = 0;
 
     public static int dotHit;
