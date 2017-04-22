@@ -41,7 +41,7 @@ public class VolcanoScript : MonoBehaviour {
         texture = Resources.Load("Characters/QuestionMark") as Texture2D; // You
         Sprite you = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
-        DialoguePopUp.instance.showDialog("Wow! Did you see that? Mt. Flume just blew its top! And it looks like something flew out of it too!", "Old Man", oldMan, () => {
+        DialoguePopUp.instance.showDialog("Wow! Did you see that? Mt. Victorius just blew its top! And it looks like something flew out of it too!", "Old Man", oldMan, () => {
             DialoguePopUp.instance.showDialog("Yeah! That thing that just flew out looked cool! I'm going to go fight it!", "You", you, () => {
                 UnityEngine.SceneManagement.SceneManager.LoadScene("WalkingScreen");
             });

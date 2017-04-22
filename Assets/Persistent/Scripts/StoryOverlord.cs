@@ -63,7 +63,7 @@ public class StoryOverlord : MonoBehaviour {
             questEndDialogue = "Well look at that, you actually did it. "+
                 "Hope that old thing works for you, I'd give you my new sword but its actually nice and I like it. "+
                 "Anyway, if you're set on going on this adventure the mountain is 100 km away so I hope you brought your walking shoes cause you're in for quite the trip. "+
-                "Meadsville is a few kilometers down the road, you can't miss it. I would start there is I were you. "+
+                "Fernwood is a few kilometers down the road, you can't miss it. I would start there is I were you. "+
                 "Well, good luck, and don't come crying to me when you get yourself killed.";
                
             firstEnemy = 0;
@@ -149,7 +149,7 @@ public class StoryOverlord : MonoBehaviour {
             float timeToComplete = -1;
             float distance = 3000;
             float difficulty = 1;
-            quest thisQuest = new quest("Into the Woods", "Get through the forest.", "Make your way through the forest to get to Meadsville.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
+            quest thisQuest = new quest("Into the Woods", "Get through the forest.", "Make your way through the forest to get to Fernwood.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
             Questing.startQuest(thisQuest, progress);
         }
@@ -184,7 +184,7 @@ public class StoryOverlord : MonoBehaviour {
             float timeToComplete = -1;
             float distance = 2000;
             float difficulty = 1;
-            quest thisQuest = new quest("Into the SPOOOOOKY Woods", "Get through the HAUNTED forest.", "You're almost through the forest, push on and get to Meadsville.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
+            quest thisQuest = new quest("Into the SPOOOOOKY Woods", "Get through the HAUNTED forest.", "You're almost through the forest, push on and get to Fernwood.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
             Questing.startQuest(thisQuest, progress);
         }
@@ -199,8 +199,8 @@ public class StoryOverlord : MonoBehaviour {
             texture = Resources.Load("Characters/Narrator") as Texture2D; // Narrator  
             characterSpriteStart = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             characterNameStart = "Narrator";
-            questStartDialogue = "You emerge from the forest, and up ahead in the distance you see the town of Meadsville. A faint tendril of smoke snakes its' way to the sky, and you can "+
-                "hear faint shouting on the wind. Meadsville looks like its in trouble! You'd better hurry.";
+            questStartDialogue = "You emerge from the forest, and up ahead in the distance you see the town of Fernwood. A faint tendril of smoke snakes its' way to the sky, and you can "+
+                "hear faint shouting on the wind. Fernwood looks like its in trouble! You'd better hurry.";
 
             textureBoss = Resources.Load("Characters/Goblin Champion") as Texture2D; // Narrator  
             bossfightSprite = Sprite.Create(textureBoss, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
@@ -210,11 +210,11 @@ public class StoryOverlord : MonoBehaviour {
 
             textureEnd = Resources.Load("Characters/Old Man") as Texture2D; // Red Goblin
             characterSpriteEnd = Sprite.Create(textureEnd, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            characterNameEnd = "Meadsville Mayor";
+            characterNameEnd = "Fernwood Mayor";
             questEndDialogue = "Hey, thanks for defeating that boss for us Adventurer! Everyone knows how poorly NPC town guards perform when it comes to fighting bosses, who knows what we would "+
                 "have done if your hadn't come along at such a convenient time! As is customary when being saved by an adventurer I will give you some loot. Here is a sword made of orichalcum! " +
-                "Its a rare metal that we mine in Meadsville, its a wonder they don't call us Orichalcumville! Ha Ha Ha! Yeah I know it doesn't sound as good, but it would make more sense "+ 
-                "economics-wise. \n\nSo you want to get to Mt. Flume and kill the beast that awoke there eh? Yeah, sounds like something an adventurer would do. Well the quickest way to Mt. Flume "+
+                "Its a rare metal that we mine in Fernwood, its a wonder they don't call us Orichalcumville! Ha Ha Ha! Yeah I know it doesn't sound as good, but it would make more sense "+ 
+                "economics-wise. \n\nSo you want to get to Mt. Victorius and kill the beast that awoke there eh? Yeah, sounds like something an adventurer would do. Well the quickest way to Mt. Victorius "+
                 "is to go through the desert to the north of here. Well, I'll let you get going, I know how you adventurer types get when you have to read too much dialogue. Good luck Adventurer" +
                 "and thanks again for saving our town!";
 
@@ -226,7 +226,7 @@ public class StoryOverlord : MonoBehaviour {
             float timeToComplete = -1;
             float distance = 4000;
             float difficulty = 1;
-            quest thisQuest = new quest("To the Rescue", "Get to Meadsville.", "You've made it out of the forest now get to Meadsville and see what the problem is.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
+            quest thisQuest = new quest("To the Rescue", "Get to Fernwood.", "You've made it out of the forest now get to Fernwood and see what the problem is.", goldReward, xpReward, null, timeToComplete, distance, difficulty);
             thisQuest.active = true;
             Questing.startQuest(thisQuest, progress);
         }
@@ -254,11 +254,11 @@ public class StoryOverlord : MonoBehaviour {
 
             textureEnd = Resources.Load("Characters/Old Man") as Texture2D; // Red Goblin
             characterSpriteEnd = Sprite.Create(textureEnd, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            characterNameEnd = "Meadsville Mayor";
+            characterNameEnd = "Fernwood Mayor";
             questEndDialogue = "Hey, thanks for defeating that boss for us Adventurer! Everyone knows how poorly NPC town guards perform when it comes to fighting bosses, who knows what we would " +
                 "have done if your hadn't come along at such a convenient time! As is customary when being saved by an adventurer I will give you some loot. Here is a sword made of orichalcum! " +
-                "Its a rare metal that we mine in Meadsville, its a wonder they don't call us Orichalcumville! Ha Ha Ha! Yeah I know it doesn't sound as good, but it would make more sense " +
-                "economics-wise. \n\nSo you want to get to Mt. Flume and kill the beast that awoke there eh? Yeah, sounds like something an adventurer would do. Well the quickest way to Mt. Flume " +
+                "Its a rare metal that we mine in Fernwood, its a wonder they don't call us Orichalcumville! Ha Ha Ha! Yeah I know it doesn't sound as good, but it would make more sense " +
+                "economics-wise. \n\nSo you want to get to Mt. Victorius and kill the beast that awoke there eh? Yeah, sounds like something an adventurer would do. Well the quickest way to Mt. Victorius " +
                 "is to go through the desert to the north of here. Well, I'll let you get going, I know how you adventurer types get when you have to read too much dialogue. Good luck Adventurer" +
                 "and thanks again for saving our town!";
 
