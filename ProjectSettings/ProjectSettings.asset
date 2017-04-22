@@ -10,8 +10,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: Mechware
-  productName: Go 4 A Walk
+  companyName: Spiffy Chicken
+  productName: Adventure Trek
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenStyle: 0
@@ -28,7 +28,7 @@ PlayerSettings:
   m_MobileMTRendering: 0
   m_StackTraceTypes: 010000000100000001000000010000000100000001000000
   iosShowActivityIndicatorOnLoading: -1
-  androidShowActivityIndicatorOnLoading: -1
+  androidShowActivityIndicatorOnLoading: 2
   iosAppInBackgroundBehavior: 0
   displayResolutionDialog: 1
   iosAllowHTTPDownload: 1
@@ -93,8 +93,8 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.Mechware.Go4AWalk
-  bundleVersion: 1.0
+  bundleIdentifier: com.SpiffyChicken.AdventureTrek
+  bundleVersion: 0.1
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   xboxOneDisableKinectGpuReservation: 0
@@ -164,8 +164,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: C:/Users/Michael/Google Drive/Archived/Hen-Tie Games/Go4AWalk/AdventureTrek.keystore
+  AndroidKeyaliasName: spiffychicken
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
   androidEnableBanner: 1

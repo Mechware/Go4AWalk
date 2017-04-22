@@ -354,8 +354,8 @@ MonoBehaviour:
   dieSound: {fileID: 8300000, guid: fd4e1323b1ef6634a8cc68e415d7cbcc, type: 3}
   attackSound: {fileID: 8300000, guid: efd2b203601f2cf41b37d435ed2006f3, type: 3}
   sound: {fileID: 82000014104229914}
-  armor: 0.5
-  sturdy: 1.1
+  armor: 0.4
+  sturdy: 1.3
   timeBetweenAttacks: 3
   spawnRate: 50
   itemName: 

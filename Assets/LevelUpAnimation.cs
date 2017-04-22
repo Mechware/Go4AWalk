@@ -13,12 +13,12 @@ public class LevelUpAnimation : MonoBehaviour {
         }
         if (Player.level.Value == lastLevel) {
             yield break;
-            print("same level");
         }
-        print("New level");
+        
         levelUpSprite.SetActive(true);
         yield return FadingUtils.fadeSpriteRenderer(levelUpSprite.GetComponent<SpriteRenderer>(), 2, 0, 1);
         yield return FadingUtils.fadeSpriteRenderer(levelUpSprite.GetComponent<SpriteRenderer>(), 2, 1, 0);
+        levelUpSprite.SetActive(false);
 
 	}
 	
