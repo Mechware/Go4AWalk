@@ -68,7 +68,7 @@ public class EnemyWatchdog : MonoBehaviour {
                 Handheld.Vibrate();
             }
 
-            nextEncounterDistance += maxRandomEncounterDistance * UnityEngine.Random.Range(0.1f, 1f);
+            nextEncounterDistance += maxRandomEncounterDistance * Random.Range(0.1f, 1f);
             saveQueue();
         }
     }
