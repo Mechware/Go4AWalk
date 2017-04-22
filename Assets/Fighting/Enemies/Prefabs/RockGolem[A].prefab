@@ -350,7 +350,7 @@ MonoBehaviour:
   health: 6500
   damage: 30
   goldToGive: 60
-  expToGive: 50
+  expToGive: 35
   dieSound: {fileID: 8300000, guid: fd4e1323b1ef6634a8cc68e415d7cbcc, type: 3}
   attackSound: {fileID: 8300000, guid: efd2b203601f2cf41b37d435ed2006f3, type: 3}
   sound: {fileID: 82000014104229914}
