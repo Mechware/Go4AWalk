@@ -353,8 +353,8 @@ MonoBehaviour:
   goldIndicator: {fileID: 1000010227259316, guid: 296d33ae00cdda04b8c818eb6dc9f709,
     type: 2}
   item: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae, type: 2}
-  health: 10000
-  damage: 6
+  health: 3500
+  damage: 10
   goldToGive: 25
   expToGive: 20
   dieSound: {fileID: 8300000, guid: cf5558971aa0947469e5370ba5955a14, type: 3}
@@ -362,7 +362,7 @@ MonoBehaviour:
   sound: {fileID: 82000014188095100}
   armor: 1
   sturdy: 1
-  timeBetweenAttacks: 3
+  timeBetweenAttacks: 1.5
   spawnRate: 100
   itemName: Skull
   lootSpawnRate: 40

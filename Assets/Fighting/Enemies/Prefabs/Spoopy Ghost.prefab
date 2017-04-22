@@ -364,8 +364,8 @@ MonoBehaviour:
   goldIndicator: {fileID: 1000010227259316, guid: 296d33ae00cdda04b8c818eb6dc9f709,
     type: 2}
   item: {fileID: 1000012896463806, guid: df2097fe412341b4abbec635323467ae, type: 2}
-  health: 4000
-  damage: 50
+  health: 3000
+  damage: 30
   goldToGive: 25
   expToGive: 20
   dieSound: {fileID: 8300000, guid: 18b0ef6f583975443b626f43f20a3467, type: 3}
