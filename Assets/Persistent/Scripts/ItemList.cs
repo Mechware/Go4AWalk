@@ -264,7 +264,7 @@ public class ItemList {
 // ***
         item bronzeSaber = new item(name: BRONZE_SABER,
                     description: "A duelists' saber made of bronze, deals less damage per strike but allows for more critical hits.",
-                    price: 100,
+                    price: 150,
                     attributeValue: 0,
                     otherInfo: null,
                     type: itemType.Weapon,
@@ -287,7 +287,7 @@ public class ItemList {
         // ***
         item woodSword = new item(name: WOOD_SWORD,
                     description: "A sword made of wood. Okay, its just a stick shaped like a sword. Okay, its just a stick.",
-                    price: 100,
+                    price: 10,
                     attributeValue: 0,
                     otherInfo: null,
                     type: itemType.Weapon,
@@ -311,7 +311,7 @@ public class ItemList {
         // ***
         item ironSword = new item(name: IRON_SWORD,
                     description: "A sturdy sword forged from iron.",
-                    price: 100,
+                    price: 200,
                     attributeValue: 0,
                     otherInfo: null,
                     type: itemType.Weapon,
@@ -335,7 +335,7 @@ public class ItemList {
         // ***
         item steelSword = new item(name: STEEL_SWORD,
                     description: "A quality blade made out of steel. #Carbon",
-                    price: 100,
+                    price: 250,
                     attributeValue: 0,
                     otherInfo: null,
                     type: itemType.Weapon,
@@ -359,7 +359,7 @@ public class ItemList {
         // ***
         item orichalcumSword = new item(name: ORICH_SWORD,
                     description: "A sword made from a mysterious ancient alloy, and apparently modern metallurgy can't compete. Huh.",
-                    price: 100,
+                    price: 1000,
                     attributeValue: 0,
                     otherInfo: null,
                     type: itemType.Weapon,
@@ -383,7 +383,7 @@ public class ItemList {
         // ***
         item sandSteelSword = new item(name: SAND_SWORD,
                     description: "A sword forged from legendary sand steel. The secret to its strength is heavily guarded. Its probably love.",
-                    price: 100,
+                    price: 1500,
                     attributeValue: 0,
                     otherInfo: null,
                     type: itemType.Weapon,
@@ -407,7 +407,7 @@ public class ItemList {
         
         item jadeSword = new item(name: JADE_SWORD,
                     description: "A beautiful ornamental sword made out of the jade. Wait why are you fighting with this?",
-                    price: 100,
+                    price: 3000,
                     attributeValue: 0,
                     otherInfo: null,
                     type: itemType.Weapon,
@@ -431,7 +431,7 @@ public class ItemList {
         // ***
         item obsidianSword = new item(name: OBSIDIAN_SWORD,
                     description: "A wooden club with obsidian blades. Did you know obsidian blades can be as sharp as 3 nanometers? Well now you do.",
-                    price: 100,
+                    price: 4000,
                     attributeValue: 0,
                     otherInfo: null,
                     type: itemType.Weapon,
@@ -455,7 +455,7 @@ public class ItemList {
         // ***
         item steelRapier = new item(name: STEEL_RAPIER,
                     description: "A delicate blade that sacrifices damage for being able to find the enemies' weak spots.",
-                    price: 100,
+                    price: 300,
                     attributeValue: 0,
                     otherInfo: null,
                     type: itemType.Weapon,
@@ -479,7 +479,7 @@ public class ItemList {
         // ***
         item mythrilSword = new item(name: MYTHRIL_SWORD,
                     description: "A magnificent sword made from the mythical metal mythril. Many muse the metal is magical, maybe.",
-                    price: 100,
+                    price: 10000,
                     attributeValue: 0,
                     otherInfo: null,
                     type: itemType.Weapon,
@@ -530,7 +530,7 @@ public class ItemList {
         // ***
         item ironArmor = new item(name: IRON_ARMOR,
             description: "Armor made from iron.",
-            price: 100,
+            price: 200,
             attributeValue: 0.9f,
             otherInfo: null,
             type: itemType.Armor,
@@ -554,7 +554,7 @@ public class ItemList {
         // ***
         item steelArmor = new item(name: STEEL_ARMOR,
             description: "Armor made from steel.",
-            price: 100,
+            price: 500,
             attributeValue: 0.85f,
             otherInfo: null,
             type: itemType.Armor,
@@ -602,7 +602,7 @@ public class ItemList {
         // ***
         item orchalcumArmor = new item(name: ORICH_ARMOR,
             description: "Armor made from orichalcum.",
-            price: 100,
+            price: 600,
             attributeValue: 0.80f,
             otherInfo: null,
             type: itemType.Armor,
@@ -702,7 +702,7 @@ public class ItemList {
 
     item crown = new item(name: CROWN,
             description: "Crown stolen from a goblin king. ",
-            price: 1000000,
+            price: 1000,
             attributeValue: 0.5f,
             otherInfo: new Accessory(() => {
                 Player.critModifier += 0.5f;
@@ -733,7 +733,7 @@ public class ItemList {
 
         item gnomeHat = new item(name: GNOME_HAT,
            description: "Crown stolen from a gnome chompy. Its a little small.",
-           price: 100,
+           price: 10,
            attributeValue: 0.25f,
            otherInfo: new Accessory(() => {
                Player.attackModifier -= 0.25f;
@@ -762,7 +762,7 @@ public class ItemList {
         //***
         item skull = new item(name: SKULL,
            description: "Skull from a spooky skeleton. Just don't think about where this has been.",
-           price: 1000,
+           price: 100,
            attributeValue: -0.1f,
            otherInfo: new Accessory(() => {
                Player.defenseModifier -= -0.1f;
